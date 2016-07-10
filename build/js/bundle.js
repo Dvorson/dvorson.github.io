@@ -58,18 +58,21 @@
 
 	var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
 
-	var _Main = __webpack_require__(178);
+	var _MainCard = __webpack_require__(178);
 
-	var _Main2 = _interopRequireDefault(_Main);
+	var _MainCard2 = _interopRequireDefault(_MainCard);
+
+	var _index = __webpack_require__(392);
 
 	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { default: obj };
+	    return obj && obj.__esModule ? obj : { default: obj };
 	}
 
-	(0, _reactTapEventPlugin2.default)();
 	//import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-	_reactDom2.default.render(_react2.default.createElement(_Main2.default, null), document.getElementsByClassName('app')[0]);
+	(0, _reactTapEventPlugin2.default)();
+
+	_reactDom2.default.render(_react2.default.createElement(_index.Grid, null, _react2.default.createElement(_index.Row, null, _react2.default.createElement(_index.Col, { xs: 12, md: 4, lg: 3 }, _react2.default.createElement(_MainCard2.default, null)))), document.getElementsByClassName('app')[0]);
 
 /***/ },
 /* 1 */
@@ -21528,16 +21531,16 @@
 	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 	}
 
-	var Main = function (_React$Component) {
-	  _inherits(Main, _React$Component);
+	var MainCard = function (_React$Component) {
+	  _inherits(MainCard, _React$Component);
 
-	  function Main() {
-	    _classCallCheck(this, Main);
+	  function MainCard() {
+	    _classCallCheck(this, MainCard);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Main).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(MainCard).apply(this, arguments));
 	  }
 
-	  _createClass(Main, [{
+	  _createClass(MainCard, [{
 	    key: 'getChildContext',
 	    value: function getChildContext() {
 	      return { muiTheme: (0, _getMuiTheme2.default)(_darkBaseTheme2.default) };
@@ -21545,24 +21548,20 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_Card.Card, null, _react2.default.createElement(_Card.CardHeader, {
-	        title: 'URL Avatar',
-	        subtitle: 'Subtitle',
-	        avatar: 'http://lorempixel.com/100/100/nature/'
-	      }), _react2.default.createElement(_Card.CardMedia, {
-	        overlay: _react2.default.createElement(_Card.CardTitle, { title: 'Overlay title', subtitle: 'Overlay subtitle' })
-	      }, _react2.default.createElement('img', { src: 'http://lorempixel.com/600/337/nature/' })), _react2.default.createElement(_Card.CardTitle, { title: 'Card title', subtitle: 'Card subtitle' }), _react2.default.createElement(_Card.CardText, null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi. Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque. Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.'), _react2.default.createElement(_Card.CardActions, null, _react2.default.createElement(_FlatButton2.default, { label: 'Action1' }), _react2.default.createElement(_FlatButton2.default, { label: 'Action2' })));
+	      return _react2.default.createElement(_Card.Card, null, _react2.default.createElement(_Card.CardMedia, {
+	        overlay: _react2.default.createElement(_Card.CardTitle, { title: 'Anton Dvorson', subtitle: 'Web Developer' })
+	      }, _react2.default.createElement('img', { src: '/build/img/multipassport.jpg' })), _react2.default.createElement(_Card.CardText, null, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'), _react2.default.createElement(_Card.CardActions, null, _react2.default.createElement(_FlatButton2.default, { label: 'GitHub' }), _react2.default.createElement(_FlatButton2.default, { label: 'Vk' })));
 	    }
 	  }]);
 
-	  return Main;
+	  return MainCard;
 	}(_react2.default.Component);
 
-	Main.childContextTypes = {
+	MainCard.childContextTypes = {
 	  muiTheme: _react2.default.PropTypes.object.isRequired
 	};
 
-	exports.default = Main;
+	exports.default = MainCard;
 
 /***/ },
 /* 179 */
@@ -33886,6 +33885,813 @@
 	  muiTheme: _react.PropTypes.object.isRequired
 	};
 	exports.default = FlatButtonLabel;
+
+/***/ },
+/* 392 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports.Col = exports.Row = exports.Grid = undefined;
+
+	var _Grid2 = __webpack_require__(393);
+
+	var _Grid3 = _interopRequireDefault(_Grid2);
+
+	var _Row2 = __webpack_require__(399);
+
+	var _Row3 = _interopRequireDefault(_Row2);
+
+	var _Col2 = __webpack_require__(400);
+
+	var _Col3 = _interopRequireDefault(_Col2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.Grid = _Grid3.default;
+	exports.Row = _Row3.default;
+	exports.Col = _Col3.default;
+
+/***/ },
+/* 393 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _classnames = __webpack_require__(394);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _flexboxgrid = __webpack_require__(395);
+
+	var _flexboxgrid2 = _interopRequireDefault(_flexboxgrid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Grid = function (_Component) {
+	  _inherits(Grid, _Component);
+
+	  function Grid() {
+	    _classCallCheck(this, Grid);
+
+	    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+	  }
+
+	  Grid.prototype.render = function render() {
+	    var containerClass = _flexboxgrid2.default[this.props.fluid ? 'container-fluid' : 'container'];
+	    var className = (0, _classnames2.default)(this.props.className, containerClass);
+
+	    return _react2.default.createElement(this.props.tagName || 'div', Object.assign({}, this.props, {
+	      className: className
+	    }), this.props.children);
+	  };
+
+	  return Grid;
+	}(_react.Component);
+
+	exports.default = Grid;
+
+	Grid.propTypes = {
+	  fluid: _react.PropTypes.bool,
+	  className: _react.PropTypes.string,
+	  tagName: _react.PropTypes.string,
+	  children: _react.PropTypes.node
+	};
+
+/***/ },
+/* 394 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+
+	(function () {
+		'use strict';
+
+		var hasOwn = {}.hasOwnProperty;
+
+		function classNames () {
+			var classes = [];
+
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+
+				var argType = typeof arg;
+
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+
+			return classes.join(' ');
+		}
+
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 395 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(396);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(398)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../css-loader/index.js?modules!./flexboxgrid.css", function() {
+				var newContent = require("!!./../../css-loader/index.js?modules!./flexboxgrid.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 396 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(397)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "._2lUES1qfK73keSn9S_BiQT,\n.R2zU9JsZW1r2id-qp7H3S {\n  margin-right: auto;\n  margin-left: auto;\n}\n\n._2lUES1qfK73keSn9S_BiQT {\n  padding-right: 2rem;\n  padding-left: 2rem;\n}\n\n._1y_mg6OlZKhq9LGfUCMUme {\n  box-sizing: border-box;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 0;\n  -webkit-flex: 0 1 auto;\n  -ms-flex: 0 1 auto;\n  flex: 0 1 auto;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n  -webkit-flex-direction: row;\n  -ms-flex-direction: row;\n  flex-direction: row;\n  -webkit-flex-wrap: wrap;\n  -ms-flex-wrap: wrap;\n  flex-wrap: wrap;\n  margin-right: -0.5rem;\n  margin-left: -0.5rem;\n}\n\n._1y_mg6OlZKhq9LGfUCMUme._1X6820BrKRu54Mn4KYz5W4 {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: reverse;\n  -webkit-flex-direction: row-reverse;\n  -ms-flex-direction: row-reverse;\n  flex-direction: row-reverse;\n}\n\n._3RqPPNvuCSBmHorVMcWqER._1X6820BrKRu54Mn4KYz5W4 {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: reverse;\n  -webkit-flex-direction: column-reverse;\n  -ms-flex-direction: column-reverse;\n  flex-direction: column-reverse;\n}\n\n._1ROHR9DlWlzMRgGVodwDxD,\n.VtNIKmsSDJgR08O3PK8uC,\n._36nDaGKnuq3ZD-agz-pgJT,\n._2f2QlvHgVI7OYkA4mpVBd6,\n.TxBJgay1Dock8v41stRW3,\n._1HkK5al1x-9ZSl2PI_ve9D,\n._1DhV6KBVDhq0C7-sV3-jzc,\n._3o2m-bhGbaVrTtC5sv0Lcs,\n._3ARGcKnN9AiPusU2akGVnf,\n._15qflIp9SjUZK7g2aEy2et,\n._2AWNv2py0f6xFU3ErZOccg,\n._3H-6Fs4_R2vnL34C9DWmH1,\n.phbtEjxefGTKnURQmDKf-,\n._12o_RiX8QTfiXTIaUPcuZc,\n._2Hh-BNa7guvwv15Uhbpw8l,\n._8NCyspZl0BDBVloYYNukx,\n.dA0P14-K7rOfw0-f-ARiQ,\n._2MbdFM3PhDavNoRcckkAH6,\n._3N3btRozy__SzWNMbr7RjP,\n._1yQDGbFjNQKaPZV3sRcb7L,\n._2aEcW6OB6LL92WjxVewj4g,\n._2haBvfinzktZWEdiLLTB7k,\n._1QsVgWEGnsMr5UiQY1SGSr,\n._29xQn67IrZKRZ780OAwxPq,\n._1XWFbKOXcVDmFV87VyIQWw {\n  box-sizing: border-box;\n  -webkit-box-flex: 0;\n  -webkit-flex: 0 0 auto;\n  -ms-flex: 0 0 auto;\n  flex: 0 0 auto;\n  padding-right: 0.5rem;\n  padding-left: 0.5rem;\n}\n\n._1ROHR9DlWlzMRgGVodwDxD {\n  -webkit-box-flex: 1;\n  -webkit-flex-grow: 1;\n  -ms-flex-positive: 1;\n  flex-grow: 1;\n  -webkit-flex-basis: 0;\n  -ms-flex-preferred-size: 0;\n  flex-basis: 0;\n  max-width: 100%;\n}\n\n.VtNIKmsSDJgR08O3PK8uC {\n  -webkit-flex-basis: 8.333%;\n  -ms-flex-preferred-size: 8.333%;\n  flex-basis: 8.333%;\n  max-width: 8.333%;\n}\n\n._36nDaGKnuq3ZD-agz-pgJT {\n  -webkit-flex-basis: 16.667%;\n  -ms-flex-preferred-size: 16.667%;\n  flex-basis: 16.667%;\n  max-width: 16.667%;\n}\n\n._2f2QlvHgVI7OYkA4mpVBd6 {\n  -webkit-flex-basis: 25%;\n  -ms-flex-preferred-size: 25%;\n  flex-basis: 25%;\n  max-width: 25%;\n}\n\n.TxBJgay1Dock8v41stRW3 {\n  -webkit-flex-basis: 33.333%;\n  -ms-flex-preferred-size: 33.333%;\n  flex-basis: 33.333%;\n  max-width: 33.333%;\n}\n\n._1HkK5al1x-9ZSl2PI_ve9D {\n  -webkit-flex-basis: 41.667%;\n  -ms-flex-preferred-size: 41.667%;\n  flex-basis: 41.667%;\n  max-width: 41.667%;\n}\n\n._1DhV6KBVDhq0C7-sV3-jzc {\n  -webkit-flex-basis: 50%;\n  -ms-flex-preferred-size: 50%;\n  flex-basis: 50%;\n  max-width: 50%;\n}\n\n._3o2m-bhGbaVrTtC5sv0Lcs {\n  -webkit-flex-basis: 58.333%;\n  -ms-flex-preferred-size: 58.333%;\n  flex-basis: 58.333%;\n  max-width: 58.333%;\n}\n\n._3ARGcKnN9AiPusU2akGVnf {\n  -webkit-flex-basis: 66.667%;\n  -ms-flex-preferred-size: 66.667%;\n  flex-basis: 66.667%;\n  max-width: 66.667%;\n}\n\n._15qflIp9SjUZK7g2aEy2et {\n  -webkit-flex-basis: 75%;\n  -ms-flex-preferred-size: 75%;\n  flex-basis: 75%;\n  max-width: 75%;\n}\n\n._2AWNv2py0f6xFU3ErZOccg {\n  -webkit-flex-basis: 83.333%;\n  -ms-flex-preferred-size: 83.333%;\n  flex-basis: 83.333%;\n  max-width: 83.333%;\n}\n\n._3H-6Fs4_R2vnL34C9DWmH1 {\n  -webkit-flex-basis: 91.667%;\n  -ms-flex-preferred-size: 91.667%;\n  flex-basis: 91.667%;\n  max-width: 91.667%;\n}\n\n.phbtEjxefGTKnURQmDKf- {\n  -webkit-flex-basis: 100%;\n  -ms-flex-preferred-size: 100%;\n  flex-basis: 100%;\n  max-width: 100%;\n}\n\n._12o_RiX8QTfiXTIaUPcuZc {\n  margin-left: 8.333%;\n}\n\n._2Hh-BNa7guvwv15Uhbpw8l {\n  margin-left: 16.667%;\n}\n\n._8NCyspZl0BDBVloYYNukx {\n  margin-left: 25%;\n}\n\n.dA0P14-K7rOfw0-f-ARiQ {\n  margin-left: 33.333%;\n}\n\n._2MbdFM3PhDavNoRcckkAH6 {\n  margin-left: 41.667%;\n}\n\n._3N3btRozy__SzWNMbr7RjP {\n  margin-left: 50%;\n}\n\n._1yQDGbFjNQKaPZV3sRcb7L {\n  margin-left: 58.333%;\n}\n\n._2aEcW6OB6LL92WjxVewj4g {\n  margin-left: 66.667%;\n}\n\n._2haBvfinzktZWEdiLLTB7k {\n  margin-left: 75%;\n}\n\n._1QsVgWEGnsMr5UiQY1SGSr {\n  margin-left: 83.333%;\n}\n\n._29xQn67IrZKRZ780OAwxPq {\n  margin-left: 91.667%;\n}\n\n.h8qdAWMHl9H9KusorsUGl {\n  -webkit-box-pack: start;\n  -webkit-justify-content: flex-start;\n  -ms-flex-pack: start;\n  justify-content: flex-start;\n  text-align: start;\n}\n\n._1JWon51gE2hvrP7DseYMY2 {\n  -webkit-box-pack: center;\n  -webkit-justify-content: center;\n  -ms-flex-pack: center;\n  justify-content: center;\n  text-align: center;\n}\n\n._33Mkuk689lT9cnx5S9o8dd {\n  -webkit-box-pack: end;\n  -webkit-justify-content: flex-end;\n  -ms-flex-pack: end;\n  justify-content: flex-end;\n  text-align: end;\n}\n\n.UhA-Vp1lWlRTzACEbGNsa {\n  -webkit-box-align: start;\n  -webkit-align-items: flex-start;\n  -ms-flex-align: start;\n  align-items: flex-start;\n}\n\n._1h5t3PJZqK9qwrT3qlPdjc {\n  -webkit-box-align: center;\n  -webkit-align-items: center;\n  -ms-flex-align: center;\n  align-items: center;\n}\n\n._2tRUaV-2xznVQcG7Iv7UM1 {\n  -webkit-box-align: end;\n  -webkit-align-items: flex-end;\n  -ms-flex-align: end;\n  align-items: flex-end;\n}\n\n._1okkKoa5s94uYKQbw8E2lT {\n  -webkit-justify-content: space-around;\n  -ms-flex-pack: distribute;\n  justify-content: space-around;\n}\n\n.WFP84ybqV_X_gc0zkjJhl {\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n  -ms-flex-pack: justify;\n  justify-content: space-between;\n}\n\n.XoosKjZwAPw326u6OP77Q {\n  -webkit-box-ordinal-group: 0;\n  -webkit-order: -1;\n  -ms-flex-order: -1;\n  order: -1;\n}\n\n.HnlRwY2cdnKB4NdTkfxQ1 {\n  -webkit-box-ordinal-group: 2;\n  -webkit-order: 1;\n  -ms-flex-order: 1;\n  order: 1;\n}\n\n@media only screen and (min-width: 48em) {\n  .R2zU9JsZW1r2id-qp7H3S {\n    width: 49rem;\n  }\n\n  ._3tZ-zUw0J3C1g8GkBa3cfk,\n  ._2Gca68cg6xV5NP8eLcc8Nb,\n  .YETza1CLxQTJmcsayMaXS,\n  ._2irZQw6H_DChp3T2u_W2wk,\n  ._3kj7SajgEZppGZXkY1jtaB,\n  .gAxuQgw3ujJStQOrnxkLD,\n  .vUdKHHlLkgiLAA1TuA45P,\n  ._22IcQjMn8UG95wFMys3kf-,\n  ._2_YhBFklQfg_qTh6U0kmHg,\n  ._2ubpxFKlu30KWXK9wEEP4V,\n  ._262G9wpfVqlfnaR6O_ILoF,\n  ._39s7JZgrko5whq6IgG-GP7,\n  ._1e5UkhjqdTH3_K0acGIg_c,\n  ._1PFWu2N487Fe2g_Ji8uBvu,\n  ._1DgbOkWx9rdi1sebxXKaRG,\n  ._3W5Iv4Uadk6pl5Ue_iroqk,\n  ._3YToGwjr0s6-rcxa2JmN9r,\n  ._609VomloCWnEztgUnWLEz,\n  .TCeVQFpWUUtDZXv3yTSSF,\n  .csvBuGnrn4ts9J3hQefTH,\n  ._11PYHVljNTkAFWsK5pMchA,\n  ._24EvyNFsA8AQhPNdGoyqdt,\n  ._1-lcECohRjgF3zkEh7sNjG,\n  ._2ynFqaw0kU1Xt49ZO7d_re,\n  ._3MBMiKRL0EjktrpAMgj9YB {\n    box-sizing: border-box;\n    -webkit-box-flex: 0;\n    -webkit-flex: 0 0 auto;\n    -ms-flex: 0 0 auto;\n    flex: 0 0 auto;\n    padding-right: 0.5rem;\n    padding-left: 0.5rem;\n  }\n\n  ._3tZ-zUw0J3C1g8GkBa3cfk {\n    -webkit-box-flex: 1;\n    -webkit-flex-grow: 1;\n    -ms-flex-positive: 1;\n    flex-grow: 1;\n    -webkit-flex-basis: 0;\n    -ms-flex-preferred-size: 0;\n    flex-basis: 0;\n    max-width: 100%;\n  }\n\n  ._2Gca68cg6xV5NP8eLcc8Nb {\n    -webkit-flex-basis: 8.333%;\n    -ms-flex-preferred-size: 8.333%;\n    flex-basis: 8.333%;\n    max-width: 8.333%;\n  }\n\n  .YETza1CLxQTJmcsayMaXS {\n    -webkit-flex-basis: 16.667%;\n    -ms-flex-preferred-size: 16.667%;\n    flex-basis: 16.667%;\n    max-width: 16.667%;\n  }\n\n  ._2irZQw6H_DChp3T2u_W2wk {\n    -webkit-flex-basis: 25%;\n    -ms-flex-preferred-size: 25%;\n    flex-basis: 25%;\n    max-width: 25%;\n  }\n\n  ._3kj7SajgEZppGZXkY1jtaB {\n    -webkit-flex-basis: 33.333%;\n    -ms-flex-preferred-size: 33.333%;\n    flex-basis: 33.333%;\n    max-width: 33.333%;\n  }\n\n  .gAxuQgw3ujJStQOrnxkLD {\n    -webkit-flex-basis: 41.667%;\n    -ms-flex-preferred-size: 41.667%;\n    flex-basis: 41.667%;\n    max-width: 41.667%;\n  }\n\n  .vUdKHHlLkgiLAA1TuA45P {\n    -webkit-flex-basis: 50%;\n    -ms-flex-preferred-size: 50%;\n    flex-basis: 50%;\n    max-width: 50%;\n  }\n\n  ._22IcQjMn8UG95wFMys3kf- {\n    -webkit-flex-basis: 58.333%;\n    -ms-flex-preferred-size: 58.333%;\n    flex-basis: 58.333%;\n    max-width: 58.333%;\n  }\n\n  ._2_YhBFklQfg_qTh6U0kmHg {\n    -webkit-flex-basis: 66.667%;\n    -ms-flex-preferred-size: 66.667%;\n    flex-basis: 66.667%;\n    max-width: 66.667%;\n  }\n\n  ._2ubpxFKlu30KWXK9wEEP4V {\n    -webkit-flex-basis: 75%;\n    -ms-flex-preferred-size: 75%;\n    flex-basis: 75%;\n    max-width: 75%;\n  }\n\n  ._262G9wpfVqlfnaR6O_ILoF {\n    -webkit-flex-basis: 83.333%;\n    -ms-flex-preferred-size: 83.333%;\n    flex-basis: 83.333%;\n    max-width: 83.333%;\n  }\n\n  ._39s7JZgrko5whq6IgG-GP7 {\n    -webkit-flex-basis: 91.667%;\n    -ms-flex-preferred-size: 91.667%;\n    flex-basis: 91.667%;\n    max-width: 91.667%;\n  }\n\n  ._1e5UkhjqdTH3_K0acGIg_c {\n    -webkit-flex-basis: 100%;\n    -ms-flex-preferred-size: 100%;\n    flex-basis: 100%;\n    max-width: 100%;\n  }\n\n  ._1PFWu2N487Fe2g_Ji8uBvu {\n    margin-left: 8.333%;\n  }\n\n  ._1DgbOkWx9rdi1sebxXKaRG {\n    margin-left: 16.667%;\n  }\n\n  ._3W5Iv4Uadk6pl5Ue_iroqk {\n    margin-left: 25%;\n  }\n\n  ._3YToGwjr0s6-rcxa2JmN9r {\n    margin-left: 33.333%;\n  }\n\n  ._609VomloCWnEztgUnWLEz {\n    margin-left: 41.667%;\n  }\n\n  .TCeVQFpWUUtDZXv3yTSSF {\n    margin-left: 50%;\n  }\n\n  .csvBuGnrn4ts9J3hQefTH {\n    margin-left: 58.333%;\n  }\n\n  ._11PYHVljNTkAFWsK5pMchA {\n    margin-left: 66.667%;\n  }\n\n  ._24EvyNFsA8AQhPNdGoyqdt {\n    margin-left: 75%;\n  }\n\n  ._1-lcECohRjgF3zkEh7sNjG {\n    margin-left: 83.333%;\n  }\n\n  ._2ynFqaw0kU1Xt49ZO7d_re {\n    margin-left: 91.667%;\n  }\n\n  ._3DiluMqMGENgZ74rnrRptT {\n    -webkit-box-pack: start;\n    -webkit-justify-content: flex-start;\n    -ms-flex-pack: start;\n    justify-content: flex-start;\n    text-align: start;\n  }\n\n  ._39HWqM1UsMo4T7c-RrIgjf {\n    -webkit-box-pack: center;\n    -webkit-justify-content: center;\n    -ms-flex-pack: center;\n    justify-content: center;\n    text-align: center;\n  }\n\n  ._3B07fC9n8zItb3gP_SDrWH {\n    -webkit-box-pack: end;\n    -webkit-justify-content: flex-end;\n    -ms-flex-pack: end;\n    justify-content: flex-end;\n    text-align: end;\n  }\n\n  ._1begSHq9XMpzkzT-sdflTA {\n    -webkit-box-align: start;\n    -webkit-align-items: flex-start;\n    -ms-flex-align: start;\n    align-items: flex-start;\n  }\n\n  .Oh4K7QoXclMHSQgp8dznR {\n    -webkit-box-align: center;\n    -webkit-align-items: center;\n    -ms-flex-align: center;\n    align-items: center;\n  }\n\n  ._1jPnc9PA0lIORtNXkAdOBk {\n    -webkit-box-align: end;\n    -webkit-align-items: flex-end;\n    -ms-flex-align: end;\n    align-items: flex-end;\n  }\n\n  ._3ffbbeYxhCeW3Nz6y_6Y2Z {\n    -webkit-justify-content: space-around;\n    -ms-flex-pack: distribute;\n    justify-content: space-around;\n  }\n\n  ._1RcafKEI96d_kpRD_ppdHZ {\n    -webkit-box-pack: justify;\n    -webkit-justify-content: space-between;\n    -ms-flex-pack: justify;\n    justify-content: space-between;\n  }\n\n  ._2Gzhbb3OnhnsSKwU-H8nnq {\n    -webkit-box-ordinal-group: 0;\n    -webkit-order: -1;\n    -ms-flex-order: -1;\n    order: -1;\n  }\n\n  ._1pF8wFEO8TZXlDaYNAaHy5 {\n    -webkit-box-ordinal-group: 2;\n    -webkit-order: 1;\n    -ms-flex-order: 1;\n    order: 1;\n  }\n}\n\n@media only screen and (min-width: 64em) {\n  .R2zU9JsZW1r2id-qp7H3S {\n    width: 65rem;\n  }\n\n  ._2lbzmILcEV08ocFmmm9K3S,\n  ._1LapjkJwg0GqeNlEOCIq3_,\n  ._1c_4tJkIvzH06N9gHCt4qu,\n  ._3ANRSKqa19Npv87KFXEafn,\n  .a_FyK74McLF0aY2GqKp_6,\n  .YXlMqJk1FDak9iKkSAbUF,\n  ._5OSyJ15E43abjQAuK9Sqs,\n  ._1Zp-rjKvYmPrNz9MaD0X7I,\n  ._3979JlrDddAMyhrcwcSAip,\n  ._2fXuCa62dkor-GyBj1FE9s,\n  ._2JbeeLk6Mjl9JSytxky4qo,\n  ._3drbKWyEfp11xIZouVCC3O,\n  .zR2lKxWWGmEG6SYONDm3E,\n  ._2XNCz_mIWxZsGKZ_xxUNt6,\n  ._2t-NVgglQbylSF7PdB1ixN,\n  ._1zlTP0SAGq8JEwpZVROe30,\n  ._3aHxz2wo4TWR7uN_57nb0Q,\n  ._3S2Gww8nFuYybu4Lhk-0vr,\n  ._3KV0VLcScfo3mOXW4MJij,\n  ._1OdCDXr2NQ4yAGyEim8qJB,\n  ._2vFbQbZ69HgdRJHYxRtgIM,\n  ._1q95xLQDqjbV-gaUdOJFoq,\n  ._2CeMKEm_luX4yoL2QIZVpP,\n  ._3u6XWAZkRp0Sy1lfjrR7E_,\n  .eKUlLU3XTnbWh9gGemlBV {\n    box-sizing: border-box;\n    -webkit-box-flex: 0;\n    -webkit-flex: 0 0 auto;\n    -ms-flex: 0 0 auto;\n    flex: 0 0 auto;\n    padding-right: 0.5rem;\n    padding-left: 0.5rem;\n  }\n\n  ._2lbzmILcEV08ocFmmm9K3S {\n    -webkit-box-flex: 1;\n    -webkit-flex-grow: 1;\n    -ms-flex-positive: 1;\n    flex-grow: 1;\n    -webkit-flex-basis: 0;\n    -ms-flex-preferred-size: 0;\n    flex-basis: 0;\n    max-width: 100%;\n  }\n\n  ._1LapjkJwg0GqeNlEOCIq3_ {\n    -webkit-flex-basis: 8.333%;\n    -ms-flex-preferred-size: 8.333%;\n    flex-basis: 8.333%;\n    max-width: 8.333%;\n  }\n\n  ._1c_4tJkIvzH06N9gHCt4qu {\n    -webkit-flex-basis: 16.667%;\n    -ms-flex-preferred-size: 16.667%;\n    flex-basis: 16.667%;\n    max-width: 16.667%;\n  }\n\n  ._3ANRSKqa19Npv87KFXEafn {\n    -webkit-flex-basis: 25%;\n    -ms-flex-preferred-size: 25%;\n    flex-basis: 25%;\n    max-width: 25%;\n  }\n\n  .a_FyK74McLF0aY2GqKp_6 {\n    -webkit-flex-basis: 33.333%;\n    -ms-flex-preferred-size: 33.333%;\n    flex-basis: 33.333%;\n    max-width: 33.333%;\n  }\n\n  .YXlMqJk1FDak9iKkSAbUF {\n    -webkit-flex-basis: 41.667%;\n    -ms-flex-preferred-size: 41.667%;\n    flex-basis: 41.667%;\n    max-width: 41.667%;\n  }\n\n  ._5OSyJ15E43abjQAuK9Sqs {\n    -webkit-flex-basis: 50%;\n    -ms-flex-preferred-size: 50%;\n    flex-basis: 50%;\n    max-width: 50%;\n  }\n\n  ._1Zp-rjKvYmPrNz9MaD0X7I {\n    -webkit-flex-basis: 58.333%;\n    -ms-flex-preferred-size: 58.333%;\n    flex-basis: 58.333%;\n    max-width: 58.333%;\n  }\n\n  ._3979JlrDddAMyhrcwcSAip {\n    -webkit-flex-basis: 66.667%;\n    -ms-flex-preferred-size: 66.667%;\n    flex-basis: 66.667%;\n    max-width: 66.667%;\n  }\n\n  ._2fXuCa62dkor-GyBj1FE9s {\n    -webkit-flex-basis: 75%;\n    -ms-flex-preferred-size: 75%;\n    flex-basis: 75%;\n    max-width: 75%;\n  }\n\n  ._2JbeeLk6Mjl9JSytxky4qo {\n    -webkit-flex-basis: 83.333%;\n    -ms-flex-preferred-size: 83.333%;\n    flex-basis: 83.333%;\n    max-width: 83.333%;\n  }\n\n  ._3drbKWyEfp11xIZouVCC3O {\n    -webkit-flex-basis: 91.667%;\n    -ms-flex-preferred-size: 91.667%;\n    flex-basis: 91.667%;\n    max-width: 91.667%;\n  }\n\n  .zR2lKxWWGmEG6SYONDm3E {\n    -webkit-flex-basis: 100%;\n    -ms-flex-preferred-size: 100%;\n    flex-basis: 100%;\n    max-width: 100%;\n  }\n\n  ._2XNCz_mIWxZsGKZ_xxUNt6 {\n    margin-left: 8.333%;\n  }\n\n  ._2t-NVgglQbylSF7PdB1ixN {\n    margin-left: 16.667%;\n  }\n\n  ._1zlTP0SAGq8JEwpZVROe30 {\n    margin-left: 25%;\n  }\n\n  ._3aHxz2wo4TWR7uN_57nb0Q {\n    margin-left: 33.333%;\n  }\n\n  ._3S2Gww8nFuYybu4Lhk-0vr {\n    margin-left: 41.667%;\n  }\n\n  ._3KV0VLcScfo3mOXW4MJij {\n    margin-left: 50%;\n  }\n\n  ._1OdCDXr2NQ4yAGyEim8qJB {\n    margin-left: 58.333%;\n  }\n\n  ._2vFbQbZ69HgdRJHYxRtgIM {\n    margin-left: 66.667%;\n  }\n\n  ._1q95xLQDqjbV-gaUdOJFoq {\n    margin-left: 75%;\n  }\n\n  ._2CeMKEm_luX4yoL2QIZVpP {\n    margin-left: 83.333%;\n  }\n\n  ._3u6XWAZkRp0Sy1lfjrR7E_ {\n    margin-left: 91.667%;\n  }\n\n  ._2B-sg8aFLfpm62_Tt69I-R {\n    -webkit-box-pack: start;\n    -webkit-justify-content: flex-start;\n    -ms-flex-pack: start;\n    justify-content: flex-start;\n    text-align: start;\n  }\n\n  ._3VDfSruvX77m054J9jcdo7 {\n    -webkit-box-pack: center;\n    -webkit-justify-content: center;\n    -ms-flex-pack: center;\n    justify-content: center;\n    text-align: center;\n  }\n\n  ._2fJWyyCoU4CzNhhsUPcj2- {\n    -webkit-box-pack: end;\n    -webkit-justify-content: flex-end;\n    -ms-flex-pack: end;\n    justify-content: flex-end;\n    text-align: end;\n  }\n\n  ._12FDgBBs391u2G5OrJRCg {\n    -webkit-box-align: start;\n    -webkit-align-items: flex-start;\n    -ms-flex-align: start;\n    align-items: flex-start;\n  }\n\n  ._3wIJRjPM2ioGWsmK74iezq {\n    -webkit-box-align: center;\n    -webkit-align-items: center;\n    -ms-flex-align: center;\n    align-items: center;\n  }\n\n  ._2v1cdeHHFLeas37EudnTH9 {\n    -webkit-box-align: end;\n    -webkit-align-items: flex-end;\n    -ms-flex-align: end;\n    align-items: flex-end;\n  }\n\n  ._1x54_LB9bbn9gpz5f8idu4 {\n    -webkit-justify-content: space-around;\n    -ms-flex-pack: distribute;\n    justify-content: space-around;\n  }\n\n  .Xn-9xI0lgObNWdy5w9E_1 {\n    -webkit-box-pack: justify;\n    -webkit-justify-content: space-between;\n    -ms-flex-pack: justify;\n    justify-content: space-between;\n  }\n\n  ._3j4t5_xrt6LQemu9k22B63 {\n    -webkit-box-ordinal-group: 0;\n    -webkit-order: -1;\n    -ms-flex-order: -1;\n    order: -1;\n  }\n\n  ._3y72eHLDXAV2xqHK0cMkAV {\n    -webkit-box-ordinal-group: 2;\n    -webkit-order: 1;\n    -ms-flex-order: 1;\n    order: 1;\n  }\n}\n\n@media only screen and (min-width: 75em) {\n  .R2zU9JsZW1r2id-qp7H3S {\n    width: 76rem;\n  }\n\n  ._3SaXdPaR142nqcIOuiKCHx,\n  ._2VMiv7_lT1-5_5mY88Smr4,\n  ._21dKKlWJanNt1mp8ByWBng,\n  .vbACpjjkrYGkAclG_dM33,\n  ._2hzy86a-KLUKEnuuA6cwiv,\n  ._1-g7-h4Cfpw7fqmqu16fHQ,\n  ._21lf8wEmHwYwld2iWGJFU7,\n  ._3kBG1bMRaIuCEMuzMkEkmF,\n  .afECxODMwe73K_5o2I3bm,\n  ._10mdlAq96KeGEpKaRURBhG,\n  ._1yTfjqgNRtnb1dHDZCr4Rq,\n  ._3hMRuLdaCWpN3QmCDWcIdQ,\n  ._1rlAAw8ioGFvdnOWUR3phO,\n  .KhvqRrVoEWPLhV1GS-L2H,\n  ._1ZD_z29DMQY0Ir_eJ1aTG4,\n  ._2GQVaM2l3Irh5kUhuKyi-C,\n  ._1zPZjWQpH288kNebp2rWz0,\n  .Kj8IqNfYzGIqx3aLmNfgG,\n  ._3nun3VX81Yw6lDqbgnHSgg,\n  .YTmn9cOcFlX259hMYWIrK,\n  ._1qG2tspUJkb5pl3_XC7XM3,\n  .qd27BVASI0s0c1kAkWTuk,\n  ._2YScPJbuzLmkg5HeTcoUnG,\n  ._3pPvjaguCS9oNhxtHhbqF4,\n  ._2rHEgmO5IzDrG5Xc3cnDsr {\n    box-sizing: border-box;\n    -webkit-box-flex: 0;\n    -webkit-flex: 0 0 auto;\n    -ms-flex: 0 0 auto;\n    flex: 0 0 auto;\n    padding-right: 0.5rem;\n    padding-left: 0.5rem;\n  }\n\n  ._3SaXdPaR142nqcIOuiKCHx {\n    -webkit-box-flex: 1;\n    -webkit-flex-grow: 1;\n    -ms-flex-positive: 1;\n    flex-grow: 1;\n    -webkit-flex-basis: 0;\n    -ms-flex-preferred-size: 0;\n    flex-basis: 0;\n    max-width: 100%;\n  }\n\n  ._2VMiv7_lT1-5_5mY88Smr4 {\n    -webkit-flex-basis: 8.333%;\n    -ms-flex-preferred-size: 8.333%;\n    flex-basis: 8.333%;\n    max-width: 8.333%;\n  }\n\n  ._21dKKlWJanNt1mp8ByWBng {\n    -webkit-flex-basis: 16.667%;\n    -ms-flex-preferred-size: 16.667%;\n    flex-basis: 16.667%;\n    max-width: 16.667%;\n  }\n\n  .vbACpjjkrYGkAclG_dM33 {\n    -webkit-flex-basis: 25%;\n    -ms-flex-preferred-size: 25%;\n    flex-basis: 25%;\n    max-width: 25%;\n  }\n\n  ._2hzy86a-KLUKEnuuA6cwiv {\n    -webkit-flex-basis: 33.333%;\n    -ms-flex-preferred-size: 33.333%;\n    flex-basis: 33.333%;\n    max-width: 33.333%;\n  }\n\n  ._1-g7-h4Cfpw7fqmqu16fHQ {\n    -webkit-flex-basis: 41.667%;\n    -ms-flex-preferred-size: 41.667%;\n    flex-basis: 41.667%;\n    max-width: 41.667%;\n  }\n\n  ._21lf8wEmHwYwld2iWGJFU7 {\n    -webkit-flex-basis: 50%;\n    -ms-flex-preferred-size: 50%;\n    flex-basis: 50%;\n    max-width: 50%;\n  }\n\n  ._3kBG1bMRaIuCEMuzMkEkmF {\n    -webkit-flex-basis: 58.333%;\n    -ms-flex-preferred-size: 58.333%;\n    flex-basis: 58.333%;\n    max-width: 58.333%;\n  }\n\n  .afECxODMwe73K_5o2I3bm {\n    -webkit-flex-basis: 66.667%;\n    -ms-flex-preferred-size: 66.667%;\n    flex-basis: 66.667%;\n    max-width: 66.667%;\n  }\n\n  ._10mdlAq96KeGEpKaRURBhG {\n    -webkit-flex-basis: 75%;\n    -ms-flex-preferred-size: 75%;\n    flex-basis: 75%;\n    max-width: 75%;\n  }\n\n  ._1yTfjqgNRtnb1dHDZCr4Rq {\n    -webkit-flex-basis: 83.333%;\n    -ms-flex-preferred-size: 83.333%;\n    flex-basis: 83.333%;\n    max-width: 83.333%;\n  }\n\n  ._3hMRuLdaCWpN3QmCDWcIdQ {\n    -webkit-flex-basis: 91.667%;\n    -ms-flex-preferred-size: 91.667%;\n    flex-basis: 91.667%;\n    max-width: 91.667%;\n  }\n\n  ._1rlAAw8ioGFvdnOWUR3phO {\n    -webkit-flex-basis: 100%;\n    -ms-flex-preferred-size: 100%;\n    flex-basis: 100%;\n    max-width: 100%;\n  }\n\n  .KhvqRrVoEWPLhV1GS-L2H {\n    margin-left: 8.333%;\n  }\n\n  ._1ZD_z29DMQY0Ir_eJ1aTG4 {\n    margin-left: 16.667%;\n  }\n\n  ._2GQVaM2l3Irh5kUhuKyi-C {\n    margin-left: 25%;\n  }\n\n  ._1zPZjWQpH288kNebp2rWz0 {\n    margin-left: 33.333%;\n  }\n\n  .Kj8IqNfYzGIqx3aLmNfgG {\n    margin-left: 41.667%;\n  }\n\n  ._3nun3VX81Yw6lDqbgnHSgg {\n    margin-left: 50%;\n  }\n\n  .YTmn9cOcFlX259hMYWIrK {\n    margin-left: 58.333%;\n  }\n\n  ._1qG2tspUJkb5pl3_XC7XM3 {\n    margin-left: 66.667%;\n  }\n\n  .qd27BVASI0s0c1kAkWTuk {\n    margin-left: 75%;\n  }\n\n  ._2YScPJbuzLmkg5HeTcoUnG {\n    margin-left: 83.333%;\n  }\n\n  ._3pPvjaguCS9oNhxtHhbqF4 {\n    margin-left: 91.667%;\n  }\n\n  .ageu9kvjITxzI4kkJTBPg {\n    -webkit-box-pack: start;\n    -webkit-justify-content: flex-start;\n    -ms-flex-pack: start;\n    justify-content: flex-start;\n    text-align: start;\n  }\n\n  ._3H3SIrkI0UbDUnmo-w81Tw {\n    -webkit-box-pack: center;\n    -webkit-justify-content: center;\n    -ms-flex-pack: center;\n    justify-content: center;\n    text-align: center;\n  }\n\n  ._27_fMsnGuAXyB3PN2E2XDi {\n    -webkit-box-pack: end;\n    -webkit-justify-content: flex-end;\n    -ms-flex-pack: end;\n    justify-content: flex-end;\n    text-align: end;\n  }\n\n  ._1tWWwsnzo29OCqDycLdabU {\n    -webkit-box-align: start;\n    -webkit-align-items: flex-start;\n    -ms-flex-align: start;\n    align-items: flex-start;\n  }\n\n  .nocGIQ9CpeWuzLVV_F-Uf {\n    -webkit-box-align: center;\n    -webkit-align-items: center;\n    -ms-flex-align: center;\n    align-items: center;\n  }\n\n  .IYGksIFT9SOw6zkflJS_u {\n    -webkit-box-align: end;\n    -webkit-align-items: flex-end;\n    -ms-flex-align: end;\n    align-items: flex-end;\n  }\n\n  .zZC2C_E9Ki2clHnozhh2a {\n    -webkit-justify-content: space-around;\n    -ms-flex-pack: distribute;\n    justify-content: space-around;\n  }\n\n  ._2njzkS2f_XEcsHCKLfLD0U {\n    -webkit-box-pack: justify;\n    -webkit-justify-content: space-between;\n    -ms-flex-pack: justify;\n    justify-content: space-between;\n  }\n\n  ._6dksOSGGLkqWE_zrFGLkt {\n    -webkit-box-ordinal-group: 0;\n    -webkit-order: -1;\n    -ms-flex-order: -1;\n    order: -1;\n  }\n\n  .xGBvSx3UZrZVZPQJ7tdQc {\n    -webkit-box-ordinal-group: 2;\n    -webkit-order: 1;\n    -ms-flex-order: 1;\n    order: 1;\n  }\n}", ""]);
+
+	// exports
+	exports.locals = {
+		"container-fluid": "_2lUES1qfK73keSn9S_BiQT",
+		"container": "R2zU9JsZW1r2id-qp7H3S",
+		"row": "_1y_mg6OlZKhq9LGfUCMUme",
+		"reverse": "_1X6820BrKRu54Mn4KYz5W4",
+		"col": "_3RqPPNvuCSBmHorVMcWqER",
+		"col-xs": "_1ROHR9DlWlzMRgGVodwDxD",
+		"col-xs-1": "VtNIKmsSDJgR08O3PK8uC",
+		"col-xs-2": "_36nDaGKnuq3ZD-agz-pgJT",
+		"col-xs-3": "_2f2QlvHgVI7OYkA4mpVBd6",
+		"col-xs-4": "TxBJgay1Dock8v41stRW3",
+		"col-xs-5": "_1HkK5al1x-9ZSl2PI_ve9D",
+		"col-xs-6": "_1DhV6KBVDhq0C7-sV3-jzc",
+		"col-xs-7": "_3o2m-bhGbaVrTtC5sv0Lcs",
+		"col-xs-8": "_3ARGcKnN9AiPusU2akGVnf",
+		"col-xs-9": "_15qflIp9SjUZK7g2aEy2et",
+		"col-xs-10": "_2AWNv2py0f6xFU3ErZOccg",
+		"col-xs-11": "_3H-6Fs4_R2vnL34C9DWmH1",
+		"col-xs-12": "phbtEjxefGTKnURQmDKf-",
+		"col-xs-offset-1": "_12o_RiX8QTfiXTIaUPcuZc",
+		"col-xs-offset-2": "_2Hh-BNa7guvwv15Uhbpw8l",
+		"col-xs-offset-3": "_8NCyspZl0BDBVloYYNukx",
+		"col-xs-offset-4": "dA0P14-K7rOfw0-f-ARiQ",
+		"col-xs-offset-5": "_2MbdFM3PhDavNoRcckkAH6",
+		"col-xs-offset-6": "_3N3btRozy__SzWNMbr7RjP",
+		"col-xs-offset-7": "_1yQDGbFjNQKaPZV3sRcb7L",
+		"col-xs-offset-8": "_2aEcW6OB6LL92WjxVewj4g",
+		"col-xs-offset-9": "_2haBvfinzktZWEdiLLTB7k",
+		"col-xs-offset-10": "_1QsVgWEGnsMr5UiQY1SGSr",
+		"col-xs-offset-11": "_29xQn67IrZKRZ780OAwxPq",
+		"col-xs-offset-12": "_1XWFbKOXcVDmFV87VyIQWw",
+		"start-xs": "h8qdAWMHl9H9KusorsUGl",
+		"center-xs": "_1JWon51gE2hvrP7DseYMY2",
+		"end-xs": "_33Mkuk689lT9cnx5S9o8dd",
+		"top-xs": "UhA-Vp1lWlRTzACEbGNsa",
+		"middle-xs": "_1h5t3PJZqK9qwrT3qlPdjc",
+		"bottom-xs": "_2tRUaV-2xznVQcG7Iv7UM1",
+		"around-xs": "_1okkKoa5s94uYKQbw8E2lT",
+		"between-xs": "WFP84ybqV_X_gc0zkjJhl",
+		"first-xs": "XoosKjZwAPw326u6OP77Q",
+		"last-xs": "HnlRwY2cdnKB4NdTkfxQ1",
+		"col-sm": "_3tZ-zUw0J3C1g8GkBa3cfk",
+		"col-sm-1": "_2Gca68cg6xV5NP8eLcc8Nb",
+		"col-sm-2": "YETza1CLxQTJmcsayMaXS",
+		"col-sm-3": "_2irZQw6H_DChp3T2u_W2wk",
+		"col-sm-4": "_3kj7SajgEZppGZXkY1jtaB",
+		"col-sm-5": "gAxuQgw3ujJStQOrnxkLD",
+		"col-sm-6": "vUdKHHlLkgiLAA1TuA45P",
+		"col-sm-7": "_22IcQjMn8UG95wFMys3kf-",
+		"col-sm-8": "_2_YhBFklQfg_qTh6U0kmHg",
+		"col-sm-9": "_2ubpxFKlu30KWXK9wEEP4V",
+		"col-sm-10": "_262G9wpfVqlfnaR6O_ILoF",
+		"col-sm-11": "_39s7JZgrko5whq6IgG-GP7",
+		"col-sm-12": "_1e5UkhjqdTH3_K0acGIg_c",
+		"col-sm-offset-1": "_1PFWu2N487Fe2g_Ji8uBvu",
+		"col-sm-offset-2": "_1DgbOkWx9rdi1sebxXKaRG",
+		"col-sm-offset-3": "_3W5Iv4Uadk6pl5Ue_iroqk",
+		"col-sm-offset-4": "_3YToGwjr0s6-rcxa2JmN9r",
+		"col-sm-offset-5": "_609VomloCWnEztgUnWLEz",
+		"col-sm-offset-6": "TCeVQFpWUUtDZXv3yTSSF",
+		"col-sm-offset-7": "csvBuGnrn4ts9J3hQefTH",
+		"col-sm-offset-8": "_11PYHVljNTkAFWsK5pMchA",
+		"col-sm-offset-9": "_24EvyNFsA8AQhPNdGoyqdt",
+		"col-sm-offset-10": "_1-lcECohRjgF3zkEh7sNjG",
+		"col-sm-offset-11": "_2ynFqaw0kU1Xt49ZO7d_re",
+		"col-sm-offset-12": "_3MBMiKRL0EjktrpAMgj9YB",
+		"start-sm": "_3DiluMqMGENgZ74rnrRptT",
+		"center-sm": "_39HWqM1UsMo4T7c-RrIgjf",
+		"end-sm": "_3B07fC9n8zItb3gP_SDrWH",
+		"top-sm": "_1begSHq9XMpzkzT-sdflTA",
+		"middle-sm": "Oh4K7QoXclMHSQgp8dznR",
+		"bottom-sm": "_1jPnc9PA0lIORtNXkAdOBk",
+		"around-sm": "_3ffbbeYxhCeW3Nz6y_6Y2Z",
+		"between-sm": "_1RcafKEI96d_kpRD_ppdHZ",
+		"first-sm": "_2Gzhbb3OnhnsSKwU-H8nnq",
+		"last-sm": "_1pF8wFEO8TZXlDaYNAaHy5",
+		"col-md": "_2lbzmILcEV08ocFmmm9K3S",
+		"col-md-1": "_1LapjkJwg0GqeNlEOCIq3_",
+		"col-md-2": "_1c_4tJkIvzH06N9gHCt4qu",
+		"col-md-3": "_3ANRSKqa19Npv87KFXEafn",
+		"col-md-4": "a_FyK74McLF0aY2GqKp_6",
+		"col-md-5": "YXlMqJk1FDak9iKkSAbUF",
+		"col-md-6": "_5OSyJ15E43abjQAuK9Sqs",
+		"col-md-7": "_1Zp-rjKvYmPrNz9MaD0X7I",
+		"col-md-8": "_3979JlrDddAMyhrcwcSAip",
+		"col-md-9": "_2fXuCa62dkor-GyBj1FE9s",
+		"col-md-10": "_2JbeeLk6Mjl9JSytxky4qo",
+		"col-md-11": "_3drbKWyEfp11xIZouVCC3O",
+		"col-md-12": "zR2lKxWWGmEG6SYONDm3E",
+		"col-md-offset-1": "_2XNCz_mIWxZsGKZ_xxUNt6",
+		"col-md-offset-2": "_2t-NVgglQbylSF7PdB1ixN",
+		"col-md-offset-3": "_1zlTP0SAGq8JEwpZVROe30",
+		"col-md-offset-4": "_3aHxz2wo4TWR7uN_57nb0Q",
+		"col-md-offset-5": "_3S2Gww8nFuYybu4Lhk-0vr",
+		"col-md-offset-6": "_3KV0VLcScfo3mOXW4MJij",
+		"col-md-offset-7": "_1OdCDXr2NQ4yAGyEim8qJB",
+		"col-md-offset-8": "_2vFbQbZ69HgdRJHYxRtgIM",
+		"col-md-offset-9": "_1q95xLQDqjbV-gaUdOJFoq",
+		"col-md-offset-10": "_2CeMKEm_luX4yoL2QIZVpP",
+		"col-md-offset-11": "_3u6XWAZkRp0Sy1lfjrR7E_",
+		"col-md-offset-12": "eKUlLU3XTnbWh9gGemlBV",
+		"start-md": "_2B-sg8aFLfpm62_Tt69I-R",
+		"center-md": "_3VDfSruvX77m054J9jcdo7",
+		"end-md": "_2fJWyyCoU4CzNhhsUPcj2-",
+		"top-md": "_12FDgBBs391u2G5OrJRCg",
+		"middle-md": "_3wIJRjPM2ioGWsmK74iezq",
+		"bottom-md": "_2v1cdeHHFLeas37EudnTH9",
+		"around-md": "_1x54_LB9bbn9gpz5f8idu4",
+		"between-md": "Xn-9xI0lgObNWdy5w9E_1",
+		"first-md": "_3j4t5_xrt6LQemu9k22B63",
+		"last-md": "_3y72eHLDXAV2xqHK0cMkAV",
+		"col-lg": "_3SaXdPaR142nqcIOuiKCHx",
+		"col-lg-1": "_2VMiv7_lT1-5_5mY88Smr4",
+		"col-lg-2": "_21dKKlWJanNt1mp8ByWBng",
+		"col-lg-3": "vbACpjjkrYGkAclG_dM33",
+		"col-lg-4": "_2hzy86a-KLUKEnuuA6cwiv",
+		"col-lg-5": "_1-g7-h4Cfpw7fqmqu16fHQ",
+		"col-lg-6": "_21lf8wEmHwYwld2iWGJFU7",
+		"col-lg-7": "_3kBG1bMRaIuCEMuzMkEkmF",
+		"col-lg-8": "afECxODMwe73K_5o2I3bm",
+		"col-lg-9": "_10mdlAq96KeGEpKaRURBhG",
+		"col-lg-10": "_1yTfjqgNRtnb1dHDZCr4Rq",
+		"col-lg-11": "_3hMRuLdaCWpN3QmCDWcIdQ",
+		"col-lg-12": "_1rlAAw8ioGFvdnOWUR3phO",
+		"col-lg-offset-1": "KhvqRrVoEWPLhV1GS-L2H",
+		"col-lg-offset-2": "_1ZD_z29DMQY0Ir_eJ1aTG4",
+		"col-lg-offset-3": "_2GQVaM2l3Irh5kUhuKyi-C",
+		"col-lg-offset-4": "_1zPZjWQpH288kNebp2rWz0",
+		"col-lg-offset-5": "Kj8IqNfYzGIqx3aLmNfgG",
+		"col-lg-offset-6": "_3nun3VX81Yw6lDqbgnHSgg",
+		"col-lg-offset-7": "YTmn9cOcFlX259hMYWIrK",
+		"col-lg-offset-8": "_1qG2tspUJkb5pl3_XC7XM3",
+		"col-lg-offset-9": "qd27BVASI0s0c1kAkWTuk",
+		"col-lg-offset-10": "_2YScPJbuzLmkg5HeTcoUnG",
+		"col-lg-offset-11": "_3pPvjaguCS9oNhxtHhbqF4",
+		"col-lg-offset-12": "_2rHEgmO5IzDrG5Xc3cnDsr",
+		"start-lg": "ageu9kvjITxzI4kkJTBPg",
+		"center-lg": "_3H3SIrkI0UbDUnmo-w81Tw",
+		"end-lg": "_27_fMsnGuAXyB3PN2E2XDi",
+		"top-lg": "_1tWWwsnzo29OCqDycLdabU",
+		"middle-lg": "nocGIQ9CpeWuzLVV_F-Uf",
+		"bottom-lg": "IYGksIFT9SOw6zkflJS_u",
+		"around-lg": "zZC2C_E9Ki2clHnozhh2a",
+		"between-lg": "_2njzkS2f_XEcsHCKLfLD0U",
+		"first-lg": "_6dksOSGGLkqWE_zrFGLkt",
+		"last-lg": "xGBvSx3UZrZVZPQJ7tdQc"
+	};
+
+/***/ },
+/* 397 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 398 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+
+		update(obj);
+
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+
+	var replaceText = (function () {
+		var textStore = [];
+
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var sourceMap = obj.sourceMap;
+
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+
+		var blob = new Blob([css], { type: "text/css" });
+
+		var oldSrc = linkElement.href;
+
+		linkElement.href = URL.createObjectURL(blob);
+
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
+
+/***/ },
+/* 399 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _classnames = __webpack_require__(394);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
+	var _flexboxgrid = __webpack_require__(395);
+
+	var _flexboxgrid2 = _interopRequireDefault(_flexboxgrid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ModificatorType = _react.PropTypes.oneOf(['xs', 'sm', 'md', 'lg']);
+	var modificatorKeys = ['start', 'center', 'end', 'top', 'middle', 'bottom', 'around', 'between', 'first', 'last'];
+
+	var Row = function (_Component) {
+	  _inherits(Row, _Component);
+
+	  function Row() {
+	    _classCallCheck(this, Row);
+
+	    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+	  }
+
+	  Row.prototype.render = function render() {
+	    var modificators = [_flexboxgrid2.default.row];
+	    for (var i = 0; i < modificatorKeys.length; ++i) {
+	      var key = modificatorKeys[i];
+	      var value = this.props[key];
+	      if (value) {
+	        modificators.push(_flexboxgrid2.default[key + '-' + value]);
+	      }
+	    }
+
+	    if (this.props.reverse) {
+	      modificators.push(_flexboxgrid2.default.reverse);
+	    }
+
+	    var className = (0, _classnames2.default)(this.props.className, modificators);
+
+	    return _react2.default.createElement(this.props.tagName || 'div', Object.assign({}, this.props, {
+	      className: className
+	    }), this.props.children);
+	  };
+
+	  return Row;
+	}(_react.Component);
+
+	exports.default = Row;
+
+	Row.propTypes = {
+	  reverse: _react.PropTypes.bool,
+	  start: ModificatorType,
+	  center: ModificatorType,
+	  end: ModificatorType,
+	  top: ModificatorType,
+	  middle: ModificatorType,
+	  bottom: ModificatorType,
+	  around: ModificatorType,
+	  between: ModificatorType,
+	  first: ModificatorType,
+	  last: ModificatorType,
+	  className: _react.PropTypes.string,
+	  tagName: _react.PropTypes.string,
+	  children: _react.PropTypes.node
+	};
+
+/***/ },
+/* 400 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _flexboxgrid = __webpack_require__(395);
+
+	var _flexboxgrid2 = _interopRequireDefault(_flexboxgrid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ModificatorType = _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.bool]);
+
+	var Col = function (_Component) {
+	  _inherits(Col, _Component);
+
+	  function Col(props) {
+	    _classCallCheck(this, Col);
+
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+
+	    _this._classMap = {
+	      xs: 'col-xs',
+	      sm: 'col-sm',
+	      md: 'col-md',
+	      lg: 'col-lg',
+	      xsOffset: 'col-xs-offset',
+	      smOffset: 'col-sm-offset',
+	      mdOffset: 'col-md-offset',
+	      lgOffset: 'col-lg-offset'
+	    };
+	    return _this;
+	  }
+
+	  Col.prototype.render = function render() {
+	    var classes = [];
+
+	    if (this.props.className) {
+	      classes.push(this.props.className);
+	    }
+
+	    if (this.props.reverse) {
+	      classes.push(_flexboxgrid2.default.reverse);
+	    }
+
+	    for (var key in this.props) {
+	      if (this.props.hasOwnProperty(key) && this._classMap[key]) {
+	        var colBaseClass = this._classMap[key];
+	        colBaseClass = Number.isInteger(this.props[key]) ? colBaseClass + '-' + this.props[key] : colBaseClass;
+	        classes.push(_flexboxgrid2.default[colBaseClass]);
+	      }
+	    }
+
+	    return _react2.default.createElement(this.props.tagName || 'div', Object.assign({}, this.props, {
+	      className: classes.join(' ')
+	    }), this.props.children);
+	  };
+
+	  return Col;
+	}(_react.Component);
+
+	exports.default = Col;
+
+	Col.propTypes = {
+	  xs: ModificatorType,
+	  sm: ModificatorType,
+	  md: ModificatorType,
+	  lg: ModificatorType,
+	  xsOffset: _react.PropTypes.number,
+	  smOffset: _react.PropTypes.number,
+	  mdOffset: _react.PropTypes.number,
+	  lgOffset: _react.PropTypes.number,
+	  reverse: _react.PropTypes.bool,
+	  className: _react.PropTypes.string,
+	  tagName: _react.PropTypes.string,
+	  children: _react.PropTypes.node
+	};
 
 /***/ }
 /******/ ]);
