@@ -1,13 +1,17 @@
-import React, {Component} from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText, Paper} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import React from 'react';
+import baseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
-const CardExampleWithAvatar = () => (
-	<MuiThemeProvider muiTheme={getMuiTheme(baseTheme)}>
-  <Card>
+
+class Main extends React.Component {
+  getChildContext() {
+    return {muiTheme: getMuiTheme(baseTheme)};
+  }
+
+  render () {
+    return <Card>
     <CardHeader
       title="URL Avatar"
       subtitle="Subtitle"
@@ -29,8 +33,12 @@ const CardExampleWithAvatar = () => (
       <FlatButton label="Action1" />
       <FlatButton label="Action2" />
     </CardActions>
-  </Card>
-  </MuiThemeProvider>
-);
+  </Card>;
+  }
+}
 
-export default CardExampleWithAvatar;
+Main.childContextTypes = {
+  muiTheme: React.PropTypes.object.isRequired,
+};
+
+export default Main;
