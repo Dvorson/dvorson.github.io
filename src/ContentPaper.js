@@ -9,7 +9,8 @@ import PropTypes from 'prop-types';
 const styleSheet = createStyleSheet('ContentPaper', theme => ({
     paper: {
         padding: '20px',
-        pageBreakBefore: 'always'
+        pageBreakBefore: 'always',
+        width: '80%'
     }
 }));
 

@@ -14145,24 +14145,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _reactTapEventPlugin2.default)();
 
 var App = function App() {
-    return _react2.default.createElement(
-        _MuiThemeProvider2.default,
-        null,
-        _react2.default.createElement(
-            _Grid2.default,
-            { container: true, gutter: 8 },
-            _react2.default.createElement(
-                _Grid2.default,
-                { item: true, xs: 12, sm: 4, md: 4, lg: 3 },
-                _react2.default.createElement(_AvatarCard2.default, null)
-            ),
-            _react2.default.createElement(
-                _Grid2.default,
-                { item: true, xs: 12, sm: 8, md: 8, lg: 9 },
-                _react2.default.createElement(_ContentPaper2.default, null)
-            )
-        )
-    );
+  return _react2.default.createElement(
+    _MuiThemeProvider2.default,
+    null,
+    _react2.default.createElement(
+      'div',
+      { style: { display: 'flex' } },
+      _react2.default.createElement(_AvatarCard2.default, null),
+      _react2.default.createElement(_ContentPaper2.default, null)
+    )
+  );
 };
 
 _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
@@ -33783,7 +33775,8 @@ var styleSheet = (0, _styles.createStyleSheet)('ContentPaper', function (theme) 
     return {
         paper: {
             padding: '20px',
-            pageBreakBefore: 'always'
+            pageBreakBefore: 'always',
+            width: '80%'
         }
     };
 });

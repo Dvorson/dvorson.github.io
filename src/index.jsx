@@ -9,14 +9,10 @@ injectTapEventPlugin();
 
 const App = () => (
       <MuiThemeProvider>
-        <Grid container gutter={8}>
-            <Grid item xs={12} sm={4} md={4} lg={3}>
-                <AvatarCard />
-            </Grid>
-            <Grid item xs={12} sm={8} md={8} lg={9}>
-                <ContentPaper />
-            </Grid>
-        </Grid>
+        <div style={{display: 'flex'}}>
+        <AvatarCard />
+        <ContentPaper />
+        </div>
       </MuiThemeProvider>
     );
 
