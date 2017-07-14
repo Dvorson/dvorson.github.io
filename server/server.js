@@ -1,12 +1,12 @@
 'use strict'
 
 const serve = require('koa-static');
-const koa = require('koa');
+const Koa = require('koa');
 const path = require('path');
-const app = koa();
-const port = 3000;
+const app = new Koa();
+const port = 8080;
 
-app.use(serve(path.resolve(__dirname, '../')));
+app.use(serve(path.resolve(__dirname, '../dist')));
 
 app.listen(port);
 

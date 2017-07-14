@@ -1,32 +1,23 @@
 var path = require('path');
-var webpack = require('webpack');
- 
+
 module.exports = {
-  entry: './src/index.js',
-  output: { path: path.resolve(__dirname, 'build/js'), filename: 'bundle.js' },
-  module: {
-    loaders: [
-      {
-        test: /.jsx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react']
-        }
-      },
-      {
-        test: /.js?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react']
-        }
-      },
-      {
-        test: /\.css$/,
-        loader: 'style!css?modules',
-        include: /flexboxgrid/,
-      }
-    ]
+  entry: './src/index.jsx',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist/js')
   },
+  module: {
+      rules: [
+          {
+             test: /\.jsx|js$/,
+             exclude: /(node_modules|bower_components)/,
+             use: {
+                 loader: 'babel-loader',
+                 options: {
+                     presets: ['env', 'react', 'react-plus']
+                 }
+             }
+          }
+        ]
+  }
 };
