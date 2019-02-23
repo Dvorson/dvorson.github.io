@@ -40510,37 +40510,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Skills)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      chipData: [{
-        key: 0,
-        label: 'Node.js'
-      }, {
-        key: 1,
-        label: 'Fullstack BEM'
-      }, {
-        key: 2,
-        label: 'React'
-      }, {
-        key: 3,
-        label: 'Gulp'
-      }, {
-        key: 4,
-        label: 'Webpack'
-      }, {
-        key: 5,
-        label: 'MongoDB'
-      }, {
-        key: 6,
-        label: 'Linux'
-      }, {
-        key: 7,
-        label: 'Lodash'
-      }, {
-        key: 8,
-        label: 'Kubernetes'
-      }, {
-        key: 9,
-        label: 'Elasticsearch'
-      }]
+      chipLabels: ['Node.js', 'React', 'Redux', 'Lodash', 'Webpack', 'MongoDB', 'Unix administration', 'Git', 'Kubernetes', 'Elasticsearch', 'Fullstack BEM']
     });
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "styles", {
@@ -40560,12 +40530,13 @@ function (_Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
+      var chipLabels = this.state.chipLabels;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: classes.row
-      }, this.state.chipData.map(function (data) {
+      }, chipLabels.map(function (label, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Chip__WEBPACK_IMPORTED_MODULE_3___default.a, {
-          label: data.label,
-          key: data.key,
+          label: label,
+          key: i,
           className: classes.chip
         });
       }));

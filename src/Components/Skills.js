@@ -12,17 +12,18 @@ const styles = theme => ({
 
 class Skills extends Component {
   state = {
-    chipData: [
-      { key: 0, label: 'Node.js' },
-      { key: 1, label: 'Fullstack BEM' },
-      { key: 2, label: 'React' },
-      { key: 3, label: 'Gulp' },
-      { key: 4, label: 'Webpack' },
-      { key: 5, label: 'MongoDB' },
-      { key: 6, label: 'Linux' },
-      { key: 7, label: 'Lodash' },
-      { key: 8, label: 'Kubernetes' },
-      { key: 9, label: 'Elasticsearch' }
+    chipLabels: [
+      'Node.js',
+      'React',
+      'Redux',
+      'Lodash',
+      'Webpack',
+      'MongoDB',
+      'Unix administration',
+      'Git',
+      'Kubernetes',
+      'Elasticsearch',
+      'Fullstack BEM'
     ]
   };
 
@@ -38,14 +39,15 @@ class Skills extends Component {
 
   render () {
     const { classes } = this.props
+    const { chipLabels } = this.state
 
     return (
       <div className={classes.row}>
-        {this.state.chipData.map(data => {
+        {chipLabels.map((label, i) => {
           return (
             <Chip
-              label={data.label}
-              key={data.key}
+              label={label}
+              key={i}
               className={classes.chip}
             />
           )
