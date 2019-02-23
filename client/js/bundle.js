@@ -40044,7 +40044,7 @@ var styles = function styles(theme) {
     social: {
       flexWrap: 'wrap',
       height: 'initial',
-      color: theme.palette.primary
+      color: theme.palette.primary.main
     },
     image: {
       width: '100%',
@@ -40091,27 +40091,33 @@ function (_Component) {
       }, "Fullstack web developer")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_4___default.a, {
         className: classes.social
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_6___default.a, {
-        href: "https://github.com/Dvorson"
+        href: "https://github.com/Dvorson",
+        target: "_blank"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FontIcon, {
         className: "fa fa-github"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_6___default.a, {
-        href: "https://vk.com/dvorson"
+        href: "https://vk.com/dvorson",
+        target: "_blank"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FontIcon, {
         className: "fa fa-vk"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_6___default.a, {
-        href: "https://t.me/dvorson"
+        href: "https://t.me/dvorson",
+        target: "_blank"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FontIcon, {
         className: "fa fa-telegram"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_6___default.a, {
-        href: "https://www.instagram.com/dvorson/"
+        href: "https://www.instagram.com/dvorson/",
+        target: "_blank"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FontIcon, {
         className: "fa fa-instagram"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_6___default.a, {
-        href: "https://ru.linkedin.com/in/\u0430\u043D\u0442\u043E\u043D-\u0434\u0432\u043E\u0440\u0441\u043E\u043D-b4ba7357"
+        href: "https://ru.linkedin.com/in/\u0430\u043D\u0442\u043E\u043D-\u0434\u0432\u043E\u0440\u0441\u043E\u043D-b4ba7357",
+        target: "_blank"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FontIcon, {
         className: "fa fa-linkedin-square"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_6___default.a, {
-        href: "https://medium.com/@dvorson"
+        href: "https://medium.com/@dvorson",
+        target: "_blank"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FontIcon, {
         className: "fa fa-medium"
       }))));
@@ -40180,7 +40186,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 var styles = function styles(theme) {
   return {
-    paper: {
+    container: {
       padding: theme.spacing.unit * 2,
       pageBreakBefore: 'always'
     },
@@ -40205,8 +40211,8 @@ function (_Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_1___default.a, {
-        className: classes.paper
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: classes.container
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_7___default.a, {
         container: true,
         className: classes.root,
@@ -40286,21 +40292,23 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 var styles = function styles(theme) {
   return {
     img: {
-      width: '100%',
+      width: '90%',
       maxWidth: '375px'
     },
     imgBlack: {
       background: 'black',
       padding: theme.spacing.unit,
+      width: '90%',
       maxWidth: '375px'
     },
     title: {
       fontSize: '1.5rem',
-      fontWeight: 100
+      color: 'rgba(0, 0, 0, 0.87);'
     },
     company: {
       fontSize: '2.5rem',
-      lineHeight: '2.5rem'
+      lineHeight: '2.5rem',
+      fontWeight: 100
     },
     desc: {
       fontSize: '1.2rem'
@@ -40340,6 +40348,7 @@ function (_Component) {
         xs: 12,
         sm: 3
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        className: classes.title,
         type: "title"
       }, "August 2017 - Currently"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: classes.img,
@@ -40375,6 +40384,7 @@ function (_Component) {
         xs: 12,
         sm: 3
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        className: classes.title,
         type: "title"
       }, "March 2016 - July 2017"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: classes.img,
@@ -40395,9 +40405,10 @@ function (_Component) {
         color: "secondary"
       }, "Programmer"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_1___default.a, {
         className: classes.desc
-      }, "Implemented new functionality for", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "money.yandex.ru"
-      }, "money.yandex.ru"), "by means of Yandex internal web-components framework (fullstack BEM): redesign, payment processes logic in node.js, client business logic, search interface, asynchronous form validation, A/B testing. Developed BEM stack tools, participated in hackathons within the company: developed assembly tools for front-end blocks with gulp, webpack, enb, templating with bem-xjst engine Administrating Linux: Supporting Different Components of Project Environment"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
+      }, "Implemented new functionality for ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://money.yandex.ru",
+        target: "_blank"
+      }, "money.yandex.ru"), " by means of Yandex internal web-components framework (fullstack BEM): redesign, payment processes logic in node.js, client business logic, search interface, asynchronous form validation, A/B testing. Developed BEM stack tools, participated in hackathons within the company: developed assembly tools for front-end blocks with gulp, webpack, enb, templating with bem-xjst engine Administrating Linux: Supporting Different Components of Project Environment"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
         item: true,
         xs: 12
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -40408,6 +40419,7 @@ function (_Component) {
         xs: 12,
         sm: 3
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        className: classes.title,
         type: "title"
       }, "July 2013 - March 2016"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: classes.img,
@@ -40573,8 +40585,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_AvatarCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Components/AvatarCard */ "./src/Components/AvatarCard.js");
 /* harmony import */ var _Components_ContentPaper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Components/ContentPaper */ "./src/Components/ContentPaper.js");
 /* harmony import */ var _withRoot__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../withRoot */ "./src/withRoot.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -40583,32 +40593,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var styles = function styles(theme) {
-  var _avatar;
-
   return {
-    root: {
-      flexGrow: 1
+    container: {
+      padding: theme.spacing.unit
     },
-    avatar: (_avatar = {}, _defineProperty(_avatar, theme.breakpoints.down('sm'), {
-      marginBottom: theme.spacing.unit,
-      backgroundColor: 'blue'
-    }), _defineProperty(_avatar, theme.breakpoints.up('md'), {
-      marginRight: theme.spacing.unit,
-      backgroundColor: 'red'
-    }), _avatar)
+    avatar: {
+      padding: theme.spacing.unit
+    }
   };
 };
 
 var App = function App(classes) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2___default.a, {
     container: true,
+    className: classes.container,
     justify: "center",
-    spacing: 8
+    spacing: 0
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2___default.a, {
     className: classes.avatar,
     item: true,
     xs: 12,
-    sm: 2
+    sm: 2,
+    spacing: 4
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Components_AvatarCard__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2___default.a, {
     item: true,
     xs: 12,

@@ -15,7 +15,7 @@ const styles = theme => ({
   social: {
     flexWrap: 'wrap',
     height: 'initial',
-    color: theme.palette.primary
+    color: theme.palette.primary.main
   },
   image: {
     width: '100%',
@@ -44,22 +44,22 @@ class AvatarCard extends Component {
           <Typography className={classes.title} type="subheading">Fullstack web developer</Typography>
         </CardContent>
         <CardActions className={classes.social}>
-          <IconButton href="https://github.com/Dvorson">
+          <IconButton href="https://github.com/Dvorson" target="_blank">
             <FontIcon className="fa fa-github"/>
           </IconButton>
-          <IconButton href="https://vk.com/dvorson">
+          <IconButton href="https://vk.com/dvorson" target="_blank">
             <FontIcon className="fa fa-vk"/>
           </IconButton>
-          <IconButton href="https://t.me/dvorson">
+          <IconButton href="https://t.me/dvorson" target="_blank">
             <FontIcon className="fa fa-telegram"/>
           </IconButton>
-          <IconButton href="https://www.instagram.com/dvorson/">
+          <IconButton href="https://www.instagram.com/dvorson/" target="_blank">
             <FontIcon className="fa fa-instagram"/>
           </IconButton>
-          <IconButton href="https://ru.linkedin.com/in/антон-дворсон-b4ba7357">
+          <IconButton href="https://ru.linkedin.com/in/антон-дворсон-b4ba7357" target="_blank">
             <FontIcon className="fa fa-linkedin-square"/>
           </IconButton>
-          <IconButton href="https://medium.com/@dvorson">
+          <IconButton href="https://medium.com/@dvorson" target="_blank">
             <FontIcon className="fa fa-medium"/>
           </IconButton>
         </CardActions>

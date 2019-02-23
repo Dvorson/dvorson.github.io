@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 
 const styles = theme => ({
-  paper: {
+  container: {
     padding: theme.spacing.unit * 2,
     pageBreakBefore: 'always'
   },
@@ -21,7 +21,7 @@ class ContentPaper extends Component {
   render () {
     const { classes } = this.props
     return (
-      <Paper className={classes.paper}>
+      <div className={classes.container}>
         <Grid container className={classes.root} spacing={16}>
           <Grid item xs={12}>
             <Typography className={classes.section} type="headline">Skills</Typography>
@@ -34,7 +34,7 @@ class ContentPaper extends Component {
             <Experience />
           </Grid>
         </Grid>
-      </Paper>
+      </div>
     )
   }
 }

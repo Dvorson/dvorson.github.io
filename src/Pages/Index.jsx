@@ -7,24 +7,17 @@ import ContentPaper from '../Components/ContentPaper'
 import withRoot from '../withRoot'
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1
+  container: {
+    padding: theme.spacing.unit
   },
   avatar: {
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing.unit,
-      backgroundColor: 'blue'
-    },
-    [theme.breakpoints.up('md')]: {
-      marginRight: theme.spacing.unit,
-      backgroundColor: 'red'
-    }
+    padding: theme.spacing.unit
   }
 })
 
 const App = (classes) => (
-  <Grid container justify="center" spacing={8}>
-    <Grid className={classes.avatar} item xs={12} sm={2}>
+  <Grid container className={classes.container} justify="center" spacing={0}>
+    <Grid className={classes.avatar} item xs={12} sm={2} spacing={4}>
       <AvatarCard />
     </Grid>
     <Grid item xs={12} sm={10}>

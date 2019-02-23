@@ -7,21 +7,23 @@ import Grid from '@material-ui/core/Grid'
 
 const styles = theme => ({
   img: {
-    width: '100%',
+    width: '90%',
     maxWidth: '375px'
   },
   imgBlack: {
     background: 'black',
     padding: theme.spacing.unit,
+    width: '90%',
     maxWidth: '375px'
   },
   title: {
     fontSize: '1.5rem',
-    fontWeight: 100
+    color: 'rgba(0, 0, 0, 0.87);'
   },
   company: {
     fontSize: '2.5rem',
-    lineHeight: '2.5rem'
+    lineHeight: '2.5rem',
+    fontWeight: 100
   },
   desc: {
     fontSize: '1.2rem'
@@ -39,7 +41,7 @@ class Experience extends Component {
         <Grid item xs={12}>
           <Grid container spacing={0}>
             <Grid item xs={12} sm={3}>
-              <Typography type="title">August 2017 - Currently</Typography>
+              <Typography className={classes.title} type="title">August 2017 - Currently</Typography>
               <img className={classes.img} src="client/img/fls-logo.svg" alt="FirstLine Software" />
               <img className={classes.imgBlack} src="client/img/bonnier.svg" alt="Bonnier News" />
             </Grid>
@@ -62,7 +64,7 @@ class Experience extends Component {
         <Grid item xs={12}>
           <Grid container spacing={16}>
             <Grid item xs={12} sm={3}>
-              <Typography type="title">March 2016 - July 2017</Typography>
+              <Typography className={classes.title} type="title">March 2016 - July 2017</Typography>
               <img className={classes.img} src="client/img/yamoney.svg" alt="Yandex.Money" />
             </Grid>
             <Grid item xs={12} sm={9}>
@@ -72,9 +74,9 @@ class Experience extends Component {
                   Programmer
                 </Typography>
                 <Typography className={classes.desc}>
-                  Implemented new functionality for
-                  <a href="money.yandex.ru">money.yandex.ru</a>
-                  by means of Yandex internal web-components
+                  Implemented new functionality
+                  for <a href="https://money.yandex.ru" target="_blank">money.yandex.ru</a> by
+                  means of Yandex internal web-components
                   framework (fullstack BEM): redesign, payment
                   processes logic in node.js, client business logic, search interface,
                   asynchronous form validation, A/B testing.
@@ -91,7 +93,7 @@ class Experience extends Component {
         <Grid item xs={12}>
           <Grid container spacing={16}>
             <Grid item xs={12} sm={3}>
-              <Typography type="title">July 2013 - March 2016</Typography>
+              <Typography className={classes.title} type="title">July 2013 - March 2016</Typography>
               <img className={classes.img} src="client/img/smart3d.png" alt="Smart3d" />
             </Grid>
             <Grid item xs={12} sm={9}>
