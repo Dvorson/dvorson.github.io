@@ -1,23 +1,26 @@
-var path = require('path');
+var path = require('path')
 
 module.exports = {
-  entry: './src/index.jsx',
+  entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist/js')
+    path: path.resolve(__dirname, 'public/js')
   },
+  devtool: 'source-map',
+  mode: 'development',
   module: {
-      rules: [
-          {
-             test: /\.jsx|js$/,
-             exclude: /(node_modules|bower_components)/,
-             use: {
-                 loader: 'babel-loader',
-                 options: {
-                     presets: ['env', 'react', 'react-plus']
-                 }
-             }
+    rules: [
+      {
+        test: /\.jsx|js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: ['@babel/plugin-proposal-class-properties']
           }
-        ]
+        }
+      }
+    ]
   }
-};
+}
