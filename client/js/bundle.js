@@ -40080,7 +40080,7 @@ function (_Component) {
         className: classes.card
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardMedia__WEBPACK_IMPORTED_MODULE_2___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: classes.image,
-        src: "img/multipassport.jpg",
+        src: "client/img/multipassport.jpg",
         alt: "Profile image"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_3___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5___default.a, {
         className: classes.name,
@@ -40306,7 +40306,7 @@ var styles = function styles(theme) {
       fontSize: '1.2rem'
     },
     content: {
-      padding: "0 ".concat(theme.spacing.unit, "px")
+      padding: "0 ".concat(theme.spacing.unit, "px 0 0")
     }
   };
 };
@@ -40328,13 +40328,13 @@ function (_Component) {
       var classes = this.props.classes;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
         container: true,
-        spacing: 16
+        spacing: 8
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
         item: true,
         xs: 12
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
         container: true,
-        spacing: 16
+        spacing: 0
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
         item: true,
         xs: 12,
@@ -40343,11 +40343,11 @@ function (_Component) {
         type: "title"
       }, "August 2017 - Currently"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: classes.img,
-        src: "/img/fls-logo.svg",
+        src: "client/img/fls-logo.svg",
         alt: "FirstLine Software"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: classes.imgBlack,
-        src: "/img/bonnier.svg",
+        src: "client/img/bonnier.svg",
         alt: "Bonnier News"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
         item: true,
@@ -40364,7 +40364,7 @@ function (_Component) {
         color: "secondary"
       }, "Programmer"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_1___default.a, {
         className: classes.desc
-      }, "Developing internal analytics and editorial tools for Bonnier News - top news publisher from Sweden. Gathering and visualising editorial analytics from complex infrastructure. Implementing EPiServer CMS functionality by means of node.js and React to help editors move to a synced multi-user workflow. Managing deployment infrastructure, moving development process into Kubernetes-based service."))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
+      }, "Developing internal analytics and editorial tools for Bonnier News - news publisher from Sweden. Gathering and visualising editorial analytics from complex infrastructure. Implementing EPiServer CMS functionality by means of node.js and React to help editors move to a synced multi-user workflow. Managing deployment infrastructure, moving development process into Kubernetes-based service."))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
         item: true,
         xs: 12
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -40378,7 +40378,7 @@ function (_Component) {
         type: "title"
       }, "March 2016 - July 2017"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: classes.img,
-        src: "/img/yamoney.svg",
+        src: "client/img/yamoney.svg",
         alt: "Yandex.Money"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
         item: true,
@@ -40395,7 +40395,9 @@ function (_Component) {
         color: "secondary"
       }, "Programmer"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_1___default.a, {
         className: classes.desc
-      }, "Implementated new functionality for money.yandex.ru by means of Yandex internal web-components framework - full stack BEM: redesign, logic of payment processes in node.js, client business logic, search interface, asynchronous form validation, A/B testing Development of BEM stack tools, participation in hackathons within the company: assembling front-end blocks with gulp, webpack, enb, template on bem-xjst engine Administrating Linux: Supporting Different Components of Project Environment"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
+      }, "Implemented new functionality for", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "money.yandex.ru"
+      }, "money.yandex.ru"), "by means of Yandex internal web-components framework (fullstack BEM): redesign, payment processes logic in node.js, client business logic, search interface, asynchronous form validation, A/B testing. Developed BEM stack tools, participated in hackathons within the company: developed assembly tools for front-end blocks with gulp, webpack, enb, templating with bem-xjst engine Administrating Linux: Supporting Different Components of Project Environment"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
         item: true,
         xs: 12
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
@@ -40409,7 +40411,7 @@ function (_Component) {
         type: "title"
       }, "July 2013 - March 2016"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: classes.img,
-        src: "/img/smart3d.png",
+        src: "client/img/smart3d.png",
         alt: "Smart3d"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5___default.a, {
         item: true,
@@ -40426,7 +40428,7 @@ function (_Component) {
         color: "secondary"
       }, "CTO"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_1___default.a, {
         className: classes.desc
-      }, "Developed a web application from scratch to support business processes: parsing 3d models clientside to calculate volume and production costs, visualising models in the browser with three.js, production order formation, preparation of reports, websocket messaging system for managers and customers. Online store with filtering by multiple criteria without additional requests to the backend. Shopping cart. Clientside templates, REST API, vk API, mailing list, blog. DB - MongoDB, MySQL, lowdb, persistent cookies"))))));
+      }, "Developed a web application from scratch to support business processes: parsing 3d models clientside to calculate volume and production costs, visualising models in the browser with three.js, production order formation, preparation of reports, websocket messaging system for managers and customers. Online store with filtering by multiple criteria without additional requests to backend. Shopping cart. Clientside templates, REST API, vk API, mailing list, blog. MongoDB, persistent cookies"))))));
     }
   }]);
 
