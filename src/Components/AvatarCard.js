@@ -37,7 +37,7 @@ class AvatarCard extends Component {
     return (
       <Card className={classes.card}>
         <CardMedia>
-          <img className={classes.image} src="img/multipassport.jpg" alt="" />
+          <img className={classes.image} src="img/multipassport.jpg" alt="Profile image"/>
         </CardMedia>
         <CardContent>
           <Typography className={classes.name} type="headline">Anton Dvorson</Typography>
