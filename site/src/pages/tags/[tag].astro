@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const postModules = import.meta.glob('../../posts/*.md', { eager: true });
+  const posts = Object.values(postModules) as any[];
+  const tags = Array.from(
+    new Set(
+      posts.flatMap((p) => p.frontmatter?.tags ?? [])
+    )
+  ).sort();
+  return tags.map((tag) => ({ params: { tag } }));
+}
+
+const { tag } = Astro.params;
+
+const posts = Object.values(
+  import.meta.glob('../../posts/*.md', { eager: true })
+) as any[];
+
+const filtered = posts
+  .filter((p) => Array.isArray(p.frontmatter?.tags) && p.frontmatter.tags.includes(tag))
+  .sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+---
+
+<Layout>
+  <section class="my-8">
+    <h1 class="text-3xl font-bold mb-4">Posts tagged "{tag}"</h1>
+    {filtered.length > 0 ? (
+      <ul class="space-y-4">
+        {filtered.map((post) => (
+          <li>
+            <a href={post.url} class="text-blue-600 hover:underline">
+              {post.frontmatter.title}
+            </a>
+            <p class="text-gray-500 text-sm">
+              {new Date(post.frontmatter.date).toLocaleDateString()}
+            </p>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="text-gray-600">No posts found for this tag.</p>
+    )}
+  </section>
+</Layout>

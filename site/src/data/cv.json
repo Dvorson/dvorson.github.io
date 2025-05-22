@@ -1,0 +1,72 @@
+{
+  "name": "Anton Dvorson",
+  "role": "Solution / Software Architect",
+  "summary": "Solution and software architect with 10+ years designing high‑traffic e‑commerce, media and digital manufacturing platforms. Expert in Node.js, React/Next.js, GraphQL APIs and cloud deployment on AWS and Azure. Skilled at CI/CD pipeline design, performance monitoring and leading cross‑functional teams.",
+  "skills": [
+    "Node.js",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "GraphQL",
+    "AWS",
+    "Azure",
+    "Docker",
+    "Kubernetes",
+    "OpenShift",
+    "Redis",
+    "MongoDB",
+    "Elasticsearch",
+    "Prometheus",
+    "Grafana",
+    "New Relic",
+    "GitHub Actions",
+    "CI/CD",
+    "Terraform",
+    "Stripe",
+    "Plaid"
+  ],
+  "experience": [
+    {
+      "company": "EPAM Systems",
+      "title": "Solution Architect",
+      "start": "2023-01",
+      "end": "present",
+      "description": "Designed and documented a high‑performance PWA (Next.js + Magento GraphQL) with server‑side rendering and responsive design. Built and optimised CI/CD pipelines using GitHub Actions and Azure. Integrated Prometheus, Grafana and New Relic for monitoring. Mentored a six‑person development team and ensured scalability through Redis caching and modular TypeScript code."
+    },
+    {
+      "company": "Liberty Global Services",
+      "title": "Senior Node / Embedded Engineer",
+      "start": "2021-09",
+      "end": "2022-12",
+      "description": "Developed EFL graphics components rendered from Node.js on embedded Linux set‑top‑box hardware. Integrated and optimised UI interactions between Node.js and Enlightenment Foundation Libraries. Implemented advanced debugging and bottleneck analysis with Prometheus and Grafana while collaborating with a five‑developer team on performance, security and UX standards."
+    },
+    {
+      "company": "FirstLine Software",
+      "title": "Full‑stack Developer / DevOps",
+      "start": "2021-02",
+      "end": "2021-06",
+      "description": "Enhanced GraphQL geolocation logic, UI checkout flow and Elasticsearch search suggestions for a heavy‑equipment marketplace. Hardened AWS infrastructure for PCI compliance with vulnerability scans, VPC segmentation and NGINX request throttling. Migrated the deployment workflow from Bitbucket Pipelines to AWS CodeDeploy with Docker‑based releases."
+    },
+    {
+      "company": "Bonnier News",
+      "title": "Full‑stack Developer",
+      "start": "2017-08",
+      "end": "2021-02",
+      "description": "Built Node and React SSR microservices for article analytics, competitor monitoring and push‑notification dashboards. Created a Puppeteer‑based screenshot service stored in S3 for visual QA and assisted the migration from EPiServer to a modular React / Node application deployed on OpenShift Kubernetes."
+    },
+    {
+      "company": "Yandex.Money",
+      "title": "Front‑end / BFF Developer",
+      "start": "2016-03",
+      "end": "2017-07",
+      "description": "Implemented a component‑based design system (Node.js / BEM) and A/B testing pages, built payment flow markup and back‑end‑for‑front‑end logic for card issuance and user statistics aggregation."
+    },
+    {
+      "company": "Measure LLC",
+      "title": "Full‑stack Developer & CNC Commissioning",
+      "start": "2013-06",
+      "end": "2016-03",
+      "description": "Built a three.js web portal for 3‑D model upload, visualisation and instant quoting; re‑wrote backend from PHP Yii to Node REST APIs and managed commissioning and maintenance of CNC machines."
+    }
+  ]
+}

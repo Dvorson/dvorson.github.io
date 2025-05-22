@@ -1,0 +1,21 @@
+{
+  "scriptId": "336",
+  "url": "file:///Users/dvorson/Projects/dvorson.github.io/admin/tests/mocks/editor.mock.tsx",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 731, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "MockEditor",
+      "ranges": [{ "startOffset": 134, "endOffset": 703, "count": 4 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "simulateChange",
+      "ranges": [{ "startOffset": 251, "endOffset": 350, "count": 1 }],
+      "isBlockCoverage": true
+    }
+  ]
+}

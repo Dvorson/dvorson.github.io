@@ -1,0 +1,51 @@
+{
+  "scriptId": "332",
+  "url": "file:///Users/dvorson/Projects/dvorson.github.io/admin/tests/islands_editor_test.ts",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 3334, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "fn",
+      "ranges": [{ "startOffset": 353, "endOffset": 694, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "fn",
+      "ranges": [{ "startOffset": 773, "endOffset": 1160, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "fn",
+      "ranges": [{ "startOffset": 1577, "endOffset": 2035, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "MockTipTapEditor",
+      "ranges": [{ "startOffset": 2117, "endOffset": 2360, "count": 0 }],
+      "isBlockCoverage": false
+    },
+    {
+      "functionName": "<instance_members_initializer>",
+      "ranges": [{ "startOffset": 2363, "endOffset": 2369, "count": 0 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "getHTML",
+      "ranges": [{ "startOffset": 2373, "endOffset": 2425, "count": 0 }],
+      "isBlockCoverage": false
+    },
+    {
+      "functionName": "destroy",
+      "ranges": [{ "startOffset": 2428, "endOffset": 2440, "count": 0 }],
+      "isBlockCoverage": false
+    },
+    {
+      "functionName": "fn",
+      "ranges": [{ "startOffset": 2663, "endOffset": 3329, "count": 1 }],
+      "isBlockCoverage": true
+    }
+  ]
+}

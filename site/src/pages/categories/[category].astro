@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const postModules = import.meta.glob('../../posts/*.md', { eager: true });
+  const posts = Object.values(postModules) as any[];
+  const categories = Array.from(
+    new Set(
+      posts
+        .map((p) => p.frontmatter?.category)
+        .filter((c): c is string => !!c)
+    )
+  ).sort();
+  return categories.map((category) => ({ params: { category } }));
+}
+
+const { category } = Astro.params;
+
+const posts = Object.values(
+  import.meta.glob('../../posts/*.md', { eager: true })
+) as any[];
+
+const filtered = posts
+  .filter((p) => p.frontmatter?.category === category)
+  .sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+---
+
+<Layout>
+  <section class="my-8">
+    <h1 class="text-3xl font-bold mb-4">Posts in "{category}"</h1>
+    {filtered.length > 0 ? (
+      <ul class="space-y-4">
+        {filtered.map((post) => (
+          <li>
+            <a href={post.url} class="text-blue-600 hover:underline">
+              {post.frontmatter.title}
+            </a>
+            <p class="text-gray-500 text-sm">
+              {new Date(post.frontmatter.date).toLocaleDateString()}
+            </p>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="text-gray-600">No posts found in this category.</p>
+    )}
+  </section>
+</Layout>

@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const posts = Object.values(import.meta.glob('../../posts/*.md', { eager: true }));
+
+// Collect unique categories
+const catSet = new Set<string>();
+for (const post of posts) {
+  const c = post.frontmatter?.category;
+  if (c) catSet.add(c);
+}
+
+const categories = Array.from(catSet).sort();
+---
+
+<Layout>
+  <section class="my-8">
+    <h1 class="text-3xl font-bold mb-4">Categories</h1>
+    {categories.length > 0 ? (
+      <ul class="flex flex-wrap gap-2">
+        {categories.map((cat) => (
+          <li>
+            <a href={`/categories/${cat}/`} class="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300">
+              {cat}
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="text-gray-600">No categories yet.</p>
+    )}
+  </section>
+</Layout>

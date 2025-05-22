@@ -1,0 +1,76 @@
+{
+  "scriptId": "334",
+  "url": "file:///Users/dvorson/Projects/dvorson.github.io/admin/tests/test_utils.ts",
+  "functions": [
+    {
+      "functionName": "",
+      "ranges": [{ "startOffset": 0, "endOffset": 6910, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "globalThis.fetch",
+      "ranges": [{ "startOffset": 630, "endOffset": 1028, "count": 0 }],
+      "isBlockCoverage": false
+    },
+    {
+      "functionName": "resetFetchCalls",
+      "ranges": [{ "startOffset": 1085, "endOffset": 1140, "count": 4 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "getFetchCalls",
+      "ranges": [{ "startOffset": 1194, "endOffset": 1256, "count": 0 }],
+      "isBlockCoverage": false
+    },
+    {
+      "functionName": "render",
+      "ranges": [{ "startOffset": 1315, "endOffset": 1371, "count": 4 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "MockTipTapEditor",
+      "ranges": [{ "startOffset": 1429, "endOffset": 1720, "count": 0 }],
+      "isBlockCoverage": false
+    },
+    {
+      "functionName": "<instance_members_initializer>",
+      "ranges": [{ "startOffset": 1723, "endOffset": 1740, "count": 0 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "getHTML",
+      "ranges": [{ "startOffset": 1744, "endOffset": 1796, "count": 0 }],
+      "isBlockCoverage": false
+    },
+    {
+      "functionName": "destroy",
+      "ranges": [{ "startOffset": 1799, "endOffset": 1811, "count": 0 }],
+      "isBlockCoverage": false
+    },
+    {
+      "functionName": "mockPreactHooks",
+      "ranges": [{ "startOffset": 1839, "endOffset": 4268, "count": 0 }],
+      "isBlockCoverage": false
+    },
+    {
+      "functionName": "setupEditorTestEnv",
+      "ranges": [{ "startOffset": 4322, "endOffset": 6487, "count": 0 }],
+      "isBlockCoverage": false
+    },
+    {
+      "functionName": "spy",
+      "ranges": [{ "startOffset": 6495, "endOffset": 6655, "count": 3 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "fn",
+      "ranges": [{ "startOffset": 6545, "endOffset": 6619, "count": 1 }],
+      "isBlockCoverage": true
+    },
+    {
+      "functionName": "cleanupMocks",
+      "ranges": [{ "startOffset": 6692, "endOffset": 6909, "count": 4 }],
+      "isBlockCoverage": true
+    }
+  ]
+}

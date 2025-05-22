@@ -1,0 +1,126 @@
+# Overview
+This project consists of a personal website and blog for dvorson.github.io, served via GitHub Pages, with a local admin interface for creating and publishing content. It follows a headless CMS architecture where content is authored locally and then published to GitHub, triggering automatic rebuilds and deployments.
+
+# Core Features
+## Personal CV / Resume Display
+- Presents professional information, skills, and experience on the homepage
+- Dynamically renders from structured JSON data
+- Provides a clean, professional appearance with Tailwind CSS styling
+
+## Blog System
+- Displays blog posts sorted by date on the homepage
+- Provides category and tag-based navigation
+- Renders Markdown content with support for rich formatting including LaTeX
+
+## Admin Interface
+- Provides a local editing environment using Deno Fresh
+- Features a rich text editor (TipTap) with table support and other formatting
+- Allows saving drafts and publishing finalized content
+- Automatically handles git operations to push content to GitHub
+
+## Automatic Deployment
+- Uses GitHub Actions for CI/CD
+- Rebuilds the Astro site when content changes are pushed
+- Deploys to GitHub Pages from the docs/ directory
+
+# Technical Architecture
+## System Components
+1. **Admin Panel (Deno Fresh)**
+   - Local server for content authoring
+   - TipTap WYSIWYG editor with extensions
+   - API endpoints for draft management and publishing
+   - Git integration for pushing content changes
+
+2. **Public Website (Astro)**
+   - Static site generator with Tailwind CSS
+   - Markdown processing
+   - Dynamic routing for categories and tags
+   - CV data rendering
+
+3. **Deployment Pipeline**
+   - GitHub Actions for automated builds
+   - GitHub Pages for hosting
+
+## Data Models
+1. **CV Data**
+   - JSON structure with personal info, skills, and experience
+   - Rendered on the homepage
+
+2. **Blog Posts**
+   - Markdown files with frontmatter
+   - Fields: title, date, tags, category, content
+   - Stored in src/posts/ directory
+
+## Infrastructure Requirements
+- GitHub Pages for hosting
+- GitHub Actions for CI/CD
+- Local development environment for admin panel
+
+# Development Roadmap
+## Phase 1: Core Site Setup (Completed)
+- Astro configuration for GitHub Pages
+- Tailwind CSS integration
+- Base layout and homepage structure
+- CV data rendering from JSON
+
+## Phase 2: Admin Interface (Completed)
+- Deno Fresh application setup
+- TipTap editor integration
+- Draft and publish API endpoints
+- Basic form inputs for post metadata
+
+## Phase 3: Blog Functionality (In Progress)
+- Category and tag page implementation
+- Post listing and filtering
+- Markdown rendering with syntax highlighting
+
+## Phase 4: Deployment Pipeline (Pending)
+- GitHub Actions workflow for automated builds
+- Initial site build and deployment
+- Testing the full content publishing flow
+
+## Phase 5: Enhancements (Future)
+- Image upload functionality
+- Preview capability in admin interface
+- Improved styling and animations
+- Social sharing integration
+
+# Logical Dependency Chain
+1. **Foundation** (Complete)
+   - Base site structure with Astro
+   - Admin panel with Deno Fresh
+   - Editor functionality
+
+2. **Content Management Flow** (Partially Complete)
+   - Draft saving functionality
+   - Publishing with git integration
+   - GitHub Actions workflow for automated builds
+
+3. **Content Display** (Partially Complete)
+   - Blog post rendering
+   - Category and tag pages
+   - Homepage post listing
+
+4. **Deployment Verification**
+   - End-to-end testing of publishing flow
+   - Verification of GitHub Pages configuration
+
+# Risks and Mitigations
+## Technical Challenges
+- **Git Integration**: Handling authentication and permissions for git operations
+  *Mitigation*: Implement error handling and user feedback for git operations
+
+- **Cross-directory Operations**: Admin needs to write to site/src/posts
+  *Mitigation*: Use relative paths and validate directory existence
+
+## MVP Definition
+- **Minimum Viable Setup**: A functioning admin interface that can publish posts that appear on the website
+  *Mitigation*: Focus on completing the GitHub Actions workflow and testing the end-to-end flow
+
+# Appendix
+## Project Structure
+- `/admin/`: Deno Fresh application for content management
+- `/site/`: Astro application for the public website
+- `/site/src/posts/`: Directory for published blog posts
+- `/site/src/data/`: Directory for structured data like CV
+- `/docs/`: Output directory for built website (GitHub Pages)

@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-gray-50 text-gray-900 font-sans antialiased;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-4xl mx-auto px-4 sm:px-6;
+  }
+  
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm transition-all duration-200;
+  }
+  
+  .btn-primary {
+    @apply bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-gray-700 border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+  }
+  
+  .input-field {
+    @apply block w-full rounded-md border-gray-300 shadow-sm 
+           focus:border-indigo-500 focus:ring-indigo-500 
+           sm:text-sm transition-colors duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl p-6 shadow-sm hover:shadow-md 
+           transition-all border border-gray-100;
+  }
+  
+  .card-hover {
+    @apply hover:border-indigo-100 hover:shadow-md;
+  }
+  
+  .section-title {
+    @apply text-2xl font-bold mb-6 text-gray-800 flex items-center;
+  }
+  
+  .icon-wrapper {
+    @apply inline-block mr-3 p-1.5 bg-indigo-100 rounded-md;
+  }
+  
+  .icon {
+    @apply h-5 w-5 text-indigo-600;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600;
+  }
+  
+  .bg-blur-gradient {
+    @apply relative overflow-hidden;
+  }
+  
+  .bg-blur-gradient::before {
+    content: '';
+    @apply absolute -top-24 -right-24 w-64 h-64 bg-gradient-to-br from-indigo-200/30 to-purple-200/30 rounded-full blur-3xl;
+  }
+  
+  .bg-blur-gradient::after {
+    content: '';
+    @apply absolute -bottom-16 -left-16 w-48 h-48 bg-gradient-to-br from-blue-200/20 to-indigo-200/20 rounded-full blur-3xl;
+  }
+}
+
+/* Animation classes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fadeInRight {
+  animation: fadeInRight 0.5s ease-out forwards;
+}
+
+.animate-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-300 {
+  animation-delay: 300ms;
+}

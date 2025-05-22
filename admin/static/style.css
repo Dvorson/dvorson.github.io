@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    /* Tailwind's base should handle bg-gray-50, text-gray-900, antialiased if configured */
+    /* The flex, flex-col, min-h-screen are applied in _app.tsx */
+  }
+  /* Ensure Fresh specific styles or overrides are considered if any */
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600;
+  }
+  /* Add other custom utilities from the old style.css if they are still needed and not achievable with Tailwind */
+}
+
+/* 
+  Note: Many custom classes from the old admin/static/style.css 
+  (e.g., .container, .card, .form-input, .btn) should now be implemented 
+  by applying Tailwind utility classes directly in your TSX components 
+  or by creating new Tailwind components using @apply if needed.
+  The layout classes in _app.tsx have already started this process.
+*/
