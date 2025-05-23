@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  body {
+    @apply bg-white text-gray-900;
+  }
+}
+
+@layer components {
+  .notion-editor {
+    @apply prose prose-lg max-w-none;
+  }
+  
+  .notion-editor .ProseMirror {
+    @apply outline-none;
+  }
+  
+  .notion-editor h1 {
+    @apply text-3xl font-bold mb-4;
+  }
+  
+  .notion-editor h2 {
+    @apply text-2xl font-semibold mb-3;
+  }
+  
+  .notion-editor h3 {
+    @apply text-xl font-medium mb-2;
+  }
+  
+  .notion-editor p {
+    @apply mb-3 leading-relaxed;
+  }
+  
+  .notion-editor ul {
+    @apply list-disc list-inside mb-3;
+  }
+  
+  .notion-editor ol {
+    @apply list-decimal list-inside mb-3;
+  }
+  
+  .notion-editor blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic mb-3;
+  }
+  
+  .notion-editor code {
+    @apply bg-gray-100 px-1 py-0.5 rounded text-sm font-mono;
+  }
+  
+  .notion-editor pre {
+    @apply bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto mb-3;
+  }
+  
+  .notion-editor pre code {
+    @apply bg-transparent p-0;
+  }
+  
+  .notion-editor table {
+    @apply w-full border-collapse border border-gray-200 mb-3;
+  }
+  
+  .notion-editor th,
+  .notion-editor td {
+    @apply border border-gray-200 px-3 py-2 text-left;
+  }
+  
+  .notion-editor th {
+    @apply bg-gray-50 font-semibold;
+  }
+  
+  .notion-editor img {
+    @apply max-w-full h-auto rounded-lg shadow-sm;
+  }
+  
+  .drag-handle {
+    @apply opacity-0 transition-opacity duration-200 cursor-grab active:cursor-grabbing;
+  }
+  
+  .drag-handle:hover {
+    @apply opacity-100;
+  }
+  
+  .block-container:hover .drag-handle {
+    @apply opacity-100;
+  }
+  
+  .dragging {
+    @apply opacity-50;
+  }
+  
+  .drop-zone {
+    @apply transition-colors duration-200;
+  }
+  
+  .drop-zone.active {
+    @apply bg-blue-50 border-blue-200;
+  }
+  
+  .slash-command-menu {
+    @apply bg-white shadow-lg rounded-lg border border-gray-200 py-2 max-h-60 overflow-y-auto;
+  }
+  
+  .slash-command-item {
+    @apply px-4 py-2 hover:bg-gray-50 cursor-pointer flex items-center gap-3;
+  }
+  
+  .slash-command-item.selected {
+    @apply bg-blue-50 text-blue-700;
+  }
+  
+  .math-node {
+    @apply inline-block;
+  }
+  
+  .math-block {
+    @apply block my-4;
+  }
+  
+  .math-input {
+    @apply font-mono text-sm;
+  }
+  
+  .upload-progress {
+    @apply w-full bg-gray-200 rounded-full h-2;
+  }
+  
+  .upload-progress-bar {
+    @apply bg-blue-600 h-2 rounded-full transition-all duration-300;
+  }
+}

@@ -1,6 +1,5 @@
 node_modules
 
-# Added by Claude Task Master
 # Logs
 logs
 *.log
@@ -11,6 +10,12 @@ dev-debug.log
 
 # Dependency directories
 node_modules/
+
+# Build outputs
+.next/
+dist/
+_fresh/
+coverage/
 
 # Environment variables
 .env
@@ -29,4 +34,10 @@ node_modules/
 
 # Task files
 tasks.json
-tasks/ 
+tasks/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Test results
+test-results/ 

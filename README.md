@@ -1,56 +1,72 @@
- # dvorson.github.io
+# dvorson.github.io
 
- This repository hosts my personal CV and blog, served via GitHub Pages, with a local admin interface for writing and publishing posts.
+Personal CV and blog site with dual-app architecture: Astro static site + Next.js admin interface.
 
- ## Current State
- - Old React/Webpack/MUI code has been removed.
- - `site/` directory scaffolded with:
-   - Astro configuration building to `docs/`.
-   - Tailwind CSS integration with custom animations.
-   - `src/data/cv.json` placeholder for CV data.
-   - Homepage at `src/pages/index.astro`.
-   - `src/posts/` directory for Markdown posts.
- - `admin/` directory scaffolded with:
-   - Deno Fresh local app stub.
-   - TipTap v2 editor island.
-   - API routes for `/api/draft` and `/api/publish` to write Markdown and commit/push.
- - CI/CD workflow in `.github/workflows/deploy.yml` to build and deploy on push to `main`.
+## Architecture
 
- ## Project Goal
- Provide a modern, simple, and stylish personal CV and blog site:
- - Static site served via `docs/` folder on GitHub Pages.
- - Local admin interface (Deno Fresh + TipTap) for writing rich-text blog posts with tables, LaTeX, etc.
- - Publishing posts via the admin triggers git commits and pushes; GitHub Actions rebuilds and deploys the site.
+This is a **dual-app personal site** with two independent applications:
 
- ## Implementation Plan
- 1. **Populate CV Data**  
-    - Update `site/src/data/cv.json` with actual personal information, skills, and experience.
- 2. **Styling and Animations**  
-    - Customize global styles in `site/src/styles/global.css`.  
-    - Refine animations in `tailwind.config.cjs`.
- 3. **Blog Posts**  
-    - Write and test the first post via the admin interface.  
-    - Verify appearance on the blog index and individual post pages.
- 4. **Tag and Category Pages**  
-    - Extend Astro pages to support dynamic tag and category listings.
- 5. **Continuous Improvement**  
-    - Enhance admin UI, error handling, and preview features.  
-    - Add additional integrations or plugins as needed.
+- **`site/`** - Astro static site generator (public CV/blog)
+- **`admin/`** - Next.js local admin interface (content management)
 
- ## Local Development
- ### Public Site
- ```bash
- cd site
- npm install
- npm run dev  # http://localhost:3000
- ```
+**Workflow**: Local admin → writes posts to `site/src/posts/` → commits to git → GitHub Actions rebuilds static site to `docs/` → serves via GitHub Pages.
 
- ### Admin App
- ```bash
- cd admin
- deno run -A https://fresh.deno.dev .  # generate fresh manifest (one-time)
- deno task dev  # http://localhost:8000
- ```
+## Technology Stack
 
- ## Deployment
- On push to `main`, GitHub Actions rebuilds the site into `docs/` and publishes to GitHub Pages.
+### Frontend Site (`site/`)
+- **Astro 4.5.0** - Static site generator
+- **Tailwind CSS 3.3.2** - Styling framework  
+- **Playwright** - Testing framework
+- Builds to `../docs` for GitHub Pages deployment
+
+### Admin Interface (`admin/`)
+- **Next.js 14** - React framework
+- **TipTap v2.3.0** - Rich text editor with table/LaTeX support
+- **Tailwind CSS 3.4.1** - Styling
+- **Jest + Testing Library** - Testing stack
+
+## Quick Start
+
+### Frontend Site
+```bash
+cd site
+npm install
+npm run dev     # Dev server at http://localhost:4321
+npm run build   # Build static site to ../docs/
+npm run test    # Run Playwright tests
+```
+
+### Admin Interface
+```bash
+cd admin
+npm install
+npm run dev     # Dev server at http://localhost:3000
+npm run test    # Run Jest tests
+npm run build   # Build admin app
+```
+
+## Key Features
+
+### Content Management
+- Rich-text editor with drag handles, tables, and LaTeX support
+- Draft and publish workflow
+- Automatic git commits and deployments
+- Image and video embed support
+
+### Site Features
+- Responsive CV/portfolio display
+- Blog with categories and tags
+- Static site optimization
+- GitHub Pages deployment
+
+## Content Management Flow
+1. Admin app provides rich-text editing interface
+2. Posts are saved as Markdown to `site/src/posts/`
+3. Admin commits and pushes changes via git
+4. GitHub Actions rebuilds site and deploys to Pages
+
+## Deployment
+- Static site builds to `docs/` directory (tracked in git)
+- GitHub Pages serves from `docs/` folder
+- Admin runs locally only (not deployed)
+- GitHub Actions handles automated rebuilds on push to main
