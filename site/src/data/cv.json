@@ -1,10 +1,18 @@
 {
   "name": "Anton Dvorson",
   "role": "Solution / Software Architect",
-  "summary": "Solution and software architect with 10+ years designing high‑traffic e‑commerce, media and digital manufacturing platforms. Expert in Node.js, React/Next.js, GraphQL APIs and cloud deployment on AWS and Azure. Skilled at CI/CD pipeline design, performance monitoring and leading cross‑functional teams.",
+  "summary": "Professional software architect with 10+ years of expertise in Node.js and React ecosystems, specializing in high-traffic e-commerce platforms and scalable cloud solutions. Proven track record in leading technical teams, implementing CI/CD pipelines, and deploying applications across AWS, Azure, and private cloud infrastructures.",
+  "expertise": [
+    "Software Architecture & Design",
+    "Full-Stack Web Development", 
+    "Cloud Infrastructure & DevOps",
+    "Team Leadership & Mentoring",
+    "Performance Optimization",
+    "Smart Home & Electronics"
+  ],
   "skills": [
     "Node.js",
-    "TypeScript",
+    "TypeScript", 
     "React",
     "Next.js",
     "GraphQL",
@@ -12,61 +20,128 @@
     "Azure",
     "Docker",
     "Kubernetes",
-    "OpenShift",
-    "Redis",
     "MongoDB",
-    "Elasticsearch",
+    "Elasticsearch", 
     "Prometheus",
     "Grafana",
-    "New Relic",
+    "Redis",
     "GitHub Actions",
     "CI/CD",
-    "Terraform",
+    "Python",
+    "C Programming",
+    "TipTap",
+    "Material UI",
     "Stripe",
     "Plaid"
   ],
   "experience": [
     {
       "company": "EPAM Systems",
-      "title": "Solution Architect",
-      "start": "2023-01",
-      "end": "present",
-      "description": "Designed and documented a high‑performance PWA (Next.js + Magento GraphQL) with server‑side rendering and responsive design. Built and optimised CI/CD pipelines using GitHub Actions and Azure. Integrated Prometheus, Grafana and New Relic for monitoring. Mentored a six‑person development team and ensured scalability through Redis caching and modular TypeScript code."
+      "title": "Solution Architect on KDI-HEAD",
+      "start": "Jan 2023",
+      "end": "Present",
+      "duration": "2 years 5 months",
+      "client": "Koninklijke Douwe Egberts BV",
+      "project": "E-commerce PWA Platform",
+      "description": "Spearheaded architecture and development of a high-performance Progressive Web Application leveraging Next.js and Magento's GraphQL API. Implemented server-side rendering, responsive design, and robust CI/CD pipelines for enterprise e-commerce standards.",
+      "responsibilities": [
+        "Developed end-to-end solution architecture for complex enterprise requirements",
+        "Collaborated with stakeholders to translate business requirements into technical specifications", 
+        "Built and optimized CI/CD pipelines reducing time-to-market",
+        "Provided technical leadership and mentorship to development team",
+        "Integrated modern web technologies for enhanced performance and user engagement"
+      ],
+      "technologies": "Node.js, Next.js, TypeScript, GraphQL, Apollo Client, Magento GraphQL, Material UI, Playwright, Redis, Azure, GitHub Actions, NewRelic"
     },
     {
-      "company": "Liberty Global Services",
-      "title": "Senior Node / Embedded Engineer",
-      "start": "2021-09",
-      "end": "2022-12",
-      "description": "Developed EFL graphics components rendered from Node.js on embedded Linux set‑top‑box hardware. Integrated and optimised UI interactions between Node.js and Enlightenment Foundation Libraries. Implemented advanced debugging and bottleneck analysis with Prometheus and Grafana while collaborating with a five‑developer team on performance, security and UX standards."
+      "company": "Liberty Global Services", 
+      "title": "Developer on LIBG-DAWN",
+      "start": "Sep 2021",
+      "end": "Dec 2022", 
+      "duration": "1 year 4 months",
+      "client": "Liberty Global Services",
+      "project": "Multimedia Hub for Set Top Box",
+      "description": "Developed centralized household Multimedia Hub providing access to live broadcasting, VOD, recordings, and third-party applications with full interoperability between devices.",
+      "responsibilities": [
+        "Developed EFL graphics components for UI display from Node.js on set top box hardware",
+        "Integrated and optimized UI functionalities on embedded Linux systems", 
+        "Ensured seamless Node.js and EFL interaction for enhanced performance",
+        "Designed efficient solutions for embedded system constraints",
+        "Implemented advanced debugging with Prometheus and Grafana"
+      ],
+      "technologies": "Node.js, Embedded Linux, EFL, Prometheus, Grafana"
     },
     {
       "company": "FirstLine Software",
-      "title": "Full‑stack Developer / DevOps",
-      "start": "2021-02",
-      "end": "2021-06",
-      "description": "Enhanced GraphQL geolocation logic, UI checkout flow and Elasticsearch search suggestions for a heavy‑equipment marketplace. Hardened AWS infrastructure for PCI compliance with vulnerability scans, VPC segmentation and NGINX request throttling. Migrated the deployment workflow from Bitbucket Pipelines to AWS CodeDeploy with Docker‑based releases."
+      "title": "Full-stack Developer, DevOps", 
+      "start": "Feb 2021",
+      "end": "Jun 2021",
+      "duration": "5 months",
+      "client": "Oroco Capital",
+      "project": "Heavy Equipment Marketplace (eqhq.com)",
+      "description": "Developed heavy equipment marketplace web application with advanced search, payment processing, and secure infrastructure for US-based customer.",
+      "responsibilities": [
+        "Fixed GraphQL-based user location procedures and improved stepper UI components",
+        "Enhanced Elasticsearch suggestions with entity splitting and performance optimization", 
+        "Improved email/chat notifications and order refund processes",
+        "Tightened infrastructure security for payment compliance with vulnerability scanning",
+        "Migrated deployment from BitBucket Pipelines to AWS CodeDeploy with VPN setup"
+      ],
+      "technologies": "Elasticsearch, GraphQL, TypeScript, React, Node.js, Docker, AWS, Redis, Material UI, Strapi, Stripe, Plaid, MongoDB"
     },
     {
       "company": "Bonnier News",
-      "title": "Full‑stack Developer",
-      "start": "2017-08",
-      "end": "2021-02",
-      "description": "Built Node and React SSR microservices for article analytics, competitor monitoring and push‑notification dashboards. Created a Puppeteer‑based screenshot service stored in S3 for visual QA and assisted the migration from EPiServer to a modular React / Node application deployed on OpenShift Kubernetes."
+      "title": "Full-stack Developer",
+      "start": "Aug 2017", 
+      "end": "Feb 2021",
+      "duration": "3 years 7 months",
+      "client": "Bonnier News",
+      "project": "Editorial Tools for News Publishing (expressen.se)",
+      "description": "Developed cloud editorial tools for Sweden's top-2 news publisher, creating microservices for analytics, competitor monitoring, and content management systems.",
+      "responsibilities": [
+        "Built Node.js and React SSR microservices for article analytics and dashboards",
+        "Created Puppeteer-based screenshot service with Amazon S3 integration",
+        "Developed popular photo manipulation tool using Konva.js with advanced cropping features", 
+        "Migrated EPiServer features to modular React/Redux + Node monolith",
+        "Led deployment migration from Basefarm to OpenShift managed Kubernetes"
+      ],
+      "technologies": "Node.js, React, MongoDB, RabbitMQ, Docker, Kubernetes, OpenShift, Puppeteer, Amazon S3, Konva.js, d3.js, Elasticsearch"
     },
     {
       "company": "Yandex.Money",
-      "title": "Front‑end / BFF Developer",
-      "start": "2016-03",
-      "end": "2017-07",
-      "description": "Implemented a component‑based design system (Node.js / BEM) and A/B testing pages, built payment flow markup and back‑end‑for‑front‑end logic for card issuance and user statistics aggregation."
+      "title": "Full-stack Developer",
+      "start": "Mar 2016",
+      "end": "Jul 2017", 
+      "duration": "1 year 5 months",
+      "client": "Yandex.Money",
+      "project": "Online Payment Service Platform", 
+      "description": "Developed Russia's largest online payment service, implementing new component-based design system and payment card processes.",
+      "responsibilities": [
+        "Implemented component-based design system using Node.js and Fullstack BEM",
+        "Created A/B testing experiment pages and payment process markup",
+        "Developed BFF business logic for payment flows",
+        "Worked on physical and virtual plastic bank card issuing processes",
+        "Implemented user statistics aggregation systems"
+      ],
+      "technologies": "Fullstack BEM, Node.js, JavaScript"
     },
     {
       "company": "Measure LLC",
-      "title": "Full‑stack Developer & CNC Commissioning",
-      "start": "2013-06",
-      "end": "2016-03",
-      "description": "Built a three.js web portal for 3‑D model upload, visualisation and instant quoting; re‑wrote backend from PHP Yii to Node REST APIs and managed commissioning and maintenance of CNC machines."
+      "title": "Full-stack Developer, CNC Commissioning",
+      "start": "Jun 2013",
+      "end": "Mar 2016",
+      "duration": "2 years 10 months", 
+      "client": "Measure LLC",
+      "project": "Digital Manufacturing Service Platform",
+      "description": "Developed web platform for digital manufacturing startup enabling 3D model upload with instant quoting and visualization, while managing CNC machine operations.",
+      "responsibilities": [
+        "Built Three.js-based 3D model visualization with volume and dimension calculations",
+        "Migrated platform from YII PHP framework to Node.js REST API architecture", 
+        "Added admin interface for e-commerce functionality and websocket chat system",
+        "Integrated social media content feeds to main page",
+        "Managed commissioning and maintenance team for dozen CNC machines"
+      ],
+      "technologies": "Three.js, YII PHP, Node.js, REST API, WebSocket, MongoDB"
     }
   ]
 }
