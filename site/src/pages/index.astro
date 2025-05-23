@@ -193,6 +193,12 @@ const posts = Object.entries(postModules)
   document.getElementById('download-cv')?.addEventListener('click', () => {
     // Create a new window with CV content for PDF printing
     const printWindow = window.open('', '_blank');
+    
+    if (!printWindow) {
+      alert('Please allow popups for this site to download the CV');
+      return;
+    }
+    
     const htmlContent = `
       <!DOCTYPE html>
       <html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Anton Dvorson - Solution and software architect with 10+ years experience designing high-traffic e-commerce, media, and digital manufacturing platforms."><title>React and Node.js Performance Optimization: Expert Strategies for Enterprise Applications</title><!-- Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><!-- Icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"><!-- KaTeX for math formatting if needed --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous"><!-- Favicon --><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/_astro/_slug_.ClCjJCG_.css"></head> <body class="min-h-screen flex flex-col bg-gray-50"> <!-- Navigation --> <nav class="bg-white py-4 border-b border-gray-100 sticky top-0 z-10 shadow-sm"> <div class="container mx-auto flex items-center justify-between"> <a href="/" class="text-xl font-bold text-gradient">Anton Dvorson</a> <div class="flex items-center space-x-6"> <a href="/" class="text-gray-600 hover:text-indigo-600 transition-colors font-medium">Home</a> <a href="/categories" class="text-gray-600 hover:text-indigo-600 transition-colors font-medium">Categories</a> <a href="/tags" class="text-gray-600 hover:text-indigo-600 transition-colors font-medium">Tags</a> <a href="https://github.com/dvorson" class="text-gray-600 hover:text-indigo-600 transition-colors" target="_blank" rel="noopener noreferrer"> <i class="fab fa-github text-lg"></i> </a> </div> </div> </nav> <!-- Main Content --> <main class="flex-grow container py-8">  <article class="max-w-3xl mx-auto my-8"> <header class="mb-8"> <h1 class="text-4xl font-bold mb-2">React and Node.js Performance Optimization: Expert Strategies for Enterprise Applications</h1> <p class="text-gray-600"> Invalid Date </p> <div class="mt-4 flex flex-wrap gap-2"> <a href="/tags/React Performance" class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm hover:bg-blue-200 transition">
+#React Performance </a><a href="/tags/Node.js Optimization" class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm hover:bg-blue-200 transition">
+#Node.js Optimization </a><a href="/tags/Performance Consulting" class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm hover:bg-blue-200 transition">
+#Performance Consulting </a><a href="/tags/JavaScript" class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm hover:bg-blue-200 transition">
+#JavaScript </a><a href="/tags/TypeScript" class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm hover:bg-blue-200 transition">
+#TypeScript </a><a href="/tags/Web Performance" class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm hover:bg-blue-200 transition">
+#Web Performance </a><a href="/tags/Frontend Optimization" class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm hover:bg-blue-200 transition">
+#Frontend Optimization </a> </div> </header> <div class="prose prose-lg max-w-none"> <h1 id="react-and-nodejs-performance-optimization-expert-strategies-for-enterprise-applications">React and Node.js Performance Optimization: Expert Strategies for Enterprise Applications</h1>
+<p>Having optimized applications serving millions of users across e-commerce, media, and enterprise platforms, I’ve developed proven strategies for identifying and eliminating performance bottlenecks in full-stack JavaScript applications. Through my work at EPAM Systems, Bonnier News, and other organizations, I’ve refined techniques that consistently deliver significant performance improvements.</p>
+<h2 id="the-performance-imperative">The Performance Imperative</h2>
+<p>Poor application performance directly impacts business metrics:</p>
+<ul>
+<li><strong>1-second delay</strong> = 7% reduction in conversions</li>
+<li><strong>3-second load time</strong> = 53% of mobile users abandon</li>
+<li><strong>100ms delay</strong> = 1% drop in revenue for e-commerce</li>
+</ul>
+<p>During my work on the <strong>KDI-HEAD e-commerce platform</strong>, we improved initial page load times by 60% and achieved 40% better Core Web Vitals scores through systematic performance optimization.</p>
+<h2 id="react-performance-optimization-strategies">React Performance Optimization Strategies</h2>
+<h3 id="1-component-optimization-patterns">1. Component Optimization Patterns</h3>
+<p><strong>React.memo() for Functional Components</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> ProductCardProps</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#FFAB70">  product</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Product</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#B392F0">  onAddToCart</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">id</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#79B8FF"> void</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Memoize component to prevent unnecessary re-renders</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> ProductCard</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> React.</span><span style="color:#B392F0">memo</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">ProductCardProps</span><span style="color:#E1E4E8">>(({ </span><span style="color:#FFAB70">product</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">onAddToCart</span><span style="color:#E1E4E8"> }) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> handleAddToCart</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> useCallback</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    onAddToCart</span><span style="color:#E1E4E8">(product.id);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }, [product.id, onAddToCart]);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#F97583">    &#x3C;</span><span style="color:#E1E4E8">div className</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"product-card"</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#F97583">      &#x3C;</span><span style="color:#E1E4E8">img src</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{product.image} alt</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{product.name} </span><span style="color:#F97583">/></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#B392F0">h3</span><span style="color:#E1E4E8">>{product.name}</span><span style="color:#F97583">&#x3C;/</span><span style="color:#E1E4E8">h3</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#F97583">      &#x3C;</span><span style="color:#E1E4E8">button onClick</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{handleAddToCart}</span><span style="color:#F97583">></span><span style="color:#E1E4E8">Add to Cart</span><span style="color:#F97583">&#x3C;/</span><span style="color:#E1E4E8">button</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#F97583">    &#x3C;/</span><span style="color:#E1E4E8">div</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}, (</span><span style="color:#FFAB70">prevProps</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">nextProps</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">  // Custom comparison for optimization</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> prevProps.product.id </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> nextProps.product.id </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">         prevProps.product.name </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> nextProps.product.name;</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span></code></pre>
+<p><strong>useMemo() and useCallback() Hooks</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> ExpensiveComponent</span><span style="color:#F97583">:</span><span style="color:#B392F0"> React</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">FC</span><span style="color:#E1E4E8">&#x3C;{ </span><span style="color:#FFAB70">items</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Item</span><span style="color:#E1E4E8">[] }> </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ({ </span><span style="color:#FFAB70">items</span><span style="color:#E1E4E8"> }) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">  // Memoize expensive calculations</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> expensiveValue</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> useMemo</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> items.</span><span style="color:#B392F0">reduce</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">total</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">item</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> total </span><span style="color:#F97583">+</span><span style="color:#B392F0"> complexCalculation</span><span style="color:#E1E4E8">(item);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }, [items]);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // Memoize event handlers to prevent child re-renders</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> handleItemClick</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> useCallback</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">id</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // Handle click logic</span></span>
+<span class="line"><span style="color:#E1E4E8">  }, []);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#B392F0">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      &#x3C;</span><span style="color:#B392F0">div</span><span style="color:#E1E4E8">></span><span style="color:#FFAB70">Total</span><span style="color:#F97583">:</span><span style="color:#E1E4E8"> {</span><span style="color:#FFAB70">expensiveValue</span><span style="color:#E1E4E8">}&#x3C;/</span><span style="color:#B392F0">div</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">      {</span><span style="color:#FFAB70">items</span><span style="color:#E1E4E8">.</span><span style="color:#FFAB70">map</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">item</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#F97583">        &#x3C;</span><span style="color:#FFAB70">ItemComponent</span><span style="color:#E1E4E8"> </span></span>
+<span class="line"><span style="color:#E1E4E8">          key</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{item.id} </span></span>
+<span class="line"><span style="color:#E1E4E8">          item</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{item} </span></span>
+<span class="line"><span style="color:#E1E4E8">          onClick</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{handleItemClick} </span></span>
+<span class="line"><span style="color:#F97583">        /></span></span>
+<span class="line"><span style="color:#E1E4E8">      ))}</span></span>
+<span class="line"><span style="color:#F97583">    &#x3C;/</span><span style="color:#E1E4E8">div</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span></code></pre>
+<h3 id="2-bundle-optimization-techniques">2. Bundle Optimization Techniques</h3>
+<p><strong>Code Splitting with React.lazy()</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#6A737D">// Lazy load components to reduce initial bundle size</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> Dashboard</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> React.</span><span style="color:#B392F0">lazy</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#F97583"> import</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'./Dashboard'</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> Analytics</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> React.</span><span style="color:#B392F0">lazy</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#F97583"> import</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'./Analytics'</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> Settings</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> React.</span><span style="color:#B392F0">lazy</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#F97583"> import</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'./Settings'</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> App</span><span style="color:#F97583">:</span><span style="color:#B392F0"> React</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">FC</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#B392F0">Router</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#F97583">      &#x3C;</span><span style="color:#E1E4E8">Suspense fallback</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{&#x3C;LoadingSpinner />}</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#E1E4E8">        &#x3C;</span><span style="color:#B392F0">Routes</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#F97583">          &#x3C;</span><span style="color:#E1E4E8">Route path</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"/dashboard"</span><span style="color:#E1E4E8"> element</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{&#x3C;Dashboard />} </span><span style="color:#F97583">/></span></span>
+<span class="line"><span style="color:#F97583">          &#x3C;</span><span style="color:#E1E4E8">Route path</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"/analytics"</span><span style="color:#E1E4E8"> element</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{&#x3C;Analytics />} </span><span style="color:#F97583">/></span></span>
+<span class="line"><span style="color:#F97583">          &#x3C;</span><span style="color:#E1E4E8">Route path</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"/settings"</span><span style="color:#E1E4E8"> element</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{&#x3C;Settings />} </span><span style="color:#F97583">/></span></span>
+<span class="line"><span style="color:#F97583">        &#x3C;/</span><span style="color:#E1E4E8">Routes</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#F97583">      &#x3C;/</span><span style="color:#E1E4E8">Suspense</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#F97583">    &#x3C;/</span><span style="color:#E1E4E8">Router</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span></code></pre>
+<p><strong>Dynamic Imports for Large Libraries</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#6A737D">// Lazy load heavy libraries</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> loadChartLibrary</span><span style="color:#F97583"> =</span><span style="color:#F97583"> async</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">Chart</span><span style="color:#E1E4E8"> } </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#F97583"> import</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'chart.js'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> Chart;</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> ChartComponent</span><span style="color:#F97583">:</span><span style="color:#B392F0"> React</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">FC</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ({ </span><span style="color:#FFAB70">data</span><span style="color:#E1E4E8"> }) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">Chart</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">setChart</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#B392F0"> useState</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">any</span><span style="color:#E1E4E8">>(</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  useEffect</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    loadChartLibrary</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(setChart);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }, []);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">Chart) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#B392F0">div</span><span style="color:#E1E4E8">>Loading chart</span><span style="color:#F97583">...&#x3C;/</span><span style="color:#E1E4E8">div</span><span style="color:#F97583">></span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> &#x3C;</span><span style="color:#B392F0">Chart</span><span style="color:#B392F0"> data</span><span style="color:#E1E4E8">={</span><span style="color:#FFAB70">data</span><span style="color:#E1E4E8">} />;</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span></code></pre>
+<h3 id="3-state-management-optimization">3. State Management Optimization</h3>
+<p><strong>Redux Toolkit with RTK Query</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#6A737D">// Efficient data fetching with automatic caching</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#79B8FF"> apiSlice</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> createApi</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  reducerPath: </span><span style="color:#9ECBFF">'api'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  baseQuery: </span><span style="color:#B392F0">fetchBaseQuery</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">    baseUrl: </span><span style="color:#9ECBFF">'/api'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">    prepareHeaders</span><span style="color:#E1E4E8">: (</span><span style="color:#FFAB70">headers</span><span style="color:#E1E4E8">, { </span><span style="color:#FFAB70">getState</span><span style="color:#E1E4E8"> }) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">      headers.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'authorization'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">`Bearer ${</span><span style="color:#B392F0">getToken</span><span style="color:#9ECBFF">(</span><span style="color:#B392F0">getState</span><span style="color:#9ECBFF">())</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> headers;</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#E1E4E8">  }),</span></span>
+<span class="line"><span style="color:#E1E4E8">  tagTypes: [</span><span style="color:#9ECBFF">'Product'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'User'</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#B392F0">  endpoints</span><span style="color:#E1E4E8">: (</span><span style="color:#FFAB70">builder</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> ({</span></span>
+<span class="line"><span style="color:#E1E4E8">    getProducts: builder.</span><span style="color:#B392F0">query</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Product</span><span style="color:#E1E4E8">[], { </span><span style="color:#FFAB70">page</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> number</span><span style="color:#E1E4E8">; </span><span style="color:#FFAB70">limit</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> number</span><span style="color:#E1E4E8"> }>({</span></span>
+<span class="line"><span style="color:#B392F0">      query</span><span style="color:#E1E4E8">: ({ </span><span style="color:#FFAB70">page</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">limit</span><span style="color:#E1E4E8"> }) </span><span style="color:#F97583">=></span><span style="color:#9ECBFF"> `products?page=${</span><span style="color:#E1E4E8">page</span><span style="color:#9ECBFF">}&#x26;limit=${</span><span style="color:#E1E4E8">limit</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      providesTags: [</span><span style="color:#9ECBFF">'Product'</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#6A737D">      // Automatic caching and background refetching</span></span>
+<span class="line"><span style="color:#E1E4E8">      keepUnusedDataFor: </span><span style="color:#79B8FF">60</span><span style="color:#E1E4E8">, </span><span style="color:#6A737D">// seconds</span></span>
+<span class="line"><span style="color:#E1E4E8">    }),</span></span>
+<span class="line"><span style="color:#E1E4E8">  }),</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span></code></pre>
+<h2 id="nodejs-performance-optimization">Node.js Performance Optimization</h2>
+<h3 id="1-memory-management">1. Memory Management</h3>
+<p><strong>Monitoring Memory Usage</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#6A737D">// Memory monitoring utilities</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> MemoryMonitor</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  static</span><span style="color:#B392F0"> logMemoryUsage</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">label</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> void</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> usage</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> process.</span><span style="color:#B392F0">memoryUsage</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">label</span><span style="color:#9ECBFF">} - Memory Usage:`</span><span style="color:#E1E4E8">, {</span></span>
+<span class="line"><span style="color:#E1E4E8">      rss: </span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">Math</span><span style="color:#9ECBFF">.</span><span style="color:#B392F0">round</span><span style="color:#9ECBFF">(</span><span style="color:#E1E4E8">usage</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">rss</span><span style="color:#F97583"> /</span><span style="color:#79B8FF"> 1024</span><span style="color:#F97583"> /</span><span style="color:#79B8FF"> 1024</span><span style="color:#F97583"> *</span><span style="color:#79B8FF"> 100</span><span style="color:#9ECBFF">) </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 100</span><span style="color:#9ECBFF">} MB`</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      heapTotal: </span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">Math</span><span style="color:#9ECBFF">.</span><span style="color:#B392F0">round</span><span style="color:#9ECBFF">(</span><span style="color:#E1E4E8">usage</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">heapTotal</span><span style="color:#F97583"> /</span><span style="color:#79B8FF"> 1024</span><span style="color:#F97583"> /</span><span style="color:#79B8FF"> 1024</span><span style="color:#F97583"> *</span><span style="color:#79B8FF"> 100</span><span style="color:#9ECBFF">) </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 100</span><span style="color:#9ECBFF">} MB`</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      heapUsed: </span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">Math</span><span style="color:#9ECBFF">.</span><span style="color:#B392F0">round</span><span style="color:#9ECBFF">(</span><span style="color:#E1E4E8">usage</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">heapUsed</span><span style="color:#F97583"> /</span><span style="color:#79B8FF"> 1024</span><span style="color:#F97583"> /</span><span style="color:#79B8FF"> 1024</span><span style="color:#F97583"> *</span><span style="color:#79B8FF"> 100</span><span style="color:#9ECBFF">) </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 100</span><span style="color:#9ECBFF">} MB`</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      external: </span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">Math</span><span style="color:#9ECBFF">.</span><span style="color:#B392F0">round</span><span style="color:#9ECBFF">(</span><span style="color:#E1E4E8">usage</span><span style="color:#9ECBFF">.</span><span style="color:#E1E4E8">external</span><span style="color:#F97583"> /</span><span style="color:#79B8FF"> 1024</span><span style="color:#F97583"> /</span><span style="color:#79B8FF"> 1024</span><span style="color:#F97583"> *</span><span style="color:#79B8FF"> 100</span><span style="color:#9ECBFF">) </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 100</span><span style="color:#9ECBFF">} MB`</span></span>
+<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  static</span><span style="color:#B392F0"> forceGarbageCollection</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> void</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (global.gc) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      global.</span><span style="color:#B392F0">gc</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<p><strong>Stream Processing for Large Data</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Transform } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'stream'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { pipeline } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'stream/promises'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Process large datasets without loading everything into memory</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> processLargeDataset</span><span style="color:#F97583"> =</span><span style="color:#F97583"> async</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">inputStream</span><span style="color:#F97583">:</span><span style="color:#B392F0"> NodeJS</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">ReadableStream</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> transformStream</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Transform</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">    objectMode: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">    transform</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">chunk</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">encoding</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">callback</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">      // Process each chunk individually</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> processedData</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> processDataChunk</span><span style="color:#E1E4E8">(chunk);</span></span>
+<span class="line"><span style="color:#B392F0">      callback</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, processedData);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> outputStream</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> createWriteStream</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'output.json'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  await</span><span style="color:#B392F0"> pipeline</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    inputStream,</span></span>
+<span class="line"><span style="color:#E1E4E8">    transformStream,</span></span>
+<span class="line"><span style="color:#E1E4E8">    outputStream</span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span></code></pre>
+<h3 id="2-database-optimization">2. Database Optimization</h3>
+<p><strong>Connection Pooling with TypeORM</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#6A737D">// Optimized database configuration</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#B392F0"> createDatabaseConnection</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#B392F0"> createConnection</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">    type: </span><span style="color:#9ECBFF">'postgres'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    host: process.env.</span><span style="color:#79B8FF">DB_HOST</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    port: </span><span style="color:#B392F0">parseInt</span><span style="color:#E1E4E8">(process.env.</span><span style="color:#79B8FF">DB_PORT</span><span style="color:#F97583"> ||</span><span style="color:#9ECBFF"> '5432'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">    username: process.env.</span><span style="color:#79B8FF">DB_USERNAME</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    password: process.env.</span><span style="color:#79B8FF">DB_PASSWORD</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    database: process.env.</span><span style="color:#79B8FF">DB_NAME</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    // Connection pooling for performance</span></span>
+<span class="line"><span style="color:#E1E4E8">    extra: {</span></span>
+<span class="line"><span style="color:#E1E4E8">      max: </span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">, </span><span style="color:#6A737D">// Maximum number of connections</span></span>
+<span class="line"><span style="color:#E1E4E8">      min: </span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">,  </span><span style="color:#6A737D">// Minimum number of connections</span></span>
+<span class="line"><span style="color:#E1E4E8">      acquire: </span><span style="color:#79B8FF">30000</span><span style="color:#E1E4E8">, </span><span style="color:#6A737D">// Maximum time to get connection</span></span>
+<span class="line"><span style="color:#E1E4E8">      idle: </span><span style="color:#79B8FF">10000</span><span style="color:#E1E4E8">,    </span><span style="color:#6A737D">// Time before closing idle connections</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#6A737D">    // Query optimization</span></span>
+<span class="line"><span style="color:#E1E4E8">    cache: {</span></span>
+<span class="line"><span style="color:#E1E4E8">      type: </span><span style="color:#9ECBFF">'redis'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      options: {</span></span>
+<span class="line"><span style="color:#E1E4E8">        host: process.env.</span><span style="color:#79B8FF">REDIS_HOST</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">        port: </span><span style="color:#B392F0">parseInt</span><span style="color:#E1E4E8">(process.env.</span><span style="color:#79B8FF">REDIS_PORT</span><span style="color:#F97583"> ||</span><span style="color:#9ECBFF"> '6379'</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">      },</span></span>
+<span class="line"><span style="color:#E1E4E8">      duration: </span><span style="color:#79B8FF">30000</span><span style="color:#E1E4E8">, </span><span style="color:#6A737D">// Cache duration in ms</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">    logging: process.env.</span><span style="color:#79B8FF">NODE_ENV</span><span style="color:#F97583"> ===</span><span style="color:#9ECBFF"> 'development'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span></code></pre>
+<p><strong>Query Optimization Strategies</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#6A737D">// Efficient data fetching with proper relations</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> class</span><span style="color:#B392F0"> ProductService</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  async</span><span style="color:#B392F0"> getProductsWithCategory</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">page</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> number</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">limit</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> number</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 20</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Promise</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Product</span><span style="color:#E1E4E8">[]> {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.productRepository</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">createQueryBuilder</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'product'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">leftJoinAndSelect</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'product.category'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'category'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">leftJoinAndSelect</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'product.images'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'images'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">where</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'product.isActive = :isActive'</span><span style="color:#E1E4E8">, { isActive: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8"> })</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">orderBy</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'product.createdAt'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'DESC'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">skip</span><span style="color:#E1E4E8">((page </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> limit)</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">take</span><span style="color:#E1E4E8">(limit)</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">getMany</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // Use indexes for frequent queries</span></span>
+<span class="line"><span style="color:#F97583">  async</span><span style="color:#B392F0"> getProductsByCategory</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">categoryId</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Promise</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">Product</span><span style="color:#E1E4E8">[]> {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.productRepository</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">        where: { categoryId },</span></span>
+<span class="line"><span style="color:#E1E4E8">        relations: [</span><span style="color:#9ECBFF">'images'</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#E1E4E8">        cache: </span><span style="color:#79B8FF">60000</span><span style="color:#E1E4E8">, </span><span style="color:#6A737D">// Cache for 1 minute</span></span>
+<span class="line"><span style="color:#E1E4E8">      });</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h3 id="3-caching-strategies">3. Caching Strategies</h3>
+<p><strong>Multi-Level Caching Implementation</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Redis </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'ioredis'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> CacheService</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  private</span><span style="color:#FFAB70"> redis</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Redis</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  private</span><span style="color:#FFAB70"> memoryCache</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Map</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">string</span><span style="color:#E1E4E8">, { </span><span style="color:#FFAB70">data</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">; </span><span style="color:#FFAB70">expiry</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> number</span><span style="color:#E1E4E8"> }>;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  constructor</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.redis </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Redis</span><span style="color:#E1E4E8">(process.env.</span><span style="color:#79B8FF">REDIS_URL</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.memoryCache </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Map</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  async</span><span style="color:#B392F0"> get</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">key</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Promise</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">any</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#6A737D">    // Level 1: Memory cache (fastest)</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> memoryResult</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getFromMemory</span><span style="color:#E1E4E8">(key);</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (memoryResult) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8"> memoryResult;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // Level 2: Redis cache</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> redisResult</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.redis.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(key);</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (redisResult) {</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> data</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> JSON</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">parse</span><span style="color:#E1E4E8">(redisResult);</span></span>
+<span class="line"><span style="color:#79B8FF">      this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">setMemory</span><span style="color:#E1E4E8">(key, data, </span><span style="color:#79B8FF">30000</span><span style="color:#E1E4E8">); </span><span style="color:#6A737D">// Cache in memory for 30s</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> data;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  async</span><span style="color:#B392F0"> set</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">key</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">data</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">ttl</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> number</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 3600</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Promise</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#79B8FF">void</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#6A737D">    // Store in both caches</span></span>
+<span class="line"><span style="color:#F97583">    await</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.redis.</span><span style="color:#B392F0">setex</span><span style="color:#E1E4E8">(key, ttl, </span><span style="color:#79B8FF">JSON</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">stringify</span><span style="color:#E1E4E8">(data));</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">setMemory</span><span style="color:#E1E4E8">(key, data, Math.</span><span style="color:#B392F0">min</span><span style="color:#E1E4E8">(ttl </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> 1000</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">60000</span><span style="color:#E1E4E8">)); </span><span style="color:#6A737D">// Max 1 min in memory</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  private</span><span style="color:#B392F0"> getFromMemory</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">key</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> cached</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.memoryCache.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(key);</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (cached </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> cached.expiry </span><span style="color:#F97583">></span><span style="color:#E1E4E8"> Date.</span><span style="color:#B392F0">now</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> cached.data;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.memoryCache.</span><span style="color:#B392F0">delete</span><span style="color:#E1E4E8">(key);</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  private</span><span style="color:#B392F0"> setMemory</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">key</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">data</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">ttlMs</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> number</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> void</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">    this</span><span style="color:#E1E4E8">.memoryCache.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(key, {</span></span>
+<span class="line"><span style="color:#E1E4E8">      data,</span></span>
+<span class="line"><span style="color:#E1E4E8">      expiry: Date.</span><span style="color:#B392F0">now</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> ttlMs</span></span>
+<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h2 id="advanced-performance-monitoring">Advanced Performance Monitoring</h2>
+<h3 id="1-application-performance-monitoring-apm">1. Application Performance Monitoring (APM)</h3>
+<p><strong>Custom Metrics with Prometheus</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> promClient </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'prom-client'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Custom metrics for business logic</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> httpRequestDuration</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> promClient.</span><span style="color:#B392F0">Histogram</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  name: </span><span style="color:#9ECBFF">'http_request_duration_seconds'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  help: </span><span style="color:#9ECBFF">'Duration of HTTP requests in seconds'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  labelNames: [</span><span style="color:#9ECBFF">'method'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'route'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'status_code'</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#E1E4E8">  buckets: [</span><span style="color:#79B8FF">0.1</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.3</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.5</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0.7</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">7</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> databaseQueryDuration</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#E1E4E8"> promClient.</span><span style="color:#B392F0">Histogram</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">  name: </span><span style="color:#9ECBFF">'database_query_duration_seconds'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  help: </span><span style="color:#9ECBFF">'Duration of database queries in seconds'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  labelNames: [</span><span style="color:#9ECBFF">'operation'</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">'table'</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Middleware for request monitoring</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#B392F0"> metricsMiddleware</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">req</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Request</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">res</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Response</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">next</span><span style="color:#F97583">:</span><span style="color:#B392F0"> NextFunction</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> start</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Date.</span><span style="color:#B392F0">now</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#E1E4E8">  res.</span><span style="color:#B392F0">on</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'finish'</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> duration</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (Date.</span><span style="color:#B392F0">now</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> start) </span><span style="color:#F97583">/</span><span style="color:#79B8FF"> 1000</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    httpRequestDuration</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">labels</span><span style="color:#E1E4E8">(req.method, req.route?.path </span><span style="color:#F97583">||</span><span style="color:#E1E4E8"> req.path, res.statusCode.</span><span style="color:#B392F0">toString</span><span style="color:#E1E4E8">())</span></span>
+<span class="line"><span style="color:#E1E4E8">      .</span><span style="color:#B392F0">observe</span><span style="color:#E1E4E8">(duration);</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#B392F0">  next</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span></code></pre>
+<h3 id="2-real-user-monitoring-rum">2. Real User Monitoring (RUM)</h3>
+<p><strong>Client-Side Performance Tracking</strong></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#6A737D">// Performance monitoring utilities</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> PerformanceTracker</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  static</span><span style="color:#B392F0"> measurePageLoad</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> void</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    window.</span><span style="color:#B392F0">addEventListener</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'load'</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">      setTimeout</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> navigation</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> performance.</span><span style="color:#B392F0">getEntriesByType</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'navigation'</span><span style="color:#E1E4E8">)[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">as</span><span style="color:#B392F0"> PerformanceNavigationTiming</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> paint</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> performance.</span><span style="color:#B392F0">getEntriesByType</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'paint'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> metrics</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">          // Core Web Vitals</span></span>
+<span class="line"><span style="color:#E1E4E8">          fcp: paint.</span><span style="color:#B392F0">find</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">p</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> p.name </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> 'first-contentful-paint'</span><span style="color:#E1E4E8">)?.startTime,</span></span>
+<span class="line"><span style="color:#E1E4E8">          lcp: </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getLargestContentfulPaint</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">          fid: </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getFirstInputDelay</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">          cls: </span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">getCumulativeLayoutShift</span><span style="color:#E1E4E8">(),</span></span>
+<span class="line"><span style="color:#E1E4E8">          </span></span>
+<span class="line"><span style="color:#6A737D">          // Navigation timing</span></span>
+<span class="line"><span style="color:#E1E4E8">          domContentLoaded: navigation.domContentLoadedEventEnd </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> navigation.domContentLoadedEventStart,</span></span>
+<span class="line"><span style="color:#E1E4E8">          loadComplete: navigation.loadEventEnd </span><span style="color:#F97583">-</span><span style="color:#E1E4E8"> navigation.loadEventStart,</span></span>
+<span class="line"><span style="color:#E1E4E8">          </span></span>
+<span class="line"><span style="color:#6A737D">          // Resource timing</span></span>
+<span class="line"><span style="color:#E1E4E8">          totalResources: performance.</span><span style="color:#B392F0">getEntriesByType</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'resource'</span><span style="color:#E1E4E8">).</span><span style="color:#79B8FF">length</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">          slowResources: performance.</span><span style="color:#B392F0">getEntriesByType</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'resource'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            .</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">r</span><span style="color:#F97583"> =></span><span style="color:#E1E4E8"> r.duration </span><span style="color:#F97583">></span><span style="color:#79B8FF"> 1000</span><span style="color:#E1E4E8">).</span><span style="color:#79B8FF">length</span></span>
+<span class="line"><span style="color:#E1E4E8">        };</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#79B8FF">        this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">sendMetrics</span><span style="color:#E1E4E8">(metrics);</span></span>
+<span class="line"><span style="color:#E1E4E8">      }, </span><span style="color:#79B8FF">1000</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  private</span><span style="color:#F97583"> static</span><span style="color:#B392F0"> getLargestContentfulPaint</span><span style="color:#E1E4E8">()</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> number</span><span style="color:#F97583"> |</span><span style="color:#79B8FF"> undefined</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> Promise</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">resolve</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">      new</span><span style="color:#B392F0"> PerformanceObserver</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">list</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> entries</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> list.</span><span style="color:#B392F0">getEntries</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> lastEntry</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> entries[entries.</span><span style="color:#79B8FF">length</span><span style="color:#F97583"> -</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#B392F0">        resolve</span><span style="color:#E1E4E8">(lastEntry.startTime);</span></span>
+<span class="line"><span style="color:#E1E4E8">      }).</span><span style="color:#B392F0">observe</span><span style="color:#E1E4E8">({ entryTypes: [</span><span style="color:#9ECBFF">'largest-contentful-paint'</span><span style="color:#E1E4E8">] });</span></span>
+<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  private</span><span style="color:#F97583"> static</span><span style="color:#B392F0"> sendMetrics</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">metrics</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> void</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // Send to analytics service</span></span>
+<span class="line"><span style="color:#B392F0">    fetch</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'/api/metrics'</span><span style="color:#E1E4E8">, {</span></span>
+<span class="line"><span style="color:#E1E4E8">      method: </span><span style="color:#9ECBFF">'POST'</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      headers: { </span><span style="color:#9ECBFF">'Content-Type'</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'application/json'</span><span style="color:#E1E4E8"> },</span></span>
+<span class="line"><span style="color:#E1E4E8">      body: </span><span style="color:#79B8FF">JSON</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">stringify</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#F97583">        ...</span><span style="color:#E1E4E8">metrics,</span></span>
+<span class="line"><span style="color:#E1E4E8">        userAgent: navigator.userAgent,</span></span>
+<span class="line"><span style="color:#E1E4E8">        timestamp: Date.</span><span style="color:#B392F0">now</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">      })</span></span>
+<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<h2 id="performance-testing-strategies">Performance Testing Strategies</h2>
+<h3 id="1-load-testing-with-artillery">1. Load Testing with Artillery</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#6A737D"># artillery-config.yml</span></span>
+<span class="line"><span style="color:#85E89D">config</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  target</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">'https://your-app.com'</span></span>
+<span class="line"><span style="color:#85E89D">  phases</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">duration</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">60</span></span>
+<span class="line"><span style="color:#85E89D">      arrivalRate</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">10</span></span>
+<span class="line"><span style="color:#85E89D">      name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Warm up</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">duration</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">120</span></span>
+<span class="line"><span style="color:#85E89D">      arrivalRate</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">50</span></span>
+<span class="line"><span style="color:#85E89D">      name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Ramp up load</span></span>
+<span class="line"><span style="color:#E1E4E8">    - </span><span style="color:#85E89D">duration</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">300</span></span>
+<span class="line"><span style="color:#85E89D">      arrivalRate</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">100</span></span>
+<span class="line"><span style="color:#85E89D">      name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">Sustained load</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">scenarios</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"Product browsing"</span></span>
+<span class="line"><span style="color:#85E89D">    weight</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">70</span></span>
+<span class="line"><span style="color:#85E89D">    flow</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#85E89D">get</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">          url</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"/api/products"</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#85E89D">think</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">2</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#85E89D">get</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">          url</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"/api/products/{{ $randomString() }}"</span></span>
+<span class="line"><span style="color:#E1E4E8">  </span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#85E89D">name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"User authentication"</span></span>
+<span class="line"><span style="color:#85E89D">    weight</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">30</span></span>
+<span class="line"><span style="color:#85E89D">    flow</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#85E89D">post</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">          url</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"/api/auth/login"</span></span>
+<span class="line"><span style="color:#85E89D">          json</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">            email</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"test@example.com"</span></span>
+<span class="line"><span style="color:#85E89D">            password</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"password"</span></span>
+<span class="line"></span></code></pre>
+<h3 id="2-react-component-performance-testing">2. React Component Performance Testing</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { render, screen } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> '@testing-library/react'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { ProfilerOnRenderCallback, Profiler } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> 'react'</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// Performance testing for React components</span></span>
+<span class="line"><span style="color:#B392F0">describe</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'ProductList Performance'</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">  it</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'should render efficiently with large datasets'</span><span style="color:#E1E4E8">, () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> largeProductList</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> generateMockProducts</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1000</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> onRender</span><span style="color:#F97583">:</span><span style="color:#B392F0"> ProfilerOnRenderCallback</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> jest.</span><span style="color:#B392F0">fn</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    render</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#F97583">      &#x3C;</span><span style="color:#E1E4E8">Profiler id</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">"ProductList"</span><span style="color:#E1E4E8"> onRender</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{onRender}</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#F97583">        &#x3C;</span><span style="color:#E1E4E8">ProductList products</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{largeProductList} </span><span style="color:#F97583">/></span></span>
+<span class="line"><span style="color:#F97583">      &#x3C;/</span><span style="color:#E1E4E8">Profiler</span><span style="color:#F97583">></span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // Assert performance metrics</span></span>
+<span class="line"><span style="color:#B392F0">    expect</span><span style="color:#E1E4E8">(onRender).</span><span style="color:#B392F0">toHaveBeenCalled</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">id</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">phase</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">actualDuration</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> onRender.mock.calls[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#B392F0">    expect</span><span style="color:#E1E4E8">(actualDuration).</span><span style="color:#B392F0">toBeLessThan</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">); </span><span style="color:#6A737D">// Should render in &#x3C; 100ms</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span></code></pre>
+<h2 id="production-optimization-checklist">Production Optimization Checklist</h2>
+<h3 id="frontend-optimization">Frontend Optimization</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> Implement code splitting for route-based chunks</li>
+<li class="task-list-item"><input type="checkbox" disabled> Use React.memo() for expensive components</li>
+<li class="task-list-item"><input type="checkbox" disabled> Optimize bundle size with webpack-bundle-analyzer</li>
+<li class="task-list-item"><input type="checkbox" disabled> Enable Gzip/Brotli compression</li>
+<li class="task-list-item"><input type="checkbox" disabled> Implement service worker for caching</li>
+<li class="task-list-item"><input type="checkbox" disabled> Optimize images (WebP format, lazy loading)</li>
+<li class="task-list-item"><input type="checkbox" disabled> Use CDN for static assets</li>
+<li class="task-list-item"><input type="checkbox" disabled> Minimize and tree-shake JavaScript bundles</li>
+</ul>
+<h3 id="backend-optimization">Backend Optimization</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> Implement connection pooling for databases</li>
+<li class="task-list-item"><input type="checkbox" disabled> Add Redis caching layer</li>
+<li class="task-list-item"><input type="checkbox" disabled> Use cluster mode for CPU-intensive operations</li>
+<li class="task-list-item"><input type="checkbox" disabled> Optimize database queries and add indexes</li>
+<li class="task-list-item"><input type="checkbox" disabled> Implement request rate limiting</li>
+<li class="task-list-item"><input type="checkbox" disabled> Use compression middleware</li>
+<li class="task-list-item"><input type="checkbox" disabled> Monitor memory usage and prevent leaks</li>
+<li class="task-list-item"><input type="checkbox" disabled> Set up proper logging and monitoring</li>
+</ul>
+<h3 id="infrastructure-optimization">Infrastructure Optimization</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> Configure auto-scaling based on metrics</li>
+<li class="task-list-item"><input type="checkbox" disabled> Set up load balancers with health checks</li>
+<li class="task-list-item"><input type="checkbox" disabled> Implement database read replicas</li>
+<li class="task-list-item"><input type="checkbox" disabled> Use appropriate instance types for workload</li>
+<li class="task-list-item"><input type="checkbox" disabled> Configure CDN with optimal cache policies</li>
+<li class="task-list-item"><input type="checkbox" disabled> Set up monitoring and alerting</li>
+<li class="task-list-item"><input type="checkbox" disabled> Implement circuit breakers for external services</li>
+</ul>
+<h2 id="common-performance-anti-patterns">Common Performance Anti-Patterns</h2>
+<h3 id="react-anti-patterns">React Anti-Patterns</h3>
+<ol>
+<li><strong>Unnecessary Re-renders</strong>: Not using React.memo() or proper key props</li>
+<li><strong>Large Bundle Sizes</strong>: Not implementing code splitting</li>
+<li><strong>Blocking Operations</strong>: Performing expensive calculations in render</li>
+<li><strong>Memory Leaks</strong>: Not cleaning up subscriptions and timers</li>
+</ol>
+<h3 id="nodejs-anti-patterns">Node.js Anti-Patterns</h3>
+<ol>
+<li><strong>Synchronous Operations</strong>: Using sync methods in production</li>
+<li><strong>No Connection Pooling</strong>: Creating new DB connections per request</li>
+<li><strong>Missing Error Handling</strong>: Uncaught exceptions crashing the process</li>
+<li><strong>Poor Logging</strong>: Not logging performance metrics</li>
+</ol>
+<h2 id="measuring-success">Measuring Success</h2>
+<p>Track these KPIs to validate optimization efforts:</p>
+<h3 id="technical-metrics">Technical Metrics</h3>
+<ul>
+<li><strong>First Contentful Paint (FCP)</strong>: &#x3C; 1.5 seconds</li>
+<li><strong>Largest Contentful Paint (LCP)</strong>: &#x3C; 2.5 seconds</li>
+<li><strong>Time to Interactive (TTI)</strong>: &#x3C; 3.5 seconds</li>
+<li><strong>API Response Time</strong>: &#x3C; 200ms (95th percentile)</li>
+<li><strong>Memory Usage</strong>: &#x3C; 80% of available RAM</li>
+<li><strong>CPU Utilization</strong>: &#x3C; 70% under normal load</li>
+</ul>
+<h3 id="business-metrics">Business Metrics</h3>
+<ul>
+<li><strong>Conversion Rate</strong>: Track changes after optimization</li>
+<li><strong>Bounce Rate</strong>: Monitor user engagement improvements</li>
+<li><strong>Page Views per Session</strong>: Measure user experience impact</li>
+<li><strong>Revenue per Visitor</strong>: Calculate ROI of performance improvements</li>
+</ul>
+<h2 id="getting-expert-help">Getting Expert Help</h2>
+<p>Organizations seeking to optimize their applications typically benefit from:</p>
+<ol>
+<li><strong>Performance Audits</strong>: Comprehensive analysis of existing applications</li>
+<li><strong>Architecture Reviews</strong>: Identify bottlenecks and optimization opportunities</li>
+<li><strong>Team Training</strong>: Educate developers on performance best practices</li>
+<li><strong>Implementation</strong>: Hands-on optimization of critical performance issues</li>
+<li><strong>Monitoring Setup</strong>: Establish performance monitoring and alerting systems</li>
+</ol>
+<h2 id="conclusion">Conclusion</h2>
+<p>Effective React and Node.js performance optimization requires a systematic approach combining proper architecture, efficient coding patterns, and comprehensive monitoring. The strategies outlined in this guide have been battle-tested across enterprise applications serving millions of users.</p>
+<p>Performance optimization is an ongoing process, not a one-time effort. Regular monitoring, testing, and refinement ensure your applications continue to deliver exceptional user experiences as they scale.</p>
+<hr>
+<p><strong>Keywords</strong>: React performance optimization, Node.js optimization, JavaScript performance, web application optimization, frontend performance, backend optimization, performance monitoring, React development</p> </div> <div class="mt-10 pt-6 border-t border-gray-200"> <a href="/" class="text-blue-600 hover:underline">← Back to Home</a> </div> </article>  </main> <!-- Footer --> <footer class="bg-white border-t border-gray-100 py-8"> <div class="container mx-auto text-center"> <p class="text-gray-600 text-sm">
+© 2025 Anton Dvorson. All rights reserved.
+</p> <div class="mt-4 flex justify-center space-x-4"> <a href="https://github.com/dvorson" class="text-gray-400 hover:text-gray-700 transition-colors" target="_blank" rel="noopener noreferrer"> <i class="fab fa-github text-lg"></i> </a> <a href="https://linkedin.com/in/" class="text-gray-400 hover:text-gray-700 transition-colors" target="_blank" rel="noopener noreferrer"> <i class="fab fa-linkedin text-lg"></i> </a> <a href="https://twitter.com/" class="text-gray-400 hover:text-gray-700 transition-colors" target="_blank" rel="noopener noreferrer"> <i class="fab fa-twitter text-lg"></i> </a> </div> </div> </footer> </body></html>
