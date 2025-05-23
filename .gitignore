@@ -41,3 +41,17 @@ tasks/
 
 # Test results
 test-results/ 
+
+# AI coding assistants
+.roo/
+.claude/
+.cursor/
+.codeium/
+.copilot/
+.windsurf/
+.continue/
+.aider/
+.aide/
+*.ai
+*.roo
+.codegpt/
