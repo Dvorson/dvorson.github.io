@@ -81,8 +81,28 @@
   @apply text-gray-800 leading-relaxed;
 }
 
-.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
-  @apply text-gray-900 font-bold tracking-tight;
+.prose h1 {
+  @apply text-gray-900 font-bold tracking-tight text-3xl mb-8 pb-4 border-b border-gray-200;
+}
+
+.prose h2 {
+  @apply text-gray-900 font-bold tracking-tight text-2xl mt-12 mb-6;
+}
+
+.prose h3 {
+  @apply text-gray-900 font-bold tracking-tight text-xl mt-8 mb-4;
+}
+
+.prose h4 {
+  @apply text-gray-900 font-bold tracking-tight text-lg mt-6 mb-3;
+}
+
+.prose h5 {
+  @apply text-gray-900 font-bold tracking-tight text-base mt-6 mb-3;
+}
+
+.prose h6 {
+  @apply text-gray-900 font-bold tracking-tight text-base mt-6 mb-3;
 }
 
 .prose h2 {
@@ -92,6 +112,31 @@
 .prose h2::before {
   content: '';
   @apply absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full;
+}
+
+/* Better spacing for article sections */
+.prose > * + * {
+  margin-top: 1.5em;
+}
+
+.prose > p + h2,
+.prose > ul + h2,
+.prose > ol + h2,
+.prose > pre + h2,
+.prose > blockquote + h2 {
+  margin-top: 3rem;
+}
+
+.prose > p + h3,
+.prose > ul + h3,
+.prose > ol + h3,
+.prose > pre + h3,
+.prose > blockquote + h3 {
+  margin-top: 2.5rem;
+}
+
+.prose p {
+  margin-bottom: 1.5em;
 }
 
 .prose code:not(.hljs) {
@@ -164,31 +209,45 @@
 
 /* Code syntax highlighting enhancement */
 .prose .hljs {
-  @apply bg-gray-900 text-gray-100;
+  @apply bg-gray-900 text-gray-100 !important;
+  color: #f3f4f6 !important;
+  background: #111827 !important;
 }
 
 .prose .hljs-keyword {
-  @apply text-purple-400;
+  @apply text-purple-400 !important;
 }
 
 .prose .hljs-string {
-  @apply text-green-400;
+  @apply text-green-400 !important;
 }
 
 .prose .hljs-number {
-  @apply text-orange-400;
+  @apply text-orange-400 !important;
 }
 
 .prose .hljs-comment {
-  @apply text-gray-500;
+  @apply text-gray-500 !important;
 }
 
 .prose .hljs-function {
-  @apply text-blue-400;
+  @apply text-blue-400 !important;
 }
 
 .prose .hljs-title {
-  @apply text-yellow-400;
+  @apply text-yellow-400 !important;
+}
+
+/* Ensure no white highlighting on code blocks */
+.prose pre code.hljs,
+.prose pre .hljs {
+  background: #111827 !important;
+  color: #f3f4f6 !important;
+}
+
+.prose pre code.hljs *,
+.prose pre .hljs * {
+  background: transparent !important;
 }
 
 /* Animation classes */

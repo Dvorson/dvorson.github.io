@@ -1,7 +1,7 @@
 ---
 title: "React and Node.js Performance Optimization: Expert Strategies for Enterprise Applications"
 description: "Complete guide to React and Node.js performance optimization from a consultant with 10+ years experience. Learn advanced techniques for scaling high-traffic applications, memory management, and production monitoring."
-pubDate: 2025-01-10
+pubDate: "2025-01-10"
 author: "Anton Dvorson"
 tags: ["React Performance", "Node.js Optimization", "Performance Consulting", "JavaScript", "TypeScript", "Web Performance", "Frontend Optimization"]
 categories: ["Performance Optimization", "Technical Consulting"]

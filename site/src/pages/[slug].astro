@@ -43,7 +43,7 @@ const Content = post.content;
           </time>
           
           {post.category && (
-            <a href={`/categories/${post.category}`} class="flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
+            <a href={`/categories/${encodeURIComponent(post.category)}/`} class="flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.023.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
               </svg>
@@ -60,7 +60,7 @@ const Content = post.content;
           <div class="flex flex-wrap gap-2">
             {post.tags.map((tag: string) => (
               <a 
-                href={`/tags/${tag}`}
+                href={`/tags/${encodeURIComponent(tag)}/`}
                 class="inline-flex items-center px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-100 transition-all duration-200 border border-blue-200 hover:border-blue-300"
               >
                 <span class="text-xs mr-1">#</span>

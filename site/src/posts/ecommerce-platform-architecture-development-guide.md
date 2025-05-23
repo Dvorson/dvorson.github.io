@@ -1,7 +1,7 @@
 ---
 title: "E-commerce Platform Architecture: Building Scalable Online Commerce Solutions"
 description: "Complete guide to e-commerce platform architecture and development. Learn microservices patterns, payment processing, inventory management, and performance optimization for high-traffic online stores."
-pubDate: 2024-12-25
+pubDate: "2024-12-25"
 author: "Anton Dvorson"
 tags: ["E-commerce Architecture", "Microservices", "Payment Processing", "Online Commerce", "Scalable Systems", "Node.js", "React", "Enterprise Software"]
 categories: ["E-commerce", "Software Architecture"]

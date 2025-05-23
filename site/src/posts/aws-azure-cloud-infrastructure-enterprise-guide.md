@@ -1,7 +1,7 @@
 ---
 title: "AWS and Azure Cloud Infrastructure: Enterprise Migration and Optimization Strategies"
 description: "Comprehensive guide to AWS and Azure cloud infrastructure design, migration strategies, and cost optimization. Learn enterprise-grade patterns for building scalable, secure cloud applications."
-pubDate: 2025-01-05
+pubDate: "2025-01-05"
 author: "Anton Dvorson"
 tags: ["AWS", "Azure", "Cloud Infrastructure", "DevOps", "Cloud Migration", "Kubernetes", "Docker", "Enterprise Architecture"]
 categories: ["Cloud Infrastructure", "DevOps"]

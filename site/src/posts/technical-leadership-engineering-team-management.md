@@ -1,7 +1,7 @@
 ---
 title: "Technical Leadership in Engineering: Building High-Performance Development Teams"
 description: "Comprehensive guide to technical leadership and engineering team management. Learn strategies for mentoring developers, implementing agile practices, and driving technical excellence in software organizations."
-pubDate: 2024-12-30
+pubDate: "2024-12-30"
 author: "Anton Dvorson"
 tags: ["Technical Leadership", "Engineering Management", "Team Leadership", "Software Development", "Agile", "Mentoring", "DevOps Culture"]
 categories: ["Technical Leadership", "Engineering Management"]

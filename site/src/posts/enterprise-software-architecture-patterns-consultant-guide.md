@@ -1,7 +1,7 @@
 ---
 title: "Enterprise Software Architecture Patterns: A Consultant's Guide to Scalable System Design"
 description: "Comprehensive guide to enterprise software architecture patterns for building scalable, maintainable systems. Expert insights from a solution architect with 10+ years of experience in Node.js, React, and cloud platforms."
-pubDate: 2025-01-15
+pubDate: "2025-01-15"
 author: "Anton Dvorson"
 tags: ["Software Architecture", "Enterprise Architecture", "System Design", "Node.js", "React", "Microservices", "Technical Consulting"]
 categories: ["Software Architecture", "Technical Consulting"]

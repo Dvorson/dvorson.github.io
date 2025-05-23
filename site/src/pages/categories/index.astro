@@ -1,33 +1,123 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-const posts = Object.values(import.meta.glob('../../posts/*.md', { eager: true }));
+const postModules = import.meta.glob('../../posts/*.md', { eager: true });
+const posts = Object.entries(postModules).map(([path, post]) => {
+  const slug = path.split('/').pop()?.replace('.md', '') || '';
+  return {
+    ...post.frontmatter,
+    url: `/${slug}`,
+    date: post.frontmatter.date || post.frontmatter.pubDate,
+    title: post.frontmatter.title
+  };
+});
 
-// Collect unique categories
-const catSet = new Set<string>();
-for (const post of posts) {
-  const c = post.frontmatter?.category;
-  if (c) catSet.add(c);
-}
+// Group posts by category
+const postsByCategory = posts.reduce((acc, post) => {
+  const categories = Array.isArray(post.categories) ? post.categories : [post.category].filter(Boolean);
+  categories.forEach(cat => {
+    if (!acc[cat]) acc[cat] = [];
+    acc[cat].push(post);
+  });
+  return acc;
+}, {} as Record<string, any[]>);
 
-const categories = Array.from(catSet).sort();
+// Sort posts within each category by date
+Object.keys(postsByCategory).forEach(cat => {
+  postsByCategory[cat].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+});
+
+const categories = Object.keys(postsByCategory).sort();
 ---
 
 <Layout>
   <section class="my-8">
-    <h1 class="text-3xl font-bold mb-4">Categories</h1>
+    <h1 class="text-4xl font-bold mb-8 text-gray-900">Categories</h1>
+    
     {categories.length > 0 ? (
-      <ul class="flex flex-wrap gap-2">
-        {categories.map((cat) => (
-          <li>
-            <a href={`/categories/${cat}/`} class="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300">
-              {cat}
-            </a>
-          </li>
+      <div class="space-y-12">
+        {categories.map((category) => (
+          <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-2xl font-bold text-gray-900">{category}</h2>
+              <a 
+                href={`/categories/${category}/`} 
+                class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
+              >
+                View all
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {postsByCategory[category].slice(0, 4).map((post: any) => (
+                <a href={post.url} class="group">
+                  <article class="bg-gray-50 rounded-lg p-6 hover:bg-blue-50 transition-all duration-200 border border-gray-200 group-hover:border-blue-300">
+                    <h3 class="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-2 line-clamp-2">
+                      {post.title}
+                    </h3>
+                    {post.description && (
+                      <p class="text-gray-600 text-sm mb-4 line-clamp-3">{post.description}</p>
+                    )}
+                    <div class="flex items-center justify-between">
+                      <time class="text-xs text-gray-500 font-medium">
+                        {new Date(post.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })}
+                      </time>
+                      <span class="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform">
+                        Read more →
+                      </span>
+                    </div>
+                  </article>
+                </a>
+              ))}
+            </div>
+            
+            {postsByCategory[category].length > 4 && (
+              <div class="text-center mt-6">
+                <a 
+                  href={`/categories/${category}/`}
+                  class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                >
+                  View {postsByCategory[category].length - 4} more posts
+                  <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
+                </a>
+              </div>
+            )}
+          </div>
         ))}
-      </ul>
+      </div>
     ) : (
-      <p class="text-gray-600">No categories yet.</p>
+      <div class="bg-white rounded-xl p-12 shadow-sm border border-gray-100 text-center">
+        <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.023.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+        </svg>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">No categories yet</h3>
+        <p class="text-gray-600">Posts will be organized by categories as they are published.</p>
+      </div>
     )}
   </section>
 </Layout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

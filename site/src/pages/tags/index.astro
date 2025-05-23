@@ -1,34 +1,107 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-const posts = Object.values(import.meta.glob('../../posts/*.md', { eager: true }));
+const postModules = import.meta.glob('../../posts/*.md', { eager: true });
+const posts = Object.entries(postModules).map(([path, post]) => {
+  const slug = path.split('/').pop()?.replace('.md', '') || '';
+  return {
+    ...post.frontmatter,
+    url: `/${slug}`,
+    date: post.frontmatter.date || post.frontmatter.pubDate,
+    title: post.frontmatter.title
+  };
+});
 
-// Collect unique tags
-const tagSet = new Set<string>();
-for (const post of posts) {
-  if (Array.isArray(post.frontmatter?.tags)) {
-    for (const t of post.frontmatter.tags) tagSet.add(t);
+// Group posts by tag
+const postsByTag = posts.reduce((acc, post) => {
+  if (Array.isArray(post.tags)) {
+    post.tags.forEach(tag => {
+      if (!acc[tag]) acc[tag] = [];
+      acc[tag].push(post);
+    });
   }
-}
+  return acc;
+}, {} as Record<string, any[]>);
 
-const tags = Array.from(tagSet).sort();
+// Sort posts within each tag by date
+Object.keys(postsByTag).forEach(tag => {
+  postsByTag[tag].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+});
+
+const tags = Object.keys(postsByTag).sort();
 ---
 
 <Layout>
   <section class="my-8">
-    <h1 class="text-3xl font-bold mb-4">Tags</h1>
+    <h1 class="text-4xl font-bold mb-8 text-gray-900">Tags</h1>
+    
     {tags.length > 0 ? (
-      <ul class="flex flex-wrap gap-2">
+      <div class="space-y-8">
         {tags.map((tag) => (
-          <li>
-            <a href={`/tags/${tag}/`} class="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300">
-              {tag}
-            </a>
-          </li>
+          <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xl font-bold text-gray-900">
+                <span class="text-blue-600">#</span>{tag}
+              </h2>
+              <a 
+                href={`/tags/${encodeURIComponent(tag)}/`} 
+                class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors text-sm"
+              >
+                View all {postsByTag[tag].length} posts
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </a>
+            </div>
+            
+            <div class="space-y-3">
+              {postsByTag[tag].slice(0, 3).map((post: any) => (
+                <a href={post.url} class="group block">
+                  <div class="bg-gray-50 rounded-lg p-4 hover:bg-blue-50 transition-all duration-200 border border-gray-200 group-hover:border-blue-300">
+                    <h3 class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-1">
+                      {post.title}
+                    </h3>
+                    <div class="flex items-center justify-between">
+                      <time class="text-xs text-gray-500">
+                        {new Date(post.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })}
+                      </time>
+                      <span class="text-blue-600 text-sm group-hover:translate-x-1 transition-transform">
+                        →
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+            
+            {postsByTag[tag].length > 3 && (
+              <div class="text-center mt-4">
+                <a 
+                  href={`/tags/${encodeURIComponent(tag)}/`}
+                  class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm"
+                >
+                  View {postsByTag[tag].length - 3} more posts
+                  <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
+                </a>
+              </div>
+            )}
+          </div>
         ))}
-      </ul>
+      </div>
     ) : (
-      <p class="text-gray-600">No tags yet.</p>
+      <div class="bg-white rounded-xl p-12 shadow-sm border border-gray-100 text-center">
+        <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.023.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+        </svg>
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">No tags yet</h3>
+        <p class="text-gray-600">Posts will be tagged as they are published.</p>
+      </div>
     )}
   </section>
 </Layout>
