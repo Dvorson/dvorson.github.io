@@ -4,14 +4,27 @@ import Layout from '../../layouts/Layout.astro';
 export async function getStaticPaths() {
   const postModules = import.meta.glob('../../posts/*.md', { eager: true });
   const posts = Object.values(postModules) as any[];
-  const categories = Array.from(
-    new Set(
-      posts
-        .map((p) => p.frontmatter?.category)
-        .filter((c): c is string => !!c)
-    )
-  ).sort();
-  return categories.map((category) => ({ params: { category } }));
+  
+  // Collect all categories from all posts (handling both single category and multiple categories)
+  const allCategories = new Set<string>();
+  
+  posts.forEach((post) => {
+    const frontmatter = post.frontmatter;
+    if (frontmatter) {
+      // Handle single category field
+      if (frontmatter.category && typeof frontmatter.category === 'string') {
+        allCategories.add(frontmatter.category);
+      }
+      // Handle categories array
+      if (frontmatter.categories && Array.isArray(frontmatter.categories)) {
+        frontmatter.categories.forEach((cat: string) => allCategories.add(cat));
+      }
+    }
+  });
+  
+  return Array.from(allCategories).sort().map((category) => ({ 
+    params: { category } 
+  }));
 }
 
 const { category } = Astro.params;
@@ -27,8 +40,19 @@ const posts = Object.entries(postModules).map(([path, post]) => {
 });
 
 const filtered = posts
-  .filter((p) => p.frontmatter?.category === category)
-  .sort((a, b) => new Date(b.frontmatter.date || b.frontmatter.pubDate) - new Date(a.frontmatter.date || a.frontmatter.pubDate));
+  .filter((p) => {
+    const frontmatter = p.frontmatter;
+    if (!frontmatter) return false;
+    
+    // Check if category matches either single category field or is in categories array
+    const matchesSingleCategory = frontmatter.category === category;
+    const matchesCategoriesArray = frontmatter.categories && 
+      Array.isArray(frontmatter.categories) && 
+      frontmatter.categories.includes(category);
+    
+    return matchesSingleCategory || matchesCategoriesArray;
+  })
+  .sort((a, b) => new Date(b.frontmatter.date || b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.date || a.frontmatter.pubDate).getTime());
 ---
 
 <Layout>

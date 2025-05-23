@@ -14,8 +14,11 @@ const posts = Object.entries(postModules).map(([path, post]) => {
 
 // Group posts by category
 const postsByCategory = posts.reduce((acc, post) => {
-  const categories = Array.isArray(post.categories) ? post.categories : [post.category].filter(Boolean);
-  categories.forEach(cat => {
+  const categoriesFromArray = Array.isArray(post.categories) ? post.categories : [];
+  const categoriesFromSingle = post.category ? [post.category] : [];
+  const allCategories = [...categoriesFromArray, ...categoriesFromSingle].filter(Boolean);
+  
+  allCategories.forEach(cat => {
     if (!acc[cat]) acc[cat] = [];
     acc[cat].push(post);
   });

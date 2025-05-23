@@ -250,6 +250,31 @@
   background: transparent !important;
 }
 
+/* Override any conflicting Astro code styles */
+.prose pre.astro-code,
+.prose pre[class*="astro-code"] {
+  background: #24292e !important;
+  color: #e1e4e8 !important;
+}
+
+.prose pre.astro-code code,
+.prose pre[class*="astro-code"] code {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+.prose pre.astro-code .line,
+.prose pre[class*="astro-code"] .line {
+  background: transparent !important;
+}
+
+/* Ensure all span elements in code blocks inherit proper styling */
+.prose pre.astro-code span,
+.prose pre[class*="astro-code"] span,
+.prose pre.hljs span {
+  background: transparent !important;
+}
+
 /* Animation classes */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
