@@ -8,7 +8,7 @@ const posts = Object.entries(postModules)
     return {
       ...post.frontmatter,
       url: `/${slug}`,
-      date: post.frontmatter.date,
+      date: post.frontmatter.date || post.frontmatter.pubDate,
       title: post.frontmatter.title
     };
   })

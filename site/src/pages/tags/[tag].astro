@@ -14,13 +14,19 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params;
 
-const posts = Object.values(
-  import.meta.glob('../../posts/*.md', { eager: true })
-) as any[];
+const postModules = import.meta.glob('../../posts/*.md', { eager: true });
+const posts = Object.entries(postModules).map(([path, post]) => {
+  const slug = path.split('/').pop()?.replace('.md', '') || '';
+  return {
+    ...post,
+    url: `/${slug}`,
+    frontmatter: post.frontmatter
+  };
+});
 
 const filtered = posts
   .filter((p) => Array.isArray(p.frontmatter?.tags) && p.frontmatter.tags.includes(tag))
-  .sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+  .sort((a, b) => new Date(b.frontmatter.date || b.frontmatter.pubDate) - new Date(a.frontmatter.date || a.frontmatter.pubDate));
 ---
 
 <Layout>
@@ -34,7 +40,7 @@ const filtered = posts
               {post.frontmatter.title}
             </a>
             <p class="text-gray-500 text-sm">
-              {new Date(post.frontmatter.date).toLocaleDateString()}
+              {new Date(post.frontmatter.date || post.frontmatter.pubDate).toLocaleDateString()}
             </p>
           </li>
         ))}
