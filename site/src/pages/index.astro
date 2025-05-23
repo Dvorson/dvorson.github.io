@@ -191,7 +191,8 @@ const posts = Object.entries(postModules)
 
 <script is:inline define:vars={{ cv }}>
   document.getElementById('download-cv')?.addEventListener('click', () => {
-    // Create a simple HTML version for PDF generation
+    // Create a new window with CV content for PDF printing
+    const printWindow = window.open('', '_blank');
     const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -199,25 +200,37 @@ const posts = Object.entries(postModules)
         <meta charset="UTF-8">
         <title>${cv.name} - CV</title>
         <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-          h1 { color: #2563eb; border-bottom: 3px solid #2563eb; padding-bottom: 10px; margin-bottom: 20px; }
-          h2 { color: #1f2937; margin-top: 30px; margin-bottom: 15px; }
-          h3 { color: #374151; margin-bottom: 5px; }
-          .header { text-align: center; margin-bottom: 40px; }
-          .role { font-size: 1.2em; color: #6b7280; margin-bottom: 15px; }
-          .summary { background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
-          .expertise { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
-          .expertise-item { background: #eff6ff; padding: 10px; border-radius: 6px; font-weight: 500; }
-          .skills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-          .skill { background: #f1f5f9; padding: 5px 12px; border-radius: 20px; font-size: 0.9em; }
-          .experience-item { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #e5e7eb; }
+          @media print {
+            body { margin: 0; padding: 20px; }
+            @page { margin: 1in; size: A4; }
+          }
+          body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            line-height: 1.5; 
+            color: #333; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px;
+            font-size: 14px;
+          }
+          h1 { color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 8px; margin-bottom: 16px; font-size: 24px; }
+          h2 { color: #1f2937; margin-top: 24px; margin-bottom: 12px; font-size: 18px; }
+          h3 { color: #374151; margin-bottom: 4px; font-size: 16px; }
+          .header { text-align: center; margin-bottom: 32px; }
+          .role { font-size: 16px; color: #6b7280; margin-bottom: 12px; }
+          .summary { background: #f8fafc; padding: 16px; border-radius: 6px; margin-bottom: 24px; }
+          .expertise { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
+          .expertise-item { background: #eff6ff; padding: 8px; border-radius: 4px; font-weight: 500; font-size: 13px; }
+          .skills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+          .skill { background: #f1f5f9; padding: 4px 10px; border-radius: 16px; font-size: 12px; }
+          .experience-item { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e5e7eb; }
           .company { font-weight: bold; color: #1f2937; }
           .title { color: #2563eb; font-weight: 600; }
-          .duration { color: #6b7280; font-size: 0.9em; }
-          .description { margin: 10px 0; }
-          .responsibilities { margin: 10px 0; }
-          .responsibilities li { margin-bottom: 5px; }
-          .technologies { background: #f8fafc; padding: 10px; border-radius: 6px; font-size: 0.9em; margin-top: 10px; }
+          .duration { color: #6b7280; font-size: 13px; }
+          .description { margin: 8px 0; }
+          .responsibilities { margin: 8px 0; }
+          .responsibilities li { margin-bottom: 4px; }
+          .technologies { background: #f8fafc; padding: 8px; border-radius: 4px; font-size: 12px; margin-top: 8px; }
         </style>
       </head>
       <body>
@@ -262,20 +275,21 @@ const posts = Object.entries(postModules)
             ${exp.technologies ? `<div class="technologies"><strong>Technologies:</strong> ${exp.technologies}</div>` : ''}
           </div>
         `).join('')}
+        
+        <script>
+          window.onload = function() {
+            window.print();
+            window.onafterprint = function() {
+              window.close();
+            };
+          };
+        </script>
       </body>
       </html>
     `;
     
-    // Create a blob and download
-    const blob = new Blob([htmlContent], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'Anton_Dvorson_CV.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    printWindow.document.write(htmlContent);
+    printWindow.document.close();
   });
 </script>
 
