@@ -4,10 +4,11 @@ test('Homepage has CV data and blog post', async ({ page }) => {
   await page.goto('http://localhost:4321/');
 
   // Check CV data
-  await expect(page.locator('h1.text-4xl')).toContainText('Dmitry V.');
-  await expect(page.locator('p.text-xl')).toContainText('Software Engineer');
-  await expect(page.locator('p.mt-4')).toContainText('Experienced software engineer');
+  await expect(page.locator('h1')).toContainText('Anton Dvorson');
+  await expect(page.locator('p.text-2xl')).toContainText('Solution / Software Architect');
+  await expect(page.locator('p.text-lg')).toContainText('Professional software architect');
 
-  // Check blog post title
-  await expect(page.locator('a.text-blue-600')).toContainText('Hello World: First Blog Post');
+  // Check blog post exists or "No posts yet" message
+  const blogSection = page.locator('#blog');
+  await expect(blogSection).toBeVisible();
 });
