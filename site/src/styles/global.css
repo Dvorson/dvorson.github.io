@@ -275,6 +275,42 @@
   background: transparent !important;
 }
 
+/* Force override for any GitHub-style syntax highlighting */
+.prose code span[style*="color:#E1E4E8"],
+.prose pre span[style*="color:#E1E4E8"] {
+  color: #f3f4f6 !important;
+}
+
+.prose code span[style*="color:#6A737D"],
+.prose pre span[style*="color:#6A737D"] {
+  color: #9ca3af !important;
+}
+
+.prose code span[style*="color:#F97583"],
+.prose pre span[style*="color:#F97583"] {
+  color: #f472b6 !important;
+}
+
+.prose code span[style*="color:#9ECBFF"],
+.prose pre span[style*="color:#9ECBFF"] {
+  color: #60a5fa !important;
+}
+
+.prose code span[style*="color:#79B8FF"],
+.prose pre span[style*="color:#79B8FF"] {
+  color: #fbbf24 !important;
+}
+
+.prose code span[style*="color:#B392F0"],
+.prose pre span[style*="color:#B392F0"] {
+  color: #a78bfa !important;
+}
+
+.prose code span[style*="color:#FFAB70"],
+.prose pre span[style*="color:#FFAB70"] {
+  color: #fb923c !important;
+}
+
 /* Animation classes */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
