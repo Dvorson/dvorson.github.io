@@ -2,9 +2,15 @@
 const nextConfig = {
   experimental: {},
   images: {
-    domains: ['localhost'],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
+    ],
     unoptimized: true,
   },
+  turbopack: {},
   webpack: (config) => {
     config.resolve.fallback = {
       fs: false,

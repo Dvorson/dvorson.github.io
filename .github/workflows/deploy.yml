@@ -36,12 +36,11 @@ jobs:
 
       - name: Build site
         run: cd site && npm run build
-        # This will build to the ../docs directory as configured in astro.config.mjs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: site/dist
 
   deploy:
     environment:
