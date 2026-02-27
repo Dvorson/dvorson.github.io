@@ -21,9 +21,31 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const { post } = Astro.props;
 const Content = post.content;
+
+// Map blog slugs to OG image filenames
+const ogMap: Record<string, string> = {
+  'graphrag-implementation-guide-enterprise-knowledge-base': 'blog-graphrag-guide',
+  'building-multi-agent-ai-systems-architecture-patterns': 'blog-multi-agent',
+  'ai-consulting-rates-europe-2026-pricing-guide': 'blog-ai-rates',
+  'rag-vs-graphrag-vs-fine-tuning-decision-framework': 'blog-rag-comparison',
+  'enterprise-knowledge-base-neo4j-llm-agents': 'blog-neo4j-kb',
+  'langflow-vs-langchain-vs-custom-ai-agent-architecture': 'blog-langflow-langchain',
+  'headless-commerce-ai-search-personalization': 'blog-headless-ai',
+  'real-cost-building-ai-agent-project-breakdowns': 'blog-ai-agent-cost',
+  'top-ai-consulting-firms-netherlands-2026': 'blog-ai-firms-nl',
+  'ai-for-ecommerce-high-roi-use-cases': 'blog-ai-ecommerce',
+  'why-your-rag-implementation-not-working-fixes': 'blog-rag-fixes',
+  'fractional-ai-architect-vs-consulting-agency': 'blog-fractional-vs-agency',
+  'enterprise-software-architecture-patterns-consultant-guide': 'blog-sw-architecture',
+  'react-nodejs-performance-optimization-consultant': 'blog-react-perf',
+  'aws-azure-cloud-infrastructure-enterprise-guide': 'blog-cloud-infra',
+  'technical-leadership-engineering-team-management': 'blog-tech-leadership',
+  'ecommerce-platform-architecture-development-guide': 'blog-ecommerce-arch',
+};
+const ogImage = ogMap[slug as string] ? `/og/${ogMap[slug as string]}.png` : '/og/blog.png';
 ---
 
-<Layout title={post.title}>
+<Layout title={post.title} ogImage={ogImage}>
   <article class="max-w-4xl mx-auto my-12">
     <!-- Article Header -->
     <header class="mb-12 bg-white rounded-2xl p-8 shadow-sm border border-gray-100">

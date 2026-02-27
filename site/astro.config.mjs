@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://dvorson.github.io',
@@ -12,5 +13,8 @@ export default defineConfig({
     css: {
       postcss: './postcss.config.cjs'
     }
-  }
+  },
+  integrations: [sitemap({
+    filter: (page) => !page.includes('/projects/')
+  })]
 });

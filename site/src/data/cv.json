@@ -1,147 +1,264 @@
 {
   "name": "Anton Dvorson",
-  "role": "Solution / Software Architect",
-  "summary": "Professional software architect with 10+ years of expertise in Node.js and React ecosystems, specializing in high-traffic e-commerce platforms and scalable cloud solutions. Proven track record in leading technical teams, implementing CI/CD pipelines, and deploying applications across AWS, Azure, and private cloud infrastructures.",
+  "role": "Software Architect | Generative AI Engineer | Full-Stack Developer",
+  "location": "Amsterdam, North Holland, Netherlands",
+  "contact": {
+    "email": "dvorson@gmail.com",
+    "linkedin": "linkedin.com/in/dvorson",
+    "website": "dvorson.github.io"
+  },
+  "summary": "Strategic and results-oriented software architect and full-stack engineer with 12+ years of experience delivering scalable, high-traffic solutions. Deep expertise in Node.js, React, TypeScript, GraphQL, AWS, and DevOps, with a proven track record in e-commerce platforms, embedded systems, editorial tools, and payments infrastructure. At the forefront of the AI-driven paradigm shift, adept at leveraging generative AI and LLM technologies to accelerate development and innovation. Proven ability to align technical strategy with business goals, driving performance improvements and delivering measurable ROI.",
   "expertise": [
-    "Software Architecture & Design",
-    "Full-Stack Web Development", 
+    "Software Architecture & System Design",
+    "Generative AI & LLM Engineering",
+    "Full-Stack Web Development",
     "Cloud Infrastructure & DevOps",
     "Team Leadership & Mentoring",
-    "Performance Optimization",
-    "Smart Home & Electronics"
+    "Data Engineering & Knowledge Graphs"
   ],
+  "skillCategories": {
+    "Languages & Frameworks": "JavaScript/TypeScript, Node.js, React, Next.js, Express, GraphQL, RESTful APIs, Kotlin, Python",
+    "Cloud & DevOps": "AWS (EC2, Lambda, S3, RDS), Docker, Kubernetes, Terraform, CI/CD (Jenkins, GitHub Actions), Azure, GCP",
+    "AI & LLM": "Langflow, Neo4j, GraphRAG, RAG, Vector DB (Milvus), LLM Agents, OpenWebUI, Custom Ontology Design",
+    "Data & Databases": "MongoDB, DynamoDB, PostgreSQL, MySQL, Elasticsearch, Redis, Caching strategies",
+    "Practices & Tools": "Microservices, Event-driven & Serverless architectures, Agile/Scrum, DevSecOps, n8n, Git/GitHub, Jira"
+  },
   "skills": [
     "Node.js",
-    "TypeScript", 
+    "TypeScript",
     "React",
     "Next.js",
     "GraphQL",
+    "Kotlin",
+    "Python",
     "AWS",
     "Azure",
     "Docker",
     "Kubernetes",
+    "Terraform",
     "MongoDB",
-    "Elasticsearch", 
+    "PostgreSQL",
+    "Elasticsearch",
+    "Redis",
+    "Neo4j",
+    "Langflow",
+    "GraphRAG",
+    "LLM Agents",
     "Prometheus",
     "Grafana",
-    "Redis",
     "GitHub Actions",
-    "CI/CD",
-    "Python",
-    "C Programming",
-    "TipTap",
-    "Material UI",
-    "Stripe",
-    "Plaid"
+    "CI/CD"
   ],
   "experience": [
     {
       "company": "EPAM Systems",
-      "title": "Solution Architect on KDI-HEAD",
-      "start": "Jan 2023",
+      "title": "Lead Software Engineer",
+      "subtitle": "GenAI Enablement Platform",
+      "start": "Jan 2026",
       "end": "Present",
-      "duration": "2 years 5 months",
-      "client": "Koninklijke Douwe Egberts BV",
-      "project": "E-commerce PWA Platform",
-      "description": "Spearheaded architecture and development of a high-performance Progressive Web Application leveraging Next.js and Magento's GraphQL API. Implemented server-side rendering, responsive design, and robust CI/CD pipelines for enterprise e-commerce standards.",
-      "responsibilities": [
-        "Developed end-to-end solution architecture for complex enterprise requirements",
-        "Collaborated with stakeholders to translate business requirements into technical specifications", 
-        "Built and optimized CI/CD pipelines reducing time-to-market",
-        "Provided technical leadership and mentorship to development team",
-        "Integrated modern web technologies for enhanced performance and user engagement"
+      "duration": "2 months",
+      "location": "Amsterdam, Netherlands",
+      "description": "Embedded as tech lead in a GenAI Enablement team at a Fortune-500 global retailer, driving engineering delivery and SDLC maturity for an internal LLM serving and agentic development platform.",
+      "highlights": [
+        "Tech lead for GenAI Enablement at Fortune-500 retailer — building the foundational LLM serving and agentic platform enabling company-wide AI agent development",
+        "Introduced structured SDLC practices to a team of 4 engineers — establishing planning disciplines and delivery visibility frameworks for management",
+        "Contributing to secure multi-tenant AI platform with isolated, governed agent deployments enforcing data access controls across retail and supply chain domains"
       ],
-      "technologies": "Node.js, Next.js, TypeScript, GraphQL, Apollo Client, Magento GraphQL, Material UI, Playwright, Redis, Azure, GitHub Actions, NewRelic"
+      "responsibilities": [
+        "Embedded as tech lead driving engineering delivery and SDLC maturity for internal LLM platform",
+        "Introduced structured SDLC practices — planning disciplines, delivery visibility frameworks",
+        "Contributing to secure multi-tenant AI platform for enterprise-scale internal adoption"
+      ],
+      "technologies": "Kotlin, Kubernetes, Next.js 16, TypeScript, LLM Serving Infrastructure, Agentic AI"
     },
     {
-      "company": "Liberty Global Services", 
-      "title": "Developer on LIBG-DAWN",
-      "start": "Sep 2021",
-      "end": "Dec 2022", 
-      "duration": "1 year 4 months",
-      "client": "Liberty Global Services",
-      "project": "Multimedia Hub for Set Top Box",
-      "description": "Developed centralized household Multimedia Hub providing access to live broadcasting, VOD, recordings, and third-party applications with full interoperability between devices.",
+      "company": "EPAM Systems",
+      "title": "Lead Software Engineer",
+      "subtitle": "GraphRAG Knowledge Base",
+      "start": "Nov 2025",
+      "end": "Jan 2026",
+      "duration": "3 months",
+      "location": "Amsterdam, Netherlands",
+      "description": "Solo-architected and delivered a GraphRAG application targeting a legacy Salesforce knowledge base of tens of thousands of articles spanning a large enterprise product portfolio.",
+      "highlights": [
+        "Solo-architected GraphRAG application for legacy Salesforce knowledge base of tens of thousands of articles — full stack from ontology design to LLM agent deployment",
+        "Built Neo4j knowledge graph with custom domain ontology and automated quality metrics: duplication score, product relevance, readability index, translation gap detection",
+        "Implemented multi-hop reasoning LLM agent with Neo4j graph traversal — answering complex queries, suggesting improvements, generating new articles from verified knowledge"
+      ],
+      "responsibilities": [
+        "Designed custom domain ontology and built Neo4j knowledge graph linking articles, products, and quality signals",
+        "Implemented automated knowledge quality metrics per article: duplication score, product relevance, readability index",
+        "Built interactive knowledge graph visualization with Sigma.js and multi-dimensional filtering",
+        "Implemented multi-hop reasoning LLM agent with Neo4j graph traversal tools"
+      ],
+      "technologies": "GraphRAG, Neo4j, Langflow, LLM Agents, Sigma.js, Salesforce Knowledge, Python, Custom Ontology Design"
+    },
+    {
+      "company": "EPAM Systems",
+      "title": "Lead Software Engineer",
+      "subtitle": "Multi-Agent AI for Telecom",
+      "start": "May 2025",
+      "end": "Oct 2025",
+      "duration": "6 months",
+      "location": "Amsterdam, Netherlands",
+      "description": "Built a multi-agent AI PoC for a large telecom operator, serving as one of 3 engineers across the full stack — from LLM orchestration to monitoring integration and engineer-facing chat interface.",
+      "highlights": [
+        "Built multi-agent AI PoC for large telecom operator — full stack from LLM orchestration to Grafana integration and conversational ops interface",
+        "Designed Langflow-orchestrated anomaly detection pipeline with specialized LLM agents independently identifying, classifying, and escalating anomalies",
+        "Deployed OpenWebUI conversational interface for field engineers — alert to AI-assisted root cause localization within a single interface"
+      ],
+      "responsibilities": [
+        "Designed Langflow-orchestrated anomaly detection pipeline ingesting real-time telecom monitoring logs",
+        "Architected RAG-based knowledge base with vector store and structured incident history",
+        "Integrated alerting pipeline with Grafana dashboards for real-time incident reflection",
+        "Deployed OpenWebUI conversational interface for natural language incident investigation"
+      ],
+      "technologies": "Langflow, OpenWebUI, Grafana, RAG, Vector DB, LLM Agents, Python, REST APIs"
+    },
+    {
+      "company": "EPAM Systems",
+      "title": "Lead Software Engineer",
+      "subtitle": "Global Coffee Brand PWA Storefront",
+      "start": "Jan 2023",
+      "end": "Apr 2025",
+      "duration": "2 years 4 months",
+      "location": "Amsterdam, Netherlands",
+      "description": "Co-architected and co-developed a next-generation GraphCommerce-based Progressive Web App storefront for a global coffee brand, functioning as 50/50 architect and hands-on engineer.",
+      "highlights": [
+        "Co-architected GraphCommerce-based PWA storefront decoupling Magento 2 via GraphQL — Next.js + TypeScript BFF with 50/50 architect and hands-on engineering role",
+        "Introduced design token architecture for multi-brand portfolio — reduced second-brand onboarding from 9 months to 2 months (78% reduction)",
+        "Established CI/CD with GitHub Actions, migrated from Vercel to Azure with blue/green zero-downtime deployments, cutting release cycle time by 30%",
+        "Mentored 6 engineers and coordinated across design, QA, and product teams"
+      ],
+      "responsibilities": [
+        "Co-architected GraphCommerce-based PWA storefront decoupling Magento 2 via GraphQL",
+        "Designed block-based content constructor system integrated with GraphCMS",
+        "Established CI/CD pipeline with GitHub Actions, blue/green zero-downtime deployments on Azure",
+        "Introduced design token architecture reducing second-brand onboarding time by 78%",
+        "Built shared component library on top of GraphCommerce",
+        "Mentored 6 engineers and coordinated across design, QA, and product"
+      ],
+      "technologies": "Next.js, Node.js, TypeScript, GraphCommerce, GraphQL Mesh, Apollo, GraphCMS, Redis, Vercel, Azure, GitHub Actions, Docker, NewRelic, Design Tokens"
+    },
+    {
+      "company": "EPAM Systems",
+      "title": "Lead Software Engineer",
+      "subtitle": "Multimedia Hub for Set Top Box",
+      "start": "Jun 2021",
+      "end": "Dec 2022",
+      "duration": "1 year 7 months",
+      "location": "Netherlands",
+      "description": "Developed EFL graphics components rendered directly from Node.js on embedded Linux hardware, enabling unified UX across live TV, VOD, and third-party apps.",
+      "highlights": [
+        "Developed EFL graphics components rendered from Node.js on embedded Linux — unified UX across live TV, VOD, and third-party apps",
+        "Optimised memory footprint and startup time, resolving critical leaks in a 400K-line codebase",
+        "Instrumented Prometheus/Grafana dashboards, reducing on-device crash rate by 25%"
+      ],
       "responsibilities": [
         "Developed EFL graphics components for UI display from Node.js on set top box hardware",
-        "Integrated and optimized UI functionalities on embedded Linux systems", 
-        "Ensured seamless Node.js and EFL interaction for enhanced performance",
-        "Designed efficient solutions for embedded system constraints",
-        "Implemented advanced debugging with Prometheus and Grafana"
+        "Optimised memory footprint and startup time, resolving critical memory leaks",
+        "Instrumented Prometheus/Grafana dashboards, reducing on-device crash rate by 25%"
       ],
       "technologies": "Node.js, Embedded Linux, EFL, Prometheus, Grafana"
     },
     {
-      "company": "FirstLine Software",
-      "title": "Full-stack Developer, DevOps", 
+      "company": "First Line Software",
+      "title": "Senior Software Engineer",
+      "subtitle": "Heavy Equipment Marketplace",
       "start": "Feb 2021",
       "end": "Jun 2021",
       "duration": "5 months",
-      "client": "Oroco Capital",
-      "project": "Heavy Equipment Marketplace (eqhq.com)",
-      "description": "Developed heavy equipment marketplace web application with advanced search, payment processing, and secure infrastructure for US-based customer.",
-      "responsibilities": [
-        "Fixed GraphQL-based user location procedures and improved stepper UI components",
-        "Enhanced Elasticsearch suggestions with entity splitting and performance optimization", 
-        "Improved email/chat notifications and order refund processes",
-        "Tightened infrastructure security for payment compliance with vulnerability scanning",
-        "Migrated deployment from BitBucket Pipelines to AWS CodeDeploy with VPN setup"
+      "location": "St Petersburg, Russia",
+      "description": "Enhanced GraphQL location inference and stepper UI, improving checkout completion by 15%. Hardened infrastructure for PCI compliance.",
+      "highlights": [
+        "Enhanced GraphQL location inference and stepper UI, improving checkout completion by 15%",
+        "Augmented Elasticsearch suggest pipeline, cutting search latency by 40ms",
+        "Hardened infrastructure for PCI compliance; migrated CI/CD from Bitbucket to AWS CodeDeploy with automated vulnerability scanning"
       ],
-      "technologies": "Elasticsearch, GraphQL, TypeScript, React, Node.js, Docker, AWS, Redis, Material UI, Strapi, Stripe, Plaid, MongoDB"
+      "responsibilities": [
+        "Enhanced GraphQL location inference and stepper UI for improved checkout flow",
+        "Augmented Elasticsearch suggest pipeline and index mapping for search optimization",
+        "Hardened infrastructure for PCI compliance with automated vulnerability scanning",
+        "Migrated CI/CD from Bitbucket Pipelines to AWS CodeDeploy"
+      ],
+      "technologies": "Node.js, React, TypeScript, Strapi, Elasticsearch, Docker, AWS, Redis, Stripe, Plaid"
     },
     {
-      "company": "Bonnier News",
-      "title": "Full-stack Developer",
-      "start": "Aug 2017", 
+      "company": "First Line Software",
+      "title": "Lead Software Engineer",
+      "subtitle": "Editorial Tools for News Publishing",
+      "start": "Sep 2019",
       "end": "Feb 2021",
-      "duration": "3 years 7 months",
-      "client": "Bonnier News",
-      "project": "Editorial Tools for News Publishing (expressen.se)",
-      "description": "Developed cloud editorial tools for Sweden's top-2 news publisher, creating microservices for analytics, competitor monitoring, and content management systems.",
+      "duration": "1 year 6 months",
+      "location": "St Petersburg, Russia",
+      "description": "Built analytics microservices and dashboards for Sweden's #2 news publisher, providing editors with real-time competitor insights and article quality scores.",
+      "highlights": [
+        "Built analytics microservices and dashboards for Sweden's #2 news publisher with real-time competitor insights",
+        "Implemented Puppeteer screenshot service storing >10TB images on Amazon S3; built popular photo tool with Konva.js",
+        "Led migration from EPiServer CMS to cloud React/Redux + Node monolith; orchestrated move to OpenShift Kubernetes, improving deployment frequency by 3x"
+      ],
       "responsibilities": [
         "Built Node.js and React SSR microservices for article analytics and dashboards",
-        "Created Puppeteer-based screenshot service with Amazon S3 integration",
-        "Developed popular photo manipulation tool using Konva.js with advanced cropping features", 
-        "Migrated EPiServer features to modular React/Redux + Node monolith",
-        "Led deployment migration from Basefarm to OpenShift managed Kubernetes"
+        "Implemented Puppeteer screenshot service with Amazon S3 integration",
+        "Developed photo manipulation tool using Konva.js",
+        "Led migration from EPiServer to modular React/Redux + Node monolith",
+        "Orchestrated deployment migration to OpenShift managed Kubernetes"
       ],
-      "technologies": "Node.js, React, MongoDB, RabbitMQ, Docker, Kubernetes, OpenShift, Puppeteer, Amazon S3, Konva.js, d3.js, Elasticsearch"
+      "technologies": "Node.js, React SSR, MongoDB, RabbitMQ, Docker, Kubernetes, OpenShift, Elasticsearch, d3.js"
     },
     {
       "company": "Yandex.Money",
-      "title": "Full-stack Developer",
+      "title": "Web Developer",
+      "subtitle": "Online Payment Service Platform",
       "start": "Mar 2016",
-      "end": "Jul 2017", 
+      "end": "Jul 2017",
       "duration": "1 year 5 months",
-      "client": "Yandex.Money",
-      "project": "Online Payment Service Platform", 
-      "description": "Developed Russia's largest online payment service, implementing new component-based design system and payment card processes.",
+      "location": "St Petersburg, Russia",
+      "description": "Modernised design system using Node.js & Full-Stack BEM, replacing legacy XML/XSLT stack across 20+ payment flows.",
+      "highlights": [
+        "Modernised design system using Node.js & Full-Stack BEM, replacing legacy XML/XSLT stack across 20+ payment flows",
+        "Developed A/B test pages and BFF logic that lifted payment conversion on pilot flows by 8%",
+        "Contributed to plastic and virtual card issuance services and user stats aggregation"
+      ],
       "responsibilities": [
-        "Implemented component-based design system using Node.js and Fullstack BEM",
+        "Implemented component-based design system using Node.js and Full-Stack BEM",
         "Created A/B testing experiment pages and payment process markup",
         "Developed BFF business logic for payment flows",
-        "Worked on physical and virtual plastic bank card issuing processes",
-        "Implemented user statistics aggregation systems"
+        "Contributed to card issuance processes and user statistics aggregation"
       ],
-      "technologies": "Fullstack BEM, Node.js, JavaScript"
+      "technologies": "Node.js, JavaScript, Full-Stack BEM"
     },
     {
       "company": "Measure LLC",
-      "title": "Full-stack Developer, CNC Commissioning",
-      "start": "Jun 2013",
-      "end": "Mar 2016",
-      "duration": "2 years 10 months", 
-      "client": "Measure LLC",
-      "project": "Digital Manufacturing Service Platform",
-      "description": "Developed web platform for digital manufacturing startup enabling 3D model upload with instant quoting and visualization, while managing CNC machine operations.",
+      "title": "Full-Stack Developer & CNC Commissioning Lead",
+      "subtitle": "Digital Manufacturing Service Platform",
+      "start": "May 2013",
+      "end": "Feb 2016",
+      "duration": "2 years 10 months",
+      "location": "St Petersburg, Russia",
+      "description": "Built web platform enabling instant 3D-print quotes with Three.js visualisation and Node.js REST API, shortening quote cycle from days to minutes.",
+      "highlights": [
+        "Built web platform with Three.js 3D visualisation and Node.js REST API — shortening quote cycle from days to minutes",
+        "Migrated platform from YII PHP to Node.js REST API architecture; added admin e-commerce interface and real-time chat",
+        "Managed commissioning and maintenance of 12 CNC machines"
+      ],
       "responsibilities": [
         "Built Three.js-based 3D model visualization with volume and dimension calculations",
-        "Migrated platform from YII PHP framework to Node.js REST API architecture", 
+        "Migrated platform from YII PHP framework to Node.js REST API architecture",
         "Added admin interface for e-commerce functionality and websocket chat system",
-        "Integrated social media content feeds to main page",
-        "Managed commissioning and maintenance team for dozen CNC machines"
+        "Managed commissioning and maintenance team for 12 CNC machines"
       ],
       "technologies": "Three.js, YII PHP, Node.js, REST API, WebSocket, MongoDB"
     }
+  ],
+  "education": {
+    "degree": "Master's degree",
+    "field": "Economics",
+    "institution": "Yaroslavl State Technical University (YSTU)"
+  },
+  "languages": [
+    { "language": "English", "level": "Fluent" },
+    { "language": "Russian", "level": "Native" },
+    { "language": "Dutch", "level": "A2" }
   ]
 }

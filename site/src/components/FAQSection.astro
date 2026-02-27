@@ -1,0 +1,86 @@
+---
+export interface Props {
+  faqs: Array<{
+    question: string;
+    answer: string;
+  }>;
+}
+
+const { faqs } = Astro.props;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<section class="mb-16">
+  <div class="space-y-3">
+    {faqs.map((faq, index) => (
+      <div class="faq-item bg-white rounded-xl border border-gray-100 overflow-hidden">
+        <button
+          class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left hover:bg-gray-50 transition-colors"
+          aria-expanded="false"
+          aria-controls={`faq-answer-${index}`}
+        >
+          <span class="text-base font-semibold text-gray-900 pr-4">{faq.question}</span>
+          <svg
+            class="faq-chevron w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div
+          id={`faq-answer-${index}`}
+          class="faq-answer hidden px-6 pb-5"
+        >
+          <p class="text-gray-600 leading-relaxed">{faq.answer}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      const item = button.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const chevron = item.querySelector('.faq-chevron');
+      const isOpen = !answer.classList.contains('hidden');
+
+      // Close all other items
+      document.querySelectorAll('.faq-item').forEach((otherItem) => {
+        if (otherItem !== item) {
+          otherItem.querySelector('.faq-answer').classList.add('hidden');
+          otherItem.querySelector('.faq-chevron').classList.remove('rotate-180');
+          otherItem.querySelector('.faq-toggle').setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Toggle current item
+      if (isOpen) {
+        answer.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+        button.setAttribute('aria-expanded', 'false');
+      } else {
+        answer.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+        button.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

@@ -1,0 +1,121 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import services from '../../data/services.json';
+
+const { caseStudies, iconPaths } = services;
+
+// Separate featured (AI projects) from other projects
+const featuredStudies = caseStudies.filter(cs => cs.featured);
+const otherStudies = caseStudies.filter(cs => !cs.featured);
+---
+
+<Layout
+  title="Case Studies | Real AI Projects, Real Outcomes — Anton Dvorson"
+  description="Case studies from AI agent platforms, GraphRAG knowledge bases, multi-agent telecom systems, and headless e-commerce architectures. Real projects with measurable outcomes."
+  ogImage="/og/case-studies.png"
+  url="https://dvorson.github.io/case-studies"
+  canonical="https://dvorson.github.io/case-studies"
+>
+  <section class="mb-12">
+    <div class="section-header">
+      <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 tracking-tight">Real projects. Real outcomes.</h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">Every project here involved real constraints, real stakeholders, and real deadlines. No theoretical exercises — just working software that shipped to production.</p>
+    </div>
+  </section>
+
+  <!-- Featured AI Case Studies -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6">AI & Agentic Systems</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {featuredStudies.map((cs) => (
+        <CaseStudyCard caseStudy={{
+          slug: cs.slug,
+          title: cs.title,
+          domain: cs.domain,
+          client: cs.client,
+          outcomes: cs.outcomes,
+          technologies: cs.technologies,
+          icon: cs.icon,
+          iconPath: iconPaths[cs.icon],
+          hasFullPage: cs.hasFullPage
+        }} />
+      ))}
+    </div>
+  </section>
+
+  <!-- Other Projects -->
+  {otherStudies.length > 0 && (
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">E-commerce, Embedded & Media</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {otherStudies.map((cs) => (
+          <CaseStudyCard caseStudy={{
+            slug: cs.slug,
+            title: cs.title,
+            domain: cs.domain,
+            client: cs.client,
+            outcomes: cs.outcomes,
+            technologies: cs.technologies,
+            icon: cs.icon,
+            iconPath: iconPaths[cs.icon],
+            hasFullPage: cs.hasFullPage
+          }} />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- GitHub repos section -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6">Open Source</h2>
+    <div id="github-repos" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center col-span-full">
+        <p class="text-gray-500 text-sm">Loading repositories...</p>
+      </div>
+    </div>
+  </section>
+
+  <CTABanner
+    headline="Facing a similar challenge?"
+    description="Let's talk about how I can help your team ship AI to production. 30 minutes, no pitch — just an honest conversation."
+    ctaText="Let's Talk on LinkedIn"
+  />
+</Layout>
+
+<script is:inline>
+  async function loadRepos() {
+    const container = document.getElementById('github-repos');
+    try {
+      const res = await fetch('https://api.github.com/users/dvorson/repos?sort=updated&per_page=6');
+      if (!res.ok) throw new Error('Failed to fetch');
+      const repos = await res.json();
+      const publicRepos = repos.filter(r => !r.fork && !r.private);
+
+      if (publicRepos.length === 0) {
+        container.innerHTML = '<div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center col-span-full"><p class="text-gray-500 text-sm">No public repositories found.</p></div>';
+        return;
+      }
+
+      container.innerHTML = publicRepos.map(repo => `
+        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="group block bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-200 transition-all duration-200">
+          <div class="flex items-start justify-between mb-2">
+            <h3 class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">${repo.name}</h3>
+            <svg class="w-4 h-4 text-gray-400 flex-shrink-0 ml-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </div>
+          ${repo.description ? `<p class="text-gray-600 text-sm mb-3">${repo.description}</p>` : ''}
+          <div class="flex items-center gap-4 text-xs text-gray-400">
+            ${repo.language ? `<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span>${repo.language}</span>` : ''}
+            ${repo.stargazers_count > 0 ? `<span>&#9733; ${repo.stargazers_count}</span>` : ''}
+          </div>
+        </a>
+      `).join('');
+    } catch (e) {
+      container.innerHTML = '<div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center col-span-full"><p class="text-gray-500 text-sm">Visit <a href="https://github.com/dvorson" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">github.com/dvorson</a> to see my repositories.</p></div>';
+    }
+  }
+  loadRepos();
+</script>

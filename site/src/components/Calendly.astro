@@ -1,0 +1,17 @@
+---
+export interface Props {
+  url?: string;
+  text?: string;
+}
+
+const { url = 'https://calendly.com/anton-dvorson/intro', text = 'Schedule a Call' } = Astro.props as Props;
+---
+
+<a href={url} class="inline-flex items-center px-5 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-200">
+  {text}
+</a>
+
+<script is:inline>
+  // If a Calendly embed script is needed in the future, we can add it here.
+</script>
+

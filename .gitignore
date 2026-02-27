@@ -42,6 +42,9 @@ tasks/
 # Test results
 test-results/ 
 
+# Reports
+SEO_GEO_LANDSCAPE_REPORT.md
+
 # AI coding assistants
 .roo/
 .claude/
