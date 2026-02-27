@@ -1,0 +1,224 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PainPoint from '../../components/PainPoint.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import TechStack from '../../components/TechStack.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import services from '../../data/services.json';
+
+export function getStaticPaths() {
+  return services.solutions.map((solution) => ({
+    params: { slug: solution.slug },
+    props: { solution }
+  }));
+}
+
+const { solution } = Astro.props;
+const { iconPaths, caseStudies } = services;
+
+// Get related case studies
+const relatedCaseStudies = caseStudies.filter(cs =>
+  solution.relatedCaseStudies.includes(cs.id)
+);
+
+// Schema.org Service + FAQPage
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: solution.title,
+  description: solution.subheadline,
+  url: `https://dvorson.github.io/solutions/${solution.slug}`,
+  provider: {
+    '@type': 'Person',
+    name: 'Anton Dvorson',
+    url: 'https://dvorson.github.io'
+  },
+  areaServed: ['Netherlands', 'Europe'],
+  serviceType: solution.title
+};
+---
+
+<Layout
+  title={solution.seoTitle}
+  description={solution.seoDescription}
+  ogImage={`/og/solutions-${solution.slug}.png`}
+  url={`https://dvorson.github.io/solutions/${solution.slug}`}
+  canonical={`https://dvorson.github.io/solutions/${solution.slug}`}
+  additionalSchema={[serviceSchema]}
+>
+  <!-- 1. Hero — Pain-focused headline -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-2xl p-8 sm:p-12 mb-16 border border-gray-100">
+    <div class="absolute -top-24 -right-24 w-64 h-64 bg-gradient-to-br from-blue-100/40 to-indigo-100/40 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-gradient-to-br from-gray-100/30 to-slate-100/30 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-3xl">
+      <p class="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-3">{solution.shortTitle}</p>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 tracking-tight leading-tight">
+        {solution.headline}
+      </h1>
+      <p class="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl">
+        {solution.subheadline}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="https://linkedin.com/in/dvorson" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-sm hover:shadow-md">
+          Let's Discuss Your Challenge
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+        <a href="#approach" class="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200 shadow-sm border border-gray-200">
+          See How It Works
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. The Problem — Pain points the persona experiences -->
+  <section class="mb-16">
+    <div class="section-header">
+      <h2>Sound familiar?</h2>
+      <p>If any of these hit close to home, you're not alone. This is where most {solution.persona.toLowerCase().includes('cto') ? 'technical leaders' : 'leaders'} get stuck.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {solution.painPoints.map((pain, i) => (
+        <PainPoint text={pain} index={i + 1} />
+      ))}
+    </div>
+  </section>
+
+  <!-- 3. What is [X]? — GEO-optimized definition block -->
+  <section class="mb-16">
+    <div class="bg-blue-50 border border-blue-100 rounded-xl p-8">
+      <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+        <svg class="w-6 h-6 text-blue-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        What is {solution.shortTitle}?
+      </h2>
+      <p class="text-gray-700 leading-relaxed">{solution.definition}</p>
+    </div>
+  </section>
+
+  <!-- 4. The Approach — How the engagement works -->
+  <section id="approach" class="mb-16">
+    <div class="section-header">
+      <h2>How we work together</h2>
+      <p>A structured process that reduces risk and gives you visibility at every step.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {solution.approach.map((step, i) => (
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center font-bold text-lg flex-shrink-0">
+              {i + 1}
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-gray-900 mb-2">{step.step}</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">{step.description}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 5. Outcomes — What changes -->
+  <section class="mb-16">
+    <div class="section-header">
+      <h2>What you get</h2>
+      <p>Concrete deliverables, not vague promises.</p>
+    </div>
+
+    <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {solution.outcomes.map((outcome) => (
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p class="text-gray-700 leading-relaxed">{outcome}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Case Study Snapshot — Related proof -->
+  {relatedCaseStudies.length > 0 && (
+    <section class="mb-16">
+      <div class="section-header">
+        <h2>Proof it works</h2>
+        <p>Real projects where this approach delivered results.</p>
+      </div>
+
+      <div class={`grid grid-cols-1 ${relatedCaseStudies.length > 1 ? 'md:grid-cols-2' : 'max-w-lg mx-auto'} gap-6`}>
+        {relatedCaseStudies.map((cs) => (
+          <CaseStudyCard caseStudy={{
+            slug: cs.slug,
+            title: cs.title,
+            domain: cs.domain,
+            client: cs.client,
+            outcomes: cs.outcomes,
+            technologies: cs.technologies,
+            icon: cs.icon,
+            iconPath: iconPaths[cs.icon],
+            hasFullPage: cs.hasFullPage
+          }} />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- 7. Technologies -->
+  <section class="mb-16">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6">Technologies I work with</h2>
+    <TechStack technologies={solution.technologies} />
+  </section>
+
+  <!-- 8. Pricing indicator -->
+  <section class="mb-16">
+    <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <h2 class="text-xl font-bold text-gray-900 mb-1">Typical investment</h2>
+        <p class="text-gray-500 text-sm">Depends on scope, timeline, and complexity. Let's discuss your specific situation.</p>
+      </div>
+      <div class="text-right">
+        <p class="text-2xl font-bold text-blue-600">{solution.pricing.range}</p>
+        <p class="text-sm text-gray-500">{solution.pricing.unit}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. FAQ -->
+  <section class="mb-16">
+    <div class="section-header">
+      <h2>Common questions</h2>
+    </div>
+    <FAQSection faqs={solution.faqs} />
+  </section>
+
+  <!-- 10. Final CTA -->
+  <CTABanner
+    headline={`Ready to ${solution.shortTitle === 'AI Strategy' ? 'set your AI direction' : solution.shortTitle === 'GraphRAG' ? 'fix your knowledge base' : solution.shortTitle === 'AI E-commerce' ? 'transform your storefront' : solution.shortTitle === 'LLM Integration' ? 'ship AI features' : 'ship your AI project'}?`}
+    description="Let's have a 30-minute conversation about your challenge. No pitch, no pressure — just an honest assessment of whether this is the right approach for you."
+    ctaText="Let's Talk on LinkedIn"
+  />
+
+  <!-- Back to solutions -->
+  <div class="text-center mb-8">
+    <a href="/solutions" class="inline-flex items-center text-sm text-gray-400 hover:text-gray-600 font-medium transition-colors">
+      <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+      </svg>
+      Back to all solutions
+    </a>
+  </div>
+</Layout>

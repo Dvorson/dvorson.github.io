@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import cv from '../data/cv.json';
+---
+
+<Layout title="CV — Anton Dvorson" description="Full CV for Anton Dvorson — Software Architect, GenAI Engineer, Full-Stack Developer." ogImage="/og/cv.png">
+  <article class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+    <div class="print:hidden mb-4">
+      <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+    <h1 class="text-3xl font-bold text-blue-600 border-b pb-2 mb-2">{cv.name}</h1>
+    <div class="text-gray-600 mb-1">{cv.role}</div>
+    {cv.location && <div class="text-sm text-gray-500 mb-6">{cv.location}</div>}
+
+    <div class="bg-gray-50 p-4 rounded mb-6">
+      <h2 class="font-semibold mb-2">Professional Summary</h2>
+      <p class="text-gray-700">{cv.summary}</p>
+    </div>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">Expertise Areas</h2>
+    <div class="grid grid-cols-2 gap-2 mb-4">
+      {cv.expertise.map((area: string) => <div class="bg-blue-50 px-3 py-2 rounded text-sm font-medium">{area}</div>)}
+    </div>
+
+    <h2 class="text-xl font-semibold mt-6 mb-2">Core Technologies</h2>
+    <div class="flex flex-wrap gap-2 mb-6">
+      {cv.skills.map((skill: string) => <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">{skill}</span>)}
+    </div>
+
+    <h2 class="text-xl font-semibold mt-6 mb-4">Professional Experience</h2>
+    {cv.experience.map((exp: any) => (
+      <section class="mb-6 pb-4 border-b">
+        <h3 class="text-lg font-semibold">{exp.company} · <span class="text-blue-700">{exp.title}</span></h3>
+        <div class="text-sm text-gray-600">{exp.start} – {exp.end} ({exp.duration})</div>
+        {exp.subtitle && <div class="mt-1 text-sm text-gray-500">{exp.subtitle}</div>}
+        {exp.location && <div class="text-sm text-gray-500">{exp.location}</div>}
+        <p class="mt-2 text-gray-700">{exp.description}</p>
+        {exp.highlights && (
+          <div class="mt-2">
+            <strong>Key Highlights:</strong>
+            <ul class="list-disc ml-5">
+              {exp.highlights.map((h: string) => <li>{h}</li>)}
+            </ul>
+          </div>
+        )}
+        {exp.technologies && <div class="mt-2 text-sm"><strong>Technologies:</strong> {exp.technologies}</div>}
+      </section>
+    ))}
+
+    {cv.education && (
+      <div>
+        <h2 class="text-xl font-semibold mt-6 mb-2">Education</h2>
+        <div class="mb-4">
+          <div class="font-medium">{cv.education.degree}, {cv.education.field}</div>
+          <div class="text-sm text-gray-600">{cv.education.institution}</div>
+        </div>
+      </div>
+    )}
+
+    {cv.languages && cv.languages.length > 0 && (
+      <div>
+        <h2 class="text-xl font-semibold mt-6 mb-2">Languages</h2>
+        <div class="flex gap-4">
+          {cv.languages.map((l: any) => (
+            <span class="text-gray-700">{l.language} <span class="text-gray-500">({l.level})</span></span>
+          ))}
+        </div>
+      </div>
+    )}
+  </article>
+
+  <style>
+    @media print {
+      nav, footer, .print\:hidden { display: none !important; }
+      main { padding: 0 !important; }
+      article { box-shadow: none !important; border: none !important; }
+    }
+  </style>
+</Layout>

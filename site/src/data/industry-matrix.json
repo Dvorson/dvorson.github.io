@@ -1,0 +1,397 @@
+{
+  "industries": [
+    {
+      "id": "ecommerce",
+      "name": "E-commerce",
+      "slug": "ecommerce",
+      "icon": "cart"
+    },
+    {
+      "id": "manufacturing",
+      "name": "Manufacturing",
+      "slug": "manufacturing",
+      "icon": "factory"
+    },
+    {
+      "id": "retail",
+      "name": "Retail",
+      "slug": "retail",
+      "icon": "store"
+    },
+    {
+      "id": "telecom",
+      "name": "Telecom",
+      "slug": "telecom",
+      "icon": "network"
+    },
+    {
+      "id": "finance",
+      "name": "Financial Services",
+      "slug": "financial-services",
+      "icon": "finance"
+    }
+  ],
+  "services": ["ai-agents", "graphrag", "llm-integration"],
+  "pages": [
+    {
+      "slug": "ai-agents-ecommerce",
+      "service": "ai-agents",
+      "industry": "ecommerce",
+      "title": "AI Agents for E-commerce",
+      "headline": "Your online store is losing sales because it can't think",
+      "subheadline": "AI agents that automate customer service, optimize pricing, manage inventory, and personalize shopping experiences — integrated with your existing e-commerce stack.",
+      "seoTitle": "AI Agents for E-commerce | Intelligent Store Automation",
+      "seoDescription": "Build AI agents that automate e-commerce operations: customer service, dynamic pricing, inventory management, and personalized shopping. Production-ready, not demos.",
+      "painPoints": [
+        "Your customer service team can't keep up with ticket volume and response times are hurting reviews",
+        "Product recommendations are generic — customers see the same suggestions regardless of behavior",
+        "Pricing decisions are manual and reactive, leaving revenue on the table",
+        "Inventory forecasting relies on spreadsheets and gut feeling instead of data-driven predictions"
+      ],
+      "useCases": [
+        "Autonomous customer service agents that handle returns, tracking, and product questions across channels",
+        "Dynamic pricing agents that monitor competitor prices, demand signals, and margin targets in real-time",
+        "Inventory optimization agents that predict stockouts and automate reorder decisions",
+        "Personalization agents that adapt product discovery, search results, and content per customer segment"
+      ],
+      "relatedSolution": "ai-agents",
+      "relatedCaseStudy": "pwa-storefront"
+    },
+    {
+      "slug": "ai-agents-manufacturing",
+      "service": "ai-agents",
+      "industry": "manufacturing",
+      "title": "AI Agents for Manufacturing",
+      "headline": "Your production line doesn't tell you what's about to break",
+      "subheadline": "AI agents that monitor equipment health, predict failures, optimize production schedules, and reduce downtime — connected to your existing SCADA and MES systems.",
+      "seoTitle": "AI Agents for Manufacturing | Predictive Maintenance & Production Optimization",
+      "seoDescription": "Deploy AI agents for manufacturing: predictive maintenance, production optimization, quality control automation, and equipment health monitoring. Enterprise-grade.",
+      "painPoints": [
+        "Unplanned downtime costs your plant thousands per hour and nobody sees failures coming",
+        "Quality control is manual, inconsistent, and catches defects too late in the process",
+        "Production scheduling is based on static plans that don't adapt to real-time conditions",
+        "Equipment data is siloed in SCADA systems that don't talk to each other"
+      ],
+      "useCases": [
+        "Predictive maintenance agents that analyze sensor data and alert operators before failures occur",
+        "Quality control agents that detect anomalies in real-time using vision and sensor fusion",
+        "Production scheduling agents that optimize throughput based on demand, capacity, and constraints",
+        "Equipment health monitoring agents that aggregate data across siloed SCADA and MES systems"
+      ],
+      "relatedSolution": "ai-agents",
+      "relatedCaseStudy": "multi-agent-telecom"
+    },
+    {
+      "slug": "ai-agents-retail",
+      "service": "ai-agents",
+      "industry": "retail",
+      "title": "AI Agents for Retail",
+      "headline": "Your retail operations run on intuition when they should run on intelligence",
+      "subheadline": "AI agents that optimize store operations, automate supply chain decisions, personalize customer engagement, and turn retail data into actionable intelligence.",
+      "seoTitle": "AI Agents for Retail | Store Operations & Supply Chain Intelligence",
+      "seoDescription": "AI agents for retail: demand forecasting, supply chain optimization, customer personalization, and store operations automation. Built by a Fortune-500 retail veteran.",
+      "painPoints": [
+        "Demand forecasting is inaccurate, leading to overstock on slow movers and stockouts on best sellers",
+        "Store associates spend more time on admin tasks than helping customers",
+        "Customer insights are locked in data warehouses that nobody outside analytics can access",
+        "Promotional planning is guesswork — you don't know which promotions actually drive incremental revenue"
+      ],
+      "useCases": [
+        "Demand forecasting agents that combine POS data, weather, events, and market trends",
+        "Store operations agents that optimize staffing, task prioritization, and inventory replenishment",
+        "Customer engagement agents that personalize offers, content, and communication across channels",
+        "Promotional optimization agents that predict campaign ROI and recommend promotional strategies"
+      ],
+      "relatedSolution": "ai-agents",
+      "relatedCaseStudy": "genai-enablement-platform"
+    },
+    {
+      "slug": "ai-agents-telecom",
+      "service": "ai-agents",
+      "industry": "telecom",
+      "title": "AI Agents for Telecom",
+      "headline": "Your NOC team is drowning in alerts they can't prioritize",
+      "subheadline": "AI agents that detect network anomalies, classify incidents, suggest root causes, and escalate intelligently — reducing mean time to resolution and operator fatigue.",
+      "seoTitle": "AI Agents for Telecom | Network Monitoring & Anomaly Detection",
+      "seoDescription": "Deploy AI agents for telecom network operations: anomaly detection, root cause analysis, incident classification, and intelligent escalation. Production-proven.",
+      "painPoints": [
+        "Your NOC is overwhelmed with thousands of daily alerts, most of which are noise",
+        "Mean time to resolution keeps climbing because root cause analysis is manual and slow",
+        "Network incidents cascade across systems but your monitoring tools can't correlate events",
+        "Field engineers lack the context they need to resolve issues on the first visit"
+      ],
+      "useCases": [
+        "Anomaly detection agents that identify genuine network issues from noise in real-time",
+        "Root cause analysis agents that correlate events across network layers and suggest fixes",
+        "Incident classification agents that prioritize, categorize, and route issues automatically",
+        "Field engineer support agents that provide contextual troubleshooting via conversational interface"
+      ],
+      "relatedSolution": "ai-agents",
+      "relatedCaseStudy": "multi-agent-telecom"
+    },
+    {
+      "slug": "ai-agents-financial-services",
+      "service": "ai-agents",
+      "industry": "finance",
+      "title": "AI Agents for Financial Services",
+      "headline": "Your compliance team is manually reviewing what AI could handle in seconds",
+      "subheadline": "AI agents that automate compliance monitoring, fraud detection, document processing, and risk assessment — with full audit trails and regulatory transparency.",
+      "seoTitle": "AI Agents for Financial Services | Compliance & Risk Automation",
+      "seoDescription": "AI agents for financial services: compliance automation, fraud detection, document processing, and risk assessment. Built with audit trails and regulatory transparency.",
+      "painPoints": [
+        "Compliance reviews are manual, expensive, and can't keep pace with regulatory changes",
+        "Fraud detection rules are brittle — sophisticated fraud patterns slip through while generating false positives",
+        "Document processing for KYC, loan applications, and claims is slow and error-prone",
+        "Risk assessment models are updated quarterly when threats evolve daily"
+      ],
+      "useCases": [
+        "Compliance monitoring agents that track regulatory changes and flag affected processes automatically",
+        "Fraud detection agents that identify anomalous transaction patterns using behavioral analysis",
+        "Document processing agents that extract, validate, and route information from applications and claims",
+        "Risk assessment agents that continuously update risk scores based on real-time market and customer data"
+      ],
+      "relatedSolution": "ai-agents",
+      "relatedCaseStudy": "genai-enablement-platform"
+    },
+    {
+      "slug": "graphrag-ecommerce",
+      "service": "graphrag",
+      "industry": "ecommerce",
+      "title": "GraphRAG for E-commerce",
+      "headline": "Your product catalog is too complex for simple search to handle",
+      "subheadline": "Knowledge graphs that connect products, attributes, customer intent, and content — enabling intelligent product discovery, cross-sell recommendations, and content automation.",
+      "seoTitle": "GraphRAG for E-commerce | Intelligent Product Discovery & Search",
+      "seoDescription": "Build knowledge graphs for e-commerce: intelligent product search, cross-sell recommendations, attribute relationships, and content automation with GraphRAG.",
+      "painPoints": [
+        "Customers can't find what they're looking for because search doesn't understand product relationships",
+        "Cross-sell and upsell recommendations miss obvious connections between products",
+        "Product content is inconsistent across channels and nobody knows which descriptions are current",
+        "Category taxonomy is rigid and can't keep up with new product lines and seasonal collections"
+      ],
+      "useCases": [
+        "Product knowledge graphs that capture relationships between products, attributes, and customer intent",
+        "Intelligent search powered by graph traversal — understanding 'red running shoes under EUR 100' as a multi-attribute query",
+        "Automated cross-sell recommendations based on product relationships, not just purchase history",
+        "Content quality agents that identify inconsistent, missing, or duplicate product descriptions"
+      ],
+      "relatedSolution": "graphrag",
+      "relatedCaseStudy": "graphrag-knowledge-base"
+    },
+    {
+      "slug": "graphrag-manufacturing",
+      "service": "graphrag",
+      "industry": "manufacturing",
+      "title": "GraphRAG for Manufacturing",
+      "headline": "Your technical documentation is scattered across systems nobody can search",
+      "subheadline": "Knowledge graphs that connect equipment manuals, maintenance procedures, parts catalogs, and incident history — making institutional knowledge searchable and actionable.",
+      "seoTitle": "GraphRAG for Manufacturing | Technical Knowledge Management",
+      "seoDescription": "Build knowledge graphs for manufacturing: equipment documentation, maintenance procedures, parts catalogs, and institutional knowledge capture with GraphRAG and Neo4j.",
+      "painPoints": [
+        "Equipment manuals and procedures are scattered across SharePoint, PDFs, and tribal knowledge",
+        "When experienced operators retire, their knowledge about equipment quirks walks out the door",
+        "Maintenance technicians waste time searching for the right procedure across multiple systems",
+        "Root cause analysis takes too long because incident history isn't connected to equipment knowledge"
+      ],
+      "useCases": [
+        "Equipment knowledge graphs connecting manuals, parts, procedures, and incident history",
+        "Maintenance assistants that guide technicians through procedures using graph-traversed knowledge",
+        "Institutional knowledge capture that preserves expert operator knowledge in structured form",
+        "Root cause analysis agents that traverse equipment-incident-procedure relationships for faster diagnosis"
+      ],
+      "relatedSolution": "graphrag",
+      "relatedCaseStudy": "graphrag-knowledge-base"
+    },
+    {
+      "slug": "graphrag-retail",
+      "service": "graphrag",
+      "industry": "retail",
+      "title": "GraphRAG for Retail",
+      "headline": "Your customer service agents can't find answers in your own knowledge base",
+      "subheadline": "Knowledge graphs that connect products, policies, promotions, and customer contexts — enabling accurate answers across support channels and reducing escalation rates.",
+      "seoTitle": "GraphRAG for Retail | Customer Service Knowledge Graphs",
+      "seoDescription": "Build retail knowledge graphs with GraphRAG: product information, policy search, promotion rules, and customer context for faster, more accurate support.",
+      "painPoints": [
+        "Support agents give inconsistent answers because policies, product info, and promotions aren't connected",
+        "Self-service search returns irrelevant results, driving customers to call centers instead",
+        "Knowledge base articles are duplicated, outdated, and contradictory across product lines",
+        "New product launches require weeks of manual knowledge base updates across all channels"
+      ],
+      "useCases": [
+        "Retail knowledge graphs connecting products, policies, promotions, and customer segments",
+        "Support agent assistants that traverse the graph to find accurate, contextual answers instantly",
+        "Self-service search powered by GraphRAG — understanding multi-attribute customer queries",
+        "Knowledge quality automation that detects duplicates, outdated content, and gaps across product lines"
+      ],
+      "relatedSolution": "graphrag",
+      "relatedCaseStudy": "graphrag-knowledge-base"
+    },
+    {
+      "slug": "graphrag-telecom",
+      "service": "graphrag",
+      "industry": "telecom",
+      "title": "GraphRAG for Telecom",
+      "headline": "Your network knowledge is trapped in documents nobody reads",
+      "subheadline": "Knowledge graphs that connect network topology, configuration databases, incident history, and troubleshooting procedures — enabling faster resolution and smarter operations.",
+      "seoTitle": "GraphRAG for Telecom | Network Knowledge & Incident Resolution",
+      "seoDescription": "Build telecom knowledge graphs: network topology, incident history, troubleshooting procedures, and configuration management with GraphRAG for faster resolution.",
+      "painPoints": [
+        "Network documentation is outdated the moment it's written because changes happen faster than updates",
+        "Troubleshooting procedures are buried in wikis that nobody maintains or trusts",
+        "New engineers take months to become effective because network knowledge isn't structured",
+        "Incident post-mortems are written but never connected to the knowledge base for future reference"
+      ],
+      "useCases": [
+        "Network knowledge graphs connecting topology, configurations, incidents, and procedures",
+        "Troubleshooting agents that traverse incident history and resolution paths for similar past issues",
+        "Onboarding acceleration through structured knowledge navigation for new engineers",
+        "Automated incident-to-knowledge linking that enriches the graph with every resolved ticket"
+      ],
+      "relatedSolution": "graphrag",
+      "relatedCaseStudy": "multi-agent-telecom"
+    },
+    {
+      "slug": "graphrag-financial-services",
+      "service": "graphrag",
+      "industry": "finance",
+      "title": "GraphRAG for Financial Services",
+      "headline": "Your regulatory knowledge base can't keep up with changing compliance requirements",
+      "subheadline": "Knowledge graphs that connect regulations, internal policies, products, and compliance obligations — enabling automated monitoring and audit-ready documentation.",
+      "seoTitle": "GraphRAG for Financial Services | Regulatory Knowledge Management",
+      "seoDescription": "Build financial services knowledge graphs: regulatory compliance, policy management, audit trails, and obligation tracking with GraphRAG for automated monitoring.",
+      "painPoints": [
+        "Regulatory changes require manual review of every affected product, policy, and process",
+        "Compliance officers spend more time searching for information than analyzing it",
+        "Audit preparation is a multi-week scramble to connect policies to evidence across departments",
+        "Product launches are delayed because nobody can quickly assess regulatory impact"
+      ],
+      "useCases": [
+        "Regulatory knowledge graphs connecting regulations, policies, products, and compliance obligations",
+        "Impact analysis agents that instantly map how regulatory changes affect your products and processes",
+        "Audit preparation agents that traverse the graph to assemble evidence packages automatically",
+        "Compliance monitoring agents that track obligation status and flag gaps in real-time"
+      ],
+      "relatedSolution": "graphrag",
+      "relatedCaseStudy": "graphrag-knowledge-base"
+    },
+    {
+      "slug": "llm-integration-ecommerce",
+      "service": "llm-integration",
+      "industry": "ecommerce",
+      "title": "LLM Integration for E-commerce",
+      "headline": "Your competitors are shipping AI features while you're still evaluating vendors",
+      "subheadline": "Integrate LLMs into your e-commerce platform for intelligent product descriptions, conversational search, review summarization, and automated content creation.",
+      "seoTitle": "LLM Integration for E-commerce | AI-Powered Product Content & Search",
+      "seoDescription": "Integrate LLMs into your e-commerce platform: AI product descriptions, conversational search, review summarization, and content automation. Vendor-neutral approach.",
+      "painPoints": [
+        "Writing product descriptions for thousands of SKUs is impossibly slow and expensive",
+        "Customer reviews contain valuable insights but nobody has time to read and synthesize them",
+        "Site search is keyword-based and can't understand natural language product queries",
+        "Content translation for multi-market stores is a bottleneck that delays international expansion"
+      ],
+      "useCases": [
+        "Automated product description generation from specs, images, and brand voice guidelines",
+        "Review summarization and sentiment analysis that surfaces actionable product insights",
+        "Conversational product search that understands natural language queries and buying intent",
+        "Multi-language content generation and translation optimized for local market nuances"
+      ],
+      "relatedSolution": "llm-integration",
+      "relatedCaseStudy": "pwa-storefront"
+    },
+    {
+      "slug": "llm-integration-manufacturing",
+      "service": "llm-integration",
+      "industry": "manufacturing",
+      "title": "LLM Integration for Manufacturing",
+      "headline": "Your engineers are asking ChatGPT for answers your own systems should provide",
+      "subheadline": "Integrate LLMs with your manufacturing systems to automate report generation, enable natural language queries to production data, and capture institutional knowledge.",
+      "seoTitle": "LLM Integration for Manufacturing | AI Reports, Queries & Knowledge Capture",
+      "seoDescription": "Integrate LLMs into manufacturing: natural language queries to production data, automated reporting, procedure generation, and institutional knowledge capture.",
+      "painPoints": [
+        "Production reports are manually compiled from multiple systems every shift",
+        "Engineers can't query production data without SQL knowledge or analyst support",
+        "Standard operating procedures are written once and rarely updated to reflect current practice",
+        "Safety incident reports are inconsistent in detail and format across shifts and plants"
+      ],
+      "useCases": [
+        "Automated shift reports generated from production data, quality metrics, and incident logs",
+        "Natural language interfaces to production databases — ask questions in plain English",
+        "SOP generation and maintenance using LLMs to draft, review, and update procedures",
+        "Standardized incident reporting with LLM-guided forms that ensure consistent detail and format"
+      ],
+      "relatedSolution": "llm-integration",
+      "relatedCaseStudy": "genai-enablement-platform"
+    },
+    {
+      "slug": "llm-integration-retail",
+      "service": "llm-integration",
+      "industry": "retail",
+      "title": "LLM Integration for Retail",
+      "headline": "Your store associates know less about your products than your customers do",
+      "subheadline": "Integrate LLMs into retail operations for associate training, customer communication, merchandising content, and data-driven store insights.",
+      "seoTitle": "LLM Integration for Retail | AI-Powered Associate & Customer Experience",
+      "seoDescription": "Integrate LLMs into retail: associate product knowledge, customer communication automation, merchandising content, and natural language store analytics.",
+      "painPoints": [
+        "Store associates can't answer product questions because catalogs are too large and change too fast",
+        "Customer email responses are slow, inconsistent, and don't reflect your brand voice",
+        "Merchandising content for seasonal campaigns takes weeks to produce across all channels",
+        "Store managers want data insights but can't write queries or navigate analytics dashboards"
+      ],
+      "useCases": [
+        "Associate product knowledge agents that answer questions about inventory, specs, and comparisons",
+        "Customer communication automation that drafts on-brand responses for email, chat, and social",
+        "Merchandising content generation for product launches, seasonal campaigns, and promotions",
+        "Natural language analytics that let store managers ask questions about sales, traffic, and performance"
+      ],
+      "relatedSolution": "llm-integration",
+      "relatedCaseStudy": "genai-enablement-platform"
+    },
+    {
+      "slug": "llm-integration-telecom",
+      "service": "llm-integration",
+      "industry": "telecom",
+      "title": "LLM Integration for Telecom",
+      "headline": "Your customer service still can't explain your own plans and pricing clearly",
+      "subheadline": "Integrate LLMs into telecom operations for customer service automation, network documentation, contract analysis, and technical support augmentation.",
+      "seoTitle": "LLM Integration for Telecom | Customer Service & Network Operations AI",
+      "seoDescription": "Integrate LLMs into telecom: customer service automation, network documentation, contract analysis, and technical support. Production-proven approach.",
+      "painPoints": [
+        "Customer service agents struggle with complex plan structures and can't explain billing clearly",
+        "Network documentation is too technical for first-level support to use effectively",
+        "Contract analysis for enterprise clients is manual, slow, and prone to missed terms",
+        "Technical support calls are long because agents lack contextual troubleshooting guidance"
+      ],
+      "useCases": [
+        "Customer service agents that explain plans, resolve billing questions, and handle account changes",
+        "Technical documentation translation that makes network docs accessible to non-specialist support",
+        "Contract analysis agents that extract key terms, obligations, and renewal conditions automatically",
+        "Technical support augmentation that guides agents through troubleshooting with contextual knowledge"
+      ],
+      "relatedSolution": "llm-integration",
+      "relatedCaseStudy": "multi-agent-telecom"
+    },
+    {
+      "slug": "llm-integration-financial-services",
+      "service": "llm-integration",
+      "industry": "finance",
+      "title": "LLM Integration for Financial Services",
+      "headline": "Your analysts spend more time formatting reports than analyzing data",
+      "subheadline": "Integrate LLMs into financial operations for automated reporting, document analysis, client communication, and regulatory summarization — with enterprise-grade security.",
+      "seoTitle": "LLM Integration for Financial Services | AI Reports, Document Analysis & Compliance",
+      "seoDescription": "Integrate LLMs into financial services: automated reporting, document analysis, client communication, and regulatory summarization. Enterprise security and compliance.",
+      "painPoints": [
+        "Analyst reports take hours to compile from multiple data sources and format to standards",
+        "Document review for deals, contracts, and applications is slow and resource-intensive",
+        "Client communication is generic because personalizing at scale is impossible manually",
+        "Regulatory updates require manual summarization and distribution across compliance teams"
+      ],
+      "useCases": [
+        "Automated report generation from market data, portfolio analytics, and risk metrics",
+        "Document analysis agents that extract key information from contracts, applications, and filings",
+        "Personalized client communication at scale — quarterly reviews, market updates, and recommendations",
+        "Regulatory digest agents that summarize new regulations and map them to affected business areas"
+      ],
+      "relatedSolution": "llm-integration",
+      "relatedCaseStudy": "genai-enablement-platform"
+    }
+  ]
+}

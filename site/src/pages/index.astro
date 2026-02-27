@@ -1,6 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SolutionCard from '../components/SolutionCard.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import MetricCard from '../components/MetricCard.astro';
+import CTABanner from '../components/CTABanner.astro';
+import services from '../data/services.json';
 import cv from '../data/cv.json';
+
 const postModules = import.meta.glob('../posts/*.md', { eager: true });
 const posts = Object.entries(postModules)
   .map(([path, post]) => {
@@ -14,142 +20,164 @@ const posts = Object.entries(postModules)
   })
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, 3);
+
+const { positioning, solutions, caseStudies, metrics, iconPaths } = services;
+const featuredCaseStudies = caseStudies.filter(cs => cs.featured);
 ---
 
-<Layout>
-  <!-- Hero Section -->
+<Layout ogImage="/og/home.png">
+  <!-- Section 1: Hero — Pain-first, visitor is the hero -->
   <section class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-2xl p-8 sm:p-12 mb-16 border border-gray-100">
     <div class="absolute -top-24 -right-24 w-64 h-64 bg-gradient-to-br from-blue-100/40 to-indigo-100/40 rounded-full blur-3xl"></div>
     <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-gradient-to-br from-gray-100/30 to-slate-100/30 rounded-full blur-3xl"></div>
-    
-    <div class="relative max-w-4xl">
-      <h1 class="text-5xl sm:text-6xl font-bold text-gray-900 mb-4 tracking-tight">{cv.name}</h1>
-      <p class="text-2xl font-medium text-blue-600 mb-6">{cv.role}</p>
-      <p class="text-lg text-gray-700 max-w-3xl leading-relaxed mb-8">{cv.summary}</p>
-      
+
+    <div class="relative max-w-3xl">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight leading-tight">
+        {positioning.headline}
+      </h1>
+      <p class="text-xl text-gray-600 mb-4 leading-relaxed max-w-2xl">
+        {positioning.subheadline}
+      </p>
+      <p class="text-sm text-gray-400 font-medium mb-8 tracking-wide uppercase">
+        {positioning.credentialLine}
+      </p>
+
       <div class="flex flex-col sm:flex-row gap-4">
-        <button id="download-cv" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-sm hover:shadow-md">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        <a href="#solutions" class="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-sm hover:shadow-md">
+          See How I Can Help
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
-          Download CV
-        </button>
-        <a href="#blog" class="inline-flex items-center px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow-md border border-gray-200">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+        </a>
+        <a href="https://linkedin.com/in/dvorson" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow-md border border-gray-200">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
           </svg>
-          Read Blog
+          Get in Touch
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Expertise Areas -->
+  <!-- Section 2: The Problem (Empathy) — Visitor sees their pain reflected -->
   <section class="mb-16">
-    <h2 class="text-3xl font-bold mb-8 text-gray-900">Expertise Areas</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {cv.expertise.map((area: string) => (
-        <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100 group">
-          <div class="flex items-center mb-3">
-            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200 transition-colors">
-              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
-            </div>
-          </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">{area}</h3>
-          <p class="text-gray-600 text-sm">
-            {area === 'Software Architecture & Design' && 'Designing scalable, maintainable systems with modern architectural patterns and best practices.'}
-            {area === 'Full-Stack Web Development' && 'End-to-end development using Node.js, React, TypeScript, and modern web technologies.'}
-            {area === 'Cloud Infrastructure & DevOps' && 'AWS, Azure deployment with CI/CD pipelines, Docker, Kubernetes orchestration.'}
-            {area === 'Team Leadership & Mentoring' && 'Leading cross-functional teams and mentoring developers in technical excellence.'}
-            {area === 'Performance Optimization' && 'Database tuning, monitoring with Prometheus/Grafana, and application performance.'}
-            {area === 'Smart Home & Electronics' && 'IoT development, microcontroller programming, and embedded systems integration.'}
-          </p>
-        </div>
-      ))}
+    <div class="section-header">
+      <h2>Sound familiar?</h2>
+      <p>These are the conversations I have every week with smart leaders who know AI matters but can't find someone who's actually built it.</p>
     </div>
-  </section>
 
-  <!-- Core Technologies -->
-  <section class="mb-16">
-    <h2 class="text-3xl font-bold mb-8 text-gray-900">Core Technologies</h2>
-    <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
-      <div class="flex flex-wrap gap-3">
-        {cv.skills.map((skill: string) => (
-          <span class="px-4 py-2 rounded-full bg-gray-50 hover:bg-blue-50 transition-all duration-200 text-gray-800 font-medium border border-gray-200 hover:border-blue-200 cursor-default">
-            {skill}
-          </span>
-        ))}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200">
+        <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.832c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">Drowning in AI hype</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">You're drowning in AI hype but can't find someone who's actually built these systems in production — not just demo'd them on stage.</p>
+      </div>
+
+      <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200">
+        <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">Stuck in PoC hell</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">Your team started a RAG or agent proof-of-concept that impressed the board — but six months later it still isn't anywhere near production.</p>
+      </div>
+
+      <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200">
+        <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2">Overquoted and under-delivered</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">Agencies quoted you six months and six figures for something that should take weeks — and you suspect half the team will be juniors you've never met.</p>
       </div>
     </div>
   </section>
 
-  <!-- Recent Experience -->
-  <section class="mb-16">
-    <h2 class="text-3xl font-bold mb-8 text-gray-900">Recent Experience</h2>
-    <div class="space-y-8">
-      {cv.experience.slice(0, 3).map((exp: any) => (
-        <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100">
-          <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-4">
-            <div class="flex-1">
-              <h3 class="text-xl font-bold text-gray-900 mb-1">{exp.company}</h3>
-              <p class="text-lg text-blue-600 font-semibold mb-2">{exp.title}</p>
-              {exp.project && (
-                <p class="text-gray-600 mb-3"><span class="font-medium">Project:</span> {exp.project}</p>
-              )}
-            </div>
-            <div class="lg:text-right lg:ml-6">
-              <div class="inline-block px-3 py-1 bg-gray-100 rounded-full text-sm font-medium text-gray-700 mb-2">
-                {exp.duration}
-              </div>
-              <p class="text-sm text-gray-500">{exp.start} – {exp.end}</p>
-            </div>
-          </div>
-          
-          <p class="text-gray-700 leading-relaxed mb-4">{exp.description}</p>
-          
-          {exp.responsibilities && (
-            <div class="mb-4">
-              <h4 class="font-semibold text-gray-900 mb-2">Key Responsibilities:</h4>
-              <ul class="space-y-1">
-                {exp.responsibilities.slice(0, 3).map((resp: string) => (
-                  <li class="text-gray-600 text-sm flex items-start">
-                    <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                    {resp}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-          
-          {exp.technologies && (
-            <div class="pt-4 border-t border-gray-100">
-              <p class="text-sm text-gray-500 mb-2 font-medium">Technologies:</p>
-              <p class="text-sm text-gray-600">{exp.technologies}</p>
-            </div>
-          )}
-        </div>
+  <!-- Section 3: Solutions Preview (The Plan) — Guide shows the way -->
+  <section id="solutions" class="mb-16">
+    <div class="section-header">
+      <h2>Here's how I can help</h2>
+      <p>Every engagement starts with your problem, not my resume. Pick the challenge that sounds most like yours.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {solutions.map((solution) => (
+        <SolutionCard solution={{
+          slug: solution.slug,
+          shortTitle: solution.shortTitle,
+          headline: solution.headline,
+          subheadline: solution.subheadline,
+          icon: solution.icon,
+          iconPath: iconPaths[solution.icon]
+        }} />
       ))}
     </div>
-    
+
     <div class="text-center mt-8">
-      <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold">
-        View Complete Experience
+      <a href="/solutions" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold transition-colors">
+        View all solutions
         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>
       </a>
     </div>
   </section>
 
-  <!-- Blog Section -->
+  <!-- Section 4: Social Proof (Authority) — Credibility signals -->
+  <section class="mb-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {metrics.map((metric) => (
+        <MetricCard value={metric.value} label={metric.label} />
+      ))}
+    </div>
+  </section>
+
+  <!-- Section 5: Featured Case Studies (Success Stories) -->
+  <section class="mb-16">
+    <div class="section-header">
+      <h2>Real projects. Real outcomes.</h2>
+      <p>Here's what happened when these companies stopped researching and started building.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {featuredCaseStudies.map((cs) => (
+        <CaseStudyCard caseStudy={{
+          slug: cs.slug,
+          title: cs.title,
+          domain: cs.domain,
+          client: cs.client,
+          outcomes: cs.outcomes,
+          technologies: cs.technologies,
+          icon: cs.icon,
+          iconPath: iconPaths[cs.icon],
+          hasFullPage: cs.hasFullPage
+        }} />
+      ))}
+    </div>
+
+    <div class="text-center mt-8">
+      <a href="/case-studies" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold transition-colors">
+        View all case studies
+        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Section 6: Latest Blog Posts -->
   <section id="blog" class="mb-16">
     <div class="flex items-center justify-between mb-8">
       <h2 class="text-3xl font-bold text-gray-900">Latest Posts</h2>
-      <a href="/categories" class="text-blue-600 hover:text-blue-700 font-semibold text-sm">View All →</a>
+      <a href="/blog" class="text-blue-600 hover:text-blue-700 font-semibold text-sm transition-colors">View All →</a>
     </div>
-    
+
     {posts.length > 0 ? (
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map((post: any) => (
@@ -179,157 +207,210 @@ const posts = Object.entries(postModules)
       </div>
     ) : (
       <div class="bg-white rounded-xl p-12 shadow-sm border border-gray-100 text-center">
-        <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-        </svg>
         <h3 class="text-lg font-semibold text-gray-900 mb-2">No posts yet</h3>
         <p class="text-gray-600">Check back soon for technical insights and project updates!</p>
       </div>
     )}
   </section>
+
+  <!-- Section 7: CTA Banner -->
+  <CTABanner
+    headline="Stop researching. Start building."
+    description="Let's have a 30-minute conversation about your challenge. No pitch, no pressure — just an honest assessment of how AI can help your business."
+    ctaText="Let's Talk on LinkedIn"
+  />
+
+  <!-- Secondary: Download CV (small, understated) -->
+  <div class="text-center mb-8">
+    <button id="download-cv" class="inline-flex items-center text-sm text-gray-400 hover:text-gray-600 font-medium transition-colors">
+      <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+      Download CV as PDF
+    </button>
+  </div>
 </Layout>
 
 <script is:inline define:vars={{ cv }}>
-  document.getElementById('download-cv')?.addEventListener('click', () => {
-    try {
-      // Create CV content as HTML
-      const cvContent = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta charset="UTF-8">
-          <title>${cv.name} - CV</title>
-          <style>
-            @media print {
-              body { margin: 0; padding: 20px; }
-              @page { margin: 1in; size: A4; }
-              .no-print { display: none !important; }
-            }
-            body { 
-              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-              line-height: 1.5; 
-              color: #333; 
-              max-width: 800px; 
-              margin: 0 auto; 
-              padding: 20px;
-              font-size: 14px;
-            }
-            h1 { color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 8px; margin-bottom: 16px; font-size: 24px; }
-            h2 { color: #1f2937; margin-top: 24px; margin-bottom: 12px; font-size: 18px; }
-            h3 { color: #374151; margin-bottom: 4px; font-size: 16px; }
-            .header { text-align: center; margin-bottom: 32px; }
-            .role { font-size: 16px; color: #6b7280; margin-bottom: 12px; }
-            .summary { background: #f8fafc; padding: 16px; border-radius: 6px; margin-bottom: 24px; }
-            .expertise { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
-            .expertise-item { background: #eff6ff; padding: 8px; border-radius: 4px; font-weight: 500; font-size: 13px; }
-            .skills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-            .skill { background: #f1f5f9; padding: 4px 10px; border-radius: 16px; font-size: 12px; }
-            .experience-item { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #e5e7eb; }
-            .company { font-weight: bold; color: #1f2937; }
-            .title { color: #2563eb; font-weight: 600; }
-            .duration { color: #6b7280; font-size: 13px; }
-            .description { margin: 8px 0; }
-            .responsibilities { margin: 8px 0; }
-            .responsibilities li { margin-bottom: 4px; }
-            .technologies { background: #f8fafc; padding: 8px; border-radius: 4px; font-size: 12px; margin-top: 8px; }
-            .print-button { 
-              position: fixed; 
-              top: 20px; 
-              right: 20px; 
-              background: #2563eb; 
-              color: white; 
-              border: none; 
-              padding: 10px 20px; 
-              border-radius: 6px; 
-              cursor: pointer; 
-              font-weight: 500;
-              box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .print-button:hover { background: #1d4ed8; }
-          </style>
-        </head>
-        <body>
-          <button class="print-button no-print" onclick="window.print()">Print/Save as PDF</button>
-          
-          <div class="header">
-            <h1>${cv.name}</h1>
-            <div class="role">${cv.role}</div>
-          </div>
-          
-          <div class="summary">
-            <h2>Professional Summary</h2>
-            <p>${cv.summary}</p>
-          </div>
-          
-          <h2>Expertise Areas</h2>
-          <div class="expertise">
-            ${cv.expertise.map(area => `<div class="expertise-item">${area}</div>`).join('')}
-          </div>
-          
-          <h2>Core Technologies</h2>
-          <div class="skills">
-            ${cv.skills.map(skill => `<span class="skill">${skill}</span>`).join('')}
-          </div>
-          
-          <h2>Professional Experience</h2>
-          ${cv.experience.map(exp => `
-            <div class="experience-item">
-              <h3>
-                <span class="company">${exp.company}</span> • 
-                <span class="title">${exp.title}</span>
-              </h3>
-              <div class="duration">${exp.start} – ${exp.end} (${exp.duration})</div>
-              ${exp.project ? `<div><strong>Project:</strong> ${exp.project}</div>` : ''}
-              <div class="description">${exp.description}</div>
-              ${exp.responsibilities ? `
-                <div class="responsibilities">
-                  <strong>Key Responsibilities:</strong>
-                  <ul>
-                    ${exp.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
-                  </ul>
-                </div>
-              ` : ''}
-              ${exp.technologies ? `<div class="technologies"><strong>Technologies:</strong> ${exp.technologies}</div>` : ''}
-            </div>
-          `).join('')}
-        </body>
-        </html>
-      `;
+  document.getElementById('download-cv')?.addEventListener('click', async () => {
+    const btn = document.getElementById('download-cv');
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
 
-      // Create blob and download link
-      const blob = new Blob([cvContent], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
-      
-      // Try to open in new window for printing, fallback to download
-      const printWindow = window.open();
-      if (printWindow) {
-        printWindow.document.write(cvContent);
-        printWindow.document.close();
-      } else {
-        // Fallback: create download link
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `${cv.name.replace(/\s+/g, '_')}_CV.html`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-        
-        // Show user instruction
-        const message = document.createElement('div');
-        message.className = 'fixed top-4 right-4 bg-blue-600 text-white p-4 rounded-lg shadow-lg z-50';
-        message.innerHTML = `
-          <p class="font-medium">CV downloaded!</p>
-          <p class="text-sm">Open the HTML file and use Ctrl+P (Cmd+P) to print/save as PDF</p>
-        `;
-        document.body.appendChild(message);
-        setTimeout(() => {
-          document.body.removeChild(message);
-        }, 5000);
+    try {
+      // Load jsPDF from CDN
+      if (!window.jspdf) {
+        await new Promise((resolve, reject) => {
+          const s = document.createElement('script');
+          s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+          s.onload = resolve;
+          s.onerror = reject;
+          document.head.appendChild(s);
+        });
       }
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+      const pw = 210;
+      const ph = 297;
+      const ml = 14, mr = 14, mt = 14;
+      const cw = pw - ml - mr;
+      let y = mt;
+
+      const skillCats = cv.skillCategories || {};
+      const edu = cv.education || {};
+      const langs = cv.languages || [];
+      const contact = cv.contact || {};
+
+      function checkPage(needed) {
+        if (y + needed > ph - 14) {
+          doc.addPage();
+          y = mt;
+        }
+      }
+
+      // --- HEADER ---
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(24);
+      doc.setTextColor(66, 133, 244);
+      doc.text(cv.name, ml, y + 7);
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.setTextColor(100, 100, 100);
+      const rightX = pw - mr;
+      let ry = y;
+      if (contact.email) { doc.text(contact.email, rightX, ry, { align: 'right' }); ry += 4; }
+      if (contact.linkedin) { doc.setTextColor(66, 133, 244); doc.text(contact.linkedin, rightX, ry, { align: 'right' }); ry += 4; }
+      if (contact.website) { doc.text(contact.website, rightX, ry, { align: 'right' }); ry += 4; }
+      y += 10;
+
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9.5);
+      doc.setTextColor(100, 100, 100);
+      doc.text(cv.role + (cv.location ? ', based in ' + cv.location : ''), ml, y);
+      y += 8;
+
+      // --- SUMMARY ---
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(60, 60, 60);
+      const summaryLines = doc.splitTextToSize(cv.summary, cw);
+      doc.text(summaryLines, ml, y);
+      y += summaryLines.length * 3.5 + 3;
+
+      doc.setDrawColor(220, 220, 220);
+      doc.line(ml, y, pw - mr, y);
+      y += 6;
+
+      // --- SKILLS ---
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(12);
+      doc.setTextColor(66, 133, 244);
+      doc.text('Skills', ml, y);
+      y += 6;
+
+      doc.setFontSize(8.5);
+      Object.entries(skillCats).forEach(([label, values]) => {
+        checkPage(5);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(30, 30, 30);
+        const labelW = doc.getTextWidth(label + ': ');
+        doc.text(label + ': ', ml, y);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(60, 60, 60);
+        const valLines = doc.splitTextToSize(String(values), cw - labelW);
+        doc.text(valLines, ml + labelW, y);
+        y += valLines.length * 3.5 + 1.5;
+      });
+      y += 3;
+
+      // --- WORK EXPERIENCE ---
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(12);
+      doc.setTextColor(66, 133, 244);
+      doc.text('Work Experience', ml, y);
+      y += 7;
+
+      cv.experience.forEach((exp, i) => {
+        const bullets = exp.highlights || exp.responsibilities || [];
+        const maxBullets = i < 4 ? 4 : 3;
+        const estimatedH = 8 + Math.min(bullets.length, maxBullets) * 8;
+        checkPage(estimatedH);
+
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(30, 30, 30);
+        doc.text(exp.title, ml, y);
+        const titleW = doc.getTextWidth(exp.title + ' ');
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(160, 160, 160);
+        doc.text('| ', ml + titleW, y);
+        const sepW = doc.getTextWidth('| ');
+        doc.setTextColor(30, 30, 30);
+        doc.text(exp.company, ml + titleW + sepW, y);
+        y += 4;
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7.5);
+        doc.setTextColor(130, 130, 130);
+        doc.text(exp.start + ' - ' + exp.end + (exp.location ? ' \u00B7 ' + exp.location : ''), ml, y);
+        y += 5;
+
+        doc.setFontSize(8.5);
+        doc.setTextColor(60, 60, 60);
+        bullets.slice(0, maxBullets).forEach(b => {
+          checkPage(8);
+          doc.setFont('helvetica', 'normal');
+          doc.text('\u2022', ml + 1, y);
+          const bLines = doc.splitTextToSize(b, cw - 6);
+          doc.text(bLines, ml + 5, y);
+          y += bLines.length * 3.5 + 1;
+        });
+        y += 4;
+      });
+
+      // --- EDUCATION ---
+      checkPage(16);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(12);
+      doc.setTextColor(66, 133, 244);
+      doc.text('Education', ml, y);
+      y += 6;
+
+      doc.setFontSize(8.5);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(30, 30, 30);
+      doc.text(edu.field || '', ml, y);
+      y += 3.5;
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(100, 100, 100);
+      doc.text(edu.institution || '', ml, y);
+      y += 3.5;
+      if (edu.degree) { doc.text(edu.degree, ml, y); y += 3.5; }
+      y += 3;
+
+      // --- LANGUAGES ---
+      if (langs.length > 0) {
+        checkPage(12);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(12);
+        doc.setTextColor(66, 133, 244);
+        doc.text('Languages', ml, y);
+        y += 6;
+
+        doc.setFontSize(8.5);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(60, 60, 60);
+        doc.text(langs.map(l => l.language + ' (' + l.level + ')').join('  |  '), ml, y);
+      }
+
+      doc.save('Anton_Dvorson_CV.pdf');
     } catch (error) {
-      console.error('Download failed:', error);
-      alert('Download failed. Please try again.');
+      console.error('PDF generation failed:', error);
+    } finally {
+      btn.disabled = false;
+      btn.style.opacity = '';
     }
   });
 </script>
@@ -341,7 +422,7 @@ const posts = Object.entries(postModules)
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;

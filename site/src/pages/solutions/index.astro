@@ -1,0 +1,105 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SolutionCard from '../../components/SolutionCard.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import services from '../../data/services.json';
+
+const { solutions, iconPaths } = services;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'AI Solutions by Anton Dvorson',
+  description: 'AI consulting solutions: agents, knowledge graphs, e-commerce architecture, strategy, and LLM integration.',
+  numberOfItems: solutions.length,
+  itemListElement: solutions.map((s, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Service',
+      name: s.title,
+      description: s.subheadline,
+      url: `https://dvorson.github.io/solutions/${s.slug}`
+    }
+  }))
+};
+---
+
+<Layout
+  title="AI Solutions | Anton Dvorson — AI Solutions Architect"
+  description="AI consulting solutions: production-ready agents, GraphRAG knowledge graphs, AI-powered e-commerce, fractional technical leadership, and LLM integration."
+  ogImage="/og/solutions.png"
+  url="https://dvorson.github.io/solutions"
+  canonical="https://dvorson.github.io/solutions"
+  additionalSchema={[serviceSchema]}
+>
+  <section class="mb-12">
+    <div class="section-header">
+      <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 tracking-tight">Every AI challenge is different</h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">Here's where I can help. Each engagement starts with your problem, not a generic playbook. Pick the challenge that sounds most like yours.</p>
+    </div>
+  </section>
+
+  <section class="mb-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {solutions.map((solution) => (
+        <SolutionCard solution={{
+          slug: solution.slug,
+          shortTitle: solution.shortTitle,
+          headline: solution.headline,
+          subheadline: solution.subheadline,
+          icon: solution.icon,
+          iconPath: iconPaths[solution.icon]
+        }} />
+      ))}
+    </div>
+  </section>
+
+  <!-- Value props -->
+  <section class="mb-16">
+    <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Why work with me?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-900 mb-1">Strategy to code</h3>
+            <p class="text-sm text-gray-600">From architecture decisions to production-ready code — no hand-off to juniors.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-900 mb-1">Enterprise battle-tested</h3>
+            <p class="text-sm text-gray-600">12+ years across Fortune-500 retail, telecom, and media. I've seen what breaks at scale.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-semibold text-gray-900 mb-1">Your way</h3>
+            <p class="text-sm text-gray-600">Solo delivery or embedded in your team — you choose how we work together.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTABanner
+    headline="Not sure where to start?"
+    description="Let's have a 30-minute conversation about your challenge. I'll give you an honest assessment — even if the answer is 'you don't need AI for this.'"
+    ctaText="Let's Talk on LinkedIn"
+  />
+</Layout>
