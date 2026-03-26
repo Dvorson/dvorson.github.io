@@ -16,28 +16,51 @@ const posts = Object.entries(postModules)
 ---
 
 <Layout title="Blog — Technical leadership, AI, and product" description="Articles on pragmatic architecture, AI strategy, and shipping B2B SaaS." ogImage="/og/blog.png">
-  <h1 class="text-4xl font-bold mb-8">Blog</h1>
-  {posts.length > 0 ? (
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {posts.map((post: any) => (
-        <a href={post.url} class="group">
-          <article class="card group-hover:border-blue-200 h-full">
-            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-2 line-clamp-2">{post.title}</h3>
-            {post.description && (
-              <p class="text-gray-600 text-sm mb-4 line-clamp-3">{post.description}</p>
-            )}
-            <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
-              <time class="text-xs text-gray-500 font-medium">
-                {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-              </time>
-              <span class="text-blue-600 text-sm font-medium group-hover:translate-x-1 transition-transform">Read more →</span>
-            </div>
-          </article>
-        </a>
-      ))}
+  <section class="border-b border-rule">
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+      <div class="section-header">
+        <div>
+          <span class="section-number">01</span>
+          <h1 class="section-title mt-2">Writing</h1>
+        </div>
+      </div>
+      <p class="text-muted leading-relaxed" style="max-width: 540px;">Technical leadership, AI architecture, and lessons from building production systems.</p>
     </div>
-  ) : (
-    <p class="text-gray-600">No posts yet.</p>
-  )}
-</Layout>
+  </section>
 
+  <section>
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+      {posts.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-rule">
+          {posts.map((post: any, i: number) => (
+            <a href={post.url}
+               class={`block p-8 hover:bg-muted-light transition-colors ${
+                 i % 3 !== 2 ? 'lg:border-r lg:border-rule' : ''
+               } ${i % 2 !== 1 ? 'md:border-r md:border-rule lg:border-r-0' : 'md:border-r-0'} ${
+                 i < posts.length - 3 ? 'lg:border-b lg:border-rule' : ''
+               } ${i < posts.length - 2 ? 'md:border-b md:border-rule lg:border-b-0' : 'md:border-b-0'} border-b border-rule last:border-b-0 md:last:border-b-0`}
+            >
+              {post.categories?.[0] && (
+                <span class="font-mono text-xs tracking-widest uppercase text-accent">{post.categories[0]}</span>
+              )}
+              <h3 class="font-display text-lg font-bold mt-3 mb-3 leading-snug" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{post.title}</h3>
+              {post.description && (
+                <p class="text-sm text-muted leading-relaxed mb-4" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{post.description}</p>
+              )}
+              <div class="flex items-center justify-between mt-auto pt-4 border-t border-rule">
+                <time class="font-mono text-xs text-muted">
+                  {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                </time>
+                <span class="font-mono text-xs text-ink hover:text-accent transition-colors">Read →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="border border-rule p-12 text-center">
+          <p class="text-muted font-mono text-sm">New writing coming soon.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>

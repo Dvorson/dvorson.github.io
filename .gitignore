@@ -58,3 +58,4 @@ SEO_GEO_LANDSCAPE_REPORT.md
 *.ai
 *.roo
 .codegpt/
+.gstack/

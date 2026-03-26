@@ -9,29 +9,26 @@ export interface Props {
 const {
   headline,
   description,
-  ctaText = 'Get in Touch',
-  ctaLink = 'https://linkedin.com/in/dvorson',
+  ctaText = 'Book a Call',
+  ctaLink = 'https://calendly.com/dvorson',
 } = Astro.props;
 ---
 
-<section class="w-full rounded-2xl bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-700 p-8 sm:p-12 mb-16">
-  <div class="max-w-3xl mx-auto text-center">
-    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">
+<section class="border-t border-b border-rule py-16 my-16">
+  <div class="max-w-2xl mx-auto text-center">
+    <h2 class="font-display text-3xl font-bold mb-4">
       {headline}
     </h2>
-    <p class="text-lg text-indigo-100 mb-8 leading-relaxed">
+    <p class="text-muted leading-relaxed mb-8">
       {description}
     </p>
     <a
       href={ctaLink}
       target="_blank"
       rel="noopener noreferrer"
-      class="inline-flex items-center px-8 py-4 bg-white text-indigo-700 font-semibold rounded-lg hover:bg-indigo-50 transition-all duration-200 shadow-lg hover:shadow-xl"
+      class="btn-primary"
     >
       {ctaText}
-      <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-      </svg>
     </a>
   </div>
 </section>

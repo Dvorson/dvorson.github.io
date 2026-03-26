@@ -4,10 +4,10 @@ import Layout from '../../layouts/Layout.astro';
 export async function getStaticPaths() {
   const postModules = import.meta.glob('../../posts/*.md', { eager: true });
   const posts = Object.values(postModules) as any[];
-  
+
   // Collect all categories from all posts (handling both single category and multiple categories)
   const allCategories = new Set<string>();
-  
+
   posts.forEach((post) => {
     const frontmatter = post.frontmatter;
     if (frontmatter) {
@@ -21,9 +21,9 @@ export async function getStaticPaths() {
       }
     }
   });
-  
-  return Array.from(allCategories).sort().map((category) => ({ 
-    params: { category } 
+
+  return Array.from(allCategories).sort().map((category) => ({
+    params: { category }
   }));
 }
 
@@ -43,36 +43,52 @@ const filtered = posts
   .filter((p) => {
     const frontmatter = p.frontmatter;
     if (!frontmatter) return false;
-    
+
     // Check if category matches either single category field or is in categories array
     const matchesSingleCategory = frontmatter.category === category;
-    const matchesCategoriesArray = frontmatter.categories && 
-      Array.isArray(frontmatter.categories) && 
+    const matchesCategoriesArray = frontmatter.categories &&
+      Array.isArray(frontmatter.categories) &&
       frontmatter.categories.includes(category);
-    
+
     return matchesSingleCategory || matchesCategoriesArray;
   })
   .sort((a, b) => new Date(b.frontmatter.date || b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.date || a.frontmatter.pubDate).getTime());
 ---
 
-<Layout>
-  <section class="my-8">
-    <h1 class="text-3xl font-bold mb-4">Posts in "{category}"</h1>
+<Layout title={`Posts in "${category}" — Blog`}>
+  <section class="container py-16">
+    <div class="mb-8">
+      <a href="/categories/" class="font-mono text-xs text-muted hover:text-ink transition-colors">← All categories</a>
+    </div>
+
+    <div class="section-header">
+      <div>
+        <span class="font-mono text-xs border border-rule px-3 py-1 text-muted">{category}</span>
+        <h1 class="section-title mt-4">Posts in "{category}"</h1>
+      </div>
+    </div>
+
     {filtered.length > 0 ? (
-      <ul class="space-y-4">
+      <div>
         {filtered.map((post) => (
-          <li>
-            <a href={post.url} class="text-blue-600 hover:underline">
-              {post.frontmatter.title}
-            </a>
-            <p class="text-gray-500 text-sm">
-              {new Date(post.frontmatter.date || post.frontmatter.pubDate).toLocaleDateString()}
-            </p>
-          </li>
+          <a href={post.url} class="group block border-b border-rule">
+            <div class="flex items-baseline justify-between py-6">
+              <h2 class="font-display text-lg font-bold text-ink group-hover:text-accent transition-colors">
+                {post.frontmatter.title}
+              </h2>
+              <time class="font-mono text-xs text-muted flex-shrink-0 ml-4">
+                {new Date(post.frontmatter.date || post.frontmatter.pubDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                })}
+              </time>
+            </div>
+          </a>
         ))}
-      </ul>
+      </div>
     ) : (
-      <p class="text-gray-600">No posts found in this category.</p>
+      <p class="text-muted">No posts found in this category.</p>
     )}
   </section>
 </Layout>

@@ -2,17 +2,59 @@
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,ts,tsx,md,mdx}'],
   theme: {
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      surface: '#fafaf8',
+      ink: '#0a0a0a',
+      accent: '#ff5722',
+      rule: '#e4e4e0',
+      muted: '#9c9c96',
+      'muted-light': '#f2f2f0',
+      white: '#ffffff',
+      black: '#000000',
+    },
+    fontFamily: {
+      display: ['Playfair Display', 'Georgia', 'Times New Roman', 'serif'],
+      body: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+      mono: ['JetBrains Mono', 'SF Mono', 'Fira Code', 'Consolas', 'monospace'],
+    },
+    borderRadius: {
+      none: '0',
+      DEFAULT: '0',
+      sm: '0',
+      md: '0',
+      lg: '0',
+      xl: '0',
+      '2xl': '0',
+      '3xl': '0',
+      full: '0',
+    },
+    boxShadow: {
+      none: 'none',
+      DEFAULT: 'none',
+      sm: 'none',
+      md: 'none',
+      lg: 'none',
+      xl: 'none',
+      '2xl': 'none',
+    },
     extend: {
-      keyframes: {
-        fadeInUp: {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' }
-        }
+      maxWidth: {
+        container: '1200px',
       },
-      animation: {
-        fadeInUp: 'fadeInUp 0.5s ease-out'
-      }
-    }
+      spacing: {
+        'grid': '8px',
+        'grid-2': '16px',
+        'grid-3': '24px',
+        'grid-4': '32px',
+        'grid-6': '48px',
+        'grid-8': '64px',
+        'grid-12': '96px',
+        'grid-16': '128px',
+        'grid-24': '192px',
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 };

@@ -47,162 +47,175 @@ const serviceSchema = {
   canonical={`https://dvorson.github.io/solutions/${solution.slug}`}
   additionalSchema={[serviceSchema]}
 >
-  <!-- 1. Hero — Pain-focused headline -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50 rounded-2xl p-8 sm:p-12 mb-16 border border-gray-100">
-    <div class="absolute -top-24 -right-24 w-64 h-64 bg-gradient-to-br from-blue-100/40 to-indigo-100/40 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-gradient-to-br from-gray-100/30 to-slate-100/30 rounded-full blur-3xl"></div>
-
-    <div class="relative max-w-3xl">
-      <p class="text-sm font-semibold text-blue-600 uppercase tracking-wider mb-3">{solution.shortTitle}</p>
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 tracking-tight leading-tight">
+  <!-- 1. Hero -->
+  <section class="border-b border-rule">
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+      <span class="font-mono text-xs tracking-widest uppercase text-accent mb-4 block">{solution.shortTitle}</span>
+      <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight mb-6" style="max-width: 800px;">
         {solution.headline}
       </h1>
-      <p class="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl">
+      <p class="text-xl text-muted leading-relaxed mb-10" style="max-width: 640px;">
         {solution.subheadline}
       </p>
       <div class="flex flex-col sm:flex-row gap-4">
-        <a href="https://linkedin.com/in/dvorson" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-sm hover:shadow-md">
+        <a href="https://linkedin.com/in/dvorson" target="_blank" rel="noopener noreferrer" class="btn-primary">
           Let's Discuss Your Challenge
-          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
         </a>
-        <a href="#approach" class="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200 shadow-sm border border-gray-200">
+        <a href="#approach" class="btn-secondary">
           See How It Works
-          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- 2. The Problem — Pain points the persona experiences -->
-  <section class="mb-16">
-    <div class="section-header">
-      <h2>Sound familiar?</h2>
-      <p>If any of these hit close to home, you're not alone. This is where most {solution.persona.toLowerCase().includes('cto') ? 'technical leaders' : 'leaders'} get stuck.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {solution.painPoints.map((pain, i) => (
-        <PainPoint text={pain} index={i + 1} />
-      ))}
-    </div>
-  </section>
-
-  <!-- 3. What is [X]? — GEO-optimized definition block -->
-  <section class="mb-16">
-    <div class="bg-blue-50 border border-blue-100 rounded-xl p-8">
-      <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
-        <svg class="w-6 h-6 text-blue-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        What is {solution.shortTitle}?
-      </h2>
-      <p class="text-gray-700 leading-relaxed">{solution.definition}</p>
-    </div>
-  </section>
-
-  <!-- 4. The Approach — How the engagement works -->
-  <section id="approach" class="mb-16">
-    <div class="section-header">
-      <h2>How we work together</h2>
-      <p>A structured process that reduces risk and gives you visibility at every step.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {solution.approach.map((step, i) => (
-        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200">
-          <div class="flex items-start gap-4">
-            <div class="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center font-bold text-lg flex-shrink-0">
-              {i + 1}
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-gray-900 mb-2">{step.step}</h3>
-              <p class="text-gray-600 text-sm leading-relaxed">{step.description}</p>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- 5. Outcomes — What changes -->
-  <section class="mb-16">
-    <div class="section-header">
-      <h2>What you get</h2>
-      <p>Concrete deliverables, not vague promises.</p>
-    </div>
-
-    <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {solution.outcomes.map((outcome) => (
-          <div class="flex items-start gap-3">
-            <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-              <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <p class="text-gray-700 leading-relaxed">{outcome}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. Case Study Snapshot — Related proof -->
-  {relatedCaseStudies.length > 0 && (
-    <section class="mb-16">
+  <!-- 2. The Problem — Pain points -->
+  <section class="border-b border-rule">
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
       <div class="section-header">
-        <h2>Proof it works</h2>
-        <p>Real projects where this approach delivered results.</p>
+        <div>
+          <span class="section-number">01</span>
+          <h2 class="section-title mt-2">Sound familiar?</h2>
+        </div>
       </div>
+      <p class="text-muted mb-10">If any of these hit close to home, you're not alone. This is where most {solution.persona.toLowerCase().includes('cto') ? 'technical leaders' : 'leaders'} get stuck.</p>
 
-      <div class={`grid grid-cols-1 ${relatedCaseStudies.length > 1 ? 'md:grid-cols-2' : 'max-w-lg mx-auto'} gap-6`}>
-        {relatedCaseStudies.map((cs) => (
-          <CaseStudyCard caseStudy={{
-            slug: cs.slug,
-            title: cs.title,
-            domain: cs.domain,
-            client: cs.client,
-            outcomes: cs.outcomes,
-            technologies: cs.technologies,
-            icon: cs.icon,
-            iconPath: iconPaths[cs.icon],
-            hasFullPage: cs.hasFullPage
-          }} />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {solution.painPoints.map((pain, i) => (
+          <PainPoint text={pain} index={i + 1} />
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. What is [X]? — Definition block -->
+  <section class="border-b border-rule">
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+      <div class="border-l-2 border-accent pl-8">
+        <span class="font-mono text-xs tracking-widest uppercase text-muted mb-3 block">Definition</span>
+        <h2 class="font-display text-xl font-bold mb-4">What is {solution.shortTitle}?</h2>
+        <p class="text-muted leading-relaxed">{solution.definition}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. The Approach -->
+  <section id="approach" class="border-b border-rule">
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+      <div class="section-header">
+        <div>
+          <span class="section-number">02</span>
+          <h2 class="section-title mt-2">How we work together</h2>
+        </div>
+      </div>
+      <p class="text-muted mb-10">A structured process that reduces risk and gives you visibility at every step.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 border border-rule">
+        {solution.approach.map((step, i) => (
+          <div class={`p-8 ${i % 2 === 0 ? 'md:border-r border-rule' : ''} ${i < solution.approach.length - 2 ? 'border-b border-rule' : i < solution.approach.length - 1 ? 'border-b md:border-b-0 border-rule' : ''}`}>
+            <span class="font-mono text-xs text-muted tracking-wider">0{i + 1}</span>
+            <h3 class="font-display text-lg font-bold mt-3 mb-2">{step.step}</h3>
+            <p class="text-sm text-muted leading-relaxed">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Outcomes -->
+  <section class="border-b border-rule">
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+      <div class="section-header">
+        <div>
+          <span class="section-number">03</span>
+          <h2 class="section-title mt-2">What you get</h2>
+        </div>
+      </div>
+      <p class="text-muted mb-10">Concrete deliverables, not vague promises.</p>
+
+      <div class="space-y-4">
+        {solution.outcomes.map((outcome, i) => (
+          <div class="flex items-start gap-4 py-4 border-b border-rule last:border-b-0">
+            <span class="font-mono text-xs text-muted mt-0.5">{String(i + 1).padStart(2, '0')}</span>
+            <p class="leading-relaxed">{outcome}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Case Study Snapshot -->
+  {relatedCaseStudies.length > 0 && (
+    <section class="border-b border-rule">
+      <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+        <div class="section-header">
+          <div>
+            <span class="section-number">04</span>
+            <h2 class="section-title mt-2">Proof it works</h2>
+          </div>
+          <a href="/case-studies" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors">All case studies →</a>
+        </div>
+        <p class="text-muted mb-10">Real projects where this approach delivered results.</p>
+
+        <div class={`grid grid-cols-1 ${relatedCaseStudies.length > 1 ? 'md:grid-cols-2' : 'max-w-lg'} gap-6`}>
+          {relatedCaseStudies.map((cs) => (
+            <CaseStudyCard caseStudy={{
+              slug: cs.slug,
+              title: cs.title,
+              domain: cs.domain,
+              client: cs.client,
+              outcomes: cs.outcomes,
+              technologies: cs.technologies,
+              icon: cs.icon,
+              iconPath: iconPaths[cs.icon],
+              hasFullPage: cs.hasFullPage
+            }} />
+          ))}
+        </div>
       </div>
     </section>
   )}
 
   <!-- 7. Technologies -->
-  <section class="mb-16">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">Technologies I work with</h2>
-    <TechStack technologies={solution.technologies} />
+  <section class="border-b border-rule">
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+      <div class="section-header">
+        <div>
+          <span class="section-number">{relatedCaseStudies.length > 0 ? '05' : '04'}</span>
+          <h2 class="section-title mt-2">Technologies I work with</h2>
+        </div>
+      </div>
+      <TechStack technologies={solution.technologies} />
+    </div>
   </section>
 
   <!-- 8. Pricing indicator -->
-  <section class="mb-16">
-    <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <div>
-        <h2 class="text-xl font-bold text-gray-900 mb-1">Typical investment</h2>
-        <p class="text-gray-500 text-sm">Depends on scope, timeline, and complexity. Let's discuss your specific situation.</p>
-      </div>
-      <div class="text-right">
-        <p class="text-2xl font-bold text-blue-600">{solution.pricing.range}</p>
-        <p class="text-sm text-gray-500">{solution.pricing.unit}</p>
+  <section class="border-b border-rule">
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border border-rule p-8">
+        <div>
+          <span class="font-mono text-xs tracking-widest uppercase text-muted mb-2 block">Investment</span>
+          <h2 class="font-display text-xl font-bold mb-1">Typical investment</h2>
+          <p class="text-sm text-muted">Depends on scope, timeline, and complexity. Let's discuss your specific situation.</p>
+        </div>
+        <div class="text-right">
+          <p class="font-display text-2xl font-bold text-accent">{solution.pricing.range}</p>
+          <p class="font-mono text-xs text-muted">{solution.pricing.unit}</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- 9. FAQ -->
-  <section class="mb-16">
-    <div class="section-header">
-      <h2>Common questions</h2>
+  <section class="border-b border-rule">
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+      <div class="section-header">
+        <div>
+          <span class="section-number">{relatedCaseStudies.length > 0 ? '06' : '05'}</span>
+          <h2 class="section-title mt-2">Common questions</h2>
+        </div>
+      </div>
+      <FAQSection faqs={solution.faqs} />
     </div>
-    <FAQSection faqs={solution.faqs} />
   </section>
 
   <!-- 10. Final CTA -->
@@ -213,10 +226,10 @@ const serviceSchema = {
   />
 
   <!-- Back to solutions -->
-  <div class="text-center mb-8">
-    <a href="/solutions" class="inline-flex items-center text-sm text-gray-400 hover:text-gray-600 font-medium transition-colors">
+  <div class="container py-8">
+    <a href="/solutions" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors inline-flex items-center">
       <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
       </svg>
       Back to all solutions
     </a>

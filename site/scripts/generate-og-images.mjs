@@ -45,16 +45,16 @@ try {
   fontDataRegular = fontData;
 }
 
-// Color schemes per section
+// Color scheme: Rams + TE aesthetic — warm base, single accent
 const themes = {
-  home: { bg1: '#1e3a5f', bg2: '#0f1b2d', accent: '#3b82f6' },
-  solutions: { bg1: '#1a365d', bg2: '#1e1b4b', accent: '#6366f1' },
-  'case-studies': { bg1: '#134e4a', bg2: '#0f2d2a', accent: '#14b8a6' },
-  blog: { bg1: '#1e293b', bg2: '#0f172a', accent: '#3b82f6' },
-  pricing: { bg1: '#312e81', bg2: '#1e1b4b', accent: '#818cf8' },
-  ai: { bg1: '#1e3a5f', bg2: '#312e81', accent: '#60a5fa' },
-  cv: { bg1: '#1f2937', bg2: '#111827', accent: '#6b7280' },
-  default: { bg1: '#1e293b', bg2: '#0f172a', accent: '#3b82f6' }
+  home: { bg: '#fafaf8', text: '#0a0a0a', accent: '#ff5722', muted: '#9c9c96' },
+  solutions: { bg: '#fafaf8', text: '#0a0a0a', accent: '#ff5722', muted: '#9c9c96' },
+  'case-studies': { bg: '#fafaf8', text: '#0a0a0a', accent: '#ff5722', muted: '#9c9c96' },
+  blog: { bg: '#fafaf8', text: '#0a0a0a', accent: '#ff5722', muted: '#9c9c96' },
+  pricing: { bg: '#fafaf8', text: '#0a0a0a', accent: '#ff5722', muted: '#9c9c96' },
+  ai: { bg: '#fafaf8', text: '#0a0a0a', accent: '#ff5722', muted: '#9c9c96' },
+  cv: { bg: '#fafaf8', text: '#0a0a0a', accent: '#ff5722', muted: '#9c9c96' },
+  default: { bg: '#fafaf8', text: '#0a0a0a', accent: '#ff5722', muted: '#9c9c96' }
 };
 
 function getTheme(section) {
@@ -76,44 +76,13 @@ async function generateOGImage(title, subtitle, section, filename) {
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: '60px 70px',
-          background: `linear-gradient(135deg, ${theme.bg1} 0%, ${theme.bg2} 100%)`,
+          background: theme.bg,
           fontFamily: 'Inter',
           position: 'relative',
           overflow: 'hidden',
+          borderBottom: `4px solid ${theme.accent}`,
         },
         children: [
-          // Decorative circle
-          {
-            type: 'div',
-            props: {
-              style: {
-                position: 'absolute',
-                top: '-80px',
-                right: '-80px',
-                width: '300px',
-                height: '300px',
-                borderRadius: '50%',
-                background: theme.accent,
-                opacity: 0.08,
-              },
-            },
-          },
-          // Another decorative element
-          {
-            type: 'div',
-            props: {
-              style: {
-                position: 'absolute',
-                bottom: '-40px',
-                left: '-40px',
-                width: '200px',
-                height: '200px',
-                borderRadius: '50%',
-                background: theme.accent,
-                opacity: 0.05,
-              },
-            },
-          },
           // Section label
           {
             type: 'div',
@@ -131,7 +100,6 @@ async function generateOGImage(title, subtitle, section, filename) {
                       width: '4px',
                       height: '24px',
                       background: theme.accent,
-                      borderRadius: '2px',
                     },
                   },
                 },
@@ -167,7 +135,7 @@ async function generateOGImage(title, subtitle, section, filename) {
                   type: 'h1',
                   props: {
                     style: {
-                      color: '#ffffff',
+                      color: theme.text,
                       fontSize: title.length > 60 ? '36px' : title.length > 40 ? '42px' : '48px',
                       fontWeight: 700,
                       lineHeight: 1.2,
@@ -188,7 +156,7 @@ async function generateOGImage(title, subtitle, section, filename) {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                borderTop: `1px solid rgba(255,255,255,0.1)`,
+                borderTop: `1px solid #e4e4e0`,
                 paddingTop: '20px',
               },
               children: [
@@ -207,12 +175,11 @@ async function generateOGImage(title, subtitle, section, filename) {
                           style: {
                             width: '44px',
                             height: '44px',
-                            borderRadius: '22px',
-                            background: theme.accent,
+                            background: theme.text,
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            color: '#ffffff',
+                            color: theme.bg,
                             fontSize: '20px',
                             fontWeight: 700,
                           },
@@ -231,7 +198,7 @@ async function generateOGImage(title, subtitle, section, filename) {
                               type: 'span',
                               props: {
                                 style: {
-                                  color: '#ffffff',
+                                  color: theme.text,
                                   fontSize: '16px',
                                   fontWeight: 700,
                                 },
@@ -242,7 +209,7 @@ async function generateOGImage(title, subtitle, section, filename) {
                               type: 'span',
                               props: {
                                 style: {
-                                  color: 'rgba(255,255,255,0.5)',
+                                  color: theme.muted,
                                   fontSize: '14px',
                                   fontWeight: 400,
                                 },
@@ -259,7 +226,7 @@ async function generateOGImage(title, subtitle, section, filename) {
                   type: 'span',
                   props: {
                     style: {
-                      color: 'rgba(255,255,255,0.4)',
+                      color: theme.muted,
                       fontSize: '14px',
                       fontWeight: 400,
                     },

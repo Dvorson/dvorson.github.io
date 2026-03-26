@@ -18,61 +18,98 @@ const otherStudies = caseStudies.filter(cs => !cs.featured);
   url="https://dvorson.github.io/case-studies"
   canonical="https://dvorson.github.io/case-studies"
 >
-  <section class="mb-12">
-    <div class="section-header">
-      <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 tracking-tight">Real projects. Real outcomes.</h1>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">Every project here involved real constraints, real stakeholders, and real deadlines. No theoretical exercises — just working software that shipped to production.</p>
+  <section class="border-b border-rule">
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+      <div class="section-header">
+        <div>
+          <span class="section-number">01</span>
+          <h1 class="section-title mt-2">Real projects. Real outcomes.</h1>
+        </div>
+      </div>
+      <p class="text-muted leading-relaxed" style="max-width: 640px;">Every project here involved real constraints, real stakeholders, and real deadlines. No theoretical exercises — just working software that shipped to production.</p>
     </div>
   </section>
 
   <!-- Featured AI Case Studies -->
-  <section class="mb-16">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">AI & Agentic Systems</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {featuredStudies.map((cs) => (
-        <CaseStudyCard caseStudy={{
-          slug: cs.slug,
-          title: cs.title,
-          domain: cs.domain,
-          client: cs.client,
-          outcomes: cs.outcomes,
-          technologies: cs.technologies,
-          icon: cs.icon,
-          iconPath: iconPaths[cs.icon],
-          hasFullPage: cs.hasFullPage
-        }} />
-      ))}
+  <section class="border-b border-rule">
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+      <div class="section-header">
+        <div>
+          <span class="section-number">02</span>
+          <h2 class="section-title mt-2">AI & Agentic Systems</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 border border-rule">
+        {featuredStudies.map((cs, i) => (
+          <a href={cs.hasFullPage ? `/case-studies/${cs.slug}` : undefined}
+             class={`block p-8 hover:bg-muted-light transition-colors ${i < featuredStudies.length - 1 ? 'border-b md:border-b-0 md:border-r border-rule' : ''}`}
+          >
+            <span class="font-mono text-xs tracking-widest uppercase text-accent">{cs.domain}</span>
+            <h3 class="font-display text-lg font-bold mt-3 mb-2">{cs.title}</h3>
+            <p class="text-sm text-muted leading-relaxed mb-4">{cs.client}</p>
+            <div class="flex flex-wrap gap-2">
+              {cs.technologies.slice(0, 3).map(tech => (
+                <span class="font-mono text-xs border border-rule px-3 py-1 text-muted">{tech}</span>
+              ))}
+            </div>
+            {cs.outcomes?.[0] && (
+              <p class="text-sm text-muted mt-4 pt-4 border-t border-rule">{cs.outcomes[0]}</p>
+            )}
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 
   <!-- Other Projects -->
   {otherStudies.length > 0 && (
-    <section class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 mb-6">E-commerce, Embedded & Media</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {otherStudies.map((cs) => (
-          <CaseStudyCard caseStudy={{
-            slug: cs.slug,
-            title: cs.title,
-            domain: cs.domain,
-            client: cs.client,
-            outcomes: cs.outcomes,
-            technologies: cs.technologies,
-            icon: cs.icon,
-            iconPath: iconPaths[cs.icon],
-            hasFullPage: cs.hasFullPage
-          }} />
-        ))}
+    <section class="border-b border-rule">
+      <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+        <div class="section-header">
+          <div>
+            <span class="section-number">03</span>
+            <h2 class="section-title mt-2">E-commerce, Embedded & Media</h2>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 border border-rule">
+          {otherStudies.map((cs, i) => (
+            <a href={cs.hasFullPage ? `/case-studies/${cs.slug}` : undefined}
+               class={`block p-8 hover:bg-muted-light transition-colors ${i < otherStudies.length - 1 ? 'border-b md:border-b-0 md:border-r border-rule' : ''}`}
+            >
+              <span class="font-mono text-xs tracking-widest uppercase text-accent">{cs.domain}</span>
+              <h3 class="font-display text-lg font-bold mt-3 mb-2">{cs.title}</h3>
+              <p class="text-sm text-muted leading-relaxed mb-4">{cs.client}</p>
+              <div class="flex flex-wrap gap-2">
+                {cs.technologies.slice(0, 3).map(tech => (
+                  <span class="font-mono text-xs border border-rule px-3 py-1 text-muted">{tech}</span>
+                ))}
+              </div>
+              {cs.outcomes?.[0] && (
+                <p class="text-sm text-muted mt-4 pt-4 border-t border-rule">{cs.outcomes[0]}</p>
+              )}
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   )}
 
   <!-- GitHub repos section -->
-  <section class="mb-16">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">Open Source</h2>
-    <div id="github-repos" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center col-span-full">
-        <p class="text-gray-500 text-sm">Loading repositories...</p>
+  <section class="border-b border-rule">
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+      <div class="section-header">
+        <div>
+          <span class="section-number">{otherStudies.length > 0 ? '04' : '03'}</span>
+          <h2 class="section-title mt-2">Open Source</h2>
+        </div>
+        <a href="https://github.com/dvorson" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors" target="_blank" rel="noopener noreferrer">GitHub →</a>
+      </div>
+      <div id="github-repos" class="grid grid-cols-1 md:grid-cols-2 border border-rule">
+        <div class="p-8 text-center col-span-full">
+          <p class="font-mono text-xs text-muted">Loading repositories...</p>
+        </div>
       </div>
     </div>
   </section>
@@ -94,27 +131,27 @@ const otherStudies = caseStudies.filter(cs => !cs.featured);
       const publicRepos = repos.filter(r => !r.fork && !r.private);
 
       if (publicRepos.length === 0) {
-        container.innerHTML = '<div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center col-span-full"><p class="text-gray-500 text-sm">No public repositories found.</p></div>';
+        container.innerHTML = '<div class="p-8 text-center col-span-full border-b border-[#e4e4e0]"><p class="font-mono text-xs text-[#9c9c96]">No public repositories found.</p></div>';
         return;
       }
 
-      container.innerHTML = publicRepos.map(repo => `
-        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="group block bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-200 transition-all duration-200">
+      container.innerHTML = publicRepos.map((repo, i) => `
+        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="group block p-8 hover:bg-[#f2f2f0] transition-colors ${i < publicRepos.length - 1 ? 'border-b md:border-b-0 md:border-r border-[#e4e4e0]' : ''} ${i < publicRepos.length - 2 ? 'md:border-b md:border-[#e4e4e0]' : ''}">
           <div class="flex items-start justify-between mb-2">
-            <h3 class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">${repo.name}</h3>
-            <svg class="w-4 h-4 text-gray-400 flex-shrink-0 ml-2" fill="currentColor" viewBox="0 0 24 24">
+            <h3 class="font-bold group-hover:text-[#ff5722] transition-colors">${repo.name}</h3>
+            <svg class="w-4 h-4 text-[#9c9c96] flex-shrink-0 ml-2" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
             </svg>
           </div>
-          ${repo.description ? `<p class="text-gray-600 text-sm mb-3">${repo.description}</p>` : ''}
-          <div class="flex items-center gap-4 text-xs text-gray-400">
-            ${repo.language ? `<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span>${repo.language}</span>` : ''}
+          ${repo.description ? `<p class="text-sm text-[#9c9c96] mb-3">${repo.description}</p>` : ''}
+          <div class="flex items-center gap-4 font-mono text-xs text-[#9c9c96]">
+            ${repo.language ? `<span>${repo.language}</span>` : ''}
             ${repo.stargazers_count > 0 ? `<span>&#9733; ${repo.stargazers_count}</span>` : ''}
           </div>
         </a>
       `).join('');
     } catch (e) {
-      container.innerHTML = '<div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 text-center col-span-full"><p class="text-gray-500 text-sm">Visit <a href="https://github.com/dvorson" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">github.com/dvorson</a> to see my repositories.</p></div>';
+      container.innerHTML = '<div class="p-8 text-center col-span-full"><p class="font-mono text-xs text-[#9c9c96]">Visit <a href="https://github.com/dvorson" class="text-[#0a0a0a] hover:text-[#ff5722] underline" target="_blank" rel="noopener noreferrer">github.com/dvorson</a> to see my repositories.</p></div>';
     }
   }
   loadRepos();

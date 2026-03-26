@@ -8,7 +8,7 @@ const { technologies } = Astro.props;
 
 <div class="flex flex-wrap gap-2">
   {technologies.map((tech) => (
-    <span class="px-3 py-1.5 bg-gray-100 text-gray-700 text-sm font-medium rounded-full">
+    <span class="font-mono text-xs border border-rule px-3 py-1 text-muted">
       {tech}
     </span>
   ))}

@@ -2,401 +2,336 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   DESIGN SYSTEM: Dieter Rams + Teenage Engineering
+   - Functional minimalism with playful precision
+   - "As little design as possible" (Rams #10)
+   - ONE accent color: TE orange (#ff5722)
+   - 8px grid, 1px borders, zero shadows/gradients/rounded corners
+   ============================================================ */
+
 @layer base {
   html {
-    @apply scroll-smooth;
+    scroll-behavior: smooth;
   }
+
   body {
-    @apply bg-gray-50 text-gray-900 font-sans antialiased;
+    background-color: #fafaf8;
+    color: #0a0a0a;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: #ff5722;
+    color: #ffffff;
   }
 }
 
 @layer components {
+  /* Container */
   .container {
-    @apply max-w-4xl mx-auto px-4 sm:px-6;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
-  
-  .btn {
-    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm transition-all duration-200;
-  }
-  
+
+  /* Buttons — Rams: purposeful, no decoration */
   .btn-primary {
-    @apply bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 32px;
+    background-color: #0a0a0a;
+    color: #fafaf8;
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    border: 1.5px solid #0a0a0a;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
   }
-  
+
+  .btn-primary:hover {
+    background-color: #ff5722;
+    border-color: #ff5722;
+    color: #ffffff;
+  }
+
   .btn-secondary {
-    @apply bg-white text-gray-700 border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
-  }
-  
-  .input-field {
-    @apply block w-full rounded-md border-gray-300 shadow-sm 
-           focus:border-indigo-500 focus:ring-indigo-500 
-           sm:text-sm transition-colors duration-200;
-  }
-  
-  .card {
-    @apply bg-white rounded-xl p-6 shadow-sm hover:shadow-md 
-           transition-all border border-gray-100;
-  }
-  
-  .card-hover {
-    @apply hover:border-indigo-100 hover:shadow-md;
-  }
-  
-  .section-title {
-    @apply text-2xl font-bold mb-6 text-gray-800 flex items-center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 32px;
+    background-color: transparent;
+    color: #0a0a0a;
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    border: 1.5px solid #e4e4e0;
+    cursor: pointer;
+    transition: border-color 0.2s;
   }
 
+  .btn-secondary:hover {
+    border-color: #0a0a0a;
+  }
+
+  /* Section headers — Braun manual aesthetic */
   .section-header {
-    @apply text-center mb-12;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid #e4e4e0;
   }
 
-  .section-header h2 {
-    @apply text-3xl sm:text-4xl font-bold text-gray-900 mb-4 tracking-tight;
+  .section-number {
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    font-size: 11px;
+    color: #9c9c96;
+    letter-spacing: 1px;
   }
 
-  .section-header p {
-    @apply text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed;
-  }
-
-  .metric-highlight {
-    @apply text-3xl sm:text-4xl font-bold text-blue-600;
-  }
-  
-  .icon-wrapper {
-    @apply inline-block mr-3 p-1.5 bg-indigo-100 rounded-md;
-  }
-  
-  .icon {
-    @apply h-5 w-5 text-indigo-600;
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0a0a0a;
+    letter-spacing: -0.5px;
   }
 }
 
-@layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600;
-  }
-  
-  .bg-blur-gradient {
-    @apply relative overflow-hidden;
-  }
-  
-  .bg-blur-gradient::before {
-    content: '';
-    @apply absolute -top-24 -right-24 w-64 h-64 bg-gradient-to-br from-indigo-200/30 to-purple-200/30 rounded-full blur-3xl;
-  }
-  
-  .bg-blur-gradient::after {
-    content: '';
-    @apply absolute -bottom-16 -left-16 w-48 h-48 bg-gradient-to-br from-blue-200/20 to-indigo-200/20 rounded-full blur-3xl;
-  }
-}
+/* ============================================================
+   PROSE — Blog article styling
+   Serif headings, clean borders, mono code, no decoration
+   ============================================================ */
 
-/* Enhanced Prose Styling for Articles */
 .prose {
-  @apply text-gray-800 leading-relaxed;
+  color: #0a0a0a;
+  line-height: 1.75;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  text-rendering: optimizeLegibility;
 }
 
-.prose h1 {
-  @apply text-gray-900 font-bold tracking-tight text-3xl mb-8 pb-4 border-b border-gray-200;
-}
-
-.prose h2 {
-  @apply text-gray-900 font-bold tracking-tight text-2xl mt-12 mb-6;
-}
-
-.prose h3 {
-  @apply text-gray-900 font-bold tracking-tight text-xl mt-8 mb-4;
-}
-
-.prose h4 {
-  @apply text-gray-900 font-bold tracking-tight text-lg mt-6 mb-3;
-}
-
-.prose h5 {
-  @apply text-gray-900 font-bold tracking-tight text-base mt-6 mb-3;
-}
-
-.prose h6 {
-  @apply text-gray-900 font-bold tracking-tight text-base mt-6 mb-3;
-}
-
-.prose h2 {
-  @apply relative;
-}
-
-.prose h2::before {
-  content: '';
-  @apply absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full;
-}
-
-/* Better spacing for article sections */
 .prose > * + * {
   margin-top: 1.5em;
 }
 
-.prose > p + h2,
-.prose > ul + h2,
-.prose > ol + h2,
-.prose > pre + h2,
-.prose > blockquote + h2 {
+/* Headings */
+.prose h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: -0.5px;
+  color: #0a0a0a;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e4e4e0;
+}
+
+.prose h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.3px;
+  color: #0a0a0a;
   margin-top: 3rem;
+  margin-bottom: 1.5rem;
 }
 
-.prose > p + h3,
-.prose > ul + h3,
-.prose > ol + h3,
-.prose > pre + h3,
-.prose > blockquote + h3 {
-  margin-top: 2.5rem;
+.prose h3 {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #0a0a0a;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
+.prose h4, .prose h5, .prose h6 {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #0a0a0a;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Paragraphs */
 .prose p {
   margin-bottom: 1.5em;
+  hyphens: auto;
 }
 
-.prose code:not(.hljs) {
-  @apply bg-gray-100 text-pink-600 px-2 py-1 rounded-md text-sm font-mono;
-}
-
-.prose pre {
-  @apply bg-gray-900 text-gray-100 rounded-xl border border-gray-700 p-6;
-}
-
-.prose pre code {
-  @apply bg-transparent text-gray-100 p-0;
-}
-
-.prose blockquote {
-  @apply border-l-4 border-blue-500 bg-blue-50/50 backdrop-blur-sm pl-6 pr-6 py-4 rounded-r-lg italic;
-}
-
-.prose blockquote p {
-  @apply text-blue-900 font-medium;
-}
-
-.prose table {
-  @apply border-collapse w-full border border-gray-300 rounded-lg overflow-hidden shadow-sm;
-}
-
-.prose th {
-  @apply bg-gray-50 font-semibold text-gray-900 text-left px-4 py-3 border-b border-gray-300;
-}
-
-.prose td {
-  @apply px-4 py-3 border-b border-gray-200;
-}
-
-.prose tr:hover {
-  @apply bg-gray-50;
-}
-
-.prose img {
-  @apply rounded-xl shadow-lg mx-auto border border-gray-200;
-}
-
-.prose ul, .prose ol {
-  @apply space-y-2;
-}
-
-.prose li {
-  @apply text-gray-700 leading-relaxed;
-}
-
-.prose li::marker {
-  @apply text-blue-600;
-}
-
+/* Links */
 .prose a {
-  @apply text-blue-600 font-medium hover:text-blue-700 transition-colors duration-200;
+  color: #0a0a0a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s;
 }
 
 .prose a:hover {
-  @apply underline decoration-2 underline-offset-2;
+  color: #ff5722;
 }
 
+.prose a:focus-visible {
+  outline: 2px solid #ff5722;
+  outline-offset: 2px;
+}
+
+/* Strong & Em */
 .prose strong {
-  @apply text-gray-900 font-semibold;
+  font-weight: 700;
+  color: #0a0a0a;
 }
 
 .prose em {
-  @apply text-gray-700;
+  color: #0a0a0a;
 }
 
-/* Code syntax highlighting enhancement */
-.prose .hljs {
-  @apply bg-gray-900 text-gray-100 !important;
-  color: #f3f4f6 !important;
-  background: #111827 !important;
+/* Inline code */
+.prose code:not(pre code) {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-size: 0.875em;
+  background-color: #f2f2f0;
+  color: #0a0a0a;
+  padding: 2px 6px;
+  border: 1px solid #e4e4e0;
 }
 
-.prose .hljs-keyword {
-  @apply text-purple-400 !important;
+/* Code blocks */
+.prose pre {
+  background-color: #0a0a0a;
+  color: #e4e4e0;
+  border: 1px solid #e4e4e0;
+  padding: 1.5rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.7;
 }
 
-.prose .hljs-string {
-  @apply text-green-400 !important;
+.prose pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border: none;
+  font-size: inherit;
 }
 
-.prose .hljs-number {
-  @apply text-orange-400 !important;
-}
-
-.prose .hljs-comment {
-  @apply text-gray-500 !important;
-}
-
-.prose .hljs-function {
-  @apply text-blue-400 !important;
-}
-
-.prose .hljs-title {
-  @apply text-yellow-400 !important;
-}
-
-/* Ensure no white highlighting on code blocks */
-.prose pre code.hljs,
-.prose pre .hljs {
-  background: #111827 !important;
-  color: #f3f4f6 !important;
-}
-
-.prose pre code.hljs *,
-.prose pre .hljs * {
-  background: transparent !important;
-}
-
-/* Override any conflicting Astro code styles */
+/* Astro code blocks */
 .prose pre.astro-code,
 .prose pre[class*="astro-code"] {
-  background: #24292e !important;
-  color: #e1e4e8 !important;
+  background: #0a0a0a !important;
+  color: #e4e4e0 !important;
 }
 
-.prose pre.astro-code code,
-.prose pre[class*="astro-code"] code {
-  background: transparent !important;
-  color: inherit !important;
-}
-
+.prose pre.astro-code span,
+.prose pre[class*="astro-code"] span,
 .prose pre.astro-code .line,
 .prose pre[class*="astro-code"] .line {
   background: transparent !important;
 }
 
-/* Ensure all span elements in code blocks inherit proper styling */
-.prose pre.astro-code span,
-.prose pre[class*="astro-code"] span,
-.prose pre.hljs span {
-  background: transparent !important;
+/* Blockquotes — TE orange accent only */
+.prose blockquote {
+  border-left: 2px solid #ff5722;
+  padding-left: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-style: italic;
 }
 
-/* Force override for any GitHub-style syntax highlighting */
-.prose code span[style*="color:#E1E4E8"],
-.prose pre span[style*="color:#E1E4E8"] {
-  color: #f3f4f6 !important;
+.prose blockquote p {
+  color: #5c5c58;
+  font-weight: 500;
 }
 
-.prose code span[style*="color:#6A737D"],
-.prose pre span[style*="color:#6A737D"] {
-  color: #9ca3af !important;
+/* Tables — clean grid, no decoration */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e4e4e0;
 }
 
-.prose code span[style*="color:#F97583"],
-.prose pre span[style*="color:#F97583"] {
-  color: #f472b6 !important;
+.prose th {
+  font-weight: 600;
+  color: #0a0a0a;
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e4e4e0;
+  background-color: #f2f2f0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-.prose code span[style*="color:#9ECBFF"],
-.prose pre span[style*="color:#9ECBFF"] {
-  color: #60a5fa !important;
+.prose td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e4e4e0;
 }
 
-.prose code span[style*="color:#79B8FF"],
-.prose pre span[style*="color:#79B8FF"] {
-  color: #fbbf24 !important;
+.prose tr:hover {
+  background-color: #f2f2f0;
 }
 
-.prose code span[style*="color:#B392F0"],
-.prose pre span[style*="color:#B392F0"] {
-  color: #a78bfa !important;
+/* Images — no decoration */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #e4e4e0;
 }
 
-.prose code span[style*="color:#FFAB70"],
-.prose pre span[style*="color:#FFAB70"] {
-  color: #fb923c !important;
+/* Lists */
+.prose ul, .prose ol {
+  padding-left: 1.5em;
 }
 
-/* Animation classes */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.prose ul { list-style-type: disc; }
+.prose ol { list-style-type: decimal; }
+
+.prose li {
+  color: #0a0a0a;
+  line-height: 1.75;
+  margin-top: 0.5em;
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.prose li::marker {
+  color: #9c9c96;
 }
 
-@keyframes fadeInRight {
-  from { opacity: 0; transform: translateX(-20px); }
-  to { opacity: 1; transform: translateX(0); }
+/* Horizontal rule */
+.prose hr {
+  border: none;
+  border-top: 1px solid #e4e4e0;
+  margin: 3rem 0;
 }
 
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-out forwards;
-}
-
-.animate-fadeInUp {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-.animate-fadeInRight {
-  animation: fadeInRight 0.5s ease-out forwards;
-}
-
-.animate-delay-100 {
-  animation-delay: 100ms;
-}
-
-.animate-delay-200 {
-  animation-delay: 200ms;
-}
-
-.animate-delay-300 {
-  animation-delay: 300ms;
-}
-
-/* Reading experience enhancements */
-.prose {
-  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'zero' 1;
-  text-rendering: optimizeLegibility;
-}
-
-.prose p {
-  @apply hyphens-auto;
-}
-
-/* Focus states for accessibility */
-.prose a:focus {
-  @apply outline-2 outline-blue-500 outline-offset-2 rounded;
-}
-
-/* Print styles for articles */
+/* Print styles */
 @media print {
   .prose {
-    @apply text-black;
+    color: #000;
   }
-  
+
   .prose h1, .prose h2, .prose h3 {
-    @apply text-black;
+    color: #000;
   }
-  
+
   .prose a {
-    @apply text-black underline;
+    color: #000;
+    text-decoration: underline;
   }
-  
+
   .prose blockquote {
-    @apply border-l-4 border-gray-800 bg-transparent;
+    border-left-color: #000;
   }
 }
