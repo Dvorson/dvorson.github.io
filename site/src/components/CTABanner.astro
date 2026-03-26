@@ -9,8 +9,8 @@ export interface Props {
 const {
   headline,
   description,
-  ctaText = 'Book a Call',
-  ctaLink = 'https://calendly.com/dvorson',
+  ctaText = 'Get in Touch',
+  ctaLink = '/#contact',
 } = Astro.props;
 ---
 
@@ -24,8 +24,6 @@ const {
     </p>
     <a
       href={ctaLink}
-      target="_blank"
-      rel="noopener noreferrer"
       class="btn-primary"
     >
       {ctaText}

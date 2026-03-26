@@ -4,9 +4,9 @@ export interface Props {
   text?: string;
 }
 
-const { url = 'https://calendly.com/dvorson', text = 'Book a Call' } = Astro.props as Props;
+const { url = '/#contact', text = 'Get in Touch' } = Astro.props as Props;
 ---
 
-<a href={url} target="_blank" rel="noopener noreferrer" class="btn-primary">
+<a href={url} class="btn-primary">
   {text}
 </a>

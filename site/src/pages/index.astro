@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
 import services from '../data/services.json';
 
 const postModules = import.meta.glob('../posts/*.md', { eager: true });
@@ -35,7 +36,7 @@ const featuredCase = caseStudies.find(cs => cs.featured);
         From proof-of-concept to production. Agents, knowledge graphs, and intelligent platforms for enterprises that need them working, not demoed.
       </p>
       <div class="flex flex-col sm:flex-row gap-4">
-        <a href="https://calendly.com/dvorson" target="_blank" rel="noopener noreferrer" class="btn-primary">Book a strategy call</a>
+        <a href="#contact" class="btn-primary">Get in touch</a>
         <a href="#solutions" class="btn-secondary">View solutions</a>
       </div>
     </div>
@@ -190,13 +191,20 @@ const featuredCase = caseStudies.find(cs => cs.featured);
   </section>
 
   <!-- ============================================================
-       CALENDLY CTA — Simple, centered
+       CONTACT FORM — Formspree
        ============================================================ -->
-  <section>
-    <div class="container text-center" style="padding-top: 96px; padding-bottom: 96px;">
-      <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">Let's solve your AI problem</h2>
-      <p class="text-muted mb-10">30 minutes. No pitch, no pressure — just problem-solving.</p>
-      <a href="https://calendly.com/dvorson" target="_blank" rel="noopener noreferrer" class="btn-primary">Book a call</a>
+  <section id="contact">
+    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+      <div class="section-header">
+        <div>
+          <span class="section-number">04</span>
+          <h2 class="section-title mt-2">Get in touch</h2>
+        </div>
+      </div>
+      <div style="max-width: 800px;">
+        <p class="text-muted leading-relaxed mb-10">Tell me about your challenge. No pitch, no pressure — just an honest conversation about whether I can help.</p>
+        <ContactForm />
+      </div>
     </div>
   </section>
 </Layout>
