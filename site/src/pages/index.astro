@@ -167,23 +167,33 @@ const featuredCase = caseStudies.find(cs => cs.featured);
   </section>
 
   <!-- ============================================================
-       LEAD CAPTURE — Email signup (Phase 2 will add backend)
+       LEAD CAPTURE — AI Readiness Checklist + email subscribe
        ============================================================ -->
   <section class="border-b border-rule">
     <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
         <div>
-          <h2 class="font-display text-3xl font-bold mb-4">Get notified when I publish</h2>
-          <p class="text-muted leading-relaxed">Occasional essays on AI architecture, production systems, and lessons from 12+ years of enterprise delivery. No spam, no fluff.</p>
+          <h2 class="font-display text-3xl font-bold mb-4">AI Readiness Checklist</h2>
+          <p class="text-muted leading-relaxed">Score your organization across 8 dimensions — data, infrastructure, team skills, use case clarity, and more. Know where you stand before you invest.</p>
         </div>
         <div>
-          <form class="flex" onsubmit="return false;">
-            <input
-              type="email"
-              placeholder="your@company.com"
-              class="flex-1 px-5 py-3 border border-rule bg-transparent font-mono text-sm focus:border-ink outline-none text-ink placeholder:text-muted"
-            />
-            <button type="submit" class="btn-primary" style="border-left: none;">Subscribe</button>
+          <form id="subscribe-form" action="https://formspree.io/f/mdkdpbzj" method="POST" class="flex flex-col gap-4">
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+            <input type="hidden" name="_subject" value="AI Readiness Checklist download" />
+            <div class="flex">
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="your@company.com"
+                class="flex-1 px-5 py-3 border border-rule bg-transparent font-mono text-sm focus:border-ink outline-none text-ink placeholder:text-muted"
+              />
+              <button type="submit" id="subscribe-btn" class="btn-primary" style="border-left: none;">Get the checklist</button>
+            </div>
+            <div id="subscribe-status" class="hidden">
+              <p class="font-mono text-xs text-ink mb-2">Your checklist is ready:</p>
+              <a href="/ai-readiness-checklist.pdf" download class="font-mono text-xs text-accent hover:text-ink transition-colors">Download AI Readiness Checklist (PDF) →</a>
+            </div>
           </form>
         </div>
       </div>
@@ -222,5 +232,34 @@ const featuredCase = caseStudies.find(cs => cs.featured);
       }, { threshold: 0.1 });
       observer.observe(canvas);
     }
+  }
+
+  // Subscribe form handler
+  const subForm = document.getElementById('subscribe-form');
+  if (subForm) {
+    subForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('subscribe-btn') as HTMLButtonElement;
+      const status = document.getElementById('subscribe-status')!;
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      try {
+        const res = await fetch(subForm.getAttribute('action')!, {
+          method: 'POST',
+          body: new FormData(subForm as HTMLFormElement),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          status.classList.remove('hidden');
+          btn.textContent = 'Sent!';
+        } else {
+          btn.textContent = 'Try again';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+      }
+    });
   }
 </script>
