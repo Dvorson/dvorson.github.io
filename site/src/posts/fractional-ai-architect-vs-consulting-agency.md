@@ -10,7 +10,7 @@ heroImage: "/img/fractional-vs-agency.jpg"
 
 # Fractional AI Architect vs AI Consulting Agency: Which Does Your Business Need?
 
-You have decided your business needs AI expertise. Now you face a second decision that will shape the entire project: do you hire a fractional AI architect or engage a consulting agency? Having worked on both sides (as a senior architect within EPAM Systems, a 60,000+ person delivery firm, and as an independent practitioner), I have a clear-eyed view of when each model delivers and when it fails.
+You have decided your business needs AI expertise. Now you face a second decision that will shape the entire project: do you hire a fractional AI architect or engage a consulting agency? Having worked on both sides (as a senior architect within a major global IT services firm and as an independent practitioner), I have a clear-eyed view of when each model delivers and when it fails.
 
 The right choice depends on your project, your team, and what you are optimizing for. This post gives you the framework to decide.
 

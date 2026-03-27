@@ -51,7 +51,7 @@
   ],
   "experience": [
     {
-      "company": "EPAM Systems",
+      "company": "Global IT Services Company",
       "title": "Lead Software Engineer",
       "subtitle": "GenAI Enablement Platform",
       "start": "Jan 2026",
@@ -72,7 +72,7 @@
       "technologies": "Kotlin, Kubernetes, Next.js 16, TypeScript, LLM Serving Infrastructure, Agentic AI"
     },
     {
-      "company": "EPAM Systems",
+      "company": "Global IT Services Company",
       "title": "Lead Software Engineer",
       "subtitle": "GraphRAG Knowledge Base",
       "start": "Nov 2025",
@@ -94,7 +94,7 @@
       "technologies": "GraphRAG, Neo4j, Langflow, LLM Agents, Sigma.js, Salesforce Knowledge, Python, Custom Ontology Design"
     },
     {
-      "company": "EPAM Systems",
+      "company": "Global IT Services Company",
       "title": "Lead Software Engineer",
       "subtitle": "Multi-Agent AI for Telecom",
       "start": "May 2025",
@@ -116,7 +116,7 @@
       "technologies": "Langflow, OpenWebUI, Grafana, RAG, Vector DB, LLM Agents, Python, REST APIs"
     },
     {
-      "company": "EPAM Systems",
+      "company": "Global IT Services Company",
       "title": "Lead Software Engineer",
       "subtitle": "Global Coffee Brand PWA Storefront",
       "start": "Jan 2023",
@@ -141,7 +141,7 @@
       "technologies": "Next.js, Node.js, TypeScript, GraphCommerce, GraphQL Mesh, Apollo, GraphCMS, Redis, Vercel, Azure, GitHub Actions, Docker, NewRelic, Design Tokens"
     },
     {
-      "company": "EPAM Systems",
+      "company": "Global IT Services Company",
       "title": "Lead Software Engineer",
       "subtitle": "Multimedia Hub for Set Top Box",
       "start": "Jun 2021",
