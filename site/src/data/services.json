@@ -295,6 +295,7 @@
       ],
       "technologies": ["Next.js", "TypeScript", "GraphQL Mesh", "GraphCommerce", "Magento", "Azure", "Adyen", "Design Tokens"],
       "icon": "cart",
+      "screenshot": "/img/cases/case-jde-storefront.png",
       "featured": true,
       "hasFullPage": false
     },
