@@ -10,9 +10,9 @@ heroImage: "/img/rag-fixes.jpg"
 
 # Why Your RAG Implementation Isn't Working (And How to Fix It)
 
-You built a RAG system. It worked great on the demo dataset. Your team was excited. Then you connected it to real data and the answers started coming back wrong -- confidently wrong. Sound familiar?
+You built a RAG system. It worked great on the demo dataset. Your team was excited. Then you connected it to real data and the answers started coming back wrong. Confidently wrong. Sound familiar?
 
-I have been called in to fix more RAG implementations than I have built from scratch. The failure modes are remarkably consistent across organizations, and most of them are fixable without rebuilding the entire system. This post walks through the most common reasons RAG systems fail in production and the specific fixes I apply.
+I've been called in to fix more RAG implementations than I've built from scratch. The failure modes are remarkably consistent across organizations, and most of them are fixable without rebuilding the entire system. This post walks through the most common reasons RAG systems fail in production and the specific fixes I apply.
 
 ## Problem 1: Your Chunks Are Wrong
 
@@ -22,7 +22,7 @@ This is the single most common issue and the one with the biggest impact on answ
 
 **Why it happens:** Fixed-size chunking splits content at arbitrary boundaries. A paragraph explaining a configuration procedure gets split across two chunks. The first chunk has the steps, the second has the important warning about what not to do. The retriever finds the first chunk but not the second, and the generated answer tells the user how to do something without mentioning that it will break their system under certain conditions.
 
-**The fix:** Switch to semantic chunking or structural chunking. Semantic chunking uses an LLM or embedding model to identify natural break points in the content -- where the topic actually changes. Structural chunking uses document structure (headers, sections, paragraphs) to create chunks that represent complete thoughts.
+**The fix:** Switch to semantic chunking or structural chunking. Semantic chunking uses an LLM or embedding model to identify natural break points in the content, where the topic actually changes. Structural chunking uses document structure (headers, sections, paragraphs) to create chunks that represent complete thoughts.
 
 In practice, I use a hybrid approach: chunk at structural boundaries (sections, subsections) and then split any chunks that exceed a maximum token limit at the nearest paragraph break. This preserves context while keeping chunks within the embedding model's effective range.
 
@@ -34,7 +34,7 @@ Your chunks might be well-formed, but if the retriever is pulling irrelevant one
 
 **Symptom:** The system returns answers that are topically adjacent but factually wrong for the specific question. The retrieved chunks are about the right topic but not the right aspect of it.
 
-**Why it happens:** Pure vector similarity is a blunt instrument. The embedding for "how to reset my password" and "our password policy requires 12 characters" are semantically similar -- both are about passwords -- but they answer very different questions. The retriever cannot distinguish between these without additional signals.
+**Why it happens:** Pure vector similarity is a blunt instrument. The embedding for "how to reset my password" and "our password policy requires 12 characters" are semantically similar (both are about passwords) but they answer very different questions. The retriever cannot distinguish between these without additional signals.
 
 **The fix:** Three approaches, in order of effort.
 
@@ -48,7 +48,7 @@ I use all three in production. The combination of metadata filtering + hybrid re
 
 ## Problem 3: The LLM Is Ignoring Retrieved Context
 
-Sometimes the retriever does its job perfectly -- the right chunks are found -- but the LLM ignores them and generates an answer from its parametric memory instead.
+Sometimes the retriever does its job perfectly (the right chunks are found) but the LLM ignores them and generates an answer from its parametric memory instead.
 
 **Symptom:** The generated answer sounds authoritative but does not match any of the retrieved documents. Alternatively, the answer starts by citing retrieved content and then drifts into information that came from the model's training data.
 
@@ -78,7 +78,7 @@ For organizations with large knowledge bases where contradictions are endemic, I
 
 ## Problem 5: No Evaluation Framework
 
-This is not a technical problem in the RAG pipeline -- it is a process problem. But it causes more failed RAG projects than any single technical issue.
+This is not a technical problem in the RAG pipeline; it's a process problem. But it causes more failed RAG projects than any single technical issue.
 
 **Symptom:** The team cannot objectively answer the question "Is our RAG system good?" Changes are made based on anecdotal reports ("Someone said it gave a wrong answer last week") rather than systematic measurement.
 
@@ -110,6 +110,6 @@ If your RAG system is underperforming, here is the order I attack these problems
 
 **Step 6:** Implement freshness and contradiction handling for production stability.
 
-This order is not arbitrary -- it reflects the dependency chain. Better chunks improve retrieval. Better retrieval reduces the burden on prompt engineering. And none of it matters without evaluation to confirm you are actually making things better.
+This order is not arbitrary. It reflects the dependency chain. Better chunks improve retrieval. Better retrieval reduces the burden on prompt engineering. And none of it matters without evaluation to confirm you are actually making things better.
 
-If you are stuck on a RAG implementation that is not delivering the quality you need, I have worked through this exact diagnostic process with multiple clients. I have also written a broader comparison of [RAG vs GraphRAG vs fine-tuning](/rag-vs-graphrag-vs-fine-tuning-decision-framework) that might help you determine whether your problem is fixable within a RAG architecture or whether you need a different approach entirely.
+If you are stuck on a RAG implementation that is not delivering the quality you need, I've worked through this exact diagnostic process with multiple clients. I've also written a broader comparison of [RAG vs GraphRAG vs fine-tuning](/rag-vs-graphrag-vs-fine-tuning-decision-framework) that might help you determine whether your problem is fixable within a RAG architecture or whether you need a different approach entirely.

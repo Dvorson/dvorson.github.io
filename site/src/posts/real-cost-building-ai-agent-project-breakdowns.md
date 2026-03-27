@@ -12,13 +12,13 @@ heroImage: "/img/ai-agent-cost.jpg"
 
 The question I hear most often from business leaders is some version of: "How much does it actually cost to build an AI agent?" The honest answer is that it depends, but that is not a useful answer when you need to put a number in a budget proposal. So let me give you the real numbers.
 
-I have built AI agent systems across telecom, e-commerce, and enterprise knowledge management. The budgets have ranged from EUR 15,000 for a focused single-agent system to EUR 80,000+ for a multi-agent platform with full production deployment. In this post I will break down where that money goes and help you estimate what your project might cost.
+I've built AI agent systems across telecom, e-commerce, and enterprise knowledge management. The budgets have ranged from EUR 15,000 for a focused single-agent system to EUR 80,000+ for a multi-agent platform with full production deployment. In this post I will break down where that money goes and help you estimate what your project might cost.
 
 ## What You Are Actually Paying For
 
 AI agent projects have costs across four categories, and most people underestimate three of them.
 
-**1. Design and Architecture (15-25% of budget).** Before writing any code, you need to define what the agent does, how it interacts with your existing systems, what data it needs access to, and what guardrails prevent it from doing something harmful. This phase includes discovery conversations, architecture design, data assessment, and a technical proposal. It is tempting to skip this and jump straight to coding, but every project I have seen that skipped proper design spent more on rework later.
+**1. Design and Architecture (15-25% of budget).** Before writing any code, you need to define what the agent does, how it interacts with your existing systems, what data it needs access to, and what guardrails prevent it from doing something harmful. This phase includes discovery conversations, architecture design, data assessment, and a technical proposal. It's tempting to skip this and jump straight to coding, but every project I've seen that skipped proper design spent more on rework later.
 
 For a typical project this means 2-4 weeks of work, costing EUR 3,000-12,000 depending on complexity.
 
@@ -94,13 +94,13 @@ You can read more about this project in the [multi-agent telecom case study](/ca
 
 **Cost multipliers:** Legacy system integration (SOAP, custom protocols) adds 20-40%. Multi-language support adds 15-25%. Real-time requirements (sub-second responses under load) add 15-30%. Compliance requirements (audit trails, data residency, access control) add 20-35%.
 
-**Cost reducers:** Using a single LLM provider simplifies development. Starting with an internal-only deployment (no customer-facing risk) reduces the testing and guardrail investment. Having clean, well-structured source data cuts the data preparation phase significantly. Choosing the right scope -- building one agent that does one thing well rather than a platform that does everything -- is the single biggest cost reducer.
+**Cost reducers:** Using a single LLM provider simplifies development. Starting with an internal-only deployment (no customer-facing risk) reduces the testing and guardrail investment. Having clean, well-structured source data cuts the data preparation phase significantly. Choosing the right scope (building one agent that does one thing well rather than a platform that does everything) is the single biggest cost reducer.
 
 ## The Hidden Costs Nobody Mentions
 
 **Prompt iteration.** Getting prompts right takes longer than most teams expect. Budget 1-2 weeks purely for prompt engineering and evaluation, especially for customer-facing agents where tone and accuracy matter.
 
-**Data preparation.** If your source data is messy (and it usually is), cleaning, structuring, and validating it can consume 20-30% of the total budget. This is not optional -- garbage in, garbage out applies more to AI agents than to any other software I have built.
+**Data preparation.** If your source data is messy (and it usually is), cleaning, structuring, and validating it can consume 20-30% of the total budget. This is not optional. Garbage in, garbage out applies more to AI agents than to any other software I've built.
 
 **Change management.** An AI agent changes how people work. Budget time for training the team that will operate alongside the agent, documenting workflows, and gathering feedback during the first month of operation.
 

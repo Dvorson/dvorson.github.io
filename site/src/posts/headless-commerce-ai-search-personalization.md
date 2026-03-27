@@ -12,7 +12,7 @@ heroImage: "/img/headless-commerce-ai.jpg"
 
 If you run an e-commerce platform on a headless architecture, you have already solved the hard problem of decoupling your frontend from your backend. But most headless commerce implementations I see are still using the same basic search and recommendation approaches they had five years ago: keyword matching, rule-based category pages, and maybe a basic collaborative filtering engine that suggests "customers also bought."
 
-The gap between what AI can do for e-commerce today and what most platforms actually implement is enormous. I have spent the last several years building AI systems for e-commerce clients, and the ROI on intelligent search and personalization is consistently the highest-impact investment these businesses make.
+The gap between what AI can do for e-commerce today and what most platforms actually implement is enormous. I've spent the last several years building AI systems for e-commerce clients, and the ROI on intelligent search and personalization is consistently the highest-impact investment these businesses make.
 
 ## Why Headless Commerce Is Uniquely Ready for AI
 
@@ -20,7 +20,7 @@ Headless architecture separates the presentation layer from the commerce engine.
 
 In a monolithic commerce platform, adding AI means modifying the core application. In a headless setup, you add an [intelligent middleware layer](/solutions/ai-ecommerce) that intercepts search queries, enriches product data, and personalizes responses before they reach the frontend. The commerce engine never knows the difference.
 
-This is not theoretical. I have implemented this pattern for two e-commerce clients, and in both cases we added AI capabilities without changing a single line of code in their existing commerce platform.
+This is not theoretical. I've implemented this pattern for two e-commerce clients, and in both cases we added AI capabilities without changing a single line of code in their existing commerce platform.
 
 ## Intelligent Search: Beyond Keyword Matching
 
@@ -32,13 +32,13 @@ The implementation is straightforward: embed your product catalog into a vector 
 
 **Query understanding with LLMs.** For more complex queries, I add an LLM layer that interprets the search intent before the vector lookup. "I need a gift for my dad who likes cooking" gets decomposed into product attributes (kitchen tools, cooking gadgets, premium quality, gift-appropriate price range) that drive a more targeted search. This adds 200-400ms to the query but dramatically improves result relevance for conversational searches.
 
-**Hybrid ranking.** Pure semantic search has its own failure modes -- it can return products that are semantically related but not commercially relevant. A customer searching for "iPhone 16 case" should see cases, not the iPhone 16 itself. I use a hybrid ranking approach that combines semantic similarity with business rules (availability, margin, category match) and behavioral signals (click-through rates, conversion rates) to produce the final ranking.
+**Hybrid ranking.** Pure semantic search has its own failure modes. It can return products that are semantically related but not commercially relevant. A customer searching for "iPhone 16 case" should see cases, not the iPhone 16 itself. I use a hybrid ranking approach that combines semantic similarity with business rules (availability, margin, category match) and behavioral signals (click-through rates, conversion rates) to produce the final ranking.
 
 ## Personalization That Actually Works
 
 Most e-commerce personalization is shallow: "you viewed X, here is more of X." Real personalization adapts the entire shopping experience based on behavioral signals, purchase history, and contextual factors.
 
-**Session-level personalization.** Track what a customer browses, searches for, and clicks during a session. Use these signals to re-rank search results and category pages in real time. If a customer has been browsing running shoes in the 100-150 EUR range, every subsequent page should prioritize products in that category and price range. This does not require login or historical data -- it works for first-time visitors.
+**Session-level personalization.** Track what a customer browses, searches for, and clicks during a session. Use these signals to re-rank search results and category pages in real time. If a customer has been browsing running shoes in the 100-150 EUR range, every subsequent page should prioritize products in that category and price range. This doesn't require login or historical data; it works for first-time visitors.
 
 **Cross-session profiles.** For returning customers, build a preference profile from purchase history and browsing patterns. This enables "you might also like" recommendations that go beyond simple collaborative filtering. Instead of "other people bought Y with X," you can offer "based on your preference for sustainable brands and outdoor activities, here are new arrivals you might like."
 
@@ -56,7 +56,7 @@ Here is how I structure the AI layer for a headless commerce implementation.
 
 **Model Service.** Recommendation models, ranking models, and embedding models run behind an internal API. This separation lets you update models without redeploying the main AI service.
 
-The entire layer adds 50-200ms to response times depending on which features are active. For search results and product pages, this is well within acceptable latency. For checkout and cart operations, the AI layer is bypassed entirely since there is nothing to personalize.
+The entire layer adds 50-200ms to response times depending on which features are active. For search results and product pages, this is well within acceptable latency. For checkout and cart operations, the AI layer is bypassed entirely since there's nothing to personalize.
 
 ## Implementation Priorities
 
@@ -80,8 +80,8 @@ If you are adding AI to an existing headless commerce platform, here is the orde
 
 **Cost management.** LLM calls for query understanding are the main variable cost. Implement caching for repeated queries (you would be surprised how many customers search for the exact same terms) and batch embedding updates rather than real-time recomputation.
 
-## Results I Have Seen
+## Results I've Seen
 
-Across the e-commerce AI projects I have delivered, the consistent results are: 15-30 percent improvement in search conversion rate, 10-20 percent increase in average order value from personalized recommendations, and 40-60 percent reduction in "zero results" search queries.
+Across the e-commerce AI projects I've delivered, the consistent results are: 15-30 percent improvement in search conversion rate, 10-20 percent increase in average order value from personalized recommendations, and 40-60 percent reduction in "zero results" search queries.
 
-These numbers are not hypothetical. They come from production systems serving real customers. If you are running a headless commerce platform and want to explore what AI can do for your specific situation, I have written more about my approach to [AI-powered e-commerce](/solutions/ai-ecommerce) and am always happy to discuss specifics.
+These numbers are not hypothetical. They come from production systems serving real customers. If you are running a headless commerce platform and want to explore what AI can do for your specific situation, I've written more about my approach to [AI-powered e-commerce](/solutions/ai-ecommerce) and am always happy to discuss specifics.

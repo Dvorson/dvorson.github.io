@@ -10,7 +10,7 @@ heroImage: "/img/fractional-vs-agency.jpg"
 
 # Fractional AI Architect vs AI Consulting Agency: Which Does Your Business Need?
 
-You have decided your business needs AI expertise. Now you face a second decision that will shape the entire project: do you hire a fractional AI architect or engage a consulting agency? Having worked on both sides -- as a senior architect within EPAM Systems (a 60,000+ person delivery firm) and as an independent practitioner -- I have a clear-eyed view of when each model delivers and when it fails.
+You have decided your business needs AI expertise. Now you face a second decision that will shape the entire project: do you hire a fractional AI architect or engage a consulting agency? Having worked on both sides (as a senior architect within EPAM Systems, a 60,000+ person delivery firm, and as an independent practitioner), I have a clear-eyed view of when each model delivers and when it fails.
 
 The right choice depends on your project, your team, and what you are optimizing for. This post gives you the framework to decide.
 
@@ -38,7 +38,7 @@ However, if your project genuinely requires five full-time engineers for six mon
 
 **Fractional architect:** You get direct access to the person with the expertise. No layers of management, no knowledge transfer losses, no junior substitutions. When I work with a client, I am the person designing the architecture, writing the critical code, and debugging production issues. The depth of understanding I develop about the client's specific problem is something no agency model can replicate.
 
-**Agency:** Quality depends entirely on the specific team assigned. I have seen exceptional agency teams and terrible ones, often within the same firm. The person who sells the project is rarely the person who delivers it. The architect in the pitch deck might be assigned to another client by the time your project starts.
+**Agency:** Quality depends entirely on the specific team assigned. I've seen exceptional agency teams and terrible ones, often within the same firm. The person who sells the project is rarely the person who delivers it. The architect in the pitch deck might be assigned to another client by the time your project starts.
 
 **The nuance:** Agencies sometimes have specialist depth that no individual can match. If your project requires both NLP expertise and computer vision expertise, an agency can assign both specialists. A fractional architect either has both skills (rare) or does not.
 
@@ -62,7 +62,7 @@ However, if your project genuinely requires five full-time engineers for six mon
 
 **Fractional architect:** Works alongside your team, transfers knowledge through pair programming, architecture reviews, and documentation. Your team learns while the project is being built. When the engagement ends, your team owns the system and understands it deeply enough to maintain and extend it.
 
-**Agency:** The team builds the system and hands it over. Knowledge transfer happens in a formal handover phase, which is often rushed. I have inherited multiple systems built by agencies where the client's internal team could not modify or debug the code because they were not involved in building it.
+**Agency:** The team builds the system and hands it over. Knowledge transfer happens in a formal handover phase, which is often rushed. I've inherited multiple systems built by agencies where the client's internal team could not modify or debug the code because they were not involved in building it.
 
 **The nuance:** Some agencies handle knowledge transfer well, embedding client engineers in the delivery team. But this is the exception, not the norm. If long-term ownership by your internal team is important (and it should be), the fractional model has a structural advantage.
 
@@ -70,13 +70,13 @@ However, if your project genuinely requires five full-time engineers for six mon
 
 **Fractional architect:** Single point of failure. If the architect gets sick or becomes unavailable, the project stalls. No bench depth, no backup. This is the model's biggest weakness, and it is real.
 
-**Agency:** Team redundancy provides some insulation against individual unavailability. If one developer leaves, the agency replaces them (though replacement quality varies). The agency also provides contractual risk coverage -- if they fail to deliver, you have a corporate entity to hold accountable, not just an individual.
+**Agency:** Team redundancy provides some insulation against individual unavailability. If one developer leaves, the agency replaces them (though replacement quality varies). The agency also provides contractual risk coverage: if they fail to deliver, you have a corporate entity to hold accountable, not just an individual.
 
 **The nuance:** For mission-critical projects where delivery failure has severe business consequences, the agency's risk mitigation has real value. For a proof of concept or an advisory engagement, the risk of individual unavailability is manageable.
 
 ## My Decision Matrix
 
-Based on everything I have seen from both sides, here is when each model wins.
+Based on everything I've seen from both sides, here is when each model wins.
 
 **Choose a fractional AI architect when:**
 
@@ -98,7 +98,7 @@ Based on everything I have seen from both sides, here is when each model wins.
 
 **Consider a hybrid model when:**
 
-- A fractional architect designs the architecture and oversees the build, while an agency or your internal team handles implementation under their guidance. This combines the expertise depth of the fractional model with the headcount of the agency model. I have structured several engagements this way and it works well when the client has a capable but AI-inexperienced engineering team.
+- A fractional architect designs the architecture and oversees the build, while an agency or your internal team handles implementation under their guidance. This combines the expertise depth of the fractional model with the headcount of the agency model. I've structured several engagements this way and it works well when the client has a capable but AI-inexperienced engineering team.
 
 ## The Question I Always Ask
 

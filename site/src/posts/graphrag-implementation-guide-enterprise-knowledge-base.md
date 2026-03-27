@@ -10,7 +10,7 @@ heroImage: "/img/graphrag-guide.jpg"
 
 # GraphRAG Implementation Guide: How I Built a Knowledge Graph AI System for an Enterprise Knowledge Base
 
-If you have ever tried to ask a question across tens of thousands of knowledge base articles and gotten back a confidently wrong answer from a vanilla RAG pipeline, you know the pain I am describing. Earlier this year I was brought in to solve exactly that problem for a Fortune-500 enterprise whose Salesforce-hosted knowledge base had grown into a tangled mess of duplicated, outdated, and contradictory content spread across multiple languages and product lines. Traditional vector-search RAG could find relevant chunks, but it could not reason across articles, detect contradictions, or tell you which piece of information was actually authoritative.
+If you've ever tried to ask a question across tens of thousands of knowledge base articles and gotten back a confidently wrong answer from a vanilla RAG pipeline, you know the pain I am describing. Earlier this year I was brought in to solve exactly that problem for a Fortune-500 enterprise whose Salesforce-hosted knowledge base had grown into a tangled mess of duplicated, outdated, and contradictory content spread across multiple languages and product lines. Traditional vector-search RAG could find relevant chunks, but it could not reason across articles, detect contradictions, or tell you which piece of information was actually authoritative.
 
 This post is the practitioner's guide I wish I had when I started. I will walk through the architecture I designed, the tools I chose and why, the problems I ran into, and the concrete outcomes we delivered.
 
@@ -20,7 +20,7 @@ This post is the practitioner's guide I wish I had when I started. I will walk t
 
 In plain terms: traditional RAG says "here are the five most similar text chunks to your question." GraphRAG says "here is the entity you are asking about, here are the other entities it connects to, here is the chain of reasoning that links your question to an authoritative answer, and here is where the knowledge base contradicts itself."
 
-The difference matters most when your corpus is large, interconnected, and messy, which describes every enterprise knowledge base I have ever encountered.
+The difference matters most when your corpus is large, interconnected, and messy, which describes every enterprise knowledge base I've ever encountered.
 
 ## The Problem: A Knowledge Base That Outgrew Itself
 
@@ -48,7 +48,7 @@ Third, Neo4j's visualization ecosystem (particularly its integration with **Sigm
 
 ### The Custom Ontology
 
-Off-the-shelf ontologies did not fit. Enterprise knowledge bases have domain-specific structure that generic schemas cannot capture. I designed a custom ontology with the following core node types:
+Off-the-shelf ontologies didn't fit. Enterprise knowledge bases have domain-specific structure that generic schemas cannot capture. I designed a custom ontology with the following core node types:
 
 - **Article**: the knowledge base article itself, with metadata (language, product line, version, quality score)
 - **Concept**: a normalized topic or procedure that one or more articles describe

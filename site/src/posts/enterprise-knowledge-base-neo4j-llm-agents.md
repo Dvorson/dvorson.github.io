@@ -10,19 +10,19 @@ heroImage: "/img/neo4j-knowledge-base.jpg"
 
 # How to Build an Enterprise Knowledge Base with Neo4j and LLM Agents
 
-Most enterprise knowledge bases share the same fate: they start as a well-organized repository and gradually decay into a graveyard of outdated, contradictory, and unfindable content. I have seen this pattern at every large organization I have worked with. Thousands of articles, wikis, and runbooks accumulate over years, but finding the right answer to a specific question becomes nearly impossible.
+Most enterprise knowledge bases share the same fate: they start as a well-organized repository and gradually decay into a graveyard of outdated, contradictory, and unfindable content. I've seen this pattern at every large organization I've worked with. Thousands of articles, wikis, and runbooks accumulate over years, but finding the right answer to a specific question becomes nearly impossible.
 
 Earlier this year I built a system that changed this for a Fortune-500 client. The architecture combines Neo4j as a knowledge graph, an entity extraction pipeline, and specialized LLM agents that can reason across the entire knowledge base. This post is a practitioner's breakdown of how I built it and what I learned.
 
 ## Why Traditional Search Fails at Enterprise Scale
 
-Before getting into the solution, it is worth understanding why the obvious approaches fall short.
+Before getting into the solution, it's worth understanding why the obvious approaches fall short.
 
 **Keyword search** works when you know the exact terminology. But enterprise knowledge bases are written by hundreds of authors over many years. The same concept gets described differently across teams, products, and time periods. A keyword search for "SSO configuration" might miss the article titled "Setting up single sign-on for enterprise clients" because the author never used the abbreviation.
 
-**Vector search (basic RAG)** improves on this by matching semantic meaning rather than exact words. But it has a fundamental limitation: it retrieves chunks of text in isolation. When your question requires connecting information from three different articles -- say, "What is the current recommended SSO setup for our enterprise tier, and does it support the MFA requirements from the Q3 security update?" -- vector search retrieves pieces that are individually relevant but cannot reason about their relationships.
+**Vector search (basic RAG)** improves on this by matching semantic meaning rather than exact words. But it has a fundamental limitation: it retrieves chunks of text in isolation. When your question requires connecting information from three different articles (say, "What is the current recommended SSO setup for our enterprise tier, and does it support the MFA requirements from the Q3 security update?"), vector search retrieves pieces that are individually relevant but cannot reason about their relationships.
 
-**The knowledge graph approach** solves this by first organizing information into entities and relationships, then using that structure to retrieve contextually connected content. It is more work to build, but the answers are dramatically better.
+**The knowledge graph approach** solves this by first organizing information into entities and relationships, then using that structure to retrieve contextually connected content. It's more work to build, but the answers are dramatically better.
 
 ## Architecture Overview
 
@@ -30,7 +30,7 @@ The system I built has four layers that work together.
 
 **Layer 1: Ingestion and Entity Extraction.** A Python pipeline reads articles from the source system (Salesforce Knowledge in this case, but the pattern applies to Confluence, SharePoint, or any CMS). Each article passes through an LLM-powered extraction step that identifies entities (products, features, procedures, teams, error codes) and relationships between them. The output is a set of structured nodes and edges ready for the graph.
 
-**Layer 2: The Neo4j Knowledge Graph.** Neo4j stores the extracted entities and relationships along with the original content chunks. The graph model I used has about a dozen node types -- Article, Product, Feature, Procedure, ErrorCode, Team, Version -- connected by typed relationships like DESCRIBES, REQUIRES, SUPERSEDES, and RELATES_TO. This structure lets you traverse from a product to its features to the procedures that configure those features to the error codes you might encounter.
+**Layer 2: The Neo4j Knowledge Graph.** Neo4j stores the extracted entities and relationships along with the original content chunks. The graph model I used has about a dozen node types (Article, Product, Feature, Procedure, ErrorCode, Team, Version) connected by typed relationships like DESCRIBES, REQUIRES, SUPERSEDES, and RELATES_TO. This structure lets you traverse from a product to its features to the procedures that configure those features to the error codes you might encounter.
 
 **Layer 3: Query Agents.** Instead of a single monolithic query pipeline, I built specialized [LLM agents](/solutions/ai-agents) that handle different types of questions. A routing agent classifies the incoming question and dispatches it to the right specialist: a factual lookup agent, a procedure agent, a troubleshooting agent, or a comparison agent. Each agent knows how to construct the right Cypher queries and how to synthesize the retrieved information.
 
@@ -38,7 +38,7 @@ The system I built has four layers that work together.
 
 ## Ontology Design: The Decisions That Matter Most
 
-The single most important decision in this kind of project is ontology design -- how you model the entities and relationships. Get this wrong and no amount of engineering will save you.
+The single most important decision in this kind of project is ontology design: how you model the entities and relationships. Get this wrong and no amount of engineering will save you.
 
 I started with a temptingly comprehensive ontology that modeled everything: authors, revision histories, access permissions, every possible relationship type. After two weeks of entity extraction producing inconsistent results, I stripped it back to a focused model with seven core node types and twelve relationship types.
 
@@ -76,7 +76,7 @@ A lightweight routing agent sits in front of these four, classifying each incomi
 
 Building the system is one thing. Keeping it running reliably in production is another.
 
-**Incremental updates.** The knowledge base changes daily. New articles are published, existing ones are updated, and occasionally articles are retired. The ingestion pipeline runs incrementally -- processing only changed articles since the last run -- and updates the graph accordingly. Full rebuilds happen weekly as a consistency check.
+**Incremental updates.** The knowledge base changes daily. New articles are published, existing ones are updated, and occasionally articles are retired. The ingestion pipeline runs incrementally, processing only changed articles since the last run, and updates the graph accordingly. Full rebuilds happen weekly as a consistency check.
 
 **Access control.** Enterprise knowledge bases often have restricted articles visible only to certain teams. The graph respects these permissions by tagging nodes with access levels and filtering query results based on the requesting user's role.
 
@@ -88,6 +88,6 @@ Building the system is one thing. Keeping it running reliably in production is a
 
 After three months in production, the system serves around 2,000 queries per day with a user satisfaction rate of 87 percent (measured by thumbs-up/thumbs-down feedback). The previous keyword search had an estimated satisfaction rate of about 40 percent based on internal surveys.
 
-The most valuable lesson: invest heavily in ontology design and entity resolution before scaling up. I spent nearly three weeks -- almost a quarter of the total project timeline -- on these two areas, and it was worth every day. Teams that rush past ontology design end up with a graph that is too noisy to query effectively.
+The most valuable lesson: invest heavily in ontology design and entity resolution before scaling up. I spent nearly three weeks (almost a quarter of the total project timeline) on these two areas, and it was worth every day. Teams that rush past ontology design end up with a graph that is too noisy to query effectively.
 
-If you are considering a similar project for your organization, I have written a broader guide on the [GraphRAG approach](/solutions/graphrag) and published a detailed [case study](/case-studies/graphrag-knowledge-base) from this project. The architecture is adaptable to any enterprise knowledge source -- the core patterns remain the same whether your content lives in Salesforce, Confluence, SharePoint, or a custom CMS.
+If you are considering a similar project for your organization, I've written a broader guide on the [GraphRAG approach](/solutions/graphrag) and published a detailed [case study](/case-studies/graphrag-knowledge-base) from this project. The architecture is adaptable to any enterprise knowledge source; the core patterns remain the same regardless of whether your content lives in Salesforce, Confluence, SharePoint, or a custom CMS.
