@@ -1,5 +1,5 @@
 ---
-title: "AI Agent Architecture: Langflow vs LangChain vs Custom -- When to Use What"
+title: "AI Agent Architecture: Langflow vs LangChain vs Custom Code"
 description: "Honest comparison of Langflow, LangChain, and custom orchestration for AI agents. Based on production experience with all three approaches."
 pubDate: "2026-03-01"
 author: "Anton Dvorson"
@@ -8,7 +8,7 @@ categories: ["AI Engineering", "Technical Consulting"]
 heroImage: "/img/langflow-vs-langchain.jpg"
 ---
 
-# AI Agent Architecture: Langflow vs LangChain vs Custom -- When to Use What
+# AI Agent Architecture: Langflow vs LangChain vs Custom Code
 
 Every few weeks there is a new AI agent framework promising to simplify everything. If you are a technical leader trying to pick the right foundation for your AI project, the decision fatigue is real. I've built production systems with Langflow, LangChain, and fully custom orchestration layers, and I can tell you that none of them is universally better. Each has a sweet spot and a set of tradeoffs that only become clear after you've shipped something with it.
 
