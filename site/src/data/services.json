@@ -252,7 +252,6 @@
       ],
       "technologies": ["Neo4j", "GraphRAG", "FastAPI", "React", "Sigma.js", "Azure Cosmos", "LangChain", "Prometheus"],
       "icon": "graph",
-      "screenshot": "/img/cases/case-knowledge-graph.png",
       "featured": true,
       "hasFullPage": false
     },
