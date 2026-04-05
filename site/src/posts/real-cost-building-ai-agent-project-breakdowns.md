@@ -88,7 +88,7 @@ This project is documented in detail in my [GraphRAG case study](/case-studies/g
 
 **What drove the cost:** Real-time processing requirements, integration with a legacy ticketing system (SOAP APIs, custom authentication), and production hardening (four-level fallback hierarchy, confidence thresholds, human-in-the-loop escalation).
 
-You can read more about this project in the [multi-agent telecom case study](/case-studies/multi-agent-telecom).
+You can read more about this project in the [multi-agent telecom case study](/case-studies/vodafone-anomaly-detection).
 
 ## What Drives Costs Up (and Down)
 

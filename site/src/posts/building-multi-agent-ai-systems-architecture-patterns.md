@@ -131,6 +131,6 @@ After bringing this system to production and now applying similar patterns at a 
 
 The multi-agent AI systems space is maturing fast. I see convergence around standardized agent communication protocols, better tooling for agent evaluation, and frameworks that make orchestration patterns reusable. The [AI agent solutions](/solutions/ai-agents) we build today will look primitive in two years, but the architectural principles (specialization, orchestration simplicity, graceful degradation, observability) will carry forward.
 
-If you want to see how these patterns played out in detail, the [telecom multi-agent case study](/case-studies/multi-agent-telecom) covers the full implementation, including performance benchmarks and lessons from the first six months in production.
+If you want to see how these patterns played out in detail, the [telecom multi-agent case study](/case-studies/vodafone-anomaly-detection) covers the full implementation, including performance benchmarks and lessons from the first six months in production.
 
 The agents are not the hard part. The system around the agents is.

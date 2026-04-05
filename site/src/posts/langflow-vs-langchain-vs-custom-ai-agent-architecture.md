@@ -26,7 +26,7 @@ Before diving into tradeoffs, here is the core philosophy behind each approach.
 
 ## Langflow: When Visual Orchestration Wins
 
-I used Langflow to build the [multi-agent system for a telecom client](/case-studies/multi-agent-telecom) and it was the right choice for that project. Here is why.
+I used Langflow to build the [multi-agent system for a telecom client](/case-studies/vodafone-anomaly-detection) and it was the right choice for that project. Here is why.
 
 **Rapid prototyping.** The visual interface lets you restructure an entire agent pipeline in minutes by dragging connections. During the discovery phase, when we were experimenting with different agent architectures, this speed was invaluable. We tried and discarded four different routing strategies in a single afternoon.
 

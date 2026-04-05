@@ -60,7 +60,7 @@ Extracting entities from tens of thousands of articles is where theory meets rea
 
 The multi-agent approach was essential for handling the variety of questions that enterprise users ask. A single prompt template cannot handle "What is the default timeout for SSO?" and "Walk me through configuring MFA for our enterprise tier" and "Why am I getting error E-4012 after the latest update?" equally well.
 
-I built four specialized agents using [Langflow for orchestration](/case-studies/multi-agent-telecom):
+I built four specialized agents using [Langflow for orchestration](/case-studies/vodafone-anomaly-detection):
 
 **Factual Lookup Agent.** Handles simple factual questions. Constructs a targeted Cypher query, retrieves the relevant subgraph, and generates a direct answer with source citations.
 
