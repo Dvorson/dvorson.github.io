@@ -59,3 +59,8 @@ SEO_GEO_LANDSCAPE_REPORT.md
 *.roo
 .codegpt/
 .gstack/
+
+# Generated site artifacts
+site/.astro/
+site/public/og/
+site/playwright-report/
