@@ -1,290 +1,110 @@
 {
-  "positioning": {
-    "headline": "Your business has an AI problem. I solve it.",
-    "subheadline": "I build AI agents, knowledge graphs, and intelligent platforms that actually ship to production — not slide decks.",
-    "credentialLine": "12+ years. Fortune-500 retail, telecom, media. Production AI systems.",
-    "valueProps": [
-      "From strategy to production-ready code — no hand-off to juniors",
-      "Battle-tested across Fortune-500 retail, telecom, media, and e-commerce",
-      "Solo delivery or embedded in your team — your choice"
-    ]
-  },
-  "solutions": [
-    {
-      "id": "ai-agents",
-      "slug": "ai-agents",
-      "title": "AI Agent & Agentic Platform Development",
-      "shortTitle": "AI Agents",
-      "headline": "Your team is building AI demos that never ship to production",
-      "subheadline": "I build production-grade AI agents and multi-agent platforms that run reliably at enterprise scale — with monitoring, guardrails, and real ops integration.",
-      "persona": "VP Engineering / CTO stuck in PoC hell",
-      "icon": "agents",
-      "painPoints": [
-        "Your proof-of-concept impressed the board, but six months later it still isn't in production",
-        "The AI vendor demos look great — until you try to integrate with your actual data and systems",
-        "Your engineers are smart but nobody on the team has shipped multi-agent systems before",
-        "You're burning budget on consultants who deliver PowerPoints, not working software"
-      ],
-      "definition": "Agentic AI systems are autonomous software agents powered by large language models that can reason, plan, use tools, and take actions — independently or in coordinated multi-agent pipelines. Unlike simple chatbots, production AI agents integrate with real enterprise systems, handle edge cases gracefully, and operate under monitoring and governance frameworks.",
-      "approach": [
-        { "step": "Discovery", "description": "Map your current systems, data sources, and the specific workflows you want to automate. No generic assessments — I focus on what will move the needle." },
-        { "step": "Architecture", "description": "Design the agent topology, tool integrations, monitoring hooks, and guardrails. You get a concrete architecture document, not a vague roadmap." },
-        { "step": "Build", "description": "Hands-on development of the agent pipeline, integration with your existing stack, and deployment to your infrastructure." },
-        { "step": "Handoff", "description": "Knowledge transfer, documentation, and monitoring setup so your team can operate and extend the system independently." }
-      ],
-      "outcomes": [
-        "Production-grade AI agents running on your infrastructure — not demo notebooks",
-        "Multi-agent orchestration with Langflow, OpenWebUI, or custom pipelines",
-        "Integrated monitoring via Grafana/Prometheus with anomaly alerting",
-        "Your team trained to maintain and extend the system"
-      ],
-      "technologies": ["Langflow", "OpenWebUI", "LLM Agents", "Grafana", "Prometheus", "Python", "Kubernetes", "RAG", "Vector DB"],
-      "relatedCaseStudies": ["genai-enablement-platform", "multi-agent-telecom"],
-      "pricing": { "range": "EUR 25,000 - 80,000", "unit": "per project" },
-      "faqs": [
-        { "question": "How long does it take to go from PoC to production?", "answer": "A focused PoC takes 4-6 weeks. Production deployment with monitoring, guardrails, and testing typically takes 8-14 weeks depending on integration complexity." },
-        { "question": "Do you work with our existing tech stack or bring your own?", "answer": "I adapt to your stack. Whether you're on AWS, Azure, or GCP, using Python or TypeScript, I integrate with what you have rather than forcing a rewrite." },
-        { "question": "What happens after the engagement ends?", "answer": "You get full ownership of the code, documentation, and architecture decisions. I do a structured knowledge transfer so your team can operate and extend the system independently." },
-        { "question": "Can you work embedded in our team?", "answer": "Yes. I regularly embed as a tech lead within client teams, participating in standups, code reviews, and sprint planning while driving the AI agent architecture forward." }
-      ],
-      "seoTitle": "AI Agent Development | Production-Ready Agentic AI Systems",
-      "seoDescription": "Ship AI agents to production, not PowerPoints. I build enterprise-grade multi-agent systems with monitoring, guardrails, and real ops integration. 12+ years experience."
-    },
-    {
-      "id": "graphrag",
-      "slug": "graphrag",
-      "title": "Knowledge Graph & GraphRAG Implementation",
-      "shortTitle": "GraphRAG",
-      "headline": "Your knowledge base answers are wrong half the time",
-      "subheadline": "I build GraphRAG systems that actually understand your domain — connecting articles, products, and processes into a knowledge graph your LLMs can reason over.",
-      "persona": "Product / Knowledge Manager drowning in stale docs",
-      "icon": "graph",
-      "painPoints": [
-        "Your internal search returns irrelevant results because it can't understand relationships between concepts",
-        "Customer-facing articles are outdated, duplicated, or contradictory — and nobody knows which ones to trust",
-        "You tried basic RAG but the answers lack context and miss connections across your knowledge base",
-        "Quality auditing tens of thousands of articles manually is impossible — you need automated signals"
-      ],
-      "definition": "GraphRAG combines knowledge graph technology with retrieval-augmented generation to enable LLMs to traverse structured relationships between entities — delivering more accurate, contextually rich answers than traditional vector-based RAG. It excels in enterprise knowledge bases with complex domain ontologies, multi-product portfolios, and cross-referencing requirements.",
-      "approach": [
-        { "step": "Ontology Design", "description": "Map your domain's entities, relationships, and quality signals into a custom ontology — not a generic template, but one built from your actual content structure." },
-        { "step": "Graph Construction", "description": "Build the knowledge graph in Neo4j with automated ingestion, quality metrics per article (duplication score, relevance, readability), and entity linking." },
-        { "step": "LLM Agent Layer", "description": "Implement multi-hop reasoning agents that traverse the graph to answer complex queries, suggest improvements, and generate new content from verified knowledge." },
-        { "step": "Visualization & Handoff", "description": "Interactive graph visualization for stakeholders, quality dashboards, and full documentation for your team to maintain the system." }
-      ],
-      "outcomes": [
-        "Knowledge graph connecting tens of thousands of articles with automated quality scoring",
-        "Multi-hop reasoning LLM agent answering complex cross-domain queries",
-        "Automated quality metrics: duplication detection, relevance scoring, readability index, translation gap analysis",
-        "Interactive knowledge graph visualization with multi-dimensional filtering"
-      ],
-      "technologies": ["Neo4j", "GraphRAG", "Langflow", "LLM Agents", "Sigma.js", "Python", "Vector DB", "Custom Ontology Design"],
-      "relatedCaseStudies": ["graphrag-knowledge-base"],
-      "pricing": { "range": "EUR 20,000 - 60,000", "unit": "per project" },
-      "faqs": [
-        { "question": "How is GraphRAG different from regular RAG?", "answer": "Traditional RAG retrieves text chunks by vector similarity. GraphRAG structures your knowledge into a graph of entities and relationships, then uses multi-hop traversal to find answers that require connecting information across multiple documents." },
-        { "question": "What size knowledge base does this work for?", "answer": "I've built systems for knowledge bases with tens of thousands of articles. The approach scales well because the graph structure makes retrieval more precise as the corpus grows." },
-        { "question": "Can this work with our existing Salesforce/Confluence/SharePoint knowledge base?", "answer": "Yes. I build automated ingestion pipelines from common knowledge base platforms. The graph is built from your existing content — no manual migration required." },
-        { "question": "How do you measure knowledge quality?", "answer": "Each article gets automated quality scores: duplication detection, product relevance, readability index, and translation gap analysis. These surface which content needs attention without manual review." }
-      ],
-      "seoTitle": "GraphRAG Implementation | Knowledge Graph & AI Search Solutions",
-      "seoDescription": "Turn your messy knowledge base into a structured knowledge graph with AI-powered search. GraphRAG, Neo4j, multi-hop reasoning agents. Solo-architected for enterprises."
-    },
-    {
-      "id": "ai-ecommerce",
-      "slug": "ai-ecommerce",
-      "title": "AI-Powered E-commerce Architecture",
-      "shortTitle": "AI E-commerce",
-      "headline": "Your storefront conversion hasn't improved since you launched",
-      "subheadline": "I architect headless commerce platforms with intelligent search, personalization, and AI-driven optimization — built for speed, scale, and multi-brand portfolios.",
-      "persona": "E-commerce Director / Head of Digital",
-      "icon": "cart",
-      "painPoints": [
-        "Your monolithic e-commerce platform is too slow and too rigid for the personalization your customers expect",
-        "Adding a second brand or market takes 6-12 months because everything is hardcoded for brand one",
-        "Your search returns irrelevant products and your recommendation engine is barely better than random",
-        "You know AI could improve conversions but your current architecture can't support it without a major rewrite"
-      ],
-      "definition": "AI-powered e-commerce architecture combines headless commerce platforms (decoupling frontend from backend via GraphQL) with AI capabilities like intelligent product search, personalized recommendations, dynamic pricing, and predictive inventory — enabling faster page loads, better conversion rates, and effortless multi-brand scaling.",
-      "approach": [
-        { "step": "Architecture Audit", "description": "Assess your current e-commerce stack, identify bottlenecks, and map the highest-ROI opportunities for AI integration." },
-        { "step": "Headless Migration", "description": "Decouple your storefront from the backend with a GraphQL BFF layer, enabling independent frontend evolution and AI feature integration." },
-        { "step": "AI Layer", "description": "Implement intelligent search, personalized recommendations, and content automation — integrated with your existing product catalog and customer data." },
-        { "step": "Multi-Brand Framework", "description": "Design token architecture and component library enabling rapid brand portfolio expansion — reducing new brand launches from months to weeks." }
-      ],
-      "outcomes": [
-        "Headless PWA storefront decoupled from backend via GraphQL — sub-second page loads",
-        "Design token architecture reducing second-brand onboarding from 9 months to 2 months (78% reduction)",
-        "CI/CD pipeline with blue/green zero-downtime deployments, cutting release cycles by 30%",
-        "AI-ready architecture supporting intelligent search, personalization, and content optimization"
-      ],
-      "technologies": ["Next.js", "TypeScript", "GraphQL", "GraphCommerce", "Azure", "GitHub Actions", "Redis", "Design Tokens"],
-      "relatedCaseStudies": ["pwa-storefront"],
-      "pricing": { "range": "EUR 30,000 - 80,000", "unit": "per project" },
-      "faqs": [
-        { "question": "Can you work with our existing Magento/Shopify/commercetools backend?", "answer": "Yes. Headless architecture means decoupling the frontend from whatever commerce backend you have. I've worked extensively with Magento 2 via GraphQL and the approach adapts to Shopify, commercetools, or custom backends." },
-        { "question": "How long does a headless migration take?", "answer": "A focused MVP storefront takes 3-4 months. Full feature parity with AI capabilities typically takes 6-9 months, delivered incrementally so you see results along the way." },
-        { "question": "What's the ROI on headless commerce?", "answer": "The projects I've led have seen 78% reduction in multi-brand onboarding time and 30% faster release cycles. Page load improvements alone typically lift conversion rates 15-30%." },
-        { "question": "Do I need to rebuild my entire store at once?", "answer": "No. Headless migration can be incremental — start with the highest-impact pages (PDP, search results) and expand from there while your existing store continues to run." }
-      ],
-      "seoTitle": "AI E-commerce Architecture | Headless Commerce & Intelligent Storefronts",
-      "seoDescription": "Architect headless e-commerce platforms with AI-powered search, personalization, and multi-brand scaling. 2.5 years building PWA storefronts for global brands."
-    },
-    {
-      "id": "ai-strategy",
-      "slug": "ai-strategy",
-      "title": "AI Strategy & Fractional Technical Leadership",
-      "shortTitle": "AI Strategy",
-      "headline": "Everyone's talking about AI but nobody on your team has built it",
-      "subheadline": "I embed as your fractional AI architect — setting technical direction, evaluating opportunities, and making sure your AI investment produces real results, not just demos.",
-      "persona": "CEO / Founder who needs technical leadership",
-      "icon": "strategy",
-      "painPoints": [
-        "Your board is asking about your AI strategy and you don't have a credible answer yet",
-        "You've seen impressive vendor demos but have no way to evaluate which solutions actually fit your business",
-        "Your engineering team is capable but needs senior AI architecture guidance to avoid expensive wrong turns",
-        "You don't need a full-time CTO but you need someone who can make binding technical decisions"
-      ],
-      "definition": "Fractional AI technical leadership provides senior architecture guidance and strategic direction on a part-time or project basis — helping organizations evaluate AI opportunities, set technical direction, mentor engineering teams, and establish delivery practices without the cost and commitment of a full-time executive hire.",
-      "approach": [
-        { "step": "Assessment", "description": "Evaluate your current technical landscape, team capabilities, and business objectives to identify the highest-impact AI opportunities." },
-        { "step": "Roadmap", "description": "Develop a concrete AI implementation roadmap with prioritized initiatives, technology choices, and resource requirements — not a generic framework." },
-        { "step": "Execution Oversight", "description": "Guide your team through implementation with architecture reviews, code reviews, and technical decision-making support." },
-        { "step": "Team Development", "description": "Mentor your engineers on AI/LLM best practices, establish SDLC disciplines, and build the internal capability to sustain the work after I step back." }
-      ],
-      "outcomes": [
-        "Clear AI strategy aligned with business goals — not a generic framework",
-        "Technology evaluation and vendor selection based on actual technical assessment",
-        "Engineering team mentored on AI/LLM best practices and delivery disciplines",
-        "Structured SDLC practices and delivery visibility frameworks for management"
-      ],
-      "technologies": ["Architecture Review", "AI Strategy", "Team Mentoring", "SDLC", "Agile", "Technical Due Diligence"],
-      "relatedCaseStudies": ["genai-enablement-platform"],
-      "pricing": { "range": "EUR 8,000 - 15,000", "unit": "per month" },
-      "faqs": [
-        { "question": "How many hours per week does fractional engagement typically involve?", "answer": "Most engagements are 2-3 days per week. This is enough to drive architecture decisions, participate in key meetings, and mentor the team without the overhead of a full-time exec." },
-        { "question": "Can you work remotely or do you need to be on-site?", "answer": "I work primarily remotely from Amsterdam with periodic on-site visits for workshops and team sessions. For European clients, on-site days are easy to arrange." },
-        { "question": "What's the minimum engagement length?", "answer": "3 months minimum. AI strategy work needs enough runway to assess, plan, and see initial results. Most engagements run 6-12 months." },
-        { "question": "How is this different from hiring an AI consulting firm?", "answer": "You get a single senior architect who knows your codebase, team, and business context — not a rotating cast of consultants. I make technical decisions and write code, not just recommendations." }
-      ],
-      "seoTitle": "Fractional AI Architect | AI Strategy & Technical Leadership",
-      "seoDescription": "Fractional AI technical leadership for companies building intelligent systems. Senior architecture guidance, team mentoring, and hands-on delivery. Based in Amsterdam."
-    },
-    {
-      "id": "llm-integration",
-      "slug": "llm-integration",
-      "title": "LLM Integration & Custom AI Solutions",
-      "shortTitle": "LLM Integration",
-      "headline": "You need LLMs in your product but don't know where to start",
-      "subheadline": "I help you identify the right LLM use cases, build the integration architecture, and ship AI features your customers actually use — without the hype and without the risk.",
-      "persona": "CTO / Product Lead evaluating AI integration",
-      "icon": "llm",
-      "painPoints": [
-        "You know LLMs could improve your product but the landscape of models, frameworks, and approaches is overwhelming",
-        "Your team prototyped something with the OpenAI API but it's unreliable, expensive, and not ready for production",
-        "You're worried about hallucinations, data privacy, and vendor lock-in but don't have the expertise to mitigate these risks",
-        "Every AI vendor promises magic but you need an independent technical perspective, not another sales pitch"
-      ],
-      "definition": "LLM integration consulting helps businesses evaluate, architect, and deploy large language model capabilities within their existing products and workflows — addressing model selection, prompt engineering, RAG pipelines, fine-tuning decisions, cost optimization, and production reliability concerns with independent, vendor-neutral guidance.",
-      "approach": [
-        { "step": "Use Case Mapping", "description": "Identify which workflows and features benefit most from LLM integration, and which are better served by traditional approaches. Not everything needs AI." },
-        { "step": "Architecture Design", "description": "Design the integration architecture: model selection, RAG pipeline, prompt engineering strategy, caching, fallback handling, and cost controls." },
-        { "step": "Implementation", "description": "Build the LLM integration into your product with proper error handling, monitoring, and guardrails against hallucination and data leakage." },
-        { "step": "Optimization", "description": "Tune for cost, latency, and quality. Set up evaluation pipelines so you can measure LLM performance objectively and improve over time." }
-      ],
-      "outcomes": [
-        "LLM features shipping in production with proper monitoring and guardrails",
-        "Vendor-neutral architecture avoiding lock-in to any single model provider",
-        "RAG pipeline for domain-specific accuracy, reducing hallucination rates",
-        "Cost-optimized deployment with caching, model routing, and fallback strategies"
-      ],
-      "technologies": ["OpenAI", "Claude", "LLM APIs", "RAG", "Vector DB", "Langflow", "Python", "Node.js", "TypeScript"],
-      "relatedCaseStudies": ["genai-enablement-platform", "graphrag-knowledge-base"],
-      "pricing": { "range": "EUR 15,000 - 50,000", "unit": "per project" },
-      "faqs": [
-        { "question": "Which LLM models do you work with?", "answer": "I'm model-agnostic. I work with OpenAI, Anthropic Claude, open-source models (Llama, Mistral), and enterprise solutions. The right model depends on your requirements for cost, latency, privacy, and quality." },
-        { "question": "How do you handle data privacy concerns?", "answer": "Architecture choices like self-hosted models, private API endpoints, data anonymization pipelines, and strict prompt engineering prevent sensitive data from leaking to external providers." },
-        { "question": "Can you integrate with our existing product without a rewrite?", "answer": "Yes. LLM integration is typically additive — a new API layer, a search enhancement, or a content generation pipeline that connects to your existing systems via APIs." },
-        { "question": "How do you prevent hallucinations?", "answer": "RAG grounding with verified data sources, structured output validation, confidence scoring, and human-in-the-loop review workflows. The specific approach depends on your risk tolerance and use case." }
-      ],
-      "seoTitle": "LLM Integration Consulting | Custom AI Solutions for Your Product",
-      "seoDescription": "Ship LLM features to production with confidence. Vendor-neutral architecture, RAG pipelines, hallucination prevention, and cost optimization. Independent AI consulting."
-    }
-  ],
   "caseStudies": [
     {
       "id": "ai-stock-screener",
       "slug": "ai-stock-screener",
-      "title": "AI-Powered Equity Research Platform",
+      "title": "Ticker Talk: Cited Answers from SEC Filings",
       "domain": "FinTech",
-      "client": "Ticker Talk (own product)",
+      "client": "Ticker Talk (independent project)",
       "role": "Founder & Solo Developer",
-      "duration": "2025-2026",
-      "challenge": "Equity researchers spend hours digging through SEC filings to answer straightforward questions about company fundamentals. Existing tools either surface raw filings or give AI answers disconnected from the source material.",
-      "approach": "Built a full-stack research platform that ingests 10-K and 10-Q filings into a Neo4j knowledge graph, then lets analysts ask natural-language questions grounded in the actual source documents. The LLM agent traverses filing relationships to produce cited, verifiable answers.",
+      "duration": "Jan 2026 – present",
+      "challenge": "Fundamental analysts spend hours in 10-K and 10-Q filings to confirm a single figure. General-purpose chatbots answer quickly but cannot show which filing, period, and unit a number came from, and they happily use facts that were published after the date in question.",
+      "approach": "A Next.js workspace over a FastAPI service and a background worker, with PostgreSQL as the single source of truth. The agent plans and retrieves, but deterministic code owns accounting, units, and calculations, and every answer carries citations to the exact filing. An evaluation harness computes expected answers point-in-time, so a test can never reward look-ahead.",
       "outcomes": [
-        "Knowledge graph connecting SEC filings with entity-level financial relationships",
-        "Multi-LLM support (OpenAI, Anthropic, OpenRouter, Ollama) with streaming responses",
-        "Custom investment screens and watchlists for repeatable research workflows",
-        "Source-grounded answers with direct links back to filing paragraphs"
+        "Answers cite the filing accession, period, unit, and as-of cutoff behind every figure",
+        "Point-in-time evaluation: 17 golden questions scored by a deterministic scorer plus a pinned LLM judge",
+        "Missing or restated data surfaces as an explicit gap instead of a zero or a partial period",
+        "Released only through a gate of real browser journeys against staging and production"
       ],
-      "technologies": ["Next.js", "React", "FastAPI", "Neo4j", "PostgreSQL", "LLM Agents", "MinIO"],
+      "technologies": [
+        "Next.js",
+        "FastAPI",
+        "PostgreSQL",
+        "Redis",
+        "OpenRouter",
+        "Ollama",
+        "Langfuse",
+        "Railway"
+      ],
       "icon": "strategy",
       "screenshot": "/img/cases/case-stock-screener.png",
       "featured": true,
-      "hasFullPage": false
+      "hasFullPage": true
     },
     {
       "id": "graphrag-knowledge-base",
       "slug": "graphrag-knowledge-base",
-      "title": "Knowledge Graph for Global HealthTech Product KB",
+      "title": "Knowledge Graph for a Global HealthTech Support Knowledge Base",
       "domain": "Healthcare Tech",
       "client": "Global HealthTech Company",
       "role": "Solo Architect & Developer",
-      "duration": "3 months (2025)",
+      "duration": "3 months (Nov 2025 – Jan 2026)",
       "challenge": "A global healthtech company had tens of thousands of Salesforce knowledge base articles across their product portfolio. Content was outdated, duplicated, and impossible to query across product domains. Manual quality audits could not scale.",
-      "approach": "Solo-architected the full stack: custom domain ontology, automated ingestion pipeline from Salesforce CSV exports, Neo4j knowledge graph with quality scoring, and a multi-hop reasoning agent for cross-domain queries. Built interactive graph visualization with Sigma.js and observability with Prometheus/Grafana.",
+      "approach": "Built an ingestion pipeline from Salesforce exports into a knowledge graph on Azure Cosmos DB (Gremlin API), after prototyping on Neo4j, with a FAISS index for semantic retrieval. Every article gets an automated quality scorecard. Editors work in a React app with a Sigma.js graph explorer and a tool-calling chat agent that queries the graph and the vector index.",
       "outcomes": [
-        "14,800+ nodes and 24,900+ relationships mapped in the knowledge graph",
-        "Automated quality scoring: duplication, relevance, readability, translation gaps",
-        "Multi-hop reasoning agent answering cross-domain queries over structured knowledge",
-        "Interactive graph explorer with quality dashboards and editor interface"
+        "Per-article quality scorecard: completeness, structure, staleness, duplicates, translation coverage, broken links, contradictions",
+        "Tool-calling chat agent (Semantic Kernel, Azure OpenAI) over the graph and the vector index",
+        "Batched graph writes cut vertex upsert time 7.8x (11.6s to 1.5s per 10 items)",
+        "Request-unit budgets, Prometheus metrics, and Grafana dashboards for every ingestion stage"
       ],
-      "technologies": ["Neo4j", "GraphRAG", "FastAPI", "React", "Sigma.js", "Azure Cosmos", "LangChain", "Prometheus"],
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "Azure Cosmos DB (Gremlin)",
+        "FAISS",
+        "Semantic Kernel",
+        "Azure OpenAI",
+        "React",
+        "Sigma.js",
+        "Prometheus",
+        "Grafana"
+      ],
       "icon": "graph",
       "screenshot": "/img/cases/case-knowledge-graph.png",
       "featured": true,
-      "hasFullPage": false
+      "hasFullPage": true
     },
     {
-      "id": "vodafone-anomaly-detection",
-      "slug": "vodafone-anomaly-detection",
-      "title": "Network Anomaly Detection for a Major European Telecom",
+      "id": "telecom-anomaly-detection",
+      "slug": "telecom-anomaly-detection",
+      "title": "Network Anomaly Detection PoC for a Major European Telecom",
       "domain": "Telecom",
       "client": "Major European Telecom Operator",
-      "role": "Full-Stack Engineer (1 of 3)",
-      "duration": "6 months (2025)",
-      "challenge": "The operator's network operations team was drowning in alerts from siloed monitoring systems. Existing dashboards could not correlate events across network layers or suggest root causes, leading to slow incident resolution.",
-      "approach": "Built a multi-agent AI pipeline (Sense, Think, Act) that ingests network telemetry, detects anomalies using ML models, and provides root cause analysis with recommended actions. Integrated with Grafana for real-time visualization and OpenWebUI for conversational incident investigation by field engineers.",
+      "role": "Engineer (1 of 3)",
+      "duration": "6 months (May – Oct 2025)",
+      "challenge": "The operator's network operations team was working through alerts from siloed monitoring systems. Dashboards could not correlate events across fiber-to-the-home network layers or suggest a root cause, so incident resolution was slow.",
+      "approach": "A three-stage agent pipeline (Sense, Think, Act) over FTTH network telemetry, driven by Celery and RabbitMQ, with results in MongoDB. The Act stage uses LLM tool calling to reboot a device, reset its configuration, or open a Jira ticket. Operators see results in Grafana and question them in Open WebUI, and their feedback drives a prompt-revision loop.",
       "outcomes": [
-        "Multi-agent anomaly detection pipeline with automated classification and escalation",
-        "Grafana dashboards for real-time network health, incident tracking, and agent performance",
-        "Conversational ops interface for field engineers to investigate incidents in natural language",
-        "RAG-based knowledge base correlating incident history for contextual troubleshooting"
+        "Sense, Think, and Act agents with tool calls for ONU reboots, config resets, and Jira tickets",
+        "Grafana dashboards for anomalies, incidents, and agent activity, with drill-down to individual runs",
+        "Open WebUI chat grounded in incident records for plain-language investigation",
+        "Feedback loop that drafts a revised agent prompt when more than 30% of recent outputs are rated bad"
       ],
-      "technologies": ["FastAPI", "Celery", "RabbitMQ", "MongoDB", "Grafana", "Prometheus", "LangChain", "OpenWebUI"],
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "LangChain",
+        "Azure OpenAI",
+        "Celery",
+        "RabbitMQ",
+        "MongoDB",
+        "Grafana",
+        "Prometheus",
+        "Open WebUI"
+      ],
       "icon": "network",
       "featured": true,
-      "hasFullPage": false
+      "hasFullPage": true,
+      "screenshot": null
     },
     {
-      "id": "jde-storefront",
-      "slug": "jde-storefront",
+      "id": "multi-brand-storefront",
+      "slug": "multi-brand-storefront",
       "title": "Multi-Brand Headless Storefront for a Global FMCG",
       "domain": "E-commerce",
       "client": "Global FMCG Company",
       "role": "Co-Architect & Lead Engineer",
-      "duration": "2 years 4 months (2023-2025)",
+      "duration": "2 years 4 months (Jan 2023 – Apr 2025)",
       "challenge": "A global FMCG company needed a next-generation headless storefront to serve two premium consumer brands from a single codebase. The existing Magento 2 monolith made launching a second brand a 9-month effort, and the frontend was too slow for modern commerce expectations.",
       "approach": "Co-architected a GraphCommerce-based PWA with Next.js, a GraphQL BFF layer stitching Magento and Hygraph CMS, and a design token architecture enabling rapid brand switching. Built CI/CD with blue/green zero-downtime deployments on Azure.",
       "outcomes": [
@@ -293,95 +113,39 @@
         "Release cycle time cut 30% with blue/green zero-downtime CI/CD",
         "6 engineers mentored across design, QA, and product"
       ],
-      "technologies": ["Next.js", "TypeScript", "GraphQL Mesh", "GraphCommerce", "Magento", "Azure", "Adyen", "Design Tokens"],
-      "icon": "cart",
-      "screenshot": "/img/cases/case-jde-storefront.png",
-      "featured": true,
-      "hasFullPage": false
-    },
-    {
-      "id": "postnl-knowledge-graph",
-      "slug": "postnl-knowledge-graph",
-      "title": "Knowledge Graph for a National Postal Service",
-      "domain": "Logistics",
-      "client": "National Postal & Logistics Operator",
-      "role": "Solo Architect & Developer",
-      "duration": "2025",
-      "challenge": "The operator's product documentation spanning services, pricing tiers, and delivery constraints was scattered across PDFs and internal systems. No single system could answer questions that required connecting information across products and channels.",
-      "approach": "Built a knowledge graph accelerator that extracts structured entities (products, channels, pricing, constraints) from documentation, stores them as assertions in Neo4j, and enables LLM-powered semantic search with automatic conflict detection across sources.",
-      "outcomes": [
-        "Structured knowledge graph with products, channels, pricing tiers, and service constraints",
-        "Automated quality reports with conflict detection across sources",
-        "Semantic search over structured knowledge using Qdrant vector store",
-        "Interactive graph visualization and content editor for knowledge curation"
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "GraphQL Mesh",
+        "GraphCommerce",
+        "Magento",
+        "Redis",
+        "Azure",
+        "New Relic"
       ],
-      "technologies": ["Neo4j", "Next.js", "FastAPI", "Qdrant", "LangGraph", "Sigma.js"],
-      "icon": "graph",
-      "featured": false,
-      "hasFullPage": false
+      "icon": "cart",
+      "screenshot": "/img/cases/case-multi-brand-storefront.png",
+      "featured": true,
+      "hasFullPage": true
     }
   ],
-  "pricing": {
-    "tiers": [
-      {
-        "name": "Advisory",
-        "tagline": "Get clarity before you commit",
-        "description": "AI readiness assessment, architecture review, technology evaluation, and an actionable implementation roadmap.",
-        "range": "EUR 2,500 - 5,000",
-        "unit": "per engagement",
-        "duration": "1-2 weeks",
-        "includes": [
-          "Architecture and technology assessment",
-          "AI opportunity mapping",
-          "Implementation roadmap with priorities",
-          "Written recommendations document",
-          "Follow-up call to discuss findings"
-        ]
-      },
-      {
-        "name": "Implementation",
-        "tagline": "From architecture to production",
-        "description": "Hands-on design and development of AI systems — agents, knowledge graphs, LLM integrations, or e-commerce platforms. Delivered incrementally with working software at every milestone.",
-        "range": "EUR 15,000 - 80,000",
-        "unit": "per project",
-        "duration": "4-16 weeks",
-        "includes": [
-          "System architecture and design",
-          "Hands-on development",
-          "CI/CD and deployment setup",
-          "Testing and monitoring",
-          "Documentation and knowledge transfer"
-        ]
-      },
-      {
-        "name": "Embedded",
-        "tagline": "Your fractional AI architect",
-        "description": "Ongoing technical leadership embedded in your team — architecture decisions, code reviews, mentoring, and delivery oversight. Part-time (2-3 days/week) with full context.",
-        "range": "EUR 8,000 - 15,000",
-        "unit": "per month",
-        "duration": "3+ months",
-        "includes": [
-          "Technical architecture leadership",
-          "Code and design reviews",
-          "Team mentoring and SDLC coaching",
-          "Sprint participation and delivery oversight",
-          "Stakeholder communication support"
-        ]
-      }
-    ],
-    "processSteps": [
-      { "name": "Discovery Call", "description": "30-minute conversation to understand your challenge, timeline, and goals. No pitch — just listening." },
-      { "name": "Proposal", "description": "Within a week, you get a concrete proposal with scope, approach, timeline, and fixed pricing. No surprises." },
-      { "name": "Build", "description": "Hands-on work with regular check-ins and demos. You see working software at every milestone, not just at the end." },
-      { "name": "Handoff", "description": "Documentation, knowledge transfer, and a follow-up period to ensure your team is fully independent." }
-    ],
-    "note": "All prices are indicative and depend on scope, timeline, and complexity. Let's talk about your specific situation."
-  },
   "metrics": [
-    { "value": "12+", "label": "Years of Enterprise Delivery" },
-    { "value": "Fortune-500", "label": "Retail, Telecom & Media Clients" },
-    { "value": "78%", "label": "Faster Multi-Brand Onboarding" },
-    { "value": "25%", "label": "Crash Rate Reduction" }
+    {
+      "value": "12+",
+      "label": "Years of Enterprise Delivery"
+    },
+    {
+      "value": "Fortune-500",
+      "label": "Retail, Telecom & Media Clients"
+    },
+    {
+      "value": "78%",
+      "label": "Faster Multi-Brand Onboarding"
+    },
+    {
+      "value": "25%",
+      "label": "Crash Rate Reduction"
+    }
   ],
   "iconPaths": {
     "agents": "M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1.07A7 7 0 0 1 14 23h-4a7 7 0 0 1-6.93-4H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73A2 2 0 0 1 12 2zm-2 9a5 5 0 0 0-5 5 5 5 0 0 0 5 5h4a5 5 0 0 0 5-5 5 5 0 0 0-5-5h-4zm-1 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z",

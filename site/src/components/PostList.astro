@@ -1,0 +1,32 @@
+---
+import { formatDate, postUrl, type Post } from '../lib/posts';
+
+interface Props {
+  posts: Post[];
+  empty?: string;
+}
+
+const { posts, empty = 'No posts yet.' } = Astro.props;
+---
+
+{posts.length > 0 ? (
+  <div>
+    {posts.map((post) => (
+      <a href={postUrl(post)} class="group block border-b border-rule">
+        <div class="py-6">
+          <div class="flex items-baseline justify-between gap-4">
+            <h2 class="font-display text-lg font-bold text-ink group-hover:text-accent transition-colors">
+              {post.data.title}
+            </h2>
+            <time datetime={post.data.pubDate.toISOString()} class="font-mono text-xs text-muted flex-shrink-0">
+              {formatDate(post.data.pubDate)}
+            </time>
+          </div>
+          <p class="text-sm text-muted leading-relaxed mt-2 line-clamp-2">{post.data.description}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+) : (
+  <p class="text-muted">{empty}</p>
+)}

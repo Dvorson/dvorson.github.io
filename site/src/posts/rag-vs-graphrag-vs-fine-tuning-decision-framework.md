@@ -1,18 +1,15 @@
 ---
 title: "RAG vs GraphRAG vs Fine-Tuning: A Practitioner's Decision Framework for Enterprise AI"
-description: "A hands-on comparison of RAG, GraphRAG, and fine-tuning from an architect who built all three in production. Decision matrix and real examples included."
+description: "A hands-on comparison of RAG, GraphRAG, and fine-tuning from an architect who has built RAG and GraphRAG systems. Decision matrix and real examples included."
 pubDate: "2026-02-05"
 author: "Anton Dvorson"
-tags: ["RAG", "GraphRAG", "Fine-Tuning", "LLM", "Knowledge Graphs", "Neo4j", "Enterprise AI", "AI Architecture"]
-categories: ["AI Architecture", "Technical Consulting"]
-heroImage: "/img/rag-comparison.jpg"
+tags: ["RAG", "GraphRAG", "Fine-Tuning", "LLM", "Knowledge Graphs", "Enterprise AI", "AI Architecture"]
+categories: ["AI Architecture"]
 ---
-
-# RAG vs GraphRAG vs Fine-Tuning: A Practitioner's Decision Framework for Enterprise AI
 
 Every team I talk to starts in the same place: "We want to build a chatbot over our internal docs, so we need RAG." That instinct is understandable. Retrieval-Augmented Generation is the most accessible pattern and delivers a working demo fastest. But after building RAG systems, GraphRAG knowledge bases, and fine-tuned deployments in production, I can tell you that defaulting to basic RAG without evaluating your actual requirements is one of the most common mistakes in enterprise AI.
 
-This post is the decision framework I wish I had when I started. It comes from real projects, including a GraphRAG system backed by Neo4j indexing tens of thousands of articles, and RAG-based knowledge bases for telecom incident investigation.
+This post is the decision framework I wish I had when I started. It comes from real projects, including a knowledge graph over tens of thousands of support articles and an incident-investigation chat for a telecom operations proof-of-concept.
 
 ## The Three Approaches at a Glance
 
@@ -28,7 +25,7 @@ Each has a fundamentally different relationship with your data, and that distinc
 
 ### Where It Excels
 
-Traditional RAG is the right choice more often than people think. In my telecom incident investigation project, operators searched historical incident reports to diagnose current network issues. The queries were direct: "What was the root cause of the BGP flapping event in region North last quarter?" The answer lived in one or two documents, and vector similarity search found them reliably.
+Simple retrieval is the right choice more often than people think. In a telecom operations proof-of-concept, engineers used a chat to investigate incidents. Their questions were direct: "which devices had the most incidents this week?" or "what are the recurring anomaly types?" We did not need a vector index for that. Each kind of question mapped to a database aggregation, and the result went into the model's context. When the answer lives in one record or one document, the simplest retrieval that reliably finds it wins.
 
 RAG shines when:
 
@@ -51,7 +48,7 @@ Other failure modes I've seen in production:
 
 ### Where It Excels
 
-I built a GraphRAG knowledge base using Neo4j that indexed tens of thousands of articles with rich entity relationships: people, organizations, topics, events, and the connections between them. The difference was immediately obvious when users asked multi-hop questions. Instead of "find me articles about X," they could ask "how are these two regulatory changes connected through the organizations involved?" and get coherent, sourced answers.
+I built a knowledge graph over tens of thousands of product support articles: master articles, their translations, products, product families, and categories. It made a class of questions answerable that vector search could not touch. Which locales are missing a translation of this master article? Which articles about the same product family near-duplicate each other? Which articles mention a product code that does not match the product they are filed under? Each of those is a traversal, not a similarity lookup.
 
 GraphRAG is the right call when:
 
@@ -70,7 +67,7 @@ Other real costs:
 - **Latency.** Graph traversal queries are inherently more complex than vector lookups. You need to think carefully about query planning and caching.
 - **Smaller ecosystem.** There are fewer off-the-shelf tools compared to traditional RAG. Expect to build more custom infrastructure.
 
-For a deeper look at how I approach GraphRAG implementations, see my [GraphRAG solutions page](/solutions/graphrag).
+The [knowledge base case study](/case-studies/graphrag-knowledge-base) covers how that graph was built and what it cost to run.
 
 ## Fine-Tuning: Changing the Model Itself
 
@@ -95,8 +92,6 @@ Other practical challenges:
 - **Hallucination risk.** No retrieval grounding means the model can generate fluent, confident, and completely wrong answers.
 - **Cost.** GPU hours for training, evaluation cycles, model hosting. The bill adds up when retraining monthly.
 - **Catastrophic forgetting.** Aggressive fine-tuning can degrade general capabilities while improving domain performance.
-
-For projects where fine-tuning complements a retrieval strategy, I cover hybrid architectures in my [LLM integration solutions](/solutions/llm-integration).
 
 ## The Decision Matrix
 
@@ -126,7 +121,7 @@ Latency                    | Medium     | Higher      | Low
 4. **Is auditability a regulatory requirement?** --> GraphRAG (or add a graph layer to your RAG pipeline).
 5. **Is your data changing daily or weekly?** --> Traditional RAG for the retrieval layer; avoid pure fine-tuning.
 
-In practice, production systems often combine approaches. The telecom system I built uses RAG for retrieval but could benefit from a graph layer for tracing incident chains. Hybrid architectures aren't a cop-out; they're often the correct answer.
+In practice, production systems often combine approaches. The telecom proof-of-concept used plain database queries for context, and a graph layer would have helped trace chains of related incidents. Hybrid architectures aren't a cop-out; they're often the correct answer.
 
 ## Questions to Ask Before Choosing
 
@@ -154,7 +149,7 @@ After building these systems across different industries, a few patterns keep re
 
 **Entity extraction is the bottleneck in GraphRAG, not the graph database.** Teams obsess over Neo4j versus Neptune versus custom solutions, but extraction pipeline quality determines 80% of system quality.
 
-**Fine-tuning is a complement, not a replacement for retrieval.** The best production systems I've built use a fine-tuned model for output formatting combined with RAG or GraphRAG for knowledge grounding. Treating fine-tuning as a retrieval substitute leads to stale, hallucination-prone systems.
+**Fine-tuning is a complement, not a replacement for retrieval.** Where fine-tuning earns its place, it shapes output format and tone while RAG or GraphRAG supplies the knowledge. Treating fine-tuning as a retrieval substitute leads to stale, hallucination-prone systems.
 
 **Measure retrieval quality before blaming the LLM.** When answers are bad, teams want to swap the language model. The retrieval layer is the culprit 70% of the time. Fix your chunking, embeddings, or graph structure before reaching for a bigger model.
 

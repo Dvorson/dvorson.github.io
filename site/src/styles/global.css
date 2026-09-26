@@ -109,6 +109,17 @@
 }
 
 /* ============================================================
+   PRETEXT REFLOW — editorial text reflow demo
+   ============================================================ */
+
+.reflow-line {
+  position: absolute;
+  display: block;
+  white-space: nowrap;
+  transition: left 0.15s ease-out, top 0.05s linear;
+}
+
+/* ============================================================
    PROSE — Blog article styling
    Serif headings, clean borders, mono code, no decoration
    ============================================================ */

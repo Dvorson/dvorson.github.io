@@ -11,8 +11,8 @@ interface Props {
 }
 
 const SITE_URL = 'https://dvorson.github.io';
-const defaultTitle = 'Anton Dvorson — AI Solutions Architect';
-const defaultDescription = 'I help businesses build AI agents, knowledge graphs, and intelligent platforms that ship to production. 12+ years of enterprise delivery across Fortune-500 retail, telecom, and media.';
+const defaultTitle = 'Anton Dvorson | Software Architect & AI Engineer';
+const defaultDescription = 'Software architect and AI engineer with 12+ years of experience. Knowledge graphs, multi-agent systems, LLM platforms, and high-traffic web architecture.';
 const { title = defaultTitle, description = defaultDescription, ogImage = '/og/home.png', url, canonical, additionalSchema } = Astro.props;
 
 // Build absolute URLs for SEO
@@ -27,19 +27,12 @@ const baseSchema = {
     {
       '@type': 'Person',
       name: 'Anton Dvorson',
-      jobTitle: 'AI Solutions Architect',
+      jobTitle: 'Software Architect & AI Engineer',
       url: 'https://dvorson.github.io',
+      email: 'mailto:dvorson@gmail.com',
       knowsAbout: ['AI Agents', 'GraphRAG', 'Knowledge Graphs', 'LLM Engineering', 'Software Architecture', 'E-commerce Architecture', 'Node.js', 'TypeScript', 'Neo4j'],
       sameAs: ['https://github.com/dvorson', 'https://linkedin.com/in/dvorson'],
       workLocation: { '@type': 'City', name: 'Amsterdam' }
-    },
-    {
-      '@type': 'ProfessionalService',
-      name: 'Anton Dvorson — AI Solutions Architect',
-      url: 'https://dvorson.github.io',
-      description: 'AI consulting: agents, knowledge graphs, LLM integration, e-commerce architecture',
-      areaServed: ['Netherlands', 'Europe'],
-      serviceType: ['AI Consulting', 'GraphRAG Implementation', 'AI Agent Development', 'E-commerce Architecture', 'LLM Integration']
     }
   ]
 };
@@ -89,12 +82,12 @@ const baseSchema = {
 </head>
 <body class="min-h-screen flex flex-col bg-surface text-ink">
   <!-- Navigation -->
-  <nav class="bg-surface border-b border-rule sticky top-0 z-10">
+  <nav class="bg-surface border-b border-rule sticky top-0 z-10 print:hidden">
     <div class="container flex items-center justify-between" style="height: 64px;">
       <a href="/" class="font-mono text-sm tracking-wider uppercase font-medium text-ink">Anton Dvorson</a>
 
       <!-- Hamburger (mobile) -->
-      <button id="mobile-menu-btn" class="md:hidden text-muted hover:text-ink transition-colors" aria-label="Toggle menu">
+      <button id="mobile-menu-btn" class="md:hidden text-muted hover:text-ink transition-colors" aria-label="Toggle menu" aria-controls="mobile-menu" aria-expanded="false">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
           <line x1="4" y1="7" x2="20" y2="7" />
           <line x1="4" y1="12" x2="20" y2="12" />
@@ -104,22 +97,20 @@ const baseSchema = {
 
       <!-- Desktop nav -->
       <div class="hidden md:flex items-center gap-10">
-        <a href="/solutions" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors">Solutions</a>
         <a href="/case-studies" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors">Case Studies</a>
-        <a href="/blog" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors">Blog</a>
-        <a href="/cv" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors">CV</a>
-        <a href="/#contact" class="font-mono text-xs tracking-wider uppercase px-4 py-2 border border-ink text-ink hover:bg-accent hover:border-accent hover:text-white transition-colors">Get in Touch</a>
+        <a href="/blog" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors">Writing</a>
+        <a href="https://github.com/dvorson" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="/cv" class="font-mono text-xs tracking-wider uppercase px-4 py-2 border border-ink text-ink hover:bg-accent hover:border-accent hover:text-white transition-colors">CV</a>
       </div>
     </div>
 
     <!-- Mobile nav -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-rule">
       <div class="container flex flex-col gap-4 py-6">
-        <a href="/solutions" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors">Solutions</a>
         <a href="/case-studies" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors">Case Studies</a>
-        <a href="/blog" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors">Blog</a>
-        <a href="/cv" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors">CV</a>
-        <a href="/#contact" class="font-mono text-xs tracking-wider uppercase px-4 py-2 border border-ink text-ink hover:bg-accent hover:border-accent hover:text-white transition-colors inline-block w-fit">Get in Touch</a>
+        <a href="/blog" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors">Writing</a>
+        <a href="https://github.com/dvorson" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="/cv" class="font-mono text-xs tracking-wider uppercase px-4 py-2 border border-ink text-ink hover:bg-accent hover:border-accent hover:text-white transition-colors inline-block w-fit">CV</a>
       </div>
     </div>
   </nav>
@@ -127,7 +118,8 @@ const baseSchema = {
   <script is:inline>
     document.getElementById('mobile-menu-btn').addEventListener('click', function () {
       var menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
+      var open = menu.classList.toggle('hidden') === false;
+      this.setAttribute('aria-expanded', String(open));
     });
   </script>
 
@@ -137,7 +129,7 @@ const baseSchema = {
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-rule">
+  <footer class="border-t border-rule print:hidden">
     <div class="container flex items-center justify-between py-10">
       <span class="font-mono text-xs text-muted">&copy; {new Date().getFullYear()} Anton Dvorson</span>
       <div class="flex items-center gap-6">

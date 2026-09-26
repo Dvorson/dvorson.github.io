@@ -1,32 +1,26 @@
 ---
 export interface Props {
-  headline: string;
-  description: string;
+  headline?: string;
+  description?: string;
   ctaText?: string;
   ctaLink?: string;
 }
 
 const {
-  headline,
-  description,
-  ctaText = 'Get in Touch',
-  ctaLink = '/#contact',
+  headline = 'Want the technical detail?',
+  description = "I'm happy to walk through the architecture, the trade-offs, and what I'd do differently next time.",
+  ctaText = 'Email me',
+  ctaLink = 'mailto:dvorson@gmail.com',
 } = Astro.props;
 ---
 
 <section class="border-t border-b border-rule py-16 my-16">
   <div class="max-w-2xl mx-auto text-center">
-    <h2 class="font-display text-3xl font-bold mb-4">
-      {headline}
-    </h2>
-    <p class="text-muted leading-relaxed mb-8">
-      {description}
-    </p>
-    <a
-      href={ctaLink}
-      class="btn-primary"
-    >
-      {ctaText}
-    </a>
+    <h2 class="font-display text-3xl font-bold mb-4">{headline}</h2>
+    <p class="text-muted leading-relaxed mb-8">{description}</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href={ctaLink} class="btn-primary">{ctaText}</a>
+      <a href="/cv" class="btn-secondary">Read the CV</a>
+    </div>
   </div>
 </section>

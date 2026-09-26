@@ -6,7 +6,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  reporter: process.env.CI ? 'github' : 'list',
   use: {
     baseURL: 'http://localhost:4321',
     trace: 'on-first-retry',
@@ -19,10 +19,13 @@ export default defineConfig({
     },
   ],
 
+  // Tests run against the production build so redirects, the generated PDF,
+  // and built assets are covered. Run `npm run build` first.
   webServer: {
-    command: 'npm run dev',
+    command: 'npx astro preview --port 4321',
     url: 'http://localhost:4321',
-    reuseExistingServer: !process.env.CI,
+    // Never reuse: a running dev server would be tested instead of the build.
+    reuseExistingServer: false,
     timeout: 120 * 1000,
   },
 });

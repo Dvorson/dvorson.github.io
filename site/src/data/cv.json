@@ -7,7 +7,7 @@
     "linkedin": "linkedin.com/in/dvorson",
     "website": "dvorson.github.io"
   },
-  "summary": "Strategic and results-oriented software architect and full-stack engineer with 12+ years of experience delivering scalable, high-traffic solutions. Deep expertise in Node.js, React, TypeScript, GraphQL, AWS, and DevOps, with a proven track record in e-commerce platforms, embedded systems, editorial tools, and payments infrastructure. At the forefront of the AI-driven paradigm shift, adept at leveraging generative AI and LLM technologies to accelerate development and innovation. Proven ability to align technical strategy with business goals, driving performance improvements and delivering measurable ROI.",
+  "summary": "Software architect and hands-on engineer with 12+ years of production web platforms and, since 2025, LLM systems. Currently tech lead for an internal LLM serving and agent platform at a Fortune-500 retailer. Recent work: a knowledge graph with automated quality scoring over tens of thousands of support articles, a multi-agent anomaly detection PoC for a telecom operator, and Ticker Talk, a filing-grounded research product I built and run in production. Earlier: a multi-brand headless storefront (Next.js, GraphQL), set-top-box UI on embedded Linux, newsroom analytics, and payment flows.",
   "expertise": [
     "Software Architecture & System Design",
     "Generative AI & LLM Engineering",
@@ -19,7 +19,7 @@
   "skillCategories": {
     "Languages & Frameworks": "JavaScript/TypeScript, Node.js, React, Next.js, Express, GraphQL, RESTful APIs, Kotlin, Python",
     "Cloud & DevOps": "AWS (EC2, Lambda, S3, RDS), Docker, Kubernetes, Terraform, CI/CD (Jenkins, GitHub Actions), Azure, GCP",
-    "AI & LLM": "Langflow, Neo4j, GraphRAG, RAG, Vector DB (Milvus), LLM Agents, OpenWebUI, Custom Ontology Design",
+    "AI & LLM": "LLM agents and tool calling, RAG, GraphRAG, LangChain, LangGraph, Semantic Kernel, knowledge graphs (Neo4j, Cosmos DB Gremlin), vector search (FAISS, Qdrant), LLM evaluation, Langfuse, Open WebUI",
     "Data & Databases": "MongoDB, DynamoDB, PostgreSQL, MySQL, Elasticsearch, Redis, Caching strategies",
     "Practices & Tools": "Microservices, Event-driven & Serverless architectures, Agile/Scrum, DevSecOps, n8n, Git/GitHub, Jira"
   },
@@ -41,7 +41,8 @@
     "Elasticsearch",
     "Redis",
     "Neo4j",
-    "Langflow",
+    "LangChain",
+    "LangGraph",
     "GraphRAG",
     "LLM Agents",
     "Prometheus",
@@ -56,18 +57,12 @@
       "subtitle": "GenAI Enablement Platform",
       "start": "Jan 2026",
       "end": "Present",
-      "duration": "2 months",
       "location": "Amsterdam, Netherlands",
       "description": "Embedded as tech lead in a GenAI Enablement team at a Fortune-500 global retailer, driving engineering delivery and SDLC maturity for an internal LLM serving and agentic development platform.",
       "highlights": [
-        "Tech lead for GenAI Enablement at Fortune-500 retailer — building the foundational LLM serving and agentic platform enabling company-wide AI agent development",
-        "Introduced structured SDLC practices to a team of 4 engineers — establishing planning disciplines and delivery visibility frameworks for management",
+        "Tech lead for GenAI Enablement at a Fortune-500 retailer, building the LLM serving and agent platform that teams across the company use to ship AI agents",
+        "Introduced planning and delivery-tracking practices to a team of 4 engineers, giving management a clear view of what ships when",
         "Contributing to secure multi-tenant AI platform with isolated, governed agent deployments enforcing data access controls across retail and supply chain domains"
-      ],
-      "responsibilities": [
-        "Embedded as tech lead driving engineering delivery and SDLC maturity for internal LLM platform",
-        "Introduced structured SDLC practices — planning disciplines, delivery visibility frameworks",
-        "Contributing to secure multi-tenant AI platform for enterprise-scale internal adoption"
       ],
       "technologies": "Kotlin, Kubernetes, Next.js 16, TypeScript, LLM Serving Infrastructure, Agentic AI"
     },
@@ -77,21 +72,15 @@
       "subtitle": "GraphRAG Knowledge Base",
       "start": "Nov 2025",
       "end": "Jan 2026",
-      "duration": "3 months",
       "location": "Amsterdam, Netherlands",
-      "description": "Solo-architected and delivered a GraphRAG application targeting a legacy Salesforce knowledge base of tens of thousands of articles spanning a large enterprise product portfolio.",
+      "description": "Solo-architected and delivered a GraphRAG application for a legacy Salesforce knowledge base of tens of thousands of articles spanning a large enterprise product portfolio.",
       "highlights": [
-        "Solo-architected GraphRAG application for legacy Salesforce knowledge base of tens of thousands of articles — full stack from ontology design to LLM agent deployment",
-        "Built Neo4j knowledge graph with custom domain ontology and automated quality metrics: duplication score, product relevance, readability index, translation gap detection",
-        "Implemented multi-hop reasoning LLM agent with Neo4j graph traversal — answering complex queries, suggesting improvements, generating new articles from verified knowledge"
+        "Built the ingestion pipeline from Salesforce exports into a knowledge graph on Azure Cosmos DB (Gremlin), prototyped on Neo4j, with FAISS for semantic retrieval",
+        "Automated per-article quality scoring: completeness, structure, staleness, duplicates, translation coverage, broken links, and contradictions",
+        "Built a tool-calling chat agent (Semantic Kernel, Azure OpenAI) over the graph and vector index, plus a React and Sigma.js graph explorer for editors",
+        "Batched Gremlin writes to cut vertex upsert time 7.8x, and added request-unit budgets, Prometheus metrics, and Grafana dashboards per ingestion stage"
       ],
-      "responsibilities": [
-        "Designed custom domain ontology and built Neo4j knowledge graph linking articles, products, and quality signals",
-        "Implemented automated knowledge quality metrics per article: duplication score, product relevance, readability index",
-        "Built interactive knowledge graph visualization with Sigma.js and multi-dimensional filtering",
-        "Implemented multi-hop reasoning LLM agent with Neo4j graph traversal tools"
-      ],
-      "technologies": "GraphRAG, Neo4j, Langflow, LLM Agents, Sigma.js, Salesforce Knowledge, Python, Custom Ontology Design"
+      "technologies": "Python, FastAPI, Azure Cosmos DB (Gremlin), Neo4j, FAISS, Semantic Kernel, Azure OpenAI, React, Sigma.js, Prometheus, Grafana, Langfuse"
     },
     {
       "company": "Global IT Services Company",
@@ -99,21 +88,15 @@
       "subtitle": "Multi-Agent AI for Telecom",
       "start": "May 2025",
       "end": "Oct 2025",
-      "duration": "6 months",
       "location": "Amsterdam, Netherlands",
-      "description": "Built a multi-agent AI PoC for a large telecom operator, serving as one of 3 engineers across the full stack — from LLM orchestration to monitoring integration and engineer-facing chat interface.",
+      "description": "Built a multi-agent AI PoC for a large telecom operator as one of 3 engineers, from agent orchestration to monitoring integration and an engineer-facing chat interface.",
       "highlights": [
-        "Built multi-agent AI PoC for large telecom operator — full stack from LLM orchestration to Grafana integration and conversational ops interface",
-        "Designed Langflow-orchestrated anomaly detection pipeline with specialized LLM agents independently identifying, classifying, and escalating anomalies",
-        "Deployed OpenWebUI conversational interface for field engineers — alert to AI-assisted root cause localization within a single interface"
+        "Built a Sense, Think, and Act agent pipeline (LangChain, Azure OpenAI) over FTTH network telemetry, with tool calls for device reboots, config resets, and Jira tickets",
+        "Owned the operator-facing layer: Grafana dashboards for anomalies, incidents, and agent activity, and an Open WebUI chat grounded in incident records",
+        "Added the feedback API behind a loop that drafts a revised agent prompt when more than 30% of recent outputs are rated bad",
+        "Scripted idempotent Azure Container Apps deployment for the API, RabbitMQ, MongoDB, Prometheus, Grafana, and Open WebUI"
       ],
-      "responsibilities": [
-        "Designed Langflow-orchestrated anomaly detection pipeline ingesting real-time telecom monitoring logs",
-        "Architected RAG-based knowledge base with vector store and structured incident history",
-        "Integrated alerting pipeline with Grafana dashboards for real-time incident reflection",
-        "Deployed OpenWebUI conversational interface for natural language incident investigation"
-      ],
-      "technologies": "Langflow, OpenWebUI, Grafana, RAG, Vector DB, LLM Agents, Python, REST APIs"
+      "technologies": "Python, FastAPI, LangChain, Azure OpenAI, Celery, RabbitMQ, MongoDB, Grafana, Prometheus, Open WebUI, Azure Container Apps"
     },
     {
       "company": "Global IT Services Company",
@@ -121,22 +104,13 @@
       "subtitle": "Global Coffee Brand PWA Storefront",
       "start": "Jan 2023",
       "end": "Apr 2025",
-      "duration": "2 years 4 months",
       "location": "Amsterdam, Netherlands",
       "description": "Co-architected and co-developed a next-generation GraphCommerce-based Progressive Web App storefront for a global coffee brand, functioning as 50/50 architect and hands-on engineer.",
       "highlights": [
-        "Co-architected GraphCommerce-based PWA storefront decoupling Magento 2 via GraphQL — Next.js + TypeScript BFF with 50/50 architect and hands-on engineering role",
-        "Introduced design token architecture for multi-brand portfolio — reduced second-brand onboarding from 9 months to 2 months (78% reduction)",
+        "Co-architected a GraphCommerce PWA storefront that decouples Magento 2 through a GraphQL BFF in Next.js and TypeScript, splitting time evenly between architecture and hands-on engineering",
+        "Introduced a design token architecture for the multi-brand portfolio, cutting second-brand onboarding from 9 months to 2",
         "Established CI/CD with GitHub Actions, migrated from Vercel to Azure with blue/green zero-downtime deployments, cutting release cycle time by 30%",
         "Mentored 6 engineers and coordinated across design, QA, and product teams"
-      ],
-      "responsibilities": [
-        "Co-architected GraphCommerce-based PWA storefront decoupling Magento 2 via GraphQL",
-        "Designed block-based content constructor system integrated with GraphCMS",
-        "Established CI/CD pipeline with GitHub Actions, blue/green zero-downtime deployments on Azure",
-        "Introduced design token architecture reducing second-brand onboarding time by 78%",
-        "Built shared component library on top of GraphCommerce",
-        "Mentored 6 engineers and coordinated across design, QA, and product"
       ],
       "technologies": "Next.js, Node.js, TypeScript, GraphCommerce, GraphQL Mesh, Apollo, GraphCMS, Redis, Vercel, Azure, GitHub Actions, Docker, NewRelic, Design Tokens"
     },
@@ -146,17 +120,11 @@
       "subtitle": "Multimedia Hub for Set Top Box",
       "start": "Jun 2021",
       "end": "Dec 2022",
-      "duration": "1 year 7 months",
       "location": "Netherlands",
       "description": "Developed EFL graphics components rendered directly from Node.js on embedded Linux hardware, enabling unified UX across live TV, VOD, and third-party apps.",
       "highlights": [
-        "Developed EFL graphics components rendered from Node.js on embedded Linux — unified UX across live TV, VOD, and third-party apps",
-        "Optimised memory footprint and startup time, resolving critical leaks in a 400K-line codebase",
-        "Instrumented Prometheus/Grafana dashboards, reducing on-device crash rate by 25%"
-      ],
-      "responsibilities": [
-        "Developed EFL graphics components for UI display from Node.js on set top box hardware",
-        "Optimised memory footprint and startup time, resolving critical memory leaks",
+        "Developed EFL graphics components driven from Node.js on embedded Linux, giving live TV, VOD, and third-party apps one consistent UI",
+        "Optimized memory footprint and startup time, resolving critical leaks in a 400K-line codebase",
         "Instrumented Prometheus/Grafana dashboards, reducing on-device crash rate by 25%"
       ],
       "technologies": "Node.js, Embedded Linux, EFL, Prometheus, Grafana"
@@ -167,19 +135,12 @@
       "subtitle": "Heavy Equipment Marketplace",
       "start": "Feb 2021",
       "end": "Jun 2021",
-      "duration": "5 months",
       "location": "St Petersburg, Russia",
       "description": "Enhanced GraphQL location inference and stepper UI, improving checkout completion by 15%. Hardened infrastructure for PCI compliance.",
       "highlights": [
         "Enhanced GraphQL location inference and stepper UI, improving checkout completion by 15%",
         "Augmented Elasticsearch suggest pipeline, cutting search latency by 40ms",
         "Hardened infrastructure for PCI compliance; migrated CI/CD from Bitbucket to AWS CodeDeploy with automated vulnerability scanning"
-      ],
-      "responsibilities": [
-        "Enhanced GraphQL location inference and stepper UI for improved checkout flow",
-        "Augmented Elasticsearch suggest pipeline and index mapping for search optimization",
-        "Hardened infrastructure for PCI compliance with automated vulnerability scanning",
-        "Migrated CI/CD from Bitbucket Pipelines to AWS CodeDeploy"
       ],
       "technologies": "Node.js, React, TypeScript, Strapi, Elasticsearch, Docker, AWS, Redis, Stripe, Plaid"
     },
@@ -189,20 +150,12 @@
       "subtitle": "Editorial Tools for News Publishing",
       "start": "Sep 2019",
       "end": "Feb 2021",
-      "duration": "1 year 6 months",
       "location": "St Petersburg, Russia",
       "description": "Built analytics microservices and dashboards for Sweden's #2 news publisher, providing editors with real-time competitor insights and article quality scores.",
       "highlights": [
         "Built analytics microservices and dashboards for Sweden's #2 news publisher with real-time competitor insights",
         "Implemented Puppeteer screenshot service storing >10TB images on Amazon S3; built popular photo tool with Konva.js",
         "Led migration from EPiServer CMS to cloud React/Redux + Node monolith; orchestrated move to OpenShift Kubernetes, improving deployment frequency by 3x"
-      ],
-      "responsibilities": [
-        "Built Node.js and React SSR microservices for article analytics and dashboards",
-        "Implemented Puppeteer screenshot service with Amazon S3 integration",
-        "Developed photo manipulation tool using Konva.js",
-        "Led migration from EPiServer to modular React/Redux + Node monolith",
-        "Orchestrated deployment migration to OpenShift managed Kubernetes"
       ],
       "technologies": "Node.js, React SSR, MongoDB, RabbitMQ, Docker, Kubernetes, OpenShift, Elasticsearch, d3.js"
     },
@@ -212,19 +165,12 @@
       "subtitle": "Online Payment Service Platform",
       "start": "Mar 2016",
       "end": "Jul 2017",
-      "duration": "1 year 5 months",
       "location": "St Petersburg, Russia",
-      "description": "Modernised design system using Node.js & Full-Stack BEM, replacing legacy XML/XSLT stack across 20+ payment flows.",
+      "description": "Modernized design system using Node.js & Full-Stack BEM, replacing legacy XML/XSLT stack across 20+ payment flows.",
       "highlights": [
-        "Modernised design system using Node.js & Full-Stack BEM, replacing legacy XML/XSLT stack across 20+ payment flows",
+        "Modernized design system using Node.js & Full-Stack BEM, replacing legacy XML/XSLT stack across 20+ payment flows",
         "Developed A/B test pages and BFF logic that lifted payment conversion on pilot flows by 8%",
         "Contributed to plastic and virtual card issuance services and user stats aggregation"
-      ],
-      "responsibilities": [
-        "Implemented component-based design system using Node.js and Full-Stack BEM",
-        "Created A/B testing experiment pages and payment process markup",
-        "Developed BFF business logic for payment flows",
-        "Contributed to card issuance processes and user statistics aggregation"
       ],
       "technologies": "Node.js, JavaScript, Full-Stack BEM"
     },
@@ -234,19 +180,12 @@
       "subtitle": "Digital Manufacturing Service Platform",
       "start": "May 2013",
       "end": "Feb 2016",
-      "duration": "2 years 10 months",
       "location": "St Petersburg, Russia",
-      "description": "Built web platform enabling instant 3D-print quotes with Three.js visualisation and Node.js REST API, shortening quote cycle from days to minutes.",
+      "description": "Built web platform enabling instant 3D-print quotes with Three.js visualization and Node.js REST API, shortening quote cycle from days to minutes.",
       "highlights": [
-        "Built web platform with Three.js 3D visualisation and Node.js REST API — shortening quote cycle from days to minutes",
+        "Built a 3D-print quoting platform with Three.js visualization and a Node.js REST API, cutting the quote cycle from days to minutes",
         "Migrated platform from YII PHP to Node.js REST API architecture; added admin e-commerce interface and real-time chat",
         "Managed commissioning and maintenance of 12 CNC machines"
-      ],
-      "responsibilities": [
-        "Built Three.js-based 3D model visualization with volume and dimension calculations",
-        "Migrated platform from YII PHP framework to Node.js REST API architecture",
-        "Added admin interface for e-commerce functionality and websocket chat system",
-        "Managed commissioning and maintenance team for 12 CNC machines"
       ],
       "technologies": "Three.js, YII PHP, Node.js, REST API, WebSocket, MongoDB"
     }
@@ -257,8 +196,33 @@
     "institution": "Yaroslavl State Technical University (YSTU)"
   },
   "languages": [
-    { "language": "English", "level": "Fluent" },
-    { "language": "Russian", "level": "Native" },
-    { "language": "Dutch", "level": "A2" }
+    {
+      "language": "English",
+      "level": "Fluent"
+    },
+    {
+      "language": "Russian",
+      "level": "Native"
+    },
+    {
+      "language": "Dutch",
+      "level": "A2"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Ticker Talk",
+      "role": "Founder & Solo Developer",
+      "start": "Jan 2026",
+      "end": "Present",
+      "description": "Evidence-first research workspace for fundamental analysts. It answers SEC-filing questions with citations to the exact filing, period, and unit, and turns later filing changes into revisions the analyst approves or rejects. Running in production.",
+      "highlights": [
+        "Point-in-time evaluation: expected answers are computed only from facts filed before each question's as-of date, then scored by a deterministic scorer and a pinned LLM judge",
+        "Deterministic code owns accounting, units, and calculations; the LLM plans, retrieves, and explains, and missing data surfaces as an explicit gap",
+        "Refocused the product from stock screening to filings after usage data showed 88 of 114 messages were filing questions and one was about screens"
+      ],
+      "technologies": "Next.js, FastAPI, PostgreSQL, Redis, OpenRouter, Ollama, Clerk, Langfuse, Railway",
+      "link": "/case-studies/ai-stock-screener"
+    }
   ]
 }
