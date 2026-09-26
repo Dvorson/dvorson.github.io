@@ -10,6 +10,7 @@ export default function AdminPage() {
     title: '',
     content: '',
     tags: [],
+    description: '',
     category: '',
     slug: ''
   })
@@ -44,7 +45,7 @@ export default function AdminPage() {
       } else {
         setMessage({ type: 'error', text: result.error || 'Failed to save draft' })
       }
-    } catch (error) {
+    } catch {
       setMessage({ type: 'error', text: 'Network error occurred' })
     } finally {
       setIsLoading(false)
@@ -76,13 +77,14 @@ export default function AdminPage() {
           title: '',
           content: '',
           tags: [],
+          description: '',
           category: '',
           slug: ''
         })
       } else {
         setMessage({ type: 'error', text: result.error || 'Failed to publish post' })
       }
-    } catch (error) {
+    } catch {
       setMessage({ type: 'error', text: 'Network error occurred' })
     } finally {
       setIsLoading(false)
