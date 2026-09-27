@@ -95,7 +95,8 @@
       "icon": "network",
       "featured": true,
       "hasFullPage": true,
-      "screenshot": null
+      "screenshot": "/img/cases/case-telecom-anomaly-detection.png",
+      "screenshotCaption": "Incidents written by the agents, from a local re-run of the proof of concept on synthetic telemetry. Ticket links are blurred."
     },
     {
       "id": "multi-brand-storefront",

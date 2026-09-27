@@ -90,7 +90,8 @@ test('blog post has a single h1 and article metadata', async ({ page }) => {
 test('CV shows computed durations and a downloadable PDF', async ({ page, request }) => {
   await page.goto('/cv');
   await expect(page.locator('h1')).toHaveText('Anton Dvorson');
-  await expect(page.getByText(/Jan 2026 – Present \(\d+ (months?|years?)/)).toBeVisible();
+  await expect(page.getByText(/Jul 2026 – Present \(\d+ (months?|years?)/)).toBeVisible();
+  await expect(page.getByText('Jan 2026 – Jun 2026 (6 months)')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Projects' })).toBeVisible();
 
   const pdf = await request.get('/cv.pdf');
