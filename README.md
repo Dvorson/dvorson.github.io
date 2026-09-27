@@ -1,72 +1,48 @@
 # dvorson.github.io
 
-Personal CV and blog site with dual-app architecture: Astro static site + Next.js admin interface.
+Personal site: CV, case studies, and writing. Served at <https://dvorson.github.io>.
 
-## Architecture
+## Layout
 
-This is a **dual-app personal site** with two independent applications:
+| Path | What it is |
+|---|---|
+| `site/` | Astro 5 static site. Deployed to GitHub Pages by `.github/workflows/deploy.yml`. |
+| `admin/` | Local-only Next.js editor that writes Markdown posts into `site/src/posts/` and commits them. |
 
-- **`site/`** - Astro static site generator (public CV/blog)
-- **`admin/`** - Next.js local admin interface (content management)
+## Site
 
-**Workflow**: Local admin → writes posts to `site/src/posts/` → commits to git → GitHub Actions rebuilds static site to `docs/` → serves via GitHub Pages.
-
-## Technology Stack
-
-### Frontend Site (`site/`)
-- **Astro 4.5.0** - Static site generator
-- **Tailwind CSS 3.3.2** - Styling framework  
-- **Playwright** - Testing framework
-- Builds to `../docs` for GitHub Pages deployment
-
-### Admin Interface (`admin/`)
-- **Next.js 14** - React framework
-- **TipTap v2.3.0** - Rich text editor with table/LaTeX support
-- **Tailwind CSS 3.4.1** - Styling
-- **Jest + Testing Library** - Testing stack
-
-## Quick Start
-
-### Frontend Site
 ```bash
 cd site
 npm install
-npm run dev     # Dev server at http://localhost:4321
-npm run build   # Build static site to ../docs/
-npm run test    # Run Playwright tests
+npm run dev      # http://localhost:4321
+npm run build    # OG images → astro build → dist/cv.pdf
+npm test         # Playwright against the built site (run the build first)
 ```
 
-### Admin Interface
+- **Posts** are an Astro content collection in `site/src/posts/*.md`, served at `/blog/<file-name>`.
+  Front-matter is validated by `site/src/content.config.ts`; an unknown or missing field fails the build.
+- **CV and case studies** live in `site/src/data/cv.json` and `site/src/data/services.json`,
+  validated by `site/src/lib/data.ts`. CV durations are computed from `start`/`end` at build time.
+- **Redirects** for retired URLs are declared in `site/astro.config.mjs`.
+- **OG images** (`public/og/`) and the **CV PDF** (`dist/cv.pdf`) are generated during the build and are not committed.
+
+## Admin
+
 ```bash
 cd admin
 npm install
-npm run dev     # Dev server at http://localhost:3000
-npm run test    # Run Jest tests
-npm run build   # Build admin app
+npm run dev          # http://localhost:3001
+npm run lint
+npm run type-check
+npx jest             # unit and API tests
+npx playwright test  # real-browser editor tests (writes to a temp dir, not ../site)
 ```
 
-## Key Features
-
-### Content Management
-- Rich-text editor with drag handles, tables, and LaTeX support
-- Draft and publish workflow
-- Automatic git commits and deployments
-- Image and video embed support
-
-### Site Features
-- Responsive CV/portfolio display
-- Blog with categories and tags
-- Static site optimization
-- GitHub Pages deployment
-
-## Content Management Flow
-1. Admin app provides rich-text editing interface
-2. Posts are saved as Markdown to `site/src/posts/`
-3. Admin commits and pushes changes via git
-4. GitHub Actions rebuilds site and deploys to Pages
+Publishing writes `site/src/posts/<slug>.md` and runs `git add/commit/push` for that file and any
+images it references. Uploaded images go to `site/public/img/posts/`. Set `POSTS_DIR` and `IMAGES_DIR`
+to write somewhere else (the tests do this).
 
 ## Deployment
-- Static site builds to `docs/` directory (tracked in git)
-- GitHub Pages serves from `docs/` folder
-- Admin runs locally only (not deployed)
-- GitHub Actions handles automated rebuilds on push to main
+
+Every push to `master` builds the site, runs the site and admin test suites, and deploys
+`site/dist` with GitHub Pages Actions. A weekly scheduled run keeps build-time values current.

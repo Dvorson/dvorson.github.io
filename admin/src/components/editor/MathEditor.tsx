@@ -14,24 +14,13 @@ export default function MathEditor({ onMathInsert }: MathEditorProps) {
   const [error, setError] = useState('')
 
   const validateLatex = (input: string): boolean => {
-    // Basic LaTeX validation
+    // Only structural checks. A command allowlist rejected the presets below
+    // and could never keep up with what LaTeX renderers accept.
     const openBraces = (input.match(/{/g) || []).length
     const closeBraces = (input.match(/}/g) || []).length
     
     if (openBraces !== closeBraces) {
       setError('Mismatched braces')
-      return false
-    }
-
-    // Check for common LaTeX commands
-    const invalidCommands = input.match(/\\[a-zA-Z]+/g)?.filter(cmd => 
-      !['\\frac', '\\sqrt', '\\sum', '\\int', '\\alpha', '\\beta', '\\gamma', 
-        '\\sin', '\\cos', '\\tan', '\\log', '\\ln', '\\infty', '\\pi', '\\theta',
-        '\\begin', '\\end', '\\bmatrix', '\\pmatrix', '\\left', '\\right'].includes(cmd)
-    )
-
-    if (invalidCommands && invalidCommands.length > 0) {
-      setError(`Invalid command: ${invalidCommands[0]}`)
       return false
     }
 

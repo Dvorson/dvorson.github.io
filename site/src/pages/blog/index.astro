@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PostList from '../../components/PostList.astro';
+import { getPosts } from '../../lib/posts';
+
+const posts = await getPosts();
+---
+
+<Layout
+  title="Writing | Anton Dvorson"
+  description="Notes on AI system architecture: GraphRAG, multi-agent systems, retrieval quality, and agent frameworks."
+  ogImage="/og/blog.png"
+>
+  <section class="border-b border-rule">
+    <div class="container" style="padding-top: 96px; padding-bottom: 64px;">
+      <div class="section-header">
+        <div>
+          <span class="section-number">01</span>
+          <h1 class="section-title mt-2">Writing</h1>
+        </div>
+      </div>
+      <p class="text-muted leading-relaxed" style="max-width: 540px;">AI system architecture and lessons from building knowledge graphs and agent pipelines.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="padding-top: 32px; padding-bottom: 96px; max-width: 900px;">
+      <PostList posts={posts} empty="New writing coming soon." />
+      <p class="font-mono text-xs text-muted mt-10">
+        Browse by <a href="/tags/" class="underline hover:text-ink">tag</a> or <a href="/categories/" class="underline hover:text-ink">category</a>.
+      </p>
+    </div>
+  </section>
+</Layout>

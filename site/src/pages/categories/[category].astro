@@ -1,94 +1,25 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PostList from '../../components/PostList.astro';
+import { getPosts } from '../../lib/posts';
 
 export async function getStaticPaths() {
-  const postModules = import.meta.glob('../../posts/*.md', { eager: true });
-  const posts = Object.values(postModules) as any[];
-
-  // Collect all categories from all posts (handling both single category and multiple categories)
-  const allCategories = new Set<string>();
-
-  posts.forEach((post) => {
-    const frontmatter = post.frontmatter;
-    if (frontmatter) {
-      // Handle single category field
-      if (frontmatter.category && typeof frontmatter.category === 'string') {
-        allCategories.add(frontmatter.category);
-      }
-      // Handle categories array
-      if (frontmatter.categories && Array.isArray(frontmatter.categories)) {
-        frontmatter.categories.forEach((cat: string) => allCategories.add(cat));
-      }
-    }
-  });
-
-  return Array.from(allCategories).sort().map((category) => ({
-    params: { category }
+  const posts = await getPosts();
+  const categories = [...new Set(posts.flatMap((post) => post.data.categories))].sort();
+  return categories.map((category) => ({
+    params: { category },
+    props: { posts: posts.filter((post) => post.data.categories.includes(category)) },
   }));
 }
 
 const { category } = Astro.params;
-
-const postModules = import.meta.glob('../../posts/*.md', { eager: true });
-const posts = Object.entries(postModules).map(([path, post]) => {
-  const slug = path.split('/').pop()?.replace('.md', '') || '';
-  return {
-    ...post,
-    url: `/${slug}`,
-    frontmatter: post.frontmatter
-  };
-});
-
-const filtered = posts
-  .filter((p) => {
-    const frontmatter = p.frontmatter;
-    if (!frontmatter) return false;
-
-    // Check if category matches either single category field or is in categories array
-    const matchesSingleCategory = frontmatter.category === category;
-    const matchesCategoriesArray = frontmatter.categories &&
-      Array.isArray(frontmatter.categories) &&
-      frontmatter.categories.includes(category);
-
-    return matchesSingleCategory || matchesCategoriesArray;
-  })
-  .sort((a, b) => new Date(b.frontmatter.date || b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.date || a.frontmatter.pubDate).getTime());
+const { posts } = Astro.props;
 ---
 
-<Layout title={`Posts in "${category}" — Blog`}>
-  <section class="container py-16">
-    <div class="mb-8">
-      <a href="/categories/" class="font-mono text-xs text-muted hover:text-ink transition-colors">← All categories</a>
-    </div>
-
-    <div class="section-header">
-      <div>
-        <span class="font-mono text-xs border border-rule px-3 py-1 text-muted">{category}</span>
-        <h1 class="section-title mt-4">Posts in "{category}"</h1>
-      </div>
-    </div>
-
-    {filtered.length > 0 ? (
-      <div>
-        {filtered.map((post) => (
-          <a href={post.url} class="group block border-b border-rule">
-            <div class="flex items-baseline justify-between py-6">
-              <h2 class="font-display text-lg font-bold text-ink group-hover:text-accent transition-colors">
-                {post.frontmatter.title}
-              </h2>
-              <time class="font-mono text-xs text-muted flex-shrink-0 ml-4">
-                {new Date(post.frontmatter.date || post.frontmatter.pubDate).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'short',
-                  day: 'numeric'
-                })}
-              </time>
-            </div>
-          </a>
-        ))}
-      </div>
-    ) : (
-      <p class="text-muted">No posts found in this category.</p>
-    )}
+<Layout title={`Posts in "${category}" | Anton Dvorson`}>
+  <section class="container py-16" style="max-width: 900px;">
+    <a href="/categories/" class="font-mono text-xs text-muted hover:text-ink transition-colors">← All categories</a>
+    <h1 class="section-title mt-8 mb-6">Posts in "{category}"</h1>
+    <PostList posts={posts} />
   </section>
 </Layout>

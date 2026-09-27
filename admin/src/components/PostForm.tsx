@@ -21,6 +21,10 @@ export default function PostForm({
     onChange({ ...postData, title: e.target.value })
   }
 
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onChange({ ...postData, description: e.target.value })
+  }
+
   const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange({ ...postData, category: e.target.value })
   }
@@ -49,6 +53,22 @@ export default function PostForm({
           placeholder="Enter post title..."
           className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
           data-testid="post-title"
+        />
+      </div>
+
+      {/* Description */}
+      <div>
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+          Description *
+        </label>
+        <textarea
+          id="description"
+          value={postData.description}
+          onChange={handleDescriptionChange}
+          rows={2}
+          placeholder="One-sentence summary shown in listings and search results"
+          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+          data-testid="post-description"
         />
       </div>
 

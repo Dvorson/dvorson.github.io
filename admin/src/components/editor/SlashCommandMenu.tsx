@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { uploadImage } from '@/lib/uploadImage'
 import { 
   Type, 
   List, 
@@ -8,10 +9,9 @@ import {
   Quote, 
   Code, 
   Table, 
-  Image, 
-  Video, 
+  Image as ImageIcon,
+  Video,
   Calculator,
-  Hash,
   Heading1,
   Heading2,
   Heading3 
@@ -38,7 +38,7 @@ interface SlashCommandMenuProps {
     addCodeBlock: () => void
     insertTable: () => void
     insertImage: (src: string, alt: string) => void
-    insertVideo: (src: string) => void
+    insertVideo: (src: string) => boolean
     insertMath: (latex: string, inline?: boolean) => void
   }
 }
@@ -130,16 +130,18 @@ export default function SlashCommandMenu({
       id: 'image',
       title: 'Image',
       description: 'Upload or embed an image',
-      icon: <Image className="w-4 h-4" />,
+      icon: <ImageIcon className="w-4 h-4" />,
       command: () => {
         const input = document.createElement('input')
         input.type = 'file'
         input.accept = 'image/*'
-        input.onchange = (e) => {
+        input.onchange = async (e) => {
           const file = (e.target as HTMLInputElement).files?.[0]
-          if (file) {
-            const url = URL.createObjectURL(file)
-            commands.insertImage(url, file.name)
+          if (!file) return
+          try {
+            commands.insertImage(await uploadImage(file), file.name)
+          } catch (error) {
+            alert(error instanceof Error ? error.message : 'Image upload failed')
           }
         }
         input.click()
@@ -152,12 +154,12 @@ export default function SlashCommandMenu({
       description: 'Embed a video',
       icon: <Video className="w-4 h-4" />,
       command: () => {
-        const url = prompt('Enter video URL (YouTube, Vimeo, or direct link):')
-        if (url) {
-          commands.insertVideo(url)
+        const url = prompt('Enter a YouTube URL:')
+        if (url && !commands.insertVideo(url)) {
+          alert('Only YouTube links can be embedded')
         }
       },
-      keywords: ['video', 'youtube', 'vimeo'],
+      keywords: ['video', 'youtube'],
     },
     {
       id: 'math',
@@ -197,18 +199,16 @@ export default function SlashCommandMenu({
         onClose()
       } else if (e.key.length === 1) {
         setFilter(prev => prev + e.key)
+        setSelectedIndex(0)
       } else if (e.key === 'Backspace') {
         setFilter(prev => prev.slice(0, -1))
+        setSelectedIndex(0)
       }
     }
 
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [filteredCommands, selectedIndex, onCommand, onClose])
-
-  useEffect(() => {
-    setSelectedIndex(0)
-  }, [filter])
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -233,7 +233,7 @@ export default function SlashCommandMenu({
     >
       {filter && (
         <div className="px-4 py-2 text-xs text-gray-500 border-b border-gray-100">
-          Filter: "{filter}"
+          Filter: &ldquo;{filter}&rdquo;
         </div>
       )}
       

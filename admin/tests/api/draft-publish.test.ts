@@ -1,387 +1,122 @@
+/**
+ * @jest-environment node
+ */
 import { NextRequest } from 'next/server'
 import { describe, it, expect, beforeEach, afterEach } from '@jest/globals'
+import matter from 'gray-matter'
+import * as fs from 'fs/promises'
+import * as os from 'os'
+import * as path from 'path'
 import { POST as draftHandler } from '../../src/app/api/draft/route'
 import { POST as publishHandler } from '../../src/app/api/publish/route'
-import * as fs from 'fs/promises'
-import * as path from 'path'
+
+// Keys the site's posts collection accepts (site/src/content.config.ts).
+const SITE_SCHEMA_KEYS = ['categories', 'description', 'draft', 'pubDate', 'tags', 'title']
+
+function request(url: string, body: unknown) {
+  return new NextRequest(`http://localhost:3001${url}`, {
+    method: 'POST',
+    body: typeof body === 'string' ? body : JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' },
+  })
+}
+
+const validPost = {
+  title: 'Published Test Post',
+  description: 'A short summary.',
+  content: 'This is published content',
+  tags: ['test', 'publish'],
+  category: 'AI Engineering',
+}
 
 describe('Draft and Publish API', () => {
-  const testDir = path.join(process.cwd(), 'test-posts')
-  const draftsDir = path.join(testDir, '_drafts')
-  
+  let postsDir: string
+
   beforeEach(async () => {
-    // Create test directories
-    await fs.mkdir(draftsDir, { recursive: true })
+    postsDir = await fs.mkdtemp(path.join(os.tmpdir(), 'posts-'))
+    process.env.POSTS_DIR = postsDir
   })
-  
+
   afterEach(async () => {
-    // Clean up test files
-    try {
-      await fs.rm(testDir, { recursive: true, force: true })
-    } catch (error) {
-      // Ignore cleanup errors
-    }
+    delete process.env.POSTS_DIR
+    await fs.rm(postsDir, { recursive: true, force: true })
   })
 
-  describe('Draft API', () => {
-    it('should save draft with valid data', async () => {
-      const postData = {
-        title: 'Test Draft Post',
-        content: 'This is test content',
-        tags: ['test', 'draft'],
-        category: 'Development',
-        slug: 'test-draft-post'
-      }
-
-      const request = new NextRequest('http://localhost:3001/api/draft', {
-        method: 'POST',
-        body: JSON.stringify(postData),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-
-      const response = await draftHandler(request)
-      const data = await response.json()
-
+  describe('publish', () => {
+    it('writes front-matter the site content schema accepts', async () => {
+      const response = await publishHandler(request('/api/publish', { ...validPost, slug: 'published-test-post' }))
       expect(response.status).toBe(200)
-      expect(data.message).toBe('Draft saved successfully!')
-      expect(data.path).toContain('test-draft-post.md')
 
-      // Verify file was created
-      const filePath = path.join(draftsDir, 'test-draft-post.md')
-      const fileExists = await fs.access(filePath).then(() => true).catch(() => false)
-      expect(fileExists).toBe(true)
-
-      // Verify file content
-      const fileContent = await fs.readFile(filePath, 'utf-8')
-      expect(fileContent).toContain('title: "Test Draft Post"')
-      expect(fileContent).toContain('draft: true')
-      expect(fileContent).toContain('This is test content')
+      const file = await fs.readFile(path.join(postsDir, 'published-test-post.md'), 'utf-8')
+      const { data, content } = matter(file)
+      expect(Object.keys(data).sort()).toEqual(SITE_SCHEMA_KEYS.filter((k) => k !== 'draft'))
+      expect(data.title).toBe('Published Test Post')
+      expect(data.categories).toEqual(['AI Engineering'])
+      expect(String(data.pubDate)).toMatch(/^\d{4}-\d{2}-\d{2}/)
+      expect(content.trim()).toBe('This is published content')
     })
 
-    it('should generate slug when not provided', async () => {
-      const postData = {
-        title: 'Auto Generated Slug',
-        content: 'Content for auto slug',
-        tags: ['auto'],
-        category: 'Test'
-      }
-
-      const request = new NextRequest('http://localhost:3001/api/draft', {
-        method: 'POST',
-        body: JSON.stringify(postData)
-      })
-
-      const response = await draftHandler(request)
-      const data = await response.json()
-
+    it('round-trips quotes and YAML-significant characters in the title', async () => {
+      const title = 'He said "hi": a #1 post $(touch /tmp/pwned) & more'
+      const response = await publishHandler(request('/api/publish', { ...validPost, title, slug: 'quoted' }))
       expect(response.status).toBe(200)
-      expect(data.path).toMatch(/draft-\d+\.md$/)
+
+      const { data } = matter(await fs.readFile(path.join(postsDir, 'quoted.md'), 'utf-8'))
+      expect(data.title).toBe(title)
     })
 
-    it('should reject request with missing title', async () => {
-      const postData = {
-        content: 'Content without title',
-        tags: ['test'],
-        category: 'Test'
-      }
+    it('derives the file name from the title when no slug is given', async () => {
+      const response = await publishHandler(request('/api/publish', { ...validPost, title: 'Café Déjà Vu: Part 2!' }))
+      expect(response.status).toBe(200)
+      expect((await response.json()).path).toMatch(/cafe-deja-vu-part-2\.md$/)
+    })
 
-      const request = new NextRequest('http://localhost:3001/api/draft', {
-        method: 'POST',
-        body: JSON.stringify(postData)
-      })
-
-      const response = await draftHandler(request)
-      const data = await response.json()
-
+    it.each([
+      ['../../escape'],
+      ['nested/path'],
+      ['UPPER'],
+      ['with space'],
+    ])('rejects unsafe slug %p without writing anything', async (slug) => {
+      const response = await publishHandler(request('/api/publish', { ...validPost, slug }))
       expect(response.status).toBe(400)
-      expect(data.error).toBe('Title and content are required')
+      expect(await fs.readdir(postsDir)).toEqual([])
     })
 
-    it('should reject request with missing content', async () => {
-      const postData = {
-        title: 'Title without content',
-        tags: ['test'],
-        category: 'Test'
-      }
-
-      const request = new NextRequest('http://localhost:3001/api/draft', {
-        method: 'POST',
-        body: JSON.stringify(postData)
-      })
-
-      const response = await draftHandler(request)
-      const data = await response.json()
-
+    it.each([
+      ['title', { ...validPost, title: '' }],
+      ['content', { ...validPost, content: '   ' }],
+      ['description', { ...validPost, description: '' }],
+      ['category', { ...validPost, category: '' }],
+    ])('rejects a post missing %s', async (_field, body) => {
+      const response = await publishHandler(request('/api/publish', body))
       expect(response.status).toBe(400)
-      expect(data.error).toBe('Title and content are required')
     })
 
-    it('should handle special characters in title and content', async () => {
-      const postData = {
-        title: 'Test with "quotes" & <tags>',
-        content: 'Content with ñ, émojis 🎉 and symbols €$£',
-        tags: ['unicode', 'special'],
-        category: 'Testing'
-      }
-
-      const request = new NextRequest('http://localhost:3001/api/draft', {
-        method: 'POST',
-        body: JSON.stringify(postData)
-      })
-
-      const response = await draftHandler(request)
-      expect(response.status).toBe(200)
-
-      const data = await response.json()
-      const filePath = data.path
-      const fileContent = await fs.readFile(filePath, 'utf-8')
-      
-      expect(fileContent).toContain('Test with "quotes" & <tags>')
-      expect(fileContent).toContain('Content with ñ, émojis 🎉 and symbols €$£')
-    })
-
-    it('should create directories if they don\'t exist', async () => {
-      // Remove test directory first
-      await fs.rm(testDir, { recursive: true, force: true })
-
-      const postData = {
-        title: 'Test Directory Creation',
-        content: 'Testing auto directory creation',
-        tags: ['test'],
-        category: 'Test'
-      }
-
-      const request = new NextRequest('http://localhost:3001/api/draft', {
-        method: 'POST',
-        body: JSON.stringify(postData)
-      })
-
-      const response = await draftHandler(request)
-      expect(response.status).toBe(200)
-
-      // Verify directories were created
-      const dirExists = await fs.access(draftsDir).then(() => true).catch(() => false)
-      expect(dirExists).toBe(true)
+    it('rejects malformed JSON with 400', async () => {
+      const response = await publishHandler(request('/api/publish', '{not json'))
+      expect(response.status).toBe(400)
     })
   })
 
-  describe('Publish API', () => {
-    it('should publish post with valid data', async () => {
-      const postData = {
-        title: 'Published Test Post',
-        content: 'This is published content',
-        tags: ['published', 'test'],
-        category: 'Development',
-        slug: 'published-test-post'
-      }
-
-      const request = new NextRequest('http://localhost:3001/api/publish', {
-        method: 'POST',
-        body: JSON.stringify(postData)
-      })
-
-      const response = await publishHandler(request)
-      const data = await response.json()
-
-      expect(response.status).toBe(200)
-      expect(data.message).toBe('Post published successfully!')
-
-      // Verify file was created in main posts directory
-      const filePath = path.join(testDir, 'published-test-post.md')
-      const fileExists = await fs.access(filePath).then(() => true).catch(() => false)
-      expect(fileExists).toBe(true)
-
-      // Verify file content doesn't have draft flag
-      const fileContent = await fs.readFile(filePath, 'utf-8')
-      expect(fileContent).toContain('title: "Published Test Post"')
-      expect(fileContent).not.toContain('draft: true')
-      expect(fileContent).toContain('This is published content')
-    })
-
-    it('should generate filename from title when slug not provided', async () => {
-      const postData = {
-        title: 'Auto Generated Post Name',
-        content: 'Content for auto generation',
-        tags: ['auto'],
-        category: 'Test'
-      }
-
-      const request = new NextRequest('http://localhost:3001/api/publish', {
-        method: 'POST',
-        body: JSON.stringify(postData)
-      })
-
-      const response = await publishHandler(request)
-      const data = await response.json()
-
-      expect(response.status).toBe(200)
-      expect(data.path).toMatch(/post-\d+\.md$/)
-    })
-
-    it('should include publication date in frontmatter', async () => {
-      const postData = {
-        title: 'Date Test Post',
-        content: 'Testing date inclusion',
-        tags: ['date'],
-        category: 'Test'
-      }
-
-      const request = new NextRequest('http://localhost:3001/api/publish', {
-        method: 'POST',
-        body: JSON.stringify(postData)
-      })
-
-      const response = await publishHandler(request)
+  describe('draft', () => {
+    it('saves drafts outside the published posts directory', async () => {
+      const response = await draftHandler(request('/api/draft', { title: 'Draft', content: 'Body', tags: [], slug: 'my-draft' }))
       expect(response.status).toBe(200)
 
-      const data = await response.json()
-      const fileContent = await fs.readFile(data.path, 'utf-8')
-      
-      // Check that date is in ISO format
-      expect(fileContent).toMatch(/date: "\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z"/)
+      expect(await fs.readdir(postsDir)).toEqual(['_drafts'])
+      const { data } = matter(await fs.readFile(path.join(postsDir, '_drafts', 'my-draft.md'), 'utf-8'))
+      expect(data.draft).toBe(true)
+      expect(data.categories).toEqual(['Uncategorized'])
     })
 
-    it('should reject invalid post data', async () => {
-      const postData = {
-        content: 'Content without required fields'
-      }
+    it('generates a file name when no slug is given', async () => {
+      const response = await draftHandler(request('/api/draft', { title: 'Draft', content: 'Body', tags: [] }))
+      expect((await response.json()).path).toMatch(/draft-\d+\.md$/)
+    })
 
-      const request = new NextRequest('http://localhost:3001/api/publish', {
-        method: 'POST',
-        body: JSON.stringify(postData)
-      })
-
-      const response = await publishHandler(request)
-      const data = await response.json()
-
+    it('rejects path traversal in the slug', async () => {
+      const response = await draftHandler(request('/api/draft', { title: 'Draft', content: 'Body', tags: [], slug: '../x' }))
       expect(response.status).toBe(400)
-      expect(data.error).toBe('Missing required fields')
-    })
-
-    it('should handle publishing with rich content including markdown', async () => {
-      const postData = {
-        title: 'Rich Content Post',
-        content: `# Heading 1
-        
-## Heading 2
-
-This is **bold** and *italic* text.
-
-- List item 1
-- List item 2
-
-\`\`\`javascript
-console.log('Hello world');
-\`\`\`
-
-[Link to Google](https://google.com)
-
-![Image alt text](https://example.com/image.jpg)`,
-        tags: ['markdown', 'rich-content'],
-        category: 'Development'
-      }
-
-      const request = new NextRequest('http://localhost:3001/api/publish', {
-        method: 'POST',
-        body: JSON.stringify(postData)
-      })
-
-      const response = await publishHandler(request)
-      expect(response.status).toBe(200)
-
-      const data = await response.json()
-      const fileContent = await fs.readFile(data.path, 'utf-8')
-      
-      expect(fileContent).toContain('# Heading 1')
-      expect(fileContent).toContain('**bold**')
-      expect(fileContent).toContain('```javascript')
-      expect(fileContent).toContain('[Link to Google]')
-    })
-
-    it('should handle empty tags array', async () => {
-      const postData = {
-        title: 'No Tags Post',
-        content: 'Post without tags',
-        tags: [],
-        category: 'General'
-      }
-
-      const request = new NextRequest('http://localhost:3001/api/publish', {
-        method: 'POST',
-        body: JSON.stringify(postData)
-      })
-
-      const response = await publishHandler(request)
-      expect(response.status).toBe(200)
-
-      const data = await response.json()
-      const fileContent = await fs.readFile(data.path, 'utf-8')
-      
-      expect(fileContent).toContain('tags: []')
-    })
-
-    it('should sanitize filename from title', async () => {
-      const postData = {
-        title: 'Post with/Special\\Characters:And*Symbols?',
-        content: 'Testing filename sanitization',
-        tags: ['test'],
-        category: 'Test'
-      }
-
-      const request = new NextRequest('http://localhost:3001/api/publish', {
-        method: 'POST',
-        body: JSON.stringify(postData)
-      })
-
-      const response = await publishHandler(request)
-      expect(response.status).toBe(200)
-
-      const data = await response.json()
-      expect(data.path).not.toMatch(/[\/\\:*?"<>|]/)
-    })
-  })
-
-  describe('Error Handling', () => {
-    it('should handle malformed JSON in request body', async () => {
-      const request = new NextRequest('http://localhost:3001/api/draft', {
-        method: 'POST',
-        body: '{"invalid": json}',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-
-      const response = await draftHandler(request)
-      expect(response.status).toBe(500)
-
-      const data = await response.json()
-      expect(data.error).toContain('Failed to save draft')
-    })
-
-    it('should handle file system permission errors', async () => {
-      // Mock fs.writeFile to throw an error
-      const originalWriteFile = fs.writeFile
-      fs.writeFile = jest.fn().mockRejectedValue(new Error('Permission denied'))
-
-      const postData = {
-        title: 'Permission Test',
-        content: 'Testing permission error',
-        tags: ['test'],
-        category: 'Test'
-      }
-
-      const request = new NextRequest('http://localhost:3001/api/draft', {
-        method: 'POST',
-        body: JSON.stringify(postData)
-      })
-
-      const response = await draftHandler(request)
-      expect(response.status).toBe(500)
-
-      // Restore original function
-      fs.writeFile = originalWriteFile
     })
   })
 })

@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - master
+  pull_request:
+  # Weekly rebuild keeps build-time values (CV durations for "Present" roles) current.
+  schedule:
+    - cron: '0 6 * * 1'
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -14,12 +17,15 @@ permissions:
 
 # Allow only one concurrent deployment
 concurrency:
-  group: "pages"
+  group: "pages-${{ github.ref }}"
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,27 +33,55 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: 'npm'
           cache-dependency-path: site/package-lock.json
 
       - name: Install dependencies
-        run: cd site && npm ci
+        run: npm ci
+
+      # Chromium renders the CV PDF during the build and runs the e2e tests.
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
 
       - name: Build site
-        run: cd site && npm run build
+        run: npm run build
+
+      - name: Test built site
+        run: npm test
 
       - name: Upload artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: site/dist
 
+  admin-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: admin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: admin/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run type-check
+      - run: npx jest
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test
+
   deploy:
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build, admin-tests]
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

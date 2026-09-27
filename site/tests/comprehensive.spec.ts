@@ -1,255 +1,136 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
-test.describe('Comprehensive Site Tests', () => {
-  test.beforeEach(async ({ page }) => {
-    // Start from the homepage for most tests
-    await page.goto('http://localhost:4321/');
-  });
+// Runs against the production build (`npm run build` first); see playwright.config.ts.
 
-  test('Homepage loads correctly', async ({ page }) => {
-    // Check CV data - using more specific selectors
-    await expect(page.locator('main h1, section h1').first()).toContainText('Your business has an AI problem. I solve it.');
-    await expect(page.locator('p.text-xl')).toContainText('I build AI agents, knowledge graphs, and intelligent platforms that actually ship to production');
-    await expect(page.locator('p.text-sm').first()).toContainText('12+ years. Fortune-500 retail, telecom, media. Production AI systems.');
+async function internalLinks(page: Page): Promise<string[]> {
+  return page.$$eval('a[href^="/"]', (anchors) =>
+    anchors.map((a) => a.getAttribute('href')!.split('#')[0]).filter(Boolean)
+  );
+}
 
-    // Check blog section exists
-    const blogSection = page.locator('#blog');
-    await expect(blogSection).toBeVisible();
+test('homepage presents the engineer, not a service catalog', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('h1')).toContainText('AI systems');
+  await expect(page.getByRole('link', { name: 'Read the CV' })).toHaveAttribute('href', '/cv');
 
-    // Check if CV download button exists and is clickable
-    const downloadButton = page.locator('#download-cv');
-    await expect(downloadButton).toBeVisible();
-    await expect(downloadButton).toBeEnabled();
-
-    // Additional sections have been reorganized to focus on AI Consulting
-  });
-
-  test('Blog posts are displayed and clickable', async ({ page }) => {
-    const blogSection = page.locator('#blog');
-    await expect(blogSection).toBeVisible();
-
-    // Check if there are posts or "No posts yet" message
-    const posts = page.locator('#blog a[href^="/"]').filter({ has: page.locator('article') });
-    const noPostsMessage = page.locator('#blog').getByText('No posts yet');
-
-    // Wait for either posts or no posts message
-    try {
-      await expect(posts.first()).toBeVisible({ timeout: 2000 });
-
-      // If posts exist, verify they're properly structured
-      const firstPost = posts.first();
-
-      // Check post has date
-      const postDate = firstPost.locator('time');
-      await expect(postDate).toBeVisible();
-
-      // Verify date is formatted correctly (not "Invalid Date")
-      const dateText = await postDate.textContent();
-      expect(dateText).not.toContain('Invalid');
-      expect(dateText).toMatch(/\w+ \d{1,2}, \d{4}/); // e.g., "Jan 5, 2025"
-    } catch {
-      await expect(noPostsMessage).toBeVisible();
-    }
-  });
-
-  test('Categories page loads and has working links', async ({ page }) => {
-    await page.goto('http://localhost:4321/categories');
-
-    await expect(page.locator('main h1, section h1').first()).toContainText('Categories');
-
-    // Check if categories exist
-    const categoryLinks = page.locator('a[href^="/categories/"]');
-    const noCategoriesMessage = page.getByText('No categories yet');
-
-    try {
-      await expect(categoryLinks.first()).toBeVisible({ timeout: 2000 });
-
-      // Test that category links work
-      const firstCategory = categoryLinks.first();
-      const categoryText = await firstCategory.textContent();
-      await firstCategory.click();
-
-      // Should navigate to category page (which lists posts for that category)
-      // The category page layout just shows the category name or 'Category: ...'
-      await expect(page.locator('h1').first()).toBeVisible();
-    } catch {
-      await expect(noCategoriesMessage).toBeVisible({ timeout: 10000 });
-    }
-  });
-
-  test('Individual category pages work correctly', async ({ page }) => {
-    // First get available categories from the categories index
-    await page.goto('http://localhost:4321/categories');
-
-    const categoryLinks = page.locator('a[href^="/categories/"]');
-    const categoriesCount = await categoryLinks.count();
-
-    if (categoriesCount > 0) {
-      // Test the first category
-      const firstCategoryLink = categoryLinks.first();
-      const categoryHref = await firstCategoryLink.getAttribute('href');
-
-      await page.goto(`http://localhost:4321${categoryHref}`);
-
-      // Should have proper heading
-      await expect(page.locator('main h1, section h1').first()).toContainText('Posts in');
-
-      // Check for posts or no posts message
-      const postLinks = page.locator('li a.text-blue-600');
-      const noPostsMessage = page.getByText('No posts found in this category');
-
-      try {
-        await expect(postLinks.first()).toBeVisible({ timeout: 2000 });
-
-        // Verify posts have proper dates
-        const dates = page.locator('p.text-gray-500.text-sm');
-        const firstDate = dates.first();
-        await expect(firstDate).toBeVisible();
-
-        const dateText = await firstDate.textContent();
-        expect(dateText).not.toContain('Invalid');
-
-        // Test that post links work
-        const firstPostLink = postLinks.first();
-        const postHref = await firstPostLink.getAttribute('href');
-        expect(postHref).toBeTruthy();
-        expect(postHref).toMatch(/^\/[\w-]+$/); // Should be a valid slug
-      } catch {
-        await expect(noPostsMessage).toBeVisible();
-      }
-    }
-  });
-
-  test('Tags functionality works correctly', async ({ page }) => {
-    // Navigate to a post that should have tags
-    const posts = page.locator('#blog a[href^="/"]').filter({ has: page.locator('article') });
-    const postsCount = await posts.count();
-
-    if (postsCount > 0) {
-      const firstPostLink = posts.first();
-      await firstPostLink.click();
-
-      // Look for tags on the post page
-      const tagLinks = page.locator('a[href^="/tags/"]');
-      const tagsCount = await tagLinks.count();
-
-      if (tagsCount > 0) {
-        // Test the first tag
-        const firstTag = tagLinks.first();
-        await firstTag.click();
-
-        // Should navigate to tag page
-        await expect(page.locator('main h1, section h1').first()).toContainText('Posts tagged');
-
-        // Check for posts or no posts message
-        const taggedPosts = page.locator('li a.text-blue-600');
-        const noPostsMessage = page.getByText('No posts found for this tag');
-
-        try {
-          await expect(taggedPosts.first()).toBeVisible({ timeout: 2000 });
-
-          // Verify posts have proper dates
-          const dates = page.locator('p.text-gray-500.text-sm');
-          const firstDate = dates.first();
-          await expect(firstDate).toBeVisible();
-
-          const dateText = await firstDate.textContent();
-          expect(dateText).not.toContain('Invalid');
-
-          // Test that post links work
-          const firstPostLink = taggedPosts.first();
-          const postHref = await firstPostLink.getAttribute('href');
-          expect(postHref).toBeTruthy();
-          expect(postHref).toMatch(/^\/[\w-]+$/);
-        } catch {
-          await expect(noPostsMessage).toBeVisible();
-        }
-      }
-    }
-  });
-
-  test('Individual article pages load correctly', async ({ page }) => {
-    const posts = page.locator('#blog a[href^="/"]').filter({ has: page.locator('article') });
-    const postsCount = await posts.count();
-
-    if (postsCount > 0) {
-      const firstPostLink = posts.first();
-      await firstPostLink.click();
-
-      // Should have article layout
-      await expect(page.locator('article')).toBeVisible();
-      await expect(page.locator('article h1').first()).toBeVisible();
-
-      // Should have proper date formatting
-      const dateElement = page.locator('time');
-      await expect(dateElement).toBeVisible();
-
-      const dateText = await dateElement.textContent();
-      expect(dateText).not.toContain('Invalid');
-      expect(dateText).toMatch(/\w+ \d{1,2}, \d{4}/);
-
-      // Should have back to home link
-      const backLink = page.locator('a').filter({ hasText: 'Back to Home' });
-      await expect(backLink).toBeVisible();
-
-      // Test back link works
-      await backLink.click();
-      await expect(page.locator('main h1, section h1').first()).toContainText('Your business has an AI problem. I solve it.');
-    }
-  });
-
-  test('Navigation between pages works correctly', async ({ page }) => {
-    // Test navigation from homepage to categories
-    const categoriesLink = page.locator('a[href="/categories"]').first();
-    if (await categoriesLink.count() > 0) {
-      await categoriesLink.click();
-      await expect(page.locator('main h1, section h1').first()).toContainText('Categories');
-    }
-
-    // Navigate back to home
-    await page.goto('http://localhost:4321/');
-    await expect(page.locator('main h1, section h1').first()).toContainText('Your business has an AI problem. I solve it.');
-  });
-
-  test('CV download functionality works', async ({ page }) => {
-    const downloadButton = page.locator('#download-cv');
-    await expect(downloadButton).toBeVisible();
-
-    // Click download button - it might open a new window or trigger download
-    await downloadButton.click();
-
-    // Wait a bit to see if anything happens (popup window or download)
-    await page.waitForTimeout(1000);
-
-    // The button should remain functional (not crash the page)
-    await expect(downloadButton).toBeVisible();
-  });
-
-  test('Responsive design works on mobile viewport', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 }); // iPhone size
-
-    // Page should still be functional
-    await expect(page.locator('main h1, section h1').first()).toContainText('Your business has an AI problem. I solve it.');
-    await expect(page.locator('#download-cv')).toBeVisible();
-
-    // Blog section should be visible
-    await expect(page.locator('#blog')).toBeVisible();
-  });
-
-  test('All internal links are valid', async ({ page }) => {
-    // Test specific important links instead of all links
-    const testLinks = ['/categories'];
-
-    for (const href of testLinks) {
-      // Navigate to the link
-      await page.goto(`http://localhost:4321${href}`);
-
-      // Should not get a 404 or error page
-      await expect(page.locator('body')).not.toContainText('404');
-      await expect(page.locator('body')).not.toContainText('Page not found');
-
-      // Should have some content
-      await expect(page.locator('main, section, article').first()).toBeVisible();
-    }
-  });
+  const body = (await page.locator('main').innerText()).toLowerCase();
+  for (const phrase of ['pricing', 'consulting', 'your business', 'readiness checklist', 'no pitch']) {
+    expect(body, `homepage should not mention "${phrase}"`).not.toContain(phrase);
+  }
 });
+
+test('every internal link on the site resolves', async ({ page, request }) => {
+  const seen = new Set<string>(['/']);
+  const queue = ['/'];
+  const broken: string[] = [];
+
+  while (queue.length) {
+    const path = queue.shift()!;
+    const response = await page.goto(path);
+    if (!response || response.status() >= 400) {
+      broken.push(path);
+      continue;
+    }
+    for (const href of await internalLinks(page)) {
+      if (seen.has(href)) continue;
+      seen.add(href);
+      if (/\.(pdf|png|jpg|svg)$/.test(href)) {
+        const asset = await request.get(href);
+        if (!asset.ok()) broken.push(href);
+      } else {
+        queue.push(href);
+      }
+    }
+  }
+
+  expect(broken, 'broken internal links').toEqual([]);
+  expect(seen.size).toBeGreaterThan(20);
+});
+
+test('featured case studies link to detail pages', async ({ page }) => {
+  await page.goto('/');
+  const cards = page.locator('a[href^="/case-studies/"]');
+  expect(await cards.count()).toBeGreaterThanOrEqual(4);
+
+  await page.goto('/case-studies/graphrag-knowledge-base');
+  await expect(page.locator('h1')).toContainText('Knowledge Graph');
+  await expect(page.getByText('The Challenge')).toBeVisible();
+});
+
+test('case study URLs do not expose client names', async ({ page }) => {
+  await page.goto('/case-studies');
+  const hrefs = await internalLinks(page);
+  for (const href of hrefs) {
+    expect(href).not.toMatch(/vodafone|postnl|jde/i);
+  }
+});
+
+test('legacy URLs redirect to their new homes', async ({ page }) => {
+  await page.goto('/rag-vs-graphrag-vs-fine-tuning-decision-framework');
+  await expect(page).toHaveURL(/\/blog\/rag-vs-graphrag-vs-fine-tuning-decision-framework\/?$/);
+
+  await page.goto('/pricing');
+  await expect(page).toHaveURL(/\/$/);
+
+  await page.goto('/solutions/graphrag');
+  await expect(page).toHaveURL(/\/case-studies\/?$/);
+});
+
+test('blog post has a single h1 and article metadata', async ({ page }) => {
+  await page.goto('/blog/why-your-rag-implementation-not-working-fixes');
+  await expect(page.locator('h1')).toHaveCount(1);
+
+  const schemas = await page.$$eval('script[type="application/ld+json"]', (nodes) =>
+    nodes.map((n) => JSON.parse(n.textContent || '{}'))
+  );
+  expect(schemas.some((s) => s['@type'] === 'BlogPosting')).toBe(true);
+  expect(JSON.stringify(schemas)).not.toContain('ProfessionalService');
+});
+
+test('CV shows computed durations and a downloadable PDF', async ({ page, request }) => {
+  await page.goto('/cv');
+  await expect(page.locator('h1')).toHaveText('Anton Dvorson');
+  await expect(page.getByText(/Jan 2026 – Present \(\d+ (months?|years?)/)).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Projects' })).toBeVisible();
+
+  const pdf = await request.get('/cv.pdf');
+  expect(pdf.ok()).toBe(true);
+  expect((await pdf.body()).subarray(0, 4).toString()).toBe('%PDF');
+});
+
+test('mobile layout has no horizontal scroll and the menu toggles', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/');
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+  expect(overflow).toBeLessThanOrEqual(0);
+
+  const toggle = page.getByRole('button', { name: 'Toggle menu' });
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator('#mobile-menu').getByRole('link', { name: 'Case Studies' })).toBeVisible();
+});
+
+test('reflow demo lays out text and keeps an accessible copy', async ({ page }) => {
+  await page.goto('/');
+  const demo = page.locator('[data-reflow-container]');
+  await demo.scrollIntoViewIfNeeded();
+  await expect(page.locator('.reflow-line').first()).toBeVisible();
+  await expect(demo.locator('.sr-only')).toContainText('prototype');
+});
+
+test('unknown URLs get the site 404 page', async ({ page }) => {
+  const response = await page.goto('/no-such-page');
+  expect(response?.status()).toBe(404);
+  await expect(page.locator('h1')).toHaveText("This page doesn't exist.");
+});
+
+test('case studies carry a technical write-up without em dashes', async ({ page }) => {
+  for (const slug of ['ai-stock-screener', 'graphrag-knowledge-base', 'telecom-anomaly-detection', 'multi-brand-storefront']) {
+    await page.goto(`/case-studies/${slug}`)
+    await expect(page.getByRole('heading', { name: 'How it was built' })).toBeVisible()
+    const writeup = await page.locator('.prose').innerText()
+    expect(writeup.length, slug).toBeGreaterThan(1500)
+    expect(writeup, slug).not.toContain('—')
+  }
+})

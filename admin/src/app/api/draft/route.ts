@@ -1,67 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { writeFile, mkdir } from 'fs/promises'
 import path from 'path'
+import { parsePostData, postsDir, resolveSlug, serializePost, ValidationError } from '@/lib/frontmatter'
 
-export interface PostData {
-  title: string
-  content: string
-  tags: string[]
-  category: string
-  slug?: string
-}
+export type { PostData } from '@/types'
 
 export async function POST(request: NextRequest) {
+  let body: unknown
   try {
-    const data = await request.json() as PostData
-    const { slug, title, tags, category, content } = data
-    
-    // Validate required fields
-    if (!title || !content) {
-      return NextResponse.json(
-        { error: 'Title and content are required' },
-        { status: 400 }
-      )
-    }
-    
-    // Create the directory structure
-    const siteDir = path.join(process.cwd(), '..', 'site')
-    const srcDir = path.join(siteDir, 'src')
-    const postsDir = path.join(srcDir, 'posts')
-    const draftsDir = path.join(postsDir, '_drafts')
-    
-    // Ensure directories exist
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: 'Request body must be valid JSON' }, { status: 400 })
+  }
+
+  try {
+    const post = parsePostData(body, { requireDescription: false })
+    const fileName = resolveSlug(post.slug, () => `draft-${Date.now()}`)
+
+    // Drafts live in a subdirectory the site's content loader does not read.
+    const draftsDir = path.join(postsDir(), '_drafts')
     await mkdir(draftsDir, { recursive: true })
-    
-    // Generate filename
-    const fileName = slug || `draft-${Date.now()}`
     const filePath = path.join(draftsDir, `${fileName}.md`)
-    
-    // Create frontmatter
-    const frontmatter = [
-      '---',
-      `title: "${title}"`,
-      `date: "${new Date().toISOString()}"`,
-      `tags: [${tags.map(tag => `"${tag}"`).join(', ')}]`,
-      `category: "${category || 'Uncategorized'}"`,
-      'draft: true',
-      '---',
-      '',
-      content
-    ].join('\n')
-    
-    // Write the file
-    await writeFile(filePath, frontmatter, 'utf-8')
-    
-    return NextResponse.json({
-      message: 'Draft saved successfully!',
-      path: filePath
-    })
-    
+    await writeFile(filePath, serializePost(post, { draft: true }), 'utf-8')
+
+    return NextResponse.json({ message: 'Draft saved successfully!', path: filePath })
   } catch (error) {
+    if (error instanceof ValidationError) {
+      return NextResponse.json({ error: error.message }, { status: 400 })
+    }
     console.error('Draft save error:', error)
-    return NextResponse.json(
-      { error: 'Failed to save draft' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Failed to save draft' }, { status: 500 })
   }
 }

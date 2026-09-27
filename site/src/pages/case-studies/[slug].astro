@@ -2,32 +2,27 @@
 import Layout from '../../layouts/Layout.astro';
 import TechStack from '../../components/TechStack.astro';
 import CTABanner from '../../components/CTABanner.astro';
-import services from '../../data/services.json';
+import { getEntry, render } from 'astro:content';
+import { services, type CaseStudy } from '../../lib/data';
 
 export function getStaticPaths() {
   return services.caseStudies
-    .filter(cs => cs.hasFullPage)
+    .filter((cs) => cs.hasFullPage)
     .map((cs) => ({
       params: { slug: cs.slug },
-      props: { caseStudy: cs }
+      props: { caseStudy: cs },
     }));
 }
 
-const { caseStudy } = Astro.props;
-const { iconPaths, solutions } = services;
-
-// Find related solutions
-const relatedSolutions = solutions.filter(s =>
-  s.relatedCaseStudies.includes(caseStudy.id)
-);
+const { caseStudy } = Astro.props as { caseStudy: CaseStudy };
+const writeup = await getEntry('caseStudyWriteups', caseStudy.slug);
+const Writeup = writeup ? (await render(writeup)).Content : null;
 ---
 
 <Layout
-  title={`${caseStudy.title} | Case Study — Anton Dvorson`}
-  description={`Case study: ${caseStudy.challenge.slice(0, 150)}...`}
+  title={`${caseStudy.title} | Case Study | Anton Dvorson`}
+  description={caseStudy.challenge.length > 155 ? `${caseStudy.challenge.slice(0, 152).trimEnd()}...` : caseStudy.challenge}
   ogImage={`/og/cs-${caseStudy.slug}.png`}
-  url={`https://dvorson.github.io/case-studies/${caseStudy.slug}`}
-  canonical={`https://dvorson.github.io/case-studies/${caseStudy.slug}`}
 >
   <!-- Header -->
   <section class="border-b border-rule">
@@ -69,18 +64,34 @@ const relatedSolutions = solutions.filter(s =>
     </div>
   </section>
 
-  <!-- The Approach -->
-  <section class="border-b border-rule">
-    <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
-      <div class="section-header">
-        <div>
-          <span class="section-number">02</span>
-          <h2 class="section-title mt-2">The Approach</h2>
+  <!-- The Approach, or the full write-up when one exists -->
+  {Writeup ? (
+    <section class="border-b border-rule">
+      <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+        <div class="section-header">
+          <div>
+            <span class="section-number">02</span>
+            <h2 class="section-title mt-2">How it was built</h2>
+          </div>
+        </div>
+        <div class="prose" style="max-width: 760px;">
+          <Writeup />
         </div>
       </div>
-      <p class="leading-relaxed" style="max-width: 720px;">{caseStudy.approach}</p>
-    </div>
-  </section>
+    </section>
+  ) : (
+    <section class="border-b border-rule">
+      <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
+        <div class="section-header">
+          <div>
+            <span class="section-number">02</span>
+            <h2 class="section-title mt-2">The Approach</h2>
+          </div>
+        </div>
+        <p class="leading-relaxed" style="max-width: 720px;">{caseStudy.approach}</p>
+      </div>
+    </section>
+  )}
 
   <!-- The Outcome -->
   <section class="border-b border-rule">
@@ -116,35 +127,15 @@ const relatedSolutions = solutions.filter(s =>
     </div>
   </section>
 
-  <!-- Related Solutions -->
-  {relatedSolutions.length > 0 && (
+  {caseStudy.screenshot && (
     <section class="border-b border-rule">
       <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
-        <div class="section-header">
-          <div>
-            <span class="section-number">05</span>
-            <h2 class="section-title mt-2">Related solutions</h2>
-          </div>
-          <a href="/solutions" class="font-mono text-xs tracking-wider uppercase text-muted hover:text-ink transition-colors">All solutions →</a>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 border border-rule">
-          {relatedSolutions.map((s, i) => (
-            <a href={`/solutions/${s.slug}`} class={`block p-8 hover:bg-muted-light transition-colors ${i < relatedSolutions.length - 1 ? 'border-b md:border-b-0 md:border-r border-rule' : ''}`}>
-              <span class="font-mono text-xs tracking-widest uppercase text-accent">{s.shortTitle}</span>
-              <h3 class="font-display text-lg font-bold mt-3 mb-2">{s.title}</h3>
-              <p class="text-sm text-muted leading-relaxed">{s.subheadline.slice(0, 120)}...</p>
-            </a>
-          ))}
-        </div>
+        <img src={caseStudy.screenshot} alt={`Screenshot: ${caseStudy.title}`} class="w-full border border-rule" loading="lazy" />
       </div>
     </section>
   )}
 
-  <!-- CTA -->
-  <CTABanner
-    headline="Facing a similar challenge?"
-    description="Let's talk about how I can help your team get the same kind of results. 30 minutes, no pitch — just an honest conversation about your situation."
-    ctaText="Let's Talk on LinkedIn"
-  />
+  <div class="container">
+    <CTABanner />
+  </div>
 </Layout>

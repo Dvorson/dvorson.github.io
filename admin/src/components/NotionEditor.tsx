@@ -9,11 +9,9 @@ import TableCell from '@tiptap/extension-table-cell'
 // Mathematics extension not available, will implement custom math support
 import Image from '@tiptap/extension-image'
 import Youtube from '@tiptap/extension-youtube'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import SlashCommandMenu from './editor/SlashCommandMenu'
 import DragHandle from './editor/DragHandle'
-import ImageUpload from './editor/ImageUpload'
-import VideoEmbed from './editor/VideoEmbed'
 import MathEditor from './editor/MathEditor'
 
 interface NotionEditorProps {
@@ -21,80 +19,110 @@ interface NotionEditorProps {
   onChange?: (content: string) => void
 }
 
+// Keys the slash menu handles itself while it is open. ProseMirror sees keydown
+// before the menu's document listener, so the editor must ignore these or it
+// would also move the cursor or insert a newline.
+const SLASH_MENU_KEYS = new Set(['ArrowUp', 'ArrowDown', 'Enter', 'Escape'])
+
+export const editorExtensions = [
+  StarterKit.configure({
+    history: {
+      depth: 100,
+    },
+    paragraph: {
+      HTMLAttributes: {
+        'data-node-type': 'paragraph',
+      },
+    },
+    heading: {
+      HTMLAttributes: {
+        'data-node-type': 'heading',
+      },
+    },
+    bulletList: {
+      HTMLAttributes: {
+        'data-node-type': 'bulletList',
+      },
+    },
+    orderedList: {
+      HTMLAttributes: {
+        'data-node-type': 'orderedList',
+      },
+    },
+    blockquote: {
+      HTMLAttributes: {
+        'data-node-type': 'blockquote',
+      },
+    },
+    codeBlock: {
+      HTMLAttributes: {
+        'data-node-type': 'codeBlock',
+      },
+    },
+  }),
+  Table.configure({
+    resizable: true,
+    HTMLAttributes: {
+      'data-node-type': 'table',
+    },
+  }),
+  TableRow.configure({
+    HTMLAttributes: {
+      'data-node-type': 'tableRow',
+    },
+  }),
+  TableHeader.configure({
+    HTMLAttributes: {
+      'data-node-type': 'tableHeader',
+    },
+  }),
+  TableCell.configure({
+    HTMLAttributes: {
+      'data-node-type': 'tableCell',
+    },
+  }),
+  // Math extension will be added later
+  Image.configure({
+    HTMLAttributes: {
+      class: 'editor-image',
+      'data-node-type': 'image',
+    },
+  }),
+  Youtube.configure({
+    controls: false,
+    nocookie: true,
+  }),
+]
+
+/** Whether the slash menu may open at the cursor: block start or after whitespace. */
+export function canOpenSlashMenu(textBeforeCursorInBlock: string): boolean {
+  return textBeforeCursorInBlock === '' || /\s$/.test(textBeforeCursorInBlock)
+}
+
+/**
+ * LaTeX as editor content. The site renders \( \) and \[ \] at build time and
+ * ignores dollar signs, which posts also use for money. Inserting a text node
+ * rather than an HTML string keeps formulas like `a < b` intact.
+ */
+export function mathContent(latex: string, inline: boolean) {
+  const text = inline ? `\\(${latex}\\)` : `\\[${latex}\\]`
+  return inline
+    ? { type: 'text', text }
+    : { type: 'paragraph', content: [{ type: 'text', text }] }
+}
+
 export default function NotionEditor({ initialContent = '', onChange }: NotionEditorProps) {
   const [showSlashMenu, setShowSlashMenu] = useState(false)
   const [slashMenuPosition, setSlashMenuPosition] = useState({ x: 0, y: 0 })
+  // editorProps are created once, so handlers read the open state through a ref.
+  const slashMenuOpen = useRef(false)
+  useEffect(() => {
+    slashMenuOpen.current = showSlashMenu
+  }, [showSlashMenu])
 
   const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        history: {
-          depth: 100,
-        },
-        paragraph: {
-          HTMLAttributes: {
-            'data-node-type': 'paragraph',
-          },
-        },
-        heading: {
-          HTMLAttributes: {
-            'data-node-type': 'heading',
-          },
-        },
-        bulletList: {
-          HTMLAttributes: {
-            'data-node-type': 'bulletList',
-          },
-        },
-        orderedList: {
-          HTMLAttributes: {
-            'data-node-type': 'orderedList',
-          },
-        },
-        blockquote: {
-          HTMLAttributes: {
-            'data-node-type': 'blockquote',
-          },
-        },
-        codeBlock: {
-          HTMLAttributes: {
-            'data-node-type': 'codeBlock',
-          },
-        },
-      }),
-      Table.configure({
-        resizable: true,
-        HTMLAttributes: {
-          'data-node-type': 'table',
-        },
-      }),
-      TableRow.configure({
-        HTMLAttributes: {
-          'data-node-type': 'tableRow',
-        },
-      }),
-      TableHeader.configure({
-        HTMLAttributes: {
-          'data-node-type': 'tableHeader',
-        },
-      }),
-      TableCell.configure({
-        HTMLAttributes: {
-          'data-node-type': 'tableCell',
-        },
-      }),
-      // Math extension will be added later
-      Image.configure({
-        HTMLAttributes: {
-          class: 'editor-image',
-          'data-node-type': 'image',
-        },
-      }),
-      Youtube.configure({
-        controls: false,
-        nocookie: true,
-      }),
-    ],
+    immediatelyRender: false,
+    extensions: editorExtensions,
     content: initialContent,
     editorProps: {
       attributes: {
@@ -104,17 +132,15 @@ export default function NotionEditor({ initialContent = '', onChange }: NotionEd
         'aria-label': 'Post content editor',
       },
       handleKeyDown: (view, event) => {
-        // Handle slash command trigger
+        if (slashMenuOpen.current && SLASH_MENU_KEYS.has(event.key)) {
+          return true
+        }
+
         if (event.key === '/') {
-          const { state } = view
-          const { selection } = state
-          const { from } = selection
-          
-          // Check if we're at the start of a line or after whitespace
-          const beforeText = state.doc.textBetween(Math.max(0, from - 10), from)
-          const isValidPosition = from === 0 || beforeText.match(/[\n\s]$/)
-          
-          if (isValidPosition) {
+          const { $from } = view.state.selection
+          const textBefore = $from.parent.textBetween(0, $from.parentOffset)
+
+          if (canOpenSlashMenu(textBefore)) {
             // Schedule menu show after the slash is inserted
             setTimeout(() => {
               const coords = view.coordsAtPos(view.state.selection.from)
@@ -124,20 +150,7 @@ export default function NotionEditor({ initialContent = '', onChange }: NotionEd
           }
           return false // Allow the slash to be inserted
         }
-        
-        // Hide slash menu on Escape
-        if (event.key === 'Escape' && showSlashMenu) {
-          setShowSlashMenu(false)
-          return true
-        }
-        
-        return false
-      },
-      handleTextInput: (view, from, to, text) => {
-        // Hide slash menu when typing other characters
-        if (showSlashMenu && text !== '/') {
-          setShowSlashMenu(false)
-        }
+
         return false
       },
     },
@@ -180,26 +193,14 @@ export default function NotionEditor({ initialContent = '', onChange }: NotionEd
     editor?.commands.setImage({ src, alt })
   }
 
-  const insertVideo = (src: string) => {
-    if (src.includes('youtube.com') || src.includes('youtu.be')) {
-      editor?.commands.setYoutubeVideo({ src })
-    } else {
-      // For other video types, insert as HTML
-      editor?.commands.insertContent(`
-        <video controls style="max-width: 100%;">
-          <source src="${src}" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      `)
-    }
+  // Only YouTube has an editor node; anything else would be dropped by the
+  // schema, so report it instead of pretending it was embedded.
+  const insertVideo = (src: string): boolean => {
+    return editor?.commands.setYoutubeVideo({ src }) ?? false
   }
 
   const insertMath = (latex: string, inline = false) => {
-    if (inline) {
-      editor?.commands.insertContent(`$${latex}$`)
-    } else {
-      editor?.commands.insertContent(`$$${latex}$$`)
-    }
+    editor?.commands.insertContent(mathContent(latex, inline))
   }
 
   const addHeading = (level: 1 | 2 | 3) => {
@@ -255,9 +256,6 @@ export default function NotionEditor({ initialContent = '', onChange }: NotionEd
         )}
       </div>
       
-      {/* Hidden components for file uploads */}
-      <ImageUpload onImageUpload={insertImage} />
-      <VideoEmbed onVideoEmbed={insertVideo} />
       <MathEditor onMathInsert={insertMath} />
     </div>
   )

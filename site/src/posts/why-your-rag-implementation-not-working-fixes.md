@@ -4,21 +4,18 @@ description: "Common reasons enterprise RAG systems fail and practical fixes fro
 pubDate: "2026-03-10"
 author: "Anton Dvorson"
 tags: ["RAG", "LLM", "AI Engineering", "Enterprise AI", "Vector Search", "Retrieval", "AI Architecture", "Debugging"]
-categories: ["AI Engineering", "Technical Consulting"]
-heroImage: "/img/rag-fixes.jpg"
+categories: ["AI Engineering"]
 ---
-
-# Why Your RAG Implementation Isn't Working (And How to Fix It)
 
 You built a RAG system. It worked great on the demo dataset. Your team was excited. Then you connected it to real data and the answers started coming back wrong. Confidently wrong. Sound familiar?
 
-I've been called in to fix more RAG implementations than I've built from scratch. The failure modes are remarkably consistent across organizations, and most of them are fixable without rebuilding the entire system. This post walks through the most common reasons RAG systems fail in production and the specific fixes I apply.
+The failure modes of RAG systems are remarkably consistent across organizations, and most of them are fixable without rebuilding the entire system. This post walks through the most common reasons RAG systems fail in production and the specific fixes I apply.
 
 ## Problem 1: Your Chunks Are Wrong
 
 This is the single most common issue and the one with the biggest impact on answer quality. Most teams use a fixed chunk size (say, 512 or 1024 tokens) with some overlap and call it done. This works for uniform content like documentation pages but fails badly for content with varying structure.
 
-**Symptom:** The system retrieves chunks that contain part of the answer but not all of it. Answers are partially correct but miss crucial context or include irrelevant information from adjacent sections.
+**Symptom:** The system retrieves chunks that contain part of the answer but not all of it. Answers are partially correct but miss key context or include irrelevant information from adjacent sections.
 
 **Why it happens:** Fixed-size chunking splits content at arbitrary boundaries. A paragraph explaining a configuration procedure gets split across two chunks. The first chunk has the steps, the second has the important warning about what not to do. The retriever finds the first chunk but not the second, and the generated answer tells the user how to do something without mentioning that it will break their system under certain conditions.
 
@@ -40,7 +37,7 @@ Your chunks might be well-formed, but if the retriever is pulling irrelevant one
 
 **First: metadata filtering.** Add metadata to your chunks (document type, product, date, category) and filter before retrieval. If the user is asking about Product A, filter out chunks from Product B documentation before the similarity search runs. This eliminates a large class of "right topic, wrong context" errors.
 
-**Second: hybrid retrieval.** Combine vector similarity with keyword (BM25) search. Vector search finds semantically related chunks; keyword search finds exact term matches. The combination catches cases where the embedding misses a crucial term. Most vector databases (Weaviate, Qdrant, Pinecone) now support hybrid search natively.
+**Second: hybrid retrieval.** Combine vector similarity with keyword (BM25) search. Vector search finds semantically related chunks; keyword search finds exact term matches. The combination catches cases where the embedding misses an exact term. Most vector databases (Weaviate, Qdrant, Pinecone) now support hybrid search natively.
 
 **Third: re-ranking.** After initial retrieval, run the top 20-30 results through a cross-encoder re-ranking model that scores each chunk against the original query more carefully than the initial embedding comparison. This is computationally more expensive (you cannot re-rank the entire corpus) but dramatically improves precision in the final set of chunks passed to the LLM.
 
@@ -74,7 +71,7 @@ Sometimes the retriever does its job perfectly (the right chunks are found) but 
 
 **Handle contradictions explicitly.** When your corpus contains multiple versions of the truth (old and updated articles about the same topic), add metadata that identifies the authoritative version. Use recency as a ranking signal: when two chunks are equally relevant, prefer the newer one.
 
-For organizations with large knowledge bases where contradictions are endemic, I recommend a [GraphRAG approach](/solutions/graphrag) that explicitly models supersession relationships between documents. This lets the system know that Article B replaced Article A and always prefer the current version.
+For organizations with large knowledge bases where contradictions are endemic, I recommend a [graph layer](/case-studies/graphrag-knowledge-base) that explicitly models supersession relationships between documents. This lets the system know that Article B replaced Article A and always prefer the current version.
 
 ## Problem 5: No Evaluation Framework
 
@@ -112,4 +109,4 @@ If your RAG system is underperforming, here is the order I attack these problems
 
 This order is not arbitrary. It reflects the dependency chain. Better chunks improve retrieval. Better retrieval reduces the burden on prompt engineering. And none of it matters without evaluation to confirm you are actually making things better.
 
-If you are stuck on a RAG implementation that is not delivering the quality you need, I've worked through this exact diagnostic process with multiple clients. I've also written a broader comparison of [RAG vs GraphRAG vs fine-tuning](/rag-vs-graphrag-vs-fine-tuning-decision-framework) that might help you determine whether your problem is fixable within a RAG architecture or whether you need a different approach entirely.
+If the fixes above are not enough, I've written a broader comparison of [RAG vs GraphRAG vs fine-tuning](/blog/rag-vs-graphrag-vs-fine-tuning-decision-framework) that might help you determine whether your problem is fixable within a RAG architecture or whether you need a different approach entirely.

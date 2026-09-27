@@ -8,167 +8,102 @@ interface DragHandleProps {
   editor: Editor
 }
 
+/**
+ * Moves the top-level block at `fromIndex` so it ends up before the block
+ * currently at `toIndex` (or at the end when `toIndex` equals the block count).
+ */
+export function moveTopLevelBlock(editor: Editor, fromIndex: number, toIndex: number): boolean {
+  const { doc } = editor.state
+  if (fromIndex === toIndex || fromIndex === toIndex - 1) return false
+  if (fromIndex < 0 || fromIndex >= doc.childCount || toIndex < 0 || toIndex > doc.childCount) return false
+
+  const offsets: number[] = []
+  doc.forEach((_node, offset) => offsets.push(offset))
+  offsets.push(doc.content.size)
+
+  const node = doc.child(fromIndex)
+  const from = offsets[fromIndex]
+  const target = offsets[toIndex]
+  const tr = editor.state.tr.delete(from, from + node.nodeSize)
+  tr.insert(target > from ? target - node.nodeSize : target, node)
+  editor.view.dispatch(tr)
+  return true
+}
+
 export default function DragHandle({ editor }: DragHandleProps) {
-  const [hoveredBlock, setHoveredBlock] = useState<HTMLElement | null>(null)
-  const [draggedBlock, setDraggedBlock] = useState<HTMLElement | null>(null)
-  const [allBlocks, setAllBlocks] = useState<HTMLElement[]>([])
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null)
+  const [blocks, setBlocks] = useState<HTMLElement[]>([])
 
   useEffect(() => {
-    if (!editor) return
-
     const editorElement = editor.view.dom as HTMLElement
-
-    const updateBlocks = () => {
-      const blocks = Array.from(editorElement.querySelectorAll('[data-node-type]')) as HTMLElement[]
-      setAllBlocks(blocks)
-    }
+    // Only direct children are blocks; paragraphs inside lists or tables move with their parent.
+    const updateBlocks = () => setBlocks(Array.from(editorElement.children) as HTMLElement[])
 
     const handleMouseMove = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      const blockElement = target.closest('[data-node-type]') as HTMLElement
-      
-      if (blockElement && blockElement !== hoveredBlock) {
-        setHoveredBlock(blockElement)
-      }
+      const block = (e.target as HTMLElement).closest('.ProseMirror > *')
+      setHoveredIndex(block ? Array.prototype.indexOf.call(editorElement.children, block) : null)
     }
-
-    const handleMouseLeave = () => {
-      setHoveredBlock(null)
-    }
-
-    // Update blocks on editor update
-    const handleEditorUpdate = () => {
-      updateBlocks()
-    }
+    const handleMouseLeave = () => setHoveredIndex(null)
 
     editorElement.addEventListener('mousemove', handleMouseMove)
     editorElement.addEventListener('mouseleave', handleMouseLeave)
-    editor.on('update', handleEditorUpdate)
-
-    // Initial block detection
+    editor.on('update', updateBlocks)
     updateBlocks()
 
     return () => {
       editorElement.removeEventListener('mousemove', handleMouseMove)
       editorElement.removeEventListener('mouseleave', handleMouseLeave)
-      editor.off('update', handleEditorUpdate)
+      editor.off('update', updateBlocks)
     }
-  }, [editor, hoveredBlock])
+  }, [editor])
 
-  const handleDragStart = (e: React.DragEvent, blockElement: HTMLElement) => {
-    setDraggedBlock(blockElement)
-    blockElement.classList.add('dragging')
-    
-    e.dataTransfer.effectAllowed = 'move'
-    e.dataTransfer.setData('text/html', blockElement.outerHTML)
-  }
-
-  const handleDragEnd = (blockElement: HTMLElement) => {
-    setDraggedBlock(null)
-    blockElement.classList.remove('dragging')
-  }
-
-  const handleDrop = (e: React.DragEvent, targetBlock: HTMLElement) => {
+  const handleDrop = (e: React.DragEvent, toIndex: number) => {
     e.preventDefault()
-    
-    if (!draggedBlock || draggedBlock === targetBlock) return
-
-    try {
-      const { state } = editor.view
-      
-      // Find positions in the document
-      const draggedPos = editor.view.posAtDOM(draggedBlock, 0)
-      const targetPos = editor.view.posAtDOM(targetBlock, 0)
-      
-      if (draggedPos >= 0 && targetPos >= 0) {
-        // Get the nodes
-        const draggedNode = state.doc.nodeAt(draggedPos)
-        
-        if (draggedNode) {
-          const tr = state.tr
-          
-          // Cut the dragged node
-          const draggedEndPos = draggedPos + draggedNode.nodeSize
-          const nodeToMove = state.doc.slice(draggedPos, draggedEndPos)
-          
-          // Remove the original node
-          tr.delete(draggedPos, draggedEndPos)
-          
-          // Calculate the new position after deletion
-          const adjustedTargetPos = draggedPos < targetPos ? targetPos - draggedNode.nodeSize : targetPos
-          
-          // Insert the node at the new position
-          tr.insert(adjustedTargetPos, nodeToMove.content)
-          
-          // Apply the transaction
-          editor.view.dispatch(tr)
-        }
-      }
-    } catch (error) {
-      console.error('Error during drag and drop:', error)
-    }
-    
+    if (draggedIndex !== null) moveTopLevelBlock(editor, draggedIndex, toIndex)
+    setDraggedIndex(null)
     editor.commands.focus()
   }
 
-  const renderDragHandle = (blockElement: HTMLElement) => {
-    const rect = blockElement.getBoundingClientRect()
-    const editorRect = editor.view.dom.getBoundingClientRect()
-    const editorContainer = editor.view.dom.closest('.relative') as HTMLElement
-    const containerRect = editorContainer?.getBoundingClientRect() || editorRect
-
-    return (
-      <div
-        className="drag-handle fixed flex items-center justify-center w-6 h-6 bg-gray-100 border border-gray-200 rounded cursor-grab active:cursor-grabbing hover:bg-gray-200 transition-colors z-10"
-        style={{
-          left: containerRect.left - 32,
-          top: rect.top + rect.height / 2 - 12,
-        }}
-        draggable
-        onDragStart={(e) => handleDragStart(e, blockElement)}
-        onDragEnd={() => handleDragEnd(blockElement)}
-        data-testid="drag-handle"
-      >
-        <GripVertical className="w-3 h-3 text-gray-400" />
-      </div>
-    )
-  }
-
-  const hasContent = (block: HTMLElement) => {
-    const textContent = block.textContent?.trim()
-    return textContent && textContent.length > 0
-  }
+  const editorRect = editor.view.dom.getBoundingClientRect()
+  const containerRect = (editor.view.dom.closest('.relative') as HTMLElement | null)?.getBoundingClientRect() ?? editorRect
 
   return (
     <>
-      {/* Show drag handles for all blocks with content */}
-      {allBlocks.filter(hasContent).map((blockElement, index) => {
-        const isHovered = blockElement === hoveredBlock
+      {blocks.map((block, index) => {
+        if (!block.textContent?.trim()) return null
+        const rect = block.getBoundingClientRect()
         return (
-          <div key={index} className={isHovered ? 'opacity-100' : 'opacity-0 hover:opacity-100'}>
-            {renderDragHandle(blockElement)}
+          <div
+            key={`handle-${index}`}
+            className={`drag-handle fixed flex items-center justify-center w-6 h-6 bg-gray-100 border border-gray-200 rounded cursor-grab active:cursor-grabbing hover:bg-gray-200 transition-colors z-10 ${
+              index === hoveredIndex ? 'opacity-100' : 'opacity-0 hover:opacity-100'
+            }`}
+            style={{ left: containerRect.left - 32, top: rect.top + rect.height / 2 - 12 }}
+            draggable
+            onDragStart={(e) => {
+              setDraggedIndex(index)
+              e.dataTransfer.effectAllowed = 'move'
+            }}
+            onDragEnd={() => setDraggedIndex(null)}
+            data-testid="drag-handle"
+            aria-label={`Drag block ${index + 1}`}
+          >
+            <GripVertical className="w-3 h-3 text-gray-400" />
           </div>
         )
       })}
-      
-      {/* Drop zones for all blocks */}
-      {allBlocks.map((block, index) => {
-        const blockElement = block as HTMLElement
-        const rect = blockElement.getBoundingClientRect()
-        const editorRect = editor.view.dom.getBoundingClientRect()
-        
+
+      {/* One drop zone above each block, plus one after the last block. */}
+      {[...blocks, null].map((block, index) => {
+        const top = block ? block.getBoundingClientRect().top - 4 : editorRect.bottom - 4
         return (
           <div
             key={`drop-${index}`}
-            className="drop-zone fixed w-full h-2 bg-transparent hover:bg-blue-200 transition-colors pointer-events-auto"
-            style={{
-              left: editorRect.left,
-              top: rect.top - 4,
-              width: editorRect.width,
-              zIndex: 5,
-            }}
+            className="drop-zone fixed h-2 bg-transparent hover:bg-blue-200 transition-colors"
+            style={{ left: editorRect.left, top, width: editorRect.width, zIndex: 5 }}
             onDragOver={(e) => e.preventDefault()}
-            onDrop={(e) => handleDrop(e, blockElement)}
+            onDrop={(e) => handleDrop(e, index)}
             data-testid="drop-zone"
           />
         )
