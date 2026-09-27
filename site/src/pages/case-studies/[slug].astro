@@ -130,7 +130,12 @@ const Writeup = writeup ? (await render(writeup)).Content : null;
   {caseStudy.screenshot && (
     <section class="border-b border-rule">
       <div class="container" style="padding-top: 96px; padding-bottom: 96px;">
-        <img src={caseStudy.screenshot} alt={`Screenshot: ${caseStudy.title}`} class="w-full border border-rule" loading="lazy" />
+        <figure>
+          <img src={caseStudy.screenshot} alt={`Screenshot: ${caseStudy.title}`} class="w-full border border-rule" loading="lazy" />
+          {caseStudy.screenshotCaption && (
+            <figcaption class="font-mono text-xs text-muted mt-3">{caseStudy.screenshotCaption}</figcaption>
+          )}
+        </figure>
       </div>
     </section>
   )}

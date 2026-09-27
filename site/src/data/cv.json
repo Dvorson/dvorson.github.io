@@ -7,7 +7,7 @@
     "linkedin": "linkedin.com/in/dvorson",
     "website": "dvorson.github.io"
   },
-  "summary": "Software architect and hands-on engineer with 12+ years of production web platforms and, since 2025, LLM systems. Currently tech lead for an internal LLM serving and agent platform at a Fortune-500 retailer. Recent work: a knowledge graph with automated quality scoring over tens of thousands of support articles, a multi-agent anomaly detection PoC for a telecom operator, and Ticker Talk, a filing-grounded research product I built and run in production. Earlier: a multi-brand headless storefront (Next.js, GraphQL), set-top-box UI on embedded Linux, newsroom analytics, and payment flows.",
+  "summary": "Software architect and hands-on engineer with 12+ years of production web platforms and, since 2025, LLM systems. Currently a senior software engineer at STX, writing custom software that speeds up the trading lifecycle and solves data completeness and proof of reliability for the agentic parts of the system. Before that: tech lead for an internal LLM serving and agent platform at a Fortune-500 retailer, a knowledge graph with automated quality scoring over tens of thousands of support articles, and a multi-agent anomaly detection PoC for a telecom operator. I also built and run Ticker Talk, a filing-grounded research product. Earlier: a multi-brand headless storefront (Next.js, GraphQL), set-top-box UI on embedded Linux, newsroom analytics, and payment flows.",
   "expertise": [
     "Software Architecture & System Design",
     "Generative AI & LLM Engineering",
@@ -52,17 +52,28 @@
   ],
   "experience": [
     {
+      "company": "STX",
+      "title": "Senior Software Engineer",
+      "start": "Jul 2026",
+      "end": "Present",
+      "description": "Writing custom software that speeds up the trading lifecycle and makes the agentic parts of the system dependable.",
+      "highlights": [
+        "Building software that shortens the trading lifecycle",
+        "Solving data completeness, proof of reliability, and related problems for the system's agentic components"
+      ]
+    },
+    {
       "company": "Global IT Services Company",
       "title": "Lead Software Engineer",
       "subtitle": "GenAI Enablement Platform",
       "start": "Jan 2026",
-      "end": "Present",
+      "end": "Jun 2026",
       "location": "Amsterdam, Netherlands",
-      "description": "Embedded as tech lead in a GenAI Enablement team at a Fortune-500 global retailer, driving engineering delivery and SDLC maturity for an internal LLM serving and agentic development platform.",
+      "description": "Embedded as tech lead in a GenAI Enablement team at a Fortune-500 global retailer, driving engineering delivery and SDLC maturity for an internal LLM serving and agent development platform.",
       "highlights": [
-        "Tech lead for GenAI Enablement at a Fortune-500 retailer, building the LLM serving and agent platform that teams across the company use to ship AI agents",
-        "Introduced planning and delivery-tracking practices to a team of 4 engineers, giving management a clear view of what ships when",
-        "Contributing to secure multi-tenant AI platform with isolated, governed agent deployments enforcing data access controls across retail and supply chain domains"
+        "Tech lead for GenAI Enablement at a Fortune-500 retailer, building the LLM serving and agent platform that teams across the company used to ship AI agents",
+        "Introduced planning and delivery-tracking practices to a team of 4 engineers, giving management a clear view of what shipped when",
+        "Contributed to a secure multi-tenant AI platform with isolated, governed agent deployments enforcing data access controls across retail and supply chain domains"
       ],
       "technologies": "Kotlin, Kubernetes, Next.js 16, TypeScript, LLM Serving Infrastructure, Agentic AI"
     },

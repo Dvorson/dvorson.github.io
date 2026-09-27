@@ -125,7 +125,7 @@ const CONDENSE_BEFORE_YEAR = 2021;
 
     <!-- Education -->
     {cv.education && (
-      <section class="mb-16">
+      <section class="mb-16 cv-closing">
         <div class="flex items-baseline gap-4 mb-6">
           <span class="section-number">06</span>
           <h2 class="section-title">Education</h2>
@@ -139,7 +139,7 @@ const CONDENSE_BEFORE_YEAR = 2021;
 
     <!-- Languages -->
     {cv.languages && cv.languages.length > 0 && (
-      <section class="mb-16">
+      <section class="mb-16 cv-closing">
         <div class="flex items-baseline gap-4 mb-6">
           <span class="section-number">07</span>
           <h2 class="section-title">Languages</h2>
@@ -173,6 +173,9 @@ const CONDENSE_BEFORE_YEAR = 2021;
       article > p.exp-description, article span.uppercase, article div.font-mono.text-xs.mb-3 { display: none; }
       article h3, article > div:first-child { break-after: avoid; }
       li { break-inside: avoid; }
+      /* Education and languages share one row so they do not spill onto a new page. */
+      .cv-closing { display: inline-block; width: 49%; vertical-align: top; margin-bottom: 0 !important; }
+      article:last-child { margin-bottom: 0 !important; padding-bottom: 0 !important; }
       .skill-tags { gap: 3pt !important; }
       .skill-tags span { padding: 0 4pt !important; font-size: 8pt !important; }
     }

@@ -19,6 +19,7 @@ const caseStudySchema = z.object({
   technologies: z.array(z.string()).min(1),
   icon: z.string(),
   screenshot: z.string().nullable(),
+  screenshotCaption: z.string().optional(),
   featured: z.boolean(),
   hasFullPage: z.boolean(),
 }).strict();
@@ -53,7 +54,7 @@ const experienceSchema = z.object({
   description: z.string(),
   highlights: z.array(z.string()),
   responsibilities: z.array(z.string()).optional(),
-  technologies: z.string(),
+  technologies: z.string().optional(),
 }).strict();
 
 const cvSchema = z.object({
